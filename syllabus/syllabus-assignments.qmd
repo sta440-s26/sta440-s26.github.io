@@ -4,4 +4,47 @@ editor:
   mode: source
 ---
 
+# Case studies 
 
+This course is organized around a sequence of case studies where you work in teams to analyze complex, messy datasets coming from various domains. Case studies will last 2 - 4 weeks depending on complexity, and each case study will proceed in the following stages:
+
+0. the instructor introduces the data and the research question in lecture;
+1. students are randomly sorted into teams of 4 - 5. The teams are different for every case study;
+2. just like in STA 199, we share a GitHub repo with each team that contains the necessary data as well as template Quarto files for your presentation and report;
+3. working inside the GitHub repo, teams use `R` and `Quarto` to collaborate on a written report and a deck of slides summarizing their analysis;
+4. After the report is submitted and the presentation is done, students will evaluate themselves and their group members with a survey through TEAMMATES.
+
+Lab sections on Friday will sometimes feature a presentation or tutorial, but for the most part these are built-in work periods where all group members can convene with access to a TA.
+
+# Grading 
+
+There will be 4 - 6 case studies in total, depending on the pace of the course. However many there end up being, they will contribute equally to your final course grade. So if there are four, each is worth 25%. If there are 5, each is worth 20%. And so on. *Within* each case study, the grade will break down as follows:
+
+- **30%**: presentation;
+- **60%**: written report;
+- **10%**: participation and collaboration. This component will be assessed using your class attendance, TEAMMATES feedback, and GitHub activity.
+
+At the end of the semester, your final letter grade will be determined using the usual thresholds:
+
+::: {.center-table}
+| Letter Grade | Final Course Grade |
+|--------------|--------------------|
+| A            | \>= 93             |
+| A-           | 90 - 92.99         |
+| B+           | 87 - 89.99         |
+| B            | 83 - 86.99         |
+| B-           | 80 - 82.99         |
+| C+           | 77 - 79.99         |
+| C            | 73 - 76.99         |
+| C-           | 70 - 72.99         |
+| D+           | 67 - 69.99         |
+| D            | 63 - 66.99         |
+| D-           | 60 - 62.99         |
+| F            | \< 60              |
+:::
+
+::: callout-note
+
+These thresholds will not be adjusted upward, but they may be adjusted downward in your favor.
+
+:::
