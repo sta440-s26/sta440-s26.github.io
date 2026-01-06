@@ -1,0 +1,65 @@
+project:
+  type: website
+
+website:
+  page-navigation: true
+  title: "STA 440 Spring 2026"
+  description: "Homepage for Case Studies in the Practice of Statistics at Duke University, Spring 2026."
+  site-url: "https://sta440-s26.github.io/"
+
+  open-graph: true
+
+  sidebar:
+    background: "#FFFB71"
+    logo: "img/sta440-logo.png"
+    pinned: true
+    align: center
+#    tools:
+#      - icon: code-square
+#        href: https://cmgr.oit.duke.edu/containers
+#        text: "RStudio Containers"
+#      - icon: megaphone
+#        href: https://go.canvas.duke.edu/
+#        text: "Canvas"
+#      - icon: people
+#        href: https://edstem.org/us/courses/89284/discussion
+#        text: "Ed Discussion"
+
+    style: docked
+    search: true
+    collapse-level: 1
+    contents:
+      - section: "Syllabus"
+        contents:
+          - href: syllabus/syllabus-overview.qmd
+            text: Overview
+          - href: syllabus/syllabus-assignments.qmd
+            text: Assignments and grading
+          - href: syllabus/syllabus-policies.qmd
+            text: Policies
+          - href: syllabus/syllabus-resources.qmd
+            text: University resources
+          - href: index.qmd
+            text: Schedule
+      - section: "Case studies"
+            
+  page-footer:
+    right: 'This page is built with [Quarto](https://quarto.org/).'
+    left: "&copy; Copyright 2026 Edwin Iversen, John Zito"
+    background: "#FFFB71"
+
+format: 
+  html:
+    mainfont: Atkinson Hyperlegible
+    highlight-style: a11y-light
+
+theme:
+  light: [cosmo, style/sta199.scss]
+linkcolor: "#798b93"
+toc: true
+code-copy: hover
+code-link: true
+code-overflow: wrap
+
+execute:
+  freeze: auto
