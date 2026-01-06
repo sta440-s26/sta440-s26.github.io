@@ -8,21 +8,15 @@ editor:
 
 **What the course catalog says**: Students apply statistical analysis skills to in-depth data analysis projects ranging across diverse application areas including but not limited to energy, environmental sustainability, global health, information and culture, brain sciences, and social networks. Students practice cutting-edge statistical methods and communicate their results both technically and non-technically via presentations and written reports.
 
-**What JZ says**: 
+**What JZ says**: You are all second-semester senior statistics majors on the verge of graduation. When you leave this august institution and enter the working world, a few things may happen:
 
+- you will be thrown onto a team with people you didn't choose;
+- you will be told to use software you haven't necessarily used;
+- you will be asked to study data from an unfamiliar domain;
+- you will be required to use new statistical methods you haven't previously studied;
+- you will have to communicate your work to managers and stakeholders that know nothing about statistics.
 
-this 
-
-Collaborating with different kinds of folks
-writing up in a reproducible way 
-version control 
-commnication
-self-studying new statistical topics 
-
-
-Several of you are about to enter the working world where you will use 
-
-Are you ready for that? 
+Are you ready for all that? To prepare you for the realities of modern data science practice, this class is essentially a sequence of group projects (case studies) where we confront you with messy, real world data analysis problems and coach you through how to tackle them using the statistical methods and the productivity tools (Quarto, R, Git, etc) that you studied in previous classes. Along the way, the instructors will introduce new statistical topics that you may find useful.
 
 
 **Prerequisites:** STA 360 or 402 (i.e. Bayes).
@@ -53,17 +47,17 @@ You *must* attend the lecture and lab section that you are enrolled in. Class ac
 | ![](images/jz.jpg){.circ} | Zito, John      | Instructor         | TBD\                           |
 |                           |                 |                    | Old Chemistry 207              |
 +---------------------------+-----------------+--------------------+--------------------------------+
-| ![](images/mk.png){.circ} | Knox, Mary      | Course Coordinator | none                           |
+| ![](images/mk.png){.circ} | Knox, Mary      | Course Coordinator | *none*                           |
 +---------------------------+-----------------+--------------------+--------------------------------+
 | ![](images/lf.jpg){.circ} | Fan, Li         | TA                 | TBD\                           |
 |                           |                 |                    | TBD                            |
 +---------------------------+-----------------+--------------------+--------------------------------+
-| ![](images/ag.jpg){.circ} | Gleich, Aidan   | Lab TA             | none                           |
+| ![](images/ag.jpg){.circ} | Gleich, Aidan   | Lab TA             | *none*                           |
 +---------------------------+-----------------+--------------------+--------------------------------+
 | ![](images/al.jpg){.circ} | Li, Aihua       | TA                 | TBD\                           |
 |                           |                 |                    | TBD                            |
 +---------------------------+-----------------+--------------------+--------------------------------+
-| ![](images/lm.jpg){.circ} | Malgieri, Luigi | Lab TA             | none                           |
+| ![](images/lm.jpg){.circ} | Malgieri, Luigi | Lab TA             | *none*                         |
 +---------------------------+-----------------+--------------------+--------------------------------+
 : {tbl-colwidths="[20,20,20,40]"}
 
