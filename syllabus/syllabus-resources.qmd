@@ -1,0 +1,41 @@
+---
+title: "University resources"
+---
+
+## Course costs
+
+If you are having difficulty with the costs associated with this course (obtaining a laptop, mostly), here are some resources:
+
+-   [**Karsh Office of Undergraduate Support**](https://financialaid.duke.edu/)**:** Regardless of your aid package, Karsh offers loans and resources for connecting students with campus programs that might help alleviate course costs.
+
+-   [**DukeLIFE**](https://dukelife.duke.edu/programs/course-materials-assistance/)**:** The Course Material Assistance program offers assistance for eligible students, including through the [LIFE Loaner Laptop Program](https://dukelife.duke.edu/academic-support/loaner-laptop-program/). Students who are eligible for DukeLIFE benefits are notified before the start of the semester; program resources are limited.
+
+-   [**Duke Link**](https://link.duke.edu/)**:** They have a small supply of laptops that can be rented out for five days at a time.
+
+## Tech support
+
+Contact the Duke OIT Service Desk at [oit.duke.edu/help](https://oit.duke.edu/help).
+
+## Academic support
+
+There are times you may need help with the class that is beyond what can be provided by the teaching team. In those instances, I encourage you to visit the Academic Resource Center. The [Academic Resource Center (the ARC)](https://arc.duke.edu) offers services to support students academically during their undergraduate careers at Duke. The ARC can provide support with time management, academic skills and strategies, course-specific tutoring, and more. ARC services are available free to all Duke undergraduate student studying any discipline.
+
+You can contact the Academic Resource Center by phone at (919) 684-5917, by email at `theARC@duke.edu`, or by visiting <http://arc.duke.edu/>.
+
+## Accessibility
+
+If any portion of the course is not accessible to you due to challenges with technology or the course format, please let me know so we can make appropriate accommodations.
+
+The [Student Disability Access Office (SDAO)](https://access.duke.edu/students) is available to ensure that students can engage with their courses and related assignments. Students should contact the SDAO to [request or update accommodations](https://access.duke.edu/requests) under these circumstances.
+
+## Mental health and well-being
+
+Duke is committed to holistic student wellbeing, which includes one’s mental, emotional, and physical health. The university offers resources to help students manage daily stress, to encourage intentional self-care, and to access just-in-time support. If you find you need support, your mental and/or emotional health concerns are impacting your day-to-day activities, your academic performance, or you need someone to talk to, the resources below are available to you:
+
+- [**DukeReach**](https://students.duke.edu/wellness/dukereach/): DukeReach provides comprehensive outreach services to support students in managing all aspects of wellbeing, including referrals and follow-up services for students who are experiencing significant challenges related to mental health, physical health, social adjustment, and/or a variety of other stressors. You can contact the DukeReach team at `dukereach@duke.edu`;
+
+- [**Counseling and Psychological Services (CAPS)**](https://students.duke.edu/wellness/caps/): CAPS offers counseling services to Duke students including virtual appointments, and referrals in the community. You do not need an appointment for an initial assessment. You may walk in or call 919-660-1000 to get started. Hours: Monday-Friday 9:00am - 4:00pm. After hours counseling services are available at no additional cost to students, you can call: 919-660-1000 Option 2;
+
+- [**TimelyCare**](https://app.timelycare.com/auth/login): TimelyCare is an online platform that is a convenient, confidential, and free way for Duke students to receive 24/7 mental health support through TalkNow and scheduled counseling;
+
+- [**Duke Student Health**](https://students.duke.edu/wellness/studenthealth/): Student Health offers a wide range of healthcare services for all Duke students, many of which are covered by the student health fee. To make an appointment call (919) 681-9355. Hours: Monday - Friday, 8am - 4:30pm, Thursday 9am - 4:30pm. Closed from 12-12:30 each day.

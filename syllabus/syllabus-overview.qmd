@@ -1,0 +1,62 @@
+---
+title: "Course overview"
+editor: 
+  mode: source
+---
+
+## Description
+
+**What the course catalog says**: Students apply statistical analysis skills to in-depth data analysis projects ranging across diverse application areas including but not limited to energy, environmental sustainability, global health, information and culture, brain sciences, and social networks. Students practice cutting-edge statistical methods and communicate their results both technically and non-technically via presentations and written reports.
+
+**What JZ says**: 
+
+
+this 
+
+Collaborating with different kinds of folks
+writing up in a reproducible way 
+version control 
+commnication
+self-studying new statistical topics 
+
+
+**Prerequisites:** STA 360 or 402 (i.e. Bayes).
+
+## Meetings
+
+| Meeting  | Location                       | Time                   | Staff  |
+|----------|--------------------------------|------------------------|--------|
+| Lecture 001 | Perkins LINK 071 (Classroom 5) | TuTh 8:30 AM - 9:45 AM | John   |
+| Lecture 002 | Perkins LINK 071 (Classroom 5) | MoWe 10:05 AM - 11:20 AM | Ed   |
+| Lab 01   | Old Chemistry 001 | F 1:25 PM - 2:40 PM   | TA |
+| Lab 02   | Perkins LINK 071 (Classroom 5) | F 10:05 AM - 11:20 AM | TA |
+
+::: callout-important
+
+You must attend the lecture and lab section that you are enrolled in. Class activities will often be completed with your project groups, and project groups will be assigned within sections.
+
+:::
+
+## Team
+
++---------------------------+-----------------+---------------+--------------------------------+
+| Mug                       | Name            | Role          | Office Hours                   |
++===========================+=================+===============+================================+
+| ![](images/ei.jpg){.circ} | Iversen, Ed     | Instructor    | **Th 4:00 PM - 5:00 PM**\      |
+|                           |                 |               | Old Chemistry 122B             |
++---------------------------+-----------------+---------------+--------------------------------+
+| ![](images/jz.jpg){.circ} | Zito, John      | Instructor    | TBD\                           |
+|                           |                 |               | Old Chemistry 207              |
++---------------------------+-----------------+---------------+--------------------------------+
+| ![](images/lf.jpg){.circ} | Fan, Li         | TA            | TBD\                           |
+|                           |                 |               | TBD                            |
++---------------------------+-----------------+---------------+--------------------------------+
+| ![](images/ag.jpg){.circ} | Gleich, Aidan   | Lab TA        | none                           |
++---------------------------+-----------------+---------------+--------------------------------+
+| ![](images/al.jpg){.circ} | Li, Aihua       | TA            | TBD\                           |
+|                           |                 |               | TBD                            |
++---------------------------+-----------------+---------------+--------------------------------+
+| ![](images/lm.jpg){.circ} | Malgieri, Luigi | Lab TA        | none                           |
++---------------------------+-----------------+---------------+--------------------------------+
+: {tbl-colwidths="[20,20,20,40]"}
+

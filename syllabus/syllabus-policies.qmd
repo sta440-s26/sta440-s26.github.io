@@ -1,0 +1,68 @@
+---
+title: "Policies"
+editor: 
+  mode: source
+---
+
+## Collaboration
+
+You are *enthusiastically encouraged* to work together and help one another on labs and problem sets. I would much rather you consult your peers than some daft language model. What I ask is that you *acknowledge* your collaborators. So, at the end of each problem in your write-up, leave a comment like "Ursula, Ignatius and I worked together on this problem," or "Ethel explained to me how to do part b." You are not being judged based on your acknowledgements, and there is no penalty for getting "too much" help from others. If you omit acknowledgements, I will assume you did your work solo. If your classmates tell a different story, I will have questions. But otherwise, so long as you are thorough and honest, there will be no problems.
+
+Having said all of that, you should not be crassly handing your solutions to others for them to brainlessly copy. This is plagiarism, and all involved will earn a zero on the assignment and be referred to the conduct office, both sharers and recipients alike. The write-up you submit must be your own work.
+
+## Use of outside resources, including AI
+
+There are at least two reasons you might seek outside resources:
+
+-   ✅ **Extra practice or alternative instruction**: Go crazy. Knock yourself out. Have a ball. The internet is saturated with good (and horrible) resources for learning this material, so if you find something that really resonates with you, have at it;
+-   ❌ **Doing the problems for you**: If you find a solution online, or ask a language model to generate one, and you copy it down and submit it as your own work, that is plagiarism. If we detect it, you will earn a zero for that part of your write-up.
+
+"[Using ChatGPT to complete assignments is like bringing a forklift into the weight room; you will never improve your cognitive fitness that way](https://www.newyorker.com/culture/the-weekend-essay/why-ai-isnt-going-to-make-art)." Furthermore, 60% of your final course grade is determined by your performance on old school, no-tech exams. As such, outsourcing all of your *thinking* to an AI will probably end in humiliating disaster. To avoid this, I suggest you abstain from using language models to do the problems for you.
+
+## Communication
+
+If you wish to ask content-related questions in writing, please do not do so via e-mail. Instead, please use the course discussion forum [Ed Discussion](https://edstem.org/us/courses/80868/discussion). That way all members of the teaching team can see your question, and all students can benefit from the ensuing discussion. You are also encouraged to answer one another’s questions.
+
+If you have questions about personal matters that may not be appropriate for the public course forum (e.g. illness, accommodations, etc), then please e-mail the instructor directly (john.zito\@duke.edu).
+
+::: callout-note
+You can ask questions anonymously on Ed. The teaching team will still know your identity, but your peers will not.
+:::
+
+## Late work and extensions
+
+No late work will be accepted unless you request an extension in advance by e-mailing the instructor directly (john.zito\@duke.edu). All reasonable requests will be entertained, but extensions will not be long.
+
+## Regrade requests
+
+If you receive a graded assignment back, and you believe that some part of it was graded incorrectly, you may dispute the grade by submitting a [regrade request](https://guides.gradescope.com/hc/en-us/articles/21854736042253-Submitting-a-Regrade-Request) in Gradescope. JZ is the sole reviewer of these. Note the following:
+
+-   You have one week after you receive a grade to submit a regrade request;
+-   You should submit separate regrade requests for each question you wish to dispute, not a single catch-all request;
+-   Requests will be considered if there was an error in the grade calculation or if a correct answer was mistakenly marked as incorrect;
+-   Requests to dispute the number of points deducted for an incorrect response will not be considered;
+-   **No grades will be changed after the final exam has been administered on Friday December 12**.
+
+## Attendance
+
+Live your life. Attendance is not strictly required for any of the class meetings. The responsibility lies with us to make class meetings sufficiently engaging and informative that you choose to attend. Having said that, success in this class and regular attendance are probably highly positively correlated. Furthermore, while lab attendance is not required, regular attendance is probably the path of least resistance to earning full credit for the lab component of your final grade. The labs are designed so that they can be completed in one sitting more or less, and they are due at midnight the same day. So show up to lab, bang it out, and move on with your life.
+
+## Accommodations
+
+If you need accommodations for this class, you will need to register with the Student Disability Access Office (SDAO) and provide them with documentation related to your needs. SDAO will work with you to determine what accommodations are appropriate for your situation. Please note that accommodations are not retroactive and disability accommodations cannot be provided until a Faculty Accommodation Letter has been given to me. Please contact SDAO for more information: `sdao@duke.edu` or `access.duke.edu`.
+
+## Duke Community Standard
+
+Duke University is a community dedicated to scholarship, leadership, and service and to the principles of honesty, fairness, respect, and accountability. Members of this community commit to reflect upon and uphold these principles in all academic and non-academic endeavors, and to protect and promote a culture of integrity.
+
+Duke University has high expectations for students’ scholarship and conduct. In accepting admission, students indicate their willingness to subscribe to and be governed by the rules and regulations of the university, which flow from the [Duke Community Standard (DCS)](https://dukecommunitystandard.students.duke.edu).
+
+Regardless of course delivery format, it is the responsibility of all students to understand and follow all Duke policies, including but not limited to the [academic integrity policy](https://dukecommunitystandard.students.duke.edu/policy/academic-dishonesty/) (e.g., completing one’s own work, following proper citation of sources, adhering to guidance around group work projects, and more). Ignoring these requirements is a violation of the DCS.
+
+Students can direct any questions or concerns regarding academic integrity to the Office of Student Conduct and Community Standards at `conduct@duke.edu` and can access the DCS guide at <https://dukecommunitystandard.students.duke.edu/>.
+
+In STA 240 specifically...
+
+-   If a conduct violation results in a zero on a lab or problem set, that zero will not be dropped;
+-   If a conduct violation results in a zero on a midterm, that zero will not be replaced with your final exam score;
+-   If we discover that students are sharing and copying assignment solutions, all students involved will be penalized equally, the sharers the same as the recipients.
