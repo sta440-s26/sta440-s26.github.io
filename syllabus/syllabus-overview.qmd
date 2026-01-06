@@ -20,6 +20,11 @@ commnication
 self-studying new statistical topics 
 
 
+Several of you are about to enter the working world where you will use 
+
+Are you ready for that? 
+
+
 **Prerequisites:** STA 360 or 402 (i.e. Bayes).
 
 ## Meetings
@@ -33,30 +38,38 @@ self-studying new statistical topics
 
 ::: callout-important
 
-You must attend the lecture and lab section that you are enrolled in. Class activities will often be completed with your project groups, and project groups will be assigned within sections.
+You *must* attend the lecture and lab section that you are enrolled in. Class activities will often be completed with your project groups, and project groups will be randomly assigned within sections.
 
 :::
 
 ## Team
 
-+---------------------------+-----------------+---------------+--------------------------------+
-| Mug                       | Name            | Role          | Office Hours                   |
-+===========================+=================+===============+================================+
-| ![](images/ei.jpg){.circ} | Iversen, Ed     | Instructor    | **Th 4:00 PM - 5:00 PM**\      |
-|                           |                 |               | Old Chemistry 122B             |
-+---------------------------+-----------------+---------------+--------------------------------+
-| ![](images/jz.jpg){.circ} | Zito, John      | Instructor    | TBD\                           |
-|                           |                 |               | Old Chemistry 207              |
-+---------------------------+-----------------+---------------+--------------------------------+
-| ![](images/lf.jpg){.circ} | Fan, Li         | TA            | TBD\                           |
-|                           |                 |               | TBD                            |
-+---------------------------+-----------------+---------------+--------------------------------+
-| ![](images/ag.jpg){.circ} | Gleich, Aidan   | Lab TA        | none                           |
-+---------------------------+-----------------+---------------+--------------------------------+
-| ![](images/al.jpg){.circ} | Li, Aihua       | TA            | TBD\                           |
-|                           |                 |               | TBD                            |
-+---------------------------+-----------------+---------------+--------------------------------+
-| ![](images/lm.jpg){.circ} | Malgieri, Luigi | Lab TA        | none                           |
-+---------------------------+-----------------+---------------+--------------------------------+
++---------------------------+-----------------+--------------------+--------------------------------+
+| Mug                       | Name            | Role               | Office Hours                   |
++===========================+=================+====================+================================+
+| ![](images/ei.jpg){.circ} | Iversen, Ed     | Instructor         | **Th 4:00 PM - 5:00 PM**\      |
+|                           |                 |                    | Old Chemistry 122B             |
++---------------------------+-----------------+--------------------+--------------------------------+
+| ![](images/jz.jpg){.circ} | Zito, John      | Instructor         | TBD\                           |
+|                           |                 |                    | Old Chemistry 207              |
++---------------------------+-----------------+--------------------+--------------------------------+
+| ![](images/mk.png){.circ} | Knox, Mary      | Course Coordinator | none                           |
++---------------------------+-----------------+--------------------+--------------------------------+
+| ![](images/lf.jpg){.circ} | Fan, Li         | TA                 | TBD\                           |
+|                           |                 |                    | TBD                            |
++---------------------------+-----------------+--------------------+--------------------------------+
+| ![](images/ag.jpg){.circ} | Gleich, Aidan   | Lab TA             | none                           |
++---------------------------+-----------------+--------------------+--------------------------------+
+| ![](images/al.jpg){.circ} | Li, Aihua       | TA                 | TBD\                           |
+|                           |                 |                    | TBD                            |
++---------------------------+-----------------+--------------------+--------------------------------+
+| ![](images/lm.jpg){.circ} | Malgieri, Luigi | Lab TA             | none                           |
++---------------------------+-----------------+--------------------+--------------------------------+
 : {tbl-colwidths="[20,20,20,40]"}
+
+::: callout-tip
+
+You are welcome to attend the office hours of either instructor and any TA.
+
+:::
 
