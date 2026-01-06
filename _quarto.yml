@@ -41,6 +41,7 @@ website:
             text: University resources
           - href: index.qmd
             text: Schedule
+      - section: "Code helpers"
       - section: "Case studies"
             
   page-footer:
