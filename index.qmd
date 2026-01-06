@@ -1,0 +1,115 @@
+---
+title: "STA 440 Case Studies in Statistics"
+subtitle: "Duke University Spring 2026"
+execute: 
+  freeze: false
+editor_options: 
+  chunk_output_type: console
+editor: 
+  mode: source
+---
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+library(googlesheets4)
+library(gt)
+library(tidyverse)
+gs4_deauth()
+d <- read_sheet("https://docs.google.com/spreadsheets/d/1ZFpVxEEJYQM9N4eCoQorgzM4zQq_VW0gGdJmnLCwPBY/edit?usp=sharing")
+prepare_cutoff_date <- as.Date("2026-5-1")
+```
+
+```{r}
+#| echo: false
+#| column: screen-inset-right
+d |>
+  filter(!is.na(session)) |>
+  select(-dow, -admin_notes, -number, -session) |>
+  mutate(
+    date = as.Date(date),
+    prepare = if_else(date > prepare_cutoff_date, "*To be posted*", prepare)
+    ) |>
+  relocate(due, .after = materials) |>
+  gt() |>
+  fmt_date(date, date_style = 31) |>
+  sub_missing(
+    columns = c(week, prepare, topic, materials, due), 
+    missing_text = ""
+  ) |>
+  cols_align(
+    align = "center", 
+    columns = c(week)
+  ) |>
+  cols_align(
+    align = "right", 
+    columns = c(date)
+  ) |>
+  cols_align(
+    align = "left", 
+    columns = c(topic, prepare, materials, due)
+  ) |>
+  tab_style(
+    style = cell_text(
+      color = "#b4b4b4"
+    ),
+    locations = cells_body(
+      columns = c(prepare),
+      rows = prepare == "*To be posted*"
+    )
+  ) |>
+  tab_style(
+    style = cell_text(
+      color = "#b4b4b4"
+    ),
+    locations = cells_body(
+      columns = c(materials),
+      rows = materials == "*To be posted*"
+    )
+  ) |>
+  tab_style(
+    style = cell_borders(
+      sides = "right",
+      color = "#D3D3D3",
+      style = "solid"
+    ),
+    locations = cells_body(
+      columns = c(date, topic, prepare, materials)
+    )
+  ) |>
+  tab_style(
+    style = cell_borders(
+      sides = "top",
+      color = "black",
+      weight = px(2),
+      style = "solid"
+    ),
+    locations = cells_body(
+      columns = everything(),
+      rows = !is.na(week) 
+      # puts black line above rows where certain keywords are detected in certain columns
+    )
+  ) |>
+  fmt_markdown(
+    columns = c(topic, prepare, materials, due)
+  ) |>
+  tab_options(table.width = pct(72),
+              table.align = 'left') |>
+  cols_width(
+    week ~ pct(2),
+    date ~ pct(9), 
+    prepare ~ pct(12),
+    topic ~ pct(22),
+    materials ~ pct(15),
+    due ~ pct(12)
+  ) |>
+  cols_label_with(fn = function(x) {
+      janitor::make_clean_names(x, case = "title") |>
+        toupper() |>
+        stringr::str_replace_all("^|$", "**") |>
+        md()
+    }) |>
+  tab_options(table.font.size = 13) |>
+  opt_row_striping()
+```
