@@ -1,5 +1,8 @@
 project:
   type: website
+  resources:
+    - syllabus/rubrics/report-rubric.pdf
+    - syllabus/rubrics/presentation-rubric.pdf
 
 website:
   page-navigation: true
