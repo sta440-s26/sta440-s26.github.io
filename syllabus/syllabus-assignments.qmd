@@ -4,25 +4,16 @@ editor:
   mode: source
 ---
 
-# Case studies 
+# Course grade 
 
-This course is organized around a sequence of case studies where you work in teams to analyze complex, messy datasets coming from various domains. Case studies will last 2 - 4 weeks depending on complexity, and each case study will proceed in the following stages:
+Your final course grade breaks down as follows:
 
-0. the instructor introduces the data and the research question in lecture;
-1. students are randomly sorted into teams of 4 - 5. The teams are different for every case study;
-2. just like in STA 199, we share a GitHub repo with each team that contains the necessary data as well as template Quarto files for your presentation and report;
-3. working inside the GitHub repo, teams use `R` and `Quarto` to collaborate on a written report and a deck of slides summarizing their analysis;
-4. After the report is submitted and the presentation is done, students will evaluate themselves and their group members with a survey through TEAMMATES.
-
-Lab sections on Friday will sometimes feature a presentation or tutorial, but for the most part these are built-in work periods where all group members can convene with access to a TA.
-
-# Grading 
-
-There will be 4 - 6 case studies in total, depending on the pace of the course. However many there end up being, they will contribute equally to your final course grade. So if there are four, each is worth 25%. If there are 5, each is worth 20%. And so on. *Within* each case study, the grade will break down as follows:
-
-- **30%**: presentation;
-- **60%**: written report;
-- **10%**: participation and collaboration. This component will be assessed using your class attendance, TEAMMATES feedback, and GitHub activity.
+- [**10%**] [**Attendance and participation**]{style="color:blue;"}: we will be taking attendance at all class meetings;
+- [**15%**] [**Final project**]{style="color:blue;"}: the semester ends with a data analysis project completed *individually*. Details to come;
+- [**75%**] [**Case studies**]{style="color:blue;"}: this course is organized around a sequence of case studies where you work in teams to analyze complex, messy datasets coming from various domains. There will be 4 - 6 case studies depending on the pace of course, and they will each get equal weight in determining this course component. *Within* each case study, your grade breaks down as follows:
+    - (60%) written report;
+    - (30%) presentation;
+    - (10%) student-specific collaboration score.
 
 At the end of the semester, your final letter grade will be determined using the usual thresholds:
 
@@ -48,3 +39,28 @@ At the end of the semester, your final letter grade will be determined using the
 These thresholds will not be adjusted upward, but they may be adjusted downward in your favor.
 
 :::
+
+# Case studies 
+
+The case studies are the heart of the class. Case studies will last 2 - 4 weeks depending on complexity, and there will be 4 - 6 in total. Sometimes the class as a whole requests more time to work on the more involved cases, and so we are prepared to be flexible and adjust the pace of the course as needed. Hence, the final number of cases is TBD.
+
+Each case study will go something like this:
+
+- the instructor introduces the data and the research question in lecture;
+- students are randomly sorted into teams of 2 - 4. The teams are different for every case study;
+- just like in STA 199, we share a GitHub repo with each team that contains the necessary data as well as template Quarto files for your presentation and report;
+- working inside their GitHub repo, teams use `R` and `Quarto` to collaborate on a written report and presentation slides;
+- during lecture, the instructor introduces new statistical topic that teams may find relevant to the current case study;
+- Each case study has two rounds of presentation: an early stage presentation on exploratory work and a final presentation on analysis. Groups will be selected at random to present in one of these two rounds, with each group presenting at least once for each case study;
+- Lab sections on Friday will sometimes feature a presentation or tutorial, but for the most part these are built-in work periods where all group members can convene with access to a TA;
+- At the end of each case study, students will confidentially evaluate themselves and their group members with a survey through TEAMMATES. **Only the teaching team will have access to this feedback**.
+
+As mentioned above, each case study will be graded as follows:
+
+- (60%) at the end you submit a brief report describing your final analysis;
+    - see [here](https://sta440-s26.github.io/syllabus/rubrics/report-rubric.pdf) for the grading rubric;
+- (30%) you will give at least one presentation, on your exploratory or final analysis;
+    - see [here](https://sta440-s26.github.io/syllabus/rubrics/presentation-rubric.pdf) for the grading rubric;
+- (10%) based on your GitHub activity and the results of the TEAMMATES survey, each individual group member will receive a separate score reflecting their contribution to the team's effort.
+
+
