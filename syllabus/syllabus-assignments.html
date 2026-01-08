@@ -71,6 +71,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 <meta property="og:title" content="Assignments and grading – STA 440 Spring 2026">
+<meta property="og:description" content="Homepage for Case Studies in the Practice of Statistics at Duke University, Spring 2026.">
 <meta property="og:site_name" content="STA 440 Spring 2026">
 </head>
 
@@ -151,6 +152,10 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Code helpers</span></span>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
  <span class="menu-text">Case studies</span></span>
   </li>
     </ul>
@@ -158,8 +163,15 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#course-grade" id="toc-course-grade" class="nav-link active" data-scroll-target="#course-grade">Course grade</a></li>
+  <li><a href="#case-studies" id="toc-case-studies" class="nav-link" data-scroll-target="#case-studies">Case studies</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -183,8 +195,123 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="course-grade" class="level1">
+<h1>Course grade</h1>
+<p>Your final course grade breaks down as follows:</p>
+<ul>
+<li>[<strong>10%</strong>] <span style="color:blue;"><strong>Attendance and participation</strong></span>: we will be taking attendance at all class meetings;</li>
+<li>[<strong>15%</strong>] <span style="color:blue;"><strong>Final project</strong></span>: the semester ends with a data analysis project completed <em>individually</em>. Details to come;</li>
+<li>[<strong>75%</strong>] <span style="color:blue;"><strong>Case studies</strong></span>: this course is organized around a sequence of case studies where you work in teams to analyze complex, messy datasets coming from various domains. There will be 4 - 6 case studies depending on the pace of course, and they will each get equal weight in determining this course component. <em>Within</em> each case study, your grade breaks down as follows:
+<ul>
+<li>(60%) written report;</li>
+<li>(30%) presentation;</li>
+<li>(10%) student-specific collaboration score.</li>
+</ul></li>
+</ul>
+<p>At the end of the semester, your final letter grade will be determined using the usual thresholds:</p>
+<div class="center-table">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Letter Grade</th>
+<th>Final Course Grade</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A</td>
+<td>&gt;= 93</td>
+</tr>
+<tr class="even">
+<td>A-</td>
+<td>90 - 92.99</td>
+</tr>
+<tr class="odd">
+<td>B+</td>
+<td>87 - 89.99</td>
+</tr>
+<tr class="even">
+<td>B</td>
+<td>83 - 86.99</td>
+</tr>
+<tr class="odd">
+<td>B-</td>
+<td>80 - 82.99</td>
+</tr>
+<tr class="even">
+<td>C+</td>
+<td>77 - 79.99</td>
+</tr>
+<tr class="odd">
+<td>C</td>
+<td>73 - 76.99</td>
+</tr>
+<tr class="even">
+<td>C-</td>
+<td>70 - 72.99</td>
+</tr>
+<tr class="odd">
+<td>D+</td>
+<td>67 - 69.99</td>
+</tr>
+<tr class="even">
+<td>D</td>
+<td>63 - 66.99</td>
+</tr>
+<tr class="odd">
+<td>D-</td>
+<td>60 - 62.99</td>
+</tr>
+<tr class="even">
+<td>F</td>
+<td>&lt; 60</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>These thresholds will not be adjusted upward, but they may be adjusted downward in your favor.</p>
+</div>
+</div>
+</section>
+<section id="case-studies" class="level1">
+<h1>Case studies</h1>
+<p>The case studies are the heart of the class. Case studies will last 2 - 4 weeks depending on complexity, and there will be 4 - 6 in total. Sometimes the class as a whole requests more time to work on the more involved cases, and so we are prepared to be flexible and adjust the pace of the course as needed. Hence, the final number of cases is TBD.</p>
+<p>Each case study will go something like this:</p>
+<ul>
+<li>the instructor introduces the data and the research question in lecture;</li>
+<li>students are randomly sorted into teams of 2 - 4. The teams are different for every case study;</li>
+<li>just like in STA 199, we share a GitHub repo with each team that contains the necessary data as well as template Quarto files for your presentation and report;</li>
+<li>working inside their GitHub repo, teams use <code>R</code> and <code>Quarto</code> to collaborate on a written report and presentation slides;</li>
+<li>during lecture, the instructor introduces new statistical topic that teams may find relevant to the current case study;</li>
+<li>Each case study has two rounds of presentation: an early stage presentation on exploratory work and a final presentation on analysis. Groups will be selected at random to present in one of these two rounds, with each group presenting at least once for each case study;</li>
+<li>Lab sections on Friday will sometimes feature a presentation or tutorial, but for the most part these are built-in work periods where all group members can convene with access to a TA;</li>
+<li>At the end of each case study, students will confidentially evaluate themselves and their group members with a survey through TEAMMATES. <strong>Only the teaching team will have access to this feedback</strong>.</li>
+</ul>
+<p>As mentioned above, each case study will be graded as follows:</p>
+<ul>
+<li>(60%) at the end you submit a brief report describing your final analysis;
+<ul>
+<li>see <a href="https://sta440-s26.github.io/syllabus/rubrics/report-rubric.pdf">here</a> for the grading rubric;</li>
+</ul></li>
+<li>(30%) you will give at least one presentation, on your exploratory or final analysis;
+<ul>
+<li>see <a href="https://sta440-s26.github.io/syllabus/rubrics/presentation-rubric.pdf">here</a> for the grading rubric;</li>
+</ul></li>
+<li>(10%) based on your GitHub activity and the results of the TEAMMATES survey, each individual group member will receive a separate score reflecting their contribution to the team’s effort.</li>
+</ul>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

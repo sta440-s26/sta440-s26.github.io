@@ -4,7 +4,7 @@
     "href": "syllabus/syllabus-overview.html",
     "title": "Course overview",
     "section": "",
-    "text": "What the course catalog says: Students apply statistical analysis skills to in-depth data analysis projects ranging across diverse application areas including but not limited to energy, environmental sustainability, global health, information and culture, brain sciences, and social networks. Students practice cutting-edge statistical methods and communicate their results both technically and non-technically via presentations and written reports.\nWhat JZ says:\nthis\nCollaborating with different kinds of folks writing up in a reproducible way version control commnication self-studying new statistical topics\nPrerequisites: STA 360 or 402 (i.e. Bayes).",
+    "text": "What the course catalog says: Students apply statistical analysis skills to in-depth data analysis projects ranging across diverse application areas including but not limited to energy, environmental sustainability, global health, information and culture, brain sciences, and social networks. Students practice cutting-edge statistical methods and communicate their results both technically and non-technically via presentations and written reports.\nWhat JZ says: You are all second-semester senior statistics majors on the verge of graduation. When you leave this august institution and enter the working world, a few things may happen:\n\nyou will be thrown onto a team with people you didn’t choose;\nyou will be told to use software you haven’t necessarily used;\nyou will be asked to study data from an unfamiliar domain;\nyou will be required to use new statistical methods you haven’t previously studied;\nyou will have to communicate your work to managers and stakeholders that know nothing about statistics.\n\nAre you ready for all that? To prepare you for the realities of modern data science practice, this class is essentially a sequence of group projects (case studies) where we confront you with messy, real world data analysis problems and coach you through how to tackle them using the statistical methods and the productivity tools (Quarto, R, Git, etc) that you studied in previous classes. Along the way, the instructors will introduce new statistical topics that you may find useful.\nPrerequisites: STA 360 or 402 (i.e. Bayes).",
     "crumbs": [
       "Syllabus",
       "Overview"
@@ -15,7 +15,7 @@
     "href": "syllabus/syllabus-overview.html#description",
     "title": "Course overview",
     "section": "",
-    "text": "What the course catalog says: Students apply statistical analysis skills to in-depth data analysis projects ranging across diverse application areas including but not limited to energy, environmental sustainability, global health, information and culture, brain sciences, and social networks. Students practice cutting-edge statistical methods and communicate their results both technically and non-technically via presentations and written reports.\nWhat JZ says:\nthis\nCollaborating with different kinds of folks writing up in a reproducible way version control commnication self-studying new statistical topics\nPrerequisites: STA 360 or 402 (i.e. Bayes).",
+    "text": "What the course catalog says: Students apply statistical analysis skills to in-depth data analysis projects ranging across diverse application areas including but not limited to energy, environmental sustainability, global health, information and culture, brain sciences, and social networks. Students practice cutting-edge statistical methods and communicate their results both technically and non-technically via presentations and written reports.\nWhat JZ says: You are all second-semester senior statistics majors on the verge of graduation. When you leave this august institution and enter the working world, a few things may happen:\n\nyou will be thrown onto a team with people you didn’t choose;\nyou will be told to use software you haven’t necessarily used;\nyou will be asked to study data from an unfamiliar domain;\nyou will be required to use new statistical methods you haven’t previously studied;\nyou will have to communicate your work to managers and stakeholders that know nothing about statistics.\n\nAre you ready for all that? To prepare you for the realities of modern data science practice, this class is essentially a sequence of group projects (case studies) where we confront you with messy, real world data analysis problems and coach you through how to tackle them using the statistical methods and the productivity tools (Quarto, R, Git, etc) that you studied in previous classes. Along the way, the instructors will introduce new statistical topics that you may find useful.\nPrerequisites: STA 360 or 402 (i.e. Bayes).",
     "crumbs": [
       "Syllabus",
       "Overview"
@@ -26,7 +26,7 @@
     "href": "syllabus/syllabus-overview.html#meetings",
     "title": "Course overview",
     "section": "Meetings",
-    "text": "Meetings\n\n\n\n\n\n\n\n\n\nMeeting\nLocation\nTime\nStaff\n\n\n\n\nLecture 001\nPerkins LINK 071 (Classroom 5)\nTuTh 8:30 AM - 9:45 AM\nJohn\n\n\nLecture 002\nPerkins LINK 071 (Classroom 5)\nMoWe 10:05 AM - 11:20 AM\nEd\n\n\nLab 01\nOld Chemistry 001\nF 1:25 PM - 2:40 PM\nTA\n\n\nLab 02\nPerkins LINK 071 (Classroom 5)\nF 10:05 AM - 11:20 AM\nTA\n\n\n\n\n\n\n\n\n\nImportant\n\n\n\nYou must attend the lecture and lab section that you are enrolled in. Class activities will often be completed with your project groups, and project groups will be assigned within sections.",
+    "text": "Meetings\n\n\n\n\n\n\n\n\n\nMeeting\nLocation\nTime\nStaff\n\n\n\n\nLecture 001\nPerkins LINK 071 (Classroom 5)\nTuTh 8:30 AM - 9:45 AM\nJohn\n\n\nLecture 002\nPerkins LINK 071 (Classroom 5)\nMoWe 10:05 AM - 11:20 AM\nEd\n\n\nLab 01\nOld Chemistry 001\nF 1:25 PM - 2:40 PM\nTA\n\n\nLab 02\nPerkins LINK 071 (Classroom 5)\nF 10:05 AM - 11:20 AM\nTA\n\n\n\n\n\n\n\n\n\nImportant\n\n\n\nYou must attend the lecture and lab section that you are enrolled in. Class activities will often be completed with your project groups, and project groups will be randomly assigned within sections.",
     "crumbs": [
       "Syllabus",
       "Overview"
@@ -37,7 +37,7 @@
     "href": "syllabus/syllabus-overview.html#team",
     "title": "Course overview",
     "section": "Team",
-    "text": "Team\n\n\n\n\n\n\n\n\n\nMug\nName\nRole\nOffice Hours\n\n\n\n\n\nIversen, Ed\nInstructor\nTh 4:00 PM - 5:00 PM\nOld Chemistry 122B\n\n\n\nZito, John\nInstructor\nTBD\nOld Chemistry 207\n\n\n\nFan, Li\nTA\nTBD\nTBD\n\n\n\nGleich, Aidan\nLab TA\nnone\n\n\n\nLi, Aihua\nTA\nTBD\nTBD\n\n\n\nMalgieri, Luigi\nLab TA\nnone",
+    "text": "Team\n\n\n\n\n\n\n\n\n\nMug\nName\nRole\nOffice Hours\n\n\n\n\n\nIversen, Ed\nInstructor\nTh 4:00 PM - 5:00 PM\nOld Chemistry 122B\n\n\n\nZito, John\nInstructor\nTBD\nOld Chemistry 207\n\n\n\nKnox, Mary\nCourse Coordinator\nnone\n\n\n\nFan, Li\nTA\nTBD\nTBD\n\n\n\nGleich, Aidan\nLab TA\nnone\n\n\n\nLi, Aihua\nTA\nTBD\nTBD\n\n\n\nMalgieri, Luigi\nLab TA\nnone\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nYou are welcome to attend the office hours of either instructor and any TA.",
     "crumbs": [
       "Syllabus",
       "Overview"
@@ -77,6 +77,17 @@
     ]
   },
   {
+    "objectID": "syllabus/syllabus-resources.html#writing-studio",
+    "href": "syllabus/syllabus-resources.html#writing-studio",
+    "title": "University resources",
+    "section": "Writing Studio",
+    "text": "Writing Studio\nPlease feel encouraged to set up a synchronous online appointment with the Writing Studio, a place beyond our classroom to work collaboratively with an attentive, nonevaluative reader. You can schedule an appointment at any stage in your writing process, including before you have even started writing. You’ll find friendly student consultants who are eager to talk with you about your writing and think with you about ways to make your processes even more effective. Visit https://twp.duke.edu/twp-writing-studio to schedule an appointment and to learn more about Writing Studio resources.",
+    "crumbs": [
+      "Syllabus",
+      "University resources"
+    ]
+  },
+  {
     "objectID": "syllabus/syllabus-resources.html#academic-support",
     "href": "syllabus/syllabus-resources.html#academic-support",
     "title": "University resources",
@@ -110,101 +121,25 @@
     ]
   },
   {
-    "objectID": "syllabus/syllabus-materials.html",
-    "href": "syllabus/syllabus-materials.html",
-    "title": "Course materials",
-    "section": "",
-    "text": "You are not required to purchase a textbook for this class. However, if you wish to follow along with one, these are all good options:\n\n[Ross] A First Course in Probability by Sheldon Ross;\n[HTZ] Probability and Statistical Inference by Robert Hogg, Elliot Tanis, and Dale Zimmerman;\n[DS] Probability and Statistics by Morris DeGroot and Mark Schervish;\n[Wass] All of Statistics by Larry Wasserman.\n\nIn the PREPARE column of the course schedule, I will indicate which parts of a book correspond to the lectures."
-  },
-  {
-    "objectID": "syllabus/syllabus-materials.html#textbooks",
-    "href": "syllabus/syllabus-materials.html#textbooks",
-    "title": "Course materials",
-    "section": "",
-    "text": "You are not required to purchase a textbook for this class. However, if you wish to follow along with one, these are all good options:\n\n[Ross] A First Course in Probability by Sheldon Ross;\n[HTZ] Probability and Statistical Inference by Robert Hogg, Elliot Tanis, and Dale Zimmerman;\n[DS] Probability and Statistics by Morris DeGroot and Mark Schervish;\n[Wass] All of Statistics by Larry Wasserman.\n\nIn the PREPARE column of the course schedule, I will indicate which parts of a book correspond to the lectures."
-  },
-  {
-    "objectID": "syllabus/syllabus-materials.html#technology",
-    "href": "syllabus/syllabus-materials.html#technology",
-    "title": "Course materials",
-    "section": "Technology",
-    "text": "Technology\nLecture will largely be a low tech affair: pencil and paper should be sufficient most of the time. You should always plan to bring a laptop or tablet device to lab. In general, you will need access to a device with internet so that you can use the following:\n\nThis course page that you are on right now;\nR/RStudio via the Duke Container Manager;\nCanvas, through which you can access…\n\nGradescope;\nEd Discussion;\n\nZoom (e.g. for remote office hours).\n\nIf access to technology becomes a concern for you during the semester, contact the instructor immediately to discuss options."
-  },
-  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "STA 440 Case Studies in Statistics",
     "section": "",
-    "text": "WEEK\nDATE\nPREPARE\nTOPIC\nMATERIALS\nDUE\n\n\n\n0\nThu, Jan 8\n\n🧑‍🏫 Welcome!\nslides\n\n\n\n\nFri, Jan 9\n\n❌ No Lab\n\n\n\n\n\n1\nTue, Jan 13\n\n🧑‍🏫 Regression review\nslides\n\n\n\n\nThu, Jan 15\n\n🧑‍🏫 Meet Case Study 1\nslides\n\n\n\n\nFri, Jan 16\n\n💻 Meet your first group\n\n\n\n\n2\nTue, Jan 20\n\n\n\n\n\n\n\nThu, Jan 22\n\n\n\n\n\n\n\nFri, Jan 23\n\n\n\n\n\n\n3\nTue, Jan 27\n\n\n\n\n\n\n\nThu, Jan 29\n\n\n\n\n\n\n\nFri, Jan 30\n\n\n\n\n\n\n4\nTue, Feb 3\n\n\n\n\n\n\n\nThu, Feb 5\n\n\n\n\n\n\n\nFri, Feb 6\n\n\n\n\n\n\n5\nTue, Feb 10\n\n\n\n\n\n\n\nThu, Feb 12\n\n\n\n\n\n\n\nFri, Feb 13\n\n\n\n\n\n\n6\nTue, Feb 17\n\n\n\n\n\n\n\nThu, Feb 19\n\n\n\n\n\n\n\nFri, Feb 20\n\n\n\n\n\n\n7\nTue, Feb 24\n\n\n\n\n\n\n\nThu, Feb 26\n\n\n\n\n\n\n\nFri, Feb 27\n\n\n\n\n\n\n8\nTue, Mar 3\n\n\n\n\n\n\n\nThu, Mar 5\n\n\n\n\n\n\n\nFri, Mar 6\n\n\n\n\n\n\n9\nTue, Mar 10\n\n❌ Spring Break - No Lecture\n\n\n\n\n\n\nThu, Mar 12\n\n❌ Spring Break - No Lecture\n\n\n\n\n\n\nFri, Mar 13\n\n❌ Spring Break - No Lab\n\n\n\n\n\n10\nTue, Mar 17\n\n\n\n\n\n\n\nThu, Mar 19\n\n\n\n\n\n\n\nFri, Mar 20\n\n\n\n\n\n\n11\nTue, Mar 24\n\n\n\n\n\n\n\nThu, Mar 26\n\n\n\n\n\n\n\nFri, Mar 27\n\n\n\n\n\n\n12\nTue, Mar 31\n\n\n\n\n\n\n\nThu, Apr 2\n\n\n\n\n\n\n\nFri, Apr 3\n\n\n\n\n\n\n13\nTue, Apr 7\n\n\n\n\n\n\n\nThu, Apr 9\n\n\n\n\n\n\n\nFri, Apr 10\n\n\n\n\n\n\n14\nTue, Apr 14\n\n\n\n\n\n\n\nThu, Apr 16\n\n\n\n\n\n\n\nFri, Apr 17\n\n\n\n\n\n\n15\nTue, Apr 21\n\n\n\n\n\n\n\nThu, Apr 23\n\n❌ Reading Days - No Lecture\n\n\n\n\n\n\nFri, Apr 24\n\n❌ Reading Days - No Lab\n\n\n\n\n\n16\nTue, Apr 28\n\nFinal presentation (9am - 12pm)",
+    "text": "Below is the schedule for the section that meets TuTh at 8:30 AM with John Zito.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWEEK\nDATE\nPREPARE\nTOPIC\nMATERIALS\nDUE\n\n\n\n0\nThu, Jan 8\n\n🧑‍🏫 Welcome!\nslides\n\n\n\n\nFri, Jan 9\n\n❌ No Lab\n\n\n\n\n\n1\nTue, Jan 13\n\n🧑‍🏫 GLM Crash Course\nslides\n\n\n\n\nThu, Jan 15\n\n🧑‍🏫 Meet Case Study 1\nslides\n\n\n\n\nFri, Jan 16\n\n💻 Meet your first group\n\n\n\n\n2\nTue, Jan 20\n\n\n\n\n\n\n\nThu, Jan 22\n\n\n\n\n\n\n\nFri, Jan 23\n\n\n\n\n\n\n3\nTue, Jan 27\n\n\n\n\n\n\n\nThu, Jan 29\n\n\n\n\n\n\n\nFri, Jan 30\n\n\n\n\n\n\n4\nTue, Feb 3\n\n\n\n\n\n\n\nThu, Feb 5\n\n\n\n\n\n\n\nFri, Feb 6\n\n\n\n\n\n\n5\nTue, Feb 10\n\n\n\n\n\n\n\nThu, Feb 12\n\n\n\n\n\n\n\nFri, Feb 13\n\n\n\n\n\n\n6\nTue, Feb 17\n\n\n\n\n\n\n\nThu, Feb 19\n\n\n\n\n\n\n\nFri, Feb 20\n\n\n\n\n\n\n7\nTue, Feb 24\n\n\n\n\n\n\n\nThu, Feb 26\n\n\n\n\n\n\n\nFri, Feb 27\n\n\n\n\n\n\n8\nTue, Mar 3\n\n\n\n\n\n\n\nThu, Mar 5\n\n\n\n\n\n\n\nFri, Mar 6\n\n\n\n\n\n\n9\nTue, Mar 10\n\n❌ Spring Break - No Lecture\n\n\n\n\n\n\nThu, Mar 12\n\n❌ Spring Break - No Lecture\n\n\n\n\n\n\nFri, Mar 13\n\n❌ Spring Break - No Lab\n\n\n\n\n\n10\nTue, Mar 17\n\n\n\n\n\n\n\nThu, Mar 19\n\n\n\n\n\n\n\nFri, Mar 20\n\n\n\n\n\n\n11\nTue, Mar 24\n\n\n\n\n\n\n\nThu, Mar 26\n\n\n\n\n\n\n\nFri, Mar 27\n\n\n\n\n\n\n12\nTue, Mar 31\n\n\n\n\n\n\n\nThu, Apr 2\n\n\n\n\n\n\n\nFri, Apr 3\n\n\n\n\n\n\n13\nTue, Apr 7\n\n\n\n\n\n\n\nThu, Apr 9\n\n\n\n\n\n\n\nFri, Apr 10\n\n\n\n\n\n\n14\nTue, Apr 14\n\n\n\n\n\n\n\nThu, Apr 16\n\n\n\n\n\n\n\nFri, Apr 17\n\n\n\n\n\n\n15\nTue, Apr 21\n\n\n\n\n\n\n\nThu, Apr 23\n\n❌ Reading Days - No Lecture\n\n\n\n\n\n\nFri, Apr 24\n\n❌ Reading Days - No Lab\n\n\n\n\n\n16\nTue, Apr 28\n\nFinal presentation (9am - 12pm)",
     "crumbs": [
       "Syllabus",
       "Schedule"
     ]
   },
   {
-    "objectID": "syllabus/syllabus-policies.html",
-    "href": "syllabus/syllabus-policies.html",
-    "title": "Policies",
+    "objectID": "syllabus/syllabus-assignments.html",
+    "href": "syllabus/syllabus-assignments.html",
+    "title": "Assignments and grading",
     "section": "",
-    "text": "You are enthusiastically encouraged to work together and help one another on labs and problem sets. I would much rather you consult your peers than some daft language model. What I ask is that you acknowledge your collaborators. So, at the end of each problem in your write-up, leave a comment like “Ursula, Ignatius and I worked together on this problem,” or “Ethel explained to me how to do part b.” You are not being judged based on your acknowledgements, and there is no penalty for getting “too much” help from others. If you omit acknowledgements, I will assume you did your work solo. If your classmates tell a different story, I will have questions. But otherwise, so long as you are thorough and honest, there will be no problems.\nHaving said all of that, you should not be crassly handing your solutions to others for them to brainlessly copy. This is plagiarism, and all involved will earn a zero on the assignment and be referred to the conduct office, both sharers and recipients alike. The write-up you submit must be your own work.",
+    "text": "Course grade\nYour final course grade breaks down as follows:\n\n[10%] Attendance and participation: we will be taking attendance at all class meetings;\n[15%] Final project: the semester ends with a data analysis project completed individually. Details to come;\n[75%] Case studies: this course is organized around a sequence of case studies where you work in teams to analyze complex, messy datasets coming from various domains. There will be 4 - 6 case studies depending on the pace of course, and they will each get equal weight in determining this course component. Within each case study, your grade breaks down as follows:\n\n(60%) written report;\n(30%) presentation;\n(10%) student-specific collaboration score.\n\n\nAt the end of the semester, your final letter grade will be determined using the usual thresholds:\n\n\n\n\nLetter Grade\nFinal Course Grade\n\n\n\n\nA\n&gt;= 93\n\n\nA-\n90 - 92.99\n\n\nB+\n87 - 89.99\n\n\nB\n83 - 86.99\n\n\nB-\n80 - 82.99\n\n\nC+\n77 - 79.99\n\n\nC\n73 - 76.99\n\n\nC-\n70 - 72.99\n\n\nD+\n67 - 69.99\n\n\nD\n63 - 66.99\n\n\nD-\n60 - 62.99\n\n\nF\n&lt; 60\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nThese thresholds will not be adjusted upward, but they may be adjusted downward in your favor.\n\n\n\n\nCase studies\nThe case studies are the heart of the class. Case studies will last 2 - 4 weeks depending on complexity, and there will be 4 - 6 in total. Sometimes the class as a whole requests more time to work on the more involved cases, and so we are prepared to be flexible and adjust the pace of the course as needed. Hence, the final number of cases is TBD.\nEach case study will go something like this:\n\nthe instructor introduces the data and the research question in lecture;\nstudents are randomly sorted into teams of 2 - 4. The teams are different for every case study;\njust like in STA 199, we share a GitHub repo with each team that contains the necessary data as well as template Quarto files for your presentation and report;\nworking inside their GitHub repo, teams use R and Quarto to collaborate on a written report and presentation slides;\nduring lecture, the instructor introduces new statistical topic that teams may find relevant to the current case study;\nEach case study has two rounds of presentation: an early stage presentation on exploratory work and a final presentation on analysis. Groups will be selected at random to present in one of these two rounds, with each group presenting at least once for each case study;\nLab sections on Friday will sometimes feature a presentation or tutorial, but for the most part these are built-in work periods where all group members can convene with access to a TA;\nAt the end of each case study, students will confidentially evaluate themselves and their group members with a survey through TEAMMATES. Only the teaching team will have access to this feedback.\n\nAs mentioned above, each case study will be graded as follows:\n\n(60%) at the end you submit a brief report describing your final analysis;\n\nsee here for the grading rubric;\n\n(30%) you will give at least one presentation, on your exploratory or final analysis;\n\nsee here for the grading rubric;\n\n(10%) based on your GitHub activity and the results of the TEAMMATES survey, each individual group member will receive a separate score reflecting their contribution to the team’s effort.",
     "crumbs": [
       "Syllabus",
-      "Policies"
-    ]
-  },
-  {
-    "objectID": "syllabus/syllabus-policies.html#collaboration",
-    "href": "syllabus/syllabus-policies.html#collaboration",
-    "title": "Policies",
-    "section": "",
-    "text": "You are enthusiastically encouraged to work together and help one another on labs and problem sets. I would much rather you consult your peers than some daft language model. What I ask is that you acknowledge your collaborators. So, at the end of each problem in your write-up, leave a comment like “Ursula, Ignatius and I worked together on this problem,” or “Ethel explained to me how to do part b.” You are not being judged based on your acknowledgements, and there is no penalty for getting “too much” help from others. If you omit acknowledgements, I will assume you did your work solo. If your classmates tell a different story, I will have questions. But otherwise, so long as you are thorough and honest, there will be no problems.\nHaving said all of that, you should not be crassly handing your solutions to others for them to brainlessly copy. This is plagiarism, and all involved will earn a zero on the assignment and be referred to the conduct office, both sharers and recipients alike. The write-up you submit must be your own work.",
-    "crumbs": [
-      "Syllabus",
-      "Policies"
-    ]
-  },
-  {
-    "objectID": "syllabus/syllabus-policies.html#use-of-outside-resources-including-ai",
-    "href": "syllabus/syllabus-policies.html#use-of-outside-resources-including-ai",
-    "title": "Policies",
-    "section": "Use of outside resources, including AI",
-    "text": "Use of outside resources, including AI\nThere are at least two reasons you might seek outside resources:\n\n✅ Extra practice or alternative instruction: Go crazy. Knock yourself out. Have a ball. The internet is saturated with good (and horrible) resources for learning this material, so if you find something that really resonates with you, have at it;\n❌ Doing the problems for you: If you find a solution online, or ask a language model to generate one, and you copy it down and submit it as your own work, that is plagiarism. If we detect it, you will earn a zero for that part of your write-up.\n\n“Using ChatGPT to complete assignments is like bringing a forklift into the weight room; you will never improve your cognitive fitness that way.” Furthermore, 60% of your final course grade is determined by your performance on old school, no-tech exams. As such, outsourcing all of your thinking to an AI will probably end in humiliating disaster. To avoid this, I suggest you abstain from using language models to do the problems for you.",
-    "crumbs": [
-      "Syllabus",
-      "Policies"
-    ]
-  },
-  {
-    "objectID": "syllabus/syllabus-policies.html#communication",
-    "href": "syllabus/syllabus-policies.html#communication",
-    "title": "Policies",
-    "section": "Communication",
-    "text": "Communication\nIf you wish to ask content-related questions in writing, please do not do so via e-mail. Instead, please use the course discussion forum Ed Discussion. That way all members of the teaching team can see your question, and all students can benefit from the ensuing discussion. You are also encouraged to answer one another’s questions.\nIf you have questions about personal matters that may not be appropriate for the public course forum (e.g. illness, accommodations, etc), then please e-mail the instructor directly (john.zito@duke.edu).\n\n\n\n\n\n\nNote\n\n\n\nYou can ask questions anonymously on Ed. The teaching team will still know your identity, but your peers will not.",
-    "crumbs": [
-      "Syllabus",
-      "Policies"
-    ]
-  },
-  {
-    "objectID": "syllabus/syllabus-policies.html#late-work-and-extensions",
-    "href": "syllabus/syllabus-policies.html#late-work-and-extensions",
-    "title": "Policies",
-    "section": "Late work and extensions",
-    "text": "Late work and extensions\nNo late work will be accepted unless you request an extension in advance by e-mailing the instructor directly (john.zito@duke.edu). All reasonable requests will be entertained, but extensions will not be long.",
-    "crumbs": [
-      "Syllabus",
-      "Policies"
-    ]
-  },
-  {
-    "objectID": "syllabus/syllabus-policies.html#regrade-requests",
-    "href": "syllabus/syllabus-policies.html#regrade-requests",
-    "title": "Policies",
-    "section": "Regrade requests",
-    "text": "Regrade requests\nIf you receive a graded assignment back, and you believe that some part of it was graded incorrectly, you may dispute the grade by submitting a regrade request in Gradescope. JZ is the sole reviewer of these. Note the following:\n\nYou have one week after you receive a grade to submit a regrade request;\nYou should submit separate regrade requests for each question you wish to dispute, not a single catch-all request;\nRequests will be considered if there was an error in the grade calculation or if a correct answer was mistakenly marked as incorrect;\nRequests to dispute the number of points deducted for an incorrect response will not be considered;\nNo grades will be changed after the final exam has been administered on Friday December 12.",
-    "crumbs": [
-      "Syllabus",
-      "Policies"
+      "Assignments and grading"
     ]
   },
   {
@@ -212,29 +147,29 @@
     "href": "syllabus/syllabus-policies.html#attendance",
     "title": "Policies",
     "section": "Attendance",
-    "text": "Attendance\nLive your life. Attendance is not strictly required for any of the class meetings. The responsibility lies with us to make class meetings sufficiently engaging and informative that you choose to attend. Having said that, success in this class and regular attendance are probably highly positively correlated. Furthermore, while lab attendance is not required, regular attendance is probably the path of least resistance to earning full credit for the lab component of your final grade. The labs are designed so that they can be completed in one sitting more or less, and they are due at midnight the same day. So show up to lab, bang it out, and move on with your life.",
+    "text": "Attendance",
     "crumbs": [
       "Syllabus",
       "Policies"
     ]
   },
   {
-    "objectID": "syllabus/syllabus-policies.html#accommodations",
-    "href": "syllabus/syllabus-policies.html#accommodations",
+    "objectID": "syllabus/syllabus-policies.html#use-of-ai",
+    "href": "syllabus/syllabus-policies.html#use-of-ai",
     "title": "Policies",
-    "section": "Accommodations",
-    "text": "Accommodations\nIf you need accommodations for this class, you will need to register with the Student Disability Access Office (SDAO) and provide them with documentation related to your needs. SDAO will work with you to determine what accommodations are appropriate for your situation. Please note that accommodations are not retroactive and disability accommodations cannot be provided until a Faculty Accommodation Letter has been given to me. Please contact SDAO for more information: sdao@duke.edu or access.duke.edu.",
+    "section": "Use of AI",
+    "text": "Use of AI",
     "crumbs": [
       "Syllabus",
       "Policies"
     ]
   },
   {
-    "objectID": "syllabus/syllabus-policies.html#duke-community-standard",
-    "href": "syllabus/syllabus-policies.html#duke-community-standard",
+    "objectID": "syllabus/syllabus-policies.html#academic-honesty",
+    "href": "syllabus/syllabus-policies.html#academic-honesty",
     "title": "Policies",
-    "section": "Duke Community Standard",
-    "text": "Duke Community Standard\nDuke University is a community dedicated to scholarship, leadership, and service and to the principles of honesty, fairness, respect, and accountability. Members of this community commit to reflect upon and uphold these principles in all academic and non-academic endeavors, and to protect and promote a culture of integrity.\nDuke University has high expectations for students’ scholarship and conduct. In accepting admission, students indicate their willingness to subscribe to and be governed by the rules and regulations of the university, which flow from the Duke Community Standard (DCS).\nRegardless of course delivery format, it is the responsibility of all students to understand and follow all Duke policies, including but not limited to the academic integrity policy (e.g., completing one’s own work, following proper citation of sources, adhering to guidance around group work projects, and more). Ignoring these requirements is a violation of the DCS.\nStudents can direct any questions or concerns regarding academic integrity to the Office of Student Conduct and Community Standards at conduct@duke.edu and can access the DCS guide at https://dukecommunitystandard.students.duke.edu/.\nIn STA 240 specifically…\n\nIf a conduct violation results in a zero on a lab or problem set, that zero will not be dropped;\nIf a conduct violation results in a zero on a midterm, that zero will not be replaced with your final exam score;\nIf we discover that students are sharing and copying assignment solutions, all students involved will be penalized equally, the sharers the same as the recipients.",
+    "section": "Academic honesty",
+    "text": "Academic honesty",
     "crumbs": [
       "Syllabus",
       "Policies"
