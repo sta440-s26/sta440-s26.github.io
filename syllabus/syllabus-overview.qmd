@@ -47,12 +47,12 @@ You *must* attend the lecture and lab section that you are enrolled in. Class ac
 | ![](images/jz.jpg){.circ} | Zito, John      | Instructor         | TBD\                           |
 |                           |                 |                    | Old Chemistry 207              |
 +---------------------------+-----------------+--------------------+--------------------------------+
-| ![](images/mk.png){.circ} | Knox, Mary      | Course Coordinator | *none*                           |
+| ![](images/mk.png){.circ} | Knox, Mary      | Course Coordinator | *none*                         |
 +---------------------------+-----------------+--------------------+--------------------------------+
 | ![](images/lf.jpg){.circ} | Fan, Li         | TA                 | TBD\                           |
 |                           |                 |                    | TBD                            |
 +---------------------------+-----------------+--------------------+--------------------------------+
-| ![](images/ag.jpg){.circ} | Gleich, Aidan   | Lab TA             | *none*                           |
+| ![](images/ag.jpg){.circ} | Gleich, Aidan   | Lab TA             | *none*                         |
 +---------------------------+-----------------+--------------------+--------------------------------+
 | ![](images/al.jpg){.circ} | Li, Aihua       | TA                 | TBD\                           |
 |                           |                 |                    | TBD                            |
