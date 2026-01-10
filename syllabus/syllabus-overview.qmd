@@ -8,7 +8,7 @@ editor:
 
 **What the course catalog says**: Students apply statistical analysis skills to in-depth data analysis projects ranging across diverse application areas including but not limited to energy, environmental sustainability, global health, information and culture, brain sciences, and social networks. Students practice cutting-edge statistical methods and communicate their results both technically and non-technically via presentations and written reports.
 
-**What JZ says**: You are all second-semester senior statistics majors on the verge of graduation. When you leave this august institution and enter the working world, a few things may happen:
+**What JZ says**: In a few months you will enter the working world as a professional with a degree in statistics. When you're out there, a few things may happen:
 
 - you will be thrown onto a team with people you didn't choose;
 - you will be told to use software you haven't necessarily used;
@@ -17,7 +17,6 @@ editor:
 - you will have to communicate your work to managers and stakeholders that know nothing about statistics.
 
 Are you ready for all that? To prepare you for the realities of modern data science practice, this class is essentially a sequence of group projects (case studies) where we confront you with messy, real world data analysis problems and coach you through how to tackle them using the statistical methods and the productivity tools (Quarto, R, Git, etc) that you studied in previous classes. Along the way, the instructors will introduce new statistical topics that you may find useful.
-
 
 **Prerequisites:** STA 360 or 402 (i.e. Bayes).
 
