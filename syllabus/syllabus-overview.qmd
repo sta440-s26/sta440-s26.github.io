@@ -25,8 +25,8 @@ Are you ready for all that? To prepare you for the realities of modern data scie
 
 | Meeting  | Location                       | Time                   | Staff  |
 |----------|--------------------------------|------------------------|--------|
-| Lecture 001 | Perkins LINK 071 (Classroom 5) | TuTh 8:30 AM - 9:45 AM | John   |
-| Lecture 002 | Perkins LINK 071 (Classroom 5) | MoWe 10:05 AM - 11:20 AM | Ed   |
+| Lecture 001 | Perkins LINK 071 (Classroom 5) | TuTh 8:30 AM - 9:45 AM | Zito   |
+| Lecture 002 | Perkins LINK 071 (Classroom 5) | MoWe 10:05 AM - 11:20 AM | Iversen   |
 | Lab 01   | Old Chemistry 001 | F 1:25 PM - 2:40 PM   | TA |
 | Lab 02   | Perkins LINK 071 (Classroom 5) | F 10:05 AM - 11:20 AM | TA |
 
@@ -63,7 +63,7 @@ You *must* attend the lecture and lab section that you are enrolled in. Class ac
 
 ::: callout-tip
 
-The four TAs are on board to help both sections, so feel free to seek help from any of them.
+The four TAs work with both sections, so feel free to seek help from any of them.
 
 :::
 
