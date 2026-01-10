@@ -54,8 +54,8 @@ You *must* attend the lecture and lab section that you are enrolled in. Class ac
 +---------------------------+-----------------+--------------------+--------------------------------+
 | ![](images/ag.jpg){.circ} | Gleich, Aidan   | Lab TA             | *none*                         |
 +---------------------------+-----------------+--------------------+--------------------------------+
-| ![](images/al.jpg){.circ} | Li, Aihua       | TA                 | TBD\                           |
-|                           |                 |                    | TBD                            |
+| ![](images/al.jpg){.circ} | Li, Aihua       | TA                 | W 2:30 PM - 4:30 PM\           |
+|                           |                 |                    | Old Chem 203B                  |
 +---------------------------+-----------------+--------------------+--------------------------------+
 | ![](images/lm.jpg){.circ} | Malgieri, Luigi | Lab TA             | *none*                         |
 +---------------------------+-----------------+--------------------+--------------------------------+
@@ -63,7 +63,7 @@ You *must* attend the lecture and lab section that you are enrolled in. Class ac
 
 ::: callout-tip
 
-You are welcome to attend the office hours of either instructor and any TA.
+The four TAs are on board to help both sections, so feel free to seek help from any of them.
 
 :::
 
