@@ -40,8 +40,7 @@ ggplot(residents, aes(x = Year, y = Pct, color = period)) +
 ggplot(residents, aes(x = Year, y = Pct, color = period)) + 
   geom_point() +
   geom_smooth(method = "lm") + 
-  labs(title = "separate regressions",
-       subtitle = "each with their own error variance!")
+  labs(title = "separate regressions")
 ```
 
 ```{r}
@@ -63,7 +62,6 @@ ggplot(residents, aes(Year, Pct, color = period, fill = period)) +
   geom_point() +
   geom_ribbon(aes(ymin = lwr, ymax = upr), alpha = 0.2, color = NA) +
   geom_line(aes(y = fit), linewidth = 1) +
-  labs(title = "interaction model",
-       subtitle = "constant error variance, but pooled estimates of coefficients")
+  labs(title = "interaction model")
 
 ```
