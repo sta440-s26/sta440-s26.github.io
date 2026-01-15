@@ -24,10 +24,10 @@ Are you ready for all that? To prepare you for the realities of modern data scie
 
 | Meeting  | Location                       | Time                   | Staff  |
 |----------|--------------------------------|------------------------|--------|
-| Lecture 001 | Perkins LINK 071 (Classroom 5) | TuTh 8:30 AM - 9:45 AM | Zito   |
-| Lecture 002 | Perkins LINK 071 (Classroom 5) | MoWe 10:05 AM - 11:20 AM | Iversen   |
-| Lab 01   | Old Chemistry 001 | F 1:25 PM - 2:40 PM   | TA |
-| Lab 02   | Perkins LINK 071 (Classroom 5) | F 10:05 AM - 11:20 AM | TA |
+| Lecture 001 | Perkins LINK 071 (Classroom 5) | TuTh 8:30 AM - 9:45 AM | John   |
+| Lecture 002 | Perkins LINK 071 (Classroom 5) | MoWe 10:05 AM - 11:20 AM | Ed   |
+| Lab 01   | Old Chemistry 001 | F 1:25 PM - 2:40 PM   | Aidan |
+| Lab 02   | Perkins LINK 071 (Classroom 5) | F 10:05 AM - 11:20 AM | Luigi |
 
 ::: callout-important
 
@@ -48,8 +48,8 @@ You *must* attend the lecture and lab section that you are enrolled in. Class ac
 +---------------------------+-----------------+--------------------+--------------------------------+
 | ![](images/mk.png){.circ} | Knox, Mary      | Course Coordinator | *none*                         |
 +---------------------------+-----------------+--------------------+--------------------------------+
-| ![](images/lf.jpg){.circ} | Fan, Li         | TA                 | TBD\                           |
-|                           |                 |                    | TBD                            |
+| ![](images/lf.jpg){.circ} | Fan, Li         | TA                 | M 7:00 PM - 9:00 PM\           |
+|                           |                 |                    | Zoom (link on Canvas)          |
 +---------------------------+-----------------+--------------------+--------------------------------+
 | ![](images/ag.jpg){.circ} | Gleich, Aidan   | Lab TA             | *none*                         |
 +---------------------------+-----------------+--------------------+--------------------------------+
