@@ -1,5 +1,0 @@
----
-title: "1-particle-adhesion"
-format: html
----
-
