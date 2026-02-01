@@ -31,21 +31,21 @@ website:
     style: docked
     search: true
     collapse-level: 1
-    contents:
-      - section: "Syllabus"
-        contents:
-          - href: syllabus/syllabus-overview.qmd
-            text: Overview
-          - href: syllabus/syllabus-assignments.qmd
-            text: Assignments and grading
-          - href: syllabus/syllabus-policies.qmd
-            text: Policies
-          - href: syllabus/syllabus-resources.qmd
-            text: University resources
-          - href: index.qmd
-            text: Schedule
-      - section: "Code helpers"
-      - section: "Case studies"
+    #contents:
+    #  - section: "Syllabus"
+    #    contents:
+    #      - href: syllabus/syllabus-overview.qmd
+    #        text: Overview
+    #      - href: syllabus/syllabus-assignments.qmd
+    #        text: Assignments and grading
+    #      - href: syllabus/syllabus-policies.qmd
+    #        text: Policies
+    #      - href: syllabus/syllabus-resources.qmd
+    #        text: University resources
+    #      - href: index.qmd
+    #        text: Schedule
+    #  - section: "Code helpers"
+    #  - section: "Case studies"
             
   page-footer:
     right: 'This page is built with [Quarto](https://quarto.org/).'
