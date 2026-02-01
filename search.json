@@ -4,175 +4,286 @@
     "href": "syllabus/syllabus-overview.html",
     "title": "Course overview",
     "section": "",
-    "text": "What the course catalog says: Students apply statistical analysis skills to in-depth data analysis projects ranging across diverse application areas including but not limited to energy, environmental sustainability, global health, information and culture, brain sciences, and social networks. Students practice cutting-edge statistical methods and communicate their results both technically and non-technically via presentations and written reports.\nWhat JZ says: You are all second-semester senior statistics majors on the verge of graduation. When you leave this august institution and enter the working world, a few things may happen:\n\nyou will be thrown onto a team with people you didn’t choose;\nyou will be told to use software you haven’t necessarily used;\nyou will be asked to study data from an unfamiliar domain;\nyou will be required to use new statistical methods you haven’t previously studied;\nyou will have to communicate your work to managers and stakeholders that know nothing about statistics.\n\nAre you ready for all that? To prepare you for the realities of modern data science practice, this class is essentially a sequence of group projects (case studies) where we confront you with messy, real world data analysis problems and coach you through how to tackle them using the statistical methods and the productivity tools (Quarto, R, Git, etc) that you studied in previous classes. Along the way, the instructors will introduce new statistical topics that you may find useful.\nPrerequisites: STA 360 or 402 (i.e. Bayes).",
-    "crumbs": [
-      "Syllabus",
-      "Overview"
-    ]
+    "text": "What the course catalog says: Students apply statistical analysis skills to in-depth data analysis projects ranging across diverse application areas including but not limited to energy, environmental sustainability, global health, information and culture, brain sciences, and social networks. Students practice cutting-edge statistical methods and communicate their results both technically and non-technically via presentations and written reports.\nWhat JZ says: In a few months you will enter the working world as a professional with a degree in statistics. When you’re out there, a few things may happen:\n\nyou will be thrown onto a team with people you didn’t choose;\nyou will be told to use software you haven’t necessarily used;\nyou will be asked to study data from an unfamiliar domain;\nyou will be required to use new statistical methods you haven’t previously studied;\nyou will have to communicate your work to managers and stakeholders that know nothing about statistics.\n\nAre you ready for all that? To prepare you for the realities of modern data science practice, this class is essentially a sequence of group projects (case studies) where we confront you with messy, real world data analysis problems and coach you through how to tackle them using the statistical methods and the productivity tools (Quarto, R, Git, etc) that you studied in previous classes. Along the way, the instructors will introduce new statistical topics that you may find useful.\nPrerequisites: STA 360 or 402 (i.e. Bayes)."
   },
   {
     "objectID": "syllabus/syllabus-overview.html#description",
     "href": "syllabus/syllabus-overview.html#description",
     "title": "Course overview",
     "section": "",
-    "text": "What the course catalog says: Students apply statistical analysis skills to in-depth data analysis projects ranging across diverse application areas including but not limited to energy, environmental sustainability, global health, information and culture, brain sciences, and social networks. Students practice cutting-edge statistical methods and communicate their results both technically and non-technically via presentations and written reports.\nWhat JZ says: You are all second-semester senior statistics majors on the verge of graduation. When you leave this august institution and enter the working world, a few things may happen:\n\nyou will be thrown onto a team with people you didn’t choose;\nyou will be told to use software you haven’t necessarily used;\nyou will be asked to study data from an unfamiliar domain;\nyou will be required to use new statistical methods you haven’t previously studied;\nyou will have to communicate your work to managers and stakeholders that know nothing about statistics.\n\nAre you ready for all that? To prepare you for the realities of modern data science practice, this class is essentially a sequence of group projects (case studies) where we confront you with messy, real world data analysis problems and coach you through how to tackle them using the statistical methods and the productivity tools (Quarto, R, Git, etc) that you studied in previous classes. Along the way, the instructors will introduce new statistical topics that you may find useful.\nPrerequisites: STA 360 or 402 (i.e. Bayes).",
-    "crumbs": [
-      "Syllabus",
-      "Overview"
-    ]
+    "text": "What the course catalog says: Students apply statistical analysis skills to in-depth data analysis projects ranging across diverse application areas including but not limited to energy, environmental sustainability, global health, information and culture, brain sciences, and social networks. Students practice cutting-edge statistical methods and communicate their results both technically and non-technically via presentations and written reports.\nWhat JZ says: In a few months you will enter the working world as a professional with a degree in statistics. When you’re out there, a few things may happen:\n\nyou will be thrown onto a team with people you didn’t choose;\nyou will be told to use software you haven’t necessarily used;\nyou will be asked to study data from an unfamiliar domain;\nyou will be required to use new statistical methods you haven’t previously studied;\nyou will have to communicate your work to managers and stakeholders that know nothing about statistics.\n\nAre you ready for all that? To prepare you for the realities of modern data science practice, this class is essentially a sequence of group projects (case studies) where we confront you with messy, real world data analysis problems and coach you through how to tackle them using the statistical methods and the productivity tools (Quarto, R, Git, etc) that you studied in previous classes. Along the way, the instructors will introduce new statistical topics that you may find useful.\nPrerequisites: STA 360 or 402 (i.e. Bayes)."
   },
   {
     "objectID": "syllabus/syllabus-overview.html#meetings",
     "href": "syllabus/syllabus-overview.html#meetings",
     "title": "Course overview",
     "section": "Meetings",
-    "text": "Meetings\n\n\n\n\n\n\n\n\n\nMeeting\nLocation\nTime\nStaff\n\n\n\n\nLecture 001\nPerkins LINK 071 (Classroom 5)\nTuTh 8:30 AM - 9:45 AM\nJohn\n\n\nLecture 002\nPerkins LINK 071 (Classroom 5)\nMoWe 10:05 AM - 11:20 AM\nEd\n\n\nLab 01\nOld Chemistry 001\nF 1:25 PM - 2:40 PM\nTA\n\n\nLab 02\nPerkins LINK 071 (Classroom 5)\nF 10:05 AM - 11:20 AM\nTA\n\n\n\n\n\n\n\n\n\nImportant\n\n\n\nYou must attend the lecture and lab section that you are enrolled in. Class activities will often be completed with your project groups, and project groups will be randomly assigned within sections.",
-    "crumbs": [
-      "Syllabus",
-      "Overview"
-    ]
+    "text": "Meetings\n\n\n\n\n\n\n\n\n\nMeeting\nLocation\nTime\nStaff\n\n\n\n\nLecture 001\nPerkins LINK 071 (Classroom 5)\nTuTh 8:30 AM - 9:45 AM\nJohn\n\n\nLecture 002\nPerkins LINK 071 (Classroom 5)\nMoWe 10:05 AM - 11:20 AM\nEd\n\n\nLab 01\nOld Chemistry 001\nF 1:25 PM - 2:40 PM\nAidan\n\n\nLab 02\nPerkins LINK 071 (Classroom 5)\nF 10:05 AM - 11:20 AM\nLuigi\n\n\n\n\n\n\n\n\n\nImportant\n\n\n\nYou must attend the lecture and lab section that you are enrolled in. Class activities will often be completed with your project groups, and project groups will be randomly assigned within sections."
   },
   {
     "objectID": "syllabus/syllabus-overview.html#team",
     "href": "syllabus/syllabus-overview.html#team",
     "title": "Course overview",
     "section": "Team",
-    "text": "Team\n\n\n\n\n\n\n\n\n\nMug\nName\nRole\nOffice Hours\n\n\n\n\n\nIversen, Ed\nInstructor\nTh 4:00 PM - 5:00 PM\nOld Chemistry 122B\n\n\n\nZito, John\nInstructor\nTBD\nOld Chemistry 207\n\n\n\nKnox, Mary\nCourse Coordinator\nnone\n\n\n\nFan, Li\nTA\nTBD\nTBD\n\n\n\nGleich, Aidan\nLab TA\nnone\n\n\n\nLi, Aihua\nTA\nTBD\nTBD\n\n\n\nMalgieri, Luigi\nLab TA\nnone\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nYou are welcome to attend the office hours of either instructor and any TA.",
-    "crumbs": [
-      "Syllabus",
-      "Overview"
-    ]
+    "text": "Team\n\n\n\n\n\n\n\n\n\nMug\nName\nRole\nOffice Hours\n\n\n\n\n\nIversen, Ed\nInstructor\nTh 4:00 PM - 5:00 PM\nOld Chemistry 122B\n\n\n\nZito, John\nInstructor\nTBD\nOld Chemistry 207\n\n\n\nKnox, Mary\nCourse Coordinator\nnone\n\n\n\nFan, Li\nTA\nM 7:00 PM - 9:00 PM\nZoom (link on Canvas)\n\n\n\nGleich, Aidan\nLab TA\nnone\n\n\n\nLi, Aihua\nTA\nW 2:30 PM - 4:30 PM\nOld Chem 203B\n\n\n\nMalgieri, Luigi\nLab TA\nnone\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nThe four TAs work with both sections, so feel free to seek help from any of them."
   },
   {
     "objectID": "syllabus/syllabus-resources.html",
     "href": "syllabus/syllabus-resources.html",
     "title": "University resources",
     "section": "",
-    "text": "If you are having difficulty with the costs associated with this course (obtaining a laptop, mostly), here are some resources:\n\nKarsh Office of Undergraduate Support: Regardless of your aid package, Karsh offers loans and resources for connecting students with campus programs that might help alleviate course costs.\nDukeLIFE: The Course Material Assistance program offers assistance for eligible students, including through the LIFE Loaner Laptop Program. Students who are eligible for DukeLIFE benefits are notified before the start of the semester; program resources are limited.\nDuke Link: They have a small supply of laptops that can be rented out for five days at a time.",
-    "crumbs": [
-      "Syllabus",
-      "University resources"
-    ]
+    "text": "If you are having difficulty with the costs associated with this course (obtaining a laptop, mostly), here are some resources:\n\nKarsh Office of Undergraduate Support: Regardless of your aid package, Karsh offers loans and resources for connecting students with campus programs that might help alleviate course costs.\nDukeLIFE: The Course Material Assistance program offers assistance for eligible students, including through the LIFE Loaner Laptop Program. Students who are eligible for DukeLIFE benefits are notified before the start of the semester; program resources are limited.\nDuke Link: They have a small supply of laptops that can be rented out for five days at a time."
   },
   {
     "objectID": "syllabus/syllabus-resources.html#course-costs",
     "href": "syllabus/syllabus-resources.html#course-costs",
     "title": "University resources",
     "section": "",
-    "text": "If you are having difficulty with the costs associated with this course (obtaining a laptop, mostly), here are some resources:\n\nKarsh Office of Undergraduate Support: Regardless of your aid package, Karsh offers loans and resources for connecting students with campus programs that might help alleviate course costs.\nDukeLIFE: The Course Material Assistance program offers assistance for eligible students, including through the LIFE Loaner Laptop Program. Students who are eligible for DukeLIFE benefits are notified before the start of the semester; program resources are limited.\nDuke Link: They have a small supply of laptops that can be rented out for five days at a time.",
-    "crumbs": [
-      "Syllabus",
-      "University resources"
-    ]
+    "text": "If you are having difficulty with the costs associated with this course (obtaining a laptop, mostly), here are some resources:\n\nKarsh Office of Undergraduate Support: Regardless of your aid package, Karsh offers loans and resources for connecting students with campus programs that might help alleviate course costs.\nDukeLIFE: The Course Material Assistance program offers assistance for eligible students, including through the LIFE Loaner Laptop Program. Students who are eligible for DukeLIFE benefits are notified before the start of the semester; program resources are limited.\nDuke Link: They have a small supply of laptops that can be rented out for five days at a time."
   },
   {
     "objectID": "syllabus/syllabus-resources.html#tech-support",
     "href": "syllabus/syllabus-resources.html#tech-support",
     "title": "University resources",
     "section": "Tech support",
-    "text": "Tech support\nContact the Duke OIT Service Desk at oit.duke.edu/help.",
-    "crumbs": [
-      "Syllabus",
-      "University resources"
-    ]
+    "text": "Tech support\nContact the Duke OIT Service Desk at oit.duke.edu/help."
   },
   {
     "objectID": "syllabus/syllabus-resources.html#writing-studio",
     "href": "syllabus/syllabus-resources.html#writing-studio",
     "title": "University resources",
     "section": "Writing Studio",
-    "text": "Writing Studio\nPlease feel encouraged to set up a synchronous online appointment with the Writing Studio, a place beyond our classroom to work collaboratively with an attentive, nonevaluative reader. You can schedule an appointment at any stage in your writing process, including before you have even started writing. You’ll find friendly student consultants who are eager to talk with you about your writing and think with you about ways to make your processes even more effective. Visit https://twp.duke.edu/twp-writing-studio to schedule an appointment and to learn more about Writing Studio resources.",
-    "crumbs": [
-      "Syllabus",
-      "University resources"
-    ]
+    "text": "Writing Studio\nPlease feel encouraged to set up a synchronous online appointment with the Writing Studio, a place beyond our classroom to work collaboratively with an attentive, nonevaluative reader. You can schedule an appointment at any stage in your writing process, including before you have even started writing. You’ll find friendly student consultants who are eager to talk with you about your writing and think with you about ways to make your processes even more effective. Visit https://twp.duke.edu/twp-writing-studio to schedule an appointment and to learn more about Writing Studio resources."
   },
   {
     "objectID": "syllabus/syllabus-resources.html#academic-support",
     "href": "syllabus/syllabus-resources.html#academic-support",
     "title": "University resources",
     "section": "Academic support",
-    "text": "Academic support\nThere are times you may need help with the class that is beyond what can be provided by the teaching team. In those instances, I encourage you to visit the Academic Resource Center. The Academic Resource Center (the ARC) offers services to support students academically during their undergraduate careers at Duke. The ARC can provide support with time management, academic skills and strategies, course-specific tutoring, and more. ARC services are available free to all Duke undergraduate student studying any discipline.\nYou can contact the Academic Resource Center by phone at (919) 684-5917, by email at theARC@duke.edu, or by visiting http://arc.duke.edu/.",
-    "crumbs": [
-      "Syllabus",
-      "University resources"
-    ]
+    "text": "Academic support\nThere are times you may need help with the class that is beyond what can be provided by the teaching team. In those instances, I encourage you to visit the Academic Resource Center. The Academic Resource Center (the ARC) offers services to support students academically during their undergraduate careers at Duke. The ARC can provide support with time management, academic skills and strategies, course-specific tutoring, and more. ARC services are available free to all Duke undergraduate student studying any discipline.\nYou can contact the Academic Resource Center by phone at (919) 684-5917, by email at theARC@duke.edu, or by visiting http://arc.duke.edu/."
   },
   {
     "objectID": "syllabus/syllabus-resources.html#accessibility",
     "href": "syllabus/syllabus-resources.html#accessibility",
     "title": "University resources",
     "section": "Accessibility",
-    "text": "Accessibility\nIf any portion of the course is not accessible to you due to challenges with technology or the course format, please let me know so we can make appropriate accommodations.\nThe Student Disability Access Office (SDAO) is available to ensure that students can engage with their courses and related assignments. Students should contact the SDAO to request or update accommodations under these circumstances.",
-    "crumbs": [
-      "Syllabus",
-      "University resources"
-    ]
+    "text": "Accessibility\nIf any portion of the course is not accessible to you due to challenges with technology or the course format, please let me know so we can make appropriate accommodations.\nThe Student Disability Access Office (SDAO) is available to ensure that students can engage with their courses and related assignments. Students should contact the SDAO to request or update accommodations under these circumstances."
   },
   {
     "objectID": "syllabus/syllabus-resources.html#mental-health-and-well-being",
     "href": "syllabus/syllabus-resources.html#mental-health-and-well-being",
     "title": "University resources",
     "section": "Mental health and well-being",
-    "text": "Mental health and well-being\nDuke is committed to holistic student wellbeing, which includes one’s mental, emotional, and physical health. The university offers resources to help students manage daily stress, to encourage intentional self-care, and to access just-in-time support. If you find you need support, your mental and/or emotional health concerns are impacting your day-to-day activities, your academic performance, or you need someone to talk to, the resources below are available to you:\n\nDukeReach: DukeReach provides comprehensive outreach services to support students in managing all aspects of wellbeing, including referrals and follow-up services for students who are experiencing significant challenges related to mental health, physical health, social adjustment, and/or a variety of other stressors. You can contact the DukeReach team at dukereach@duke.edu;\nCounseling and Psychological Services (CAPS): CAPS offers counseling services to Duke students including virtual appointments, and referrals in the community. You do not need an appointment for an initial assessment. You may walk in or call 919-660-1000 to get started. Hours: Monday-Friday 9:00am - 4:00pm. After hours counseling services are available at no additional cost to students, you can call: 919-660-1000 Option 2;\nTimelyCare: TimelyCare is an online platform that is a convenient, confidential, and free way for Duke students to receive 24/7 mental health support through TalkNow and scheduled counseling;\nDuke Student Health: Student Health offers a wide range of healthcare services for all Duke students, many of which are covered by the student health fee. To make an appointment call (919) 681-9355. Hours: Monday - Friday, 8am - 4:30pm, Thursday 9am - 4:30pm. Closed from 12-12:30 each day.",
-    "crumbs": [
-      "Syllabus",
-      "University resources"
-    ]
+    "text": "Mental health and well-being\nDuke is committed to holistic student wellbeing, which includes one’s mental, emotional, and physical health. The university offers resources to help students manage daily stress, to encourage intentional self-care, and to access just-in-time support. If you find you need support, your mental and/or emotional health concerns are impacting your day-to-day activities, your academic performance, or you need someone to talk to, the resources below are available to you:\n\nDukeReach: DukeReach provides comprehensive outreach services to support students in managing all aspects of wellbeing, including referrals and follow-up services for students who are experiencing significant challenges related to mental health, physical health, social adjustment, and/or a variety of other stressors. You can contact the DukeReach team at dukereach@duke.edu;\nCounseling and Psychological Services (CAPS): CAPS offers counseling services to Duke students including virtual appointments, and referrals in the community. You do not need an appointment for an initial assessment. You may walk in or call 919-660-1000 to get started. Hours: Monday-Friday 9:00am - 4:00pm. After hours counseling services are available at no additional cost to students, you can call: 919-660-1000 Option 2;\nTimelyCare: TimelyCare is an online platform that is a convenient, confidential, and free way for Duke students to receive 24/7 mental health support through TalkNow and scheduled counseling;\nDuke Student Health: Student Health offers a wide range of healthcare services for all Duke students, many of which are covered by the student health fee. To make an appointment call (919) 681-9355. Hours: Monday - Friday, 8am - 4:30pm, Thursday 9am - 4:30pm. Closed from 12-12:30 each day."
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "STA 440 Case Studies in Statistics",
-    "section": "",
-    "text": "Below is the schedule for the section that meets TuTh at 8:30 AM with John Zito.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWEEK\nDATE\nPREPARE\nTOPIC\nMATERIALS\nDUE\n\n\n\n0\nThu, Jan 8\n\n🧑‍🏫 Welcome!\nslides\n\n\n\n\nFri, Jan 9\n\n❌ No Lab\n\n\n\n\n\n1\nTue, Jan 13\n\n🧑‍🏫 GLM Crash Course\nslides\n\n\n\n\nThu, Jan 15\n\n🧑‍🏫 Meet Case Study 1\nslides\n\n\n\n\nFri, Jan 16\n\n💻 Meet your first group\n\n\n\n\n2\nTue, Jan 20\n\n\n\n\n\n\n\nThu, Jan 22\n\n\n\n\n\n\n\nFri, Jan 23\n\n\n\n\n\n\n3\nTue, Jan 27\n\n\n\n\n\n\n\nThu, Jan 29\n\n\n\n\n\n\n\nFri, Jan 30\n\n\n\n\n\n\n4\nTue, Feb 3\n\n\n\n\n\n\n\nThu, Feb 5\n\n\n\n\n\n\n\nFri, Feb 6\n\n\n\n\n\n\n5\nTue, Feb 10\n\n\n\n\n\n\n\nThu, Feb 12\n\n\n\n\n\n\n\nFri, Feb 13\n\n\n\n\n\n\n6\nTue, Feb 17\n\n\n\n\n\n\n\nThu, Feb 19\n\n\n\n\n\n\n\nFri, Feb 20\n\n\n\n\n\n\n7\nTue, Feb 24\n\n\n\n\n\n\n\nThu, Feb 26\n\n\n\n\n\n\n\nFri, Feb 27\n\n\n\n\n\n\n8\nTue, Mar 3\n\n\n\n\n\n\n\nThu, Mar 5\n\n\n\n\n\n\n\nFri, Mar 6\n\n\n\n\n\n\n9\nTue, Mar 10\n\n❌ Spring Break - No Lecture\n\n\n\n\n\n\nThu, Mar 12\n\n❌ Spring Break - No Lecture\n\n\n\n\n\n\nFri, Mar 13\n\n❌ Spring Break - No Lab\n\n\n\n\n\n10\nTue, Mar 17\n\n\n\n\n\n\n\nThu, Mar 19\n\n\n\n\n\n\n\nFri, Mar 20\n\n\n\n\n\n\n11\nTue, Mar 24\n\n\n\n\n\n\n\nThu, Mar 26\n\n\n\n\n\n\n\nFri, Mar 27\n\n\n\n\n\n\n12\nTue, Mar 31\n\n\n\n\n\n\n\nThu, Apr 2\n\n\n\n\n\n\n\nFri, Apr 3\n\n\n\n\n\n\n13\nTue, Apr 7\n\n\n\n\n\n\n\nThu, Apr 9\n\n\n\n\n\n\n\nFri, Apr 10\n\n\n\n\n\n\n14\nTue, Apr 14\n\n\n\n\n\n\n\nThu, Apr 16\n\n\n\n\n\n\n\nFri, Apr 17\n\n\n\n\n\n\n15\nTue, Apr 21\n\n\n\n\n\n\n\nThu, Apr 23\n\n❌ Reading Days - No Lecture\n\n\n\n\n\n\nFri, Apr 24\n\n❌ Reading Days - No Lab\n\n\n\n\n\n16\nTue, Apr 28\n\nFinal presentation (9am - 12pm)",
-    "crumbs": [
-      "Syllabus",
-      "Schedule"
-    ]
+    "objectID": "slides/case-study-2.html#a-few-us-macro-aggregates",
+    "href": "slides/case-study-2.html#a-few-us-macro-aggregates",
+    "title": "Case Study 2",
+    "section": "A few US macro aggregates",
+    "text": "A few US macro aggregates\n\n\n\n\n\n\n\n\nThere are hundreds more. Play around on FRED!"
+  },
+  {
+    "objectID": "slides/case-study-2.html#where-do-these-data-come-from",
+    "href": "slides/case-study-2.html#where-do-these-data-come-from",
+    "title": "Case Study 2",
+    "section": "Where do these data come from?",
+    "text": "Where do these data come from?\nBureau of Labor Statistics (under the Labor Department)\n\n\nConsumer Price Index (CPI);\n\n\nUnemployment;\n\nLabor Productivity;\n\nBureau of Economic Analysis (under the Commerce Department)\n\n\nGross Domestic Product (GDP);\n\nPersonal Consumption Expenditures (PCE).\n\nAnd many many more!"
+  },
+  {
+    "objectID": "slides/case-study-2.html#who-cares",
+    "href": "slides/case-study-2.html#who-cares",
+    "title": "Case Study 2",
+    "section": "Who cares?",
+    "text": "Who cares?\n\nThese are some of the most talked about data in the world. They are constantly being studied by…\n\n\n\n\n\n\n\n\n\nAcademics\n“how does the macroeconomy…work?”\n\n\nPolicymakers\n“what effect did our actions have?”\n\n\nBusinesses\n“how do we plan for the future?”\n\n\nJournalists\neach new release is a major headline…\n\n\nInvestors\n…followed by a second headline about how the stock and bond markets reacted.\n\n\n\n\n\nDid I leave anybody out?"
+  },
+  {
+    "objectID": "slides/case-study-2.html#oh-right.",
+    "href": "slides/case-study-2.html#oh-right.",
+    "title": "Case Study 2",
+    "section": "Oh, right.",
+    "text": "Oh, right."
+  },
+  {
+    "objectID": "slides/case-study-2.html#what-happened",
+    "href": "slides/case-study-2.html#what-happened",
+    "title": "Case Study 2",
+    "section": "What happened?",
+    "text": "What happened?\n\nAt 8:30 AM ET on Friday August 1, 2025, the BLS issued its regular monthly report on the US employment situation;\n\nIt includes total nonfarm payroll employment:\n\na measure of the number of U.S. workers in the economy that excludes proprietors, private household employees, unpaid volunteers, farm employees, and the unincorporated self-employed. This measure accounts for approximately 80 percent of the workers who contribute to Gross Domestic Product (GDP). This measure provides useful insights into the current economic situation because it can represent the number of jobs added or lost in an economy.\n\n\nPresidents want to take credit for this going up each month."
+  },
+  {
+    "objectID": "slides/case-study-2.html#what-happened-1",
+    "href": "slides/case-study-2.html#what-happened-1",
+    "title": "Case Study 2",
+    "section": "What happened?",
+    "text": "What happened?\nThe August 1 report announced the initial release of the July numbers, as well as revisions to the May and June numbers:\n\n\nSource: Madeleine Ngo in the New York Times, August 1 2025."
+  },
+  {
+    "objectID": "slides/case-study-2.html#what-happened-2",
+    "href": "slides/case-study-2.html#what-happened-2",
+    "title": "Case Study 2",
+    "section": "What happened?",
+    "text": "What happened?\nThe Commissioner of Labor Statistics was fired that afternoon:\n\n\n\n\nSource: Truth Social.\n\n\n\n\nSource: Truth Social"
+  },
+  {
+    "objectID": "slides/case-study-2.html#whence-revisions",
+    "href": "slides/case-study-2.html#whence-revisions",
+    "title": "Case Study 2",
+    "section": "Whence revisions?",
+    "text": "Whence revisions?\nFrom the BLS report (and more here):\n\nMonthly revisions result from additional reports received from businesses and government agencies since the last published estimates and from the recalculation of seasonal factors.\n\nThe statistical agencies announce an initial estimate with a one period lag, but they continue to revise the measurement (sometimes years later) as new information arrives and measurement techniques improve."
+  },
+  {
+    "objectID": "slides/case-study-2.html#real-time-data",
+    "href": "slides/case-study-2.html#real-time-data",
+    "title": "Case Study 2",
+    "section": "Real-time data",
+    "text": "Real-time data\nThe Federal Reserve Bank of Philadelphia publishes a real-time dataset of key macroeconomic variables that allows you to see how the data were revised from initial release all the way to the present."
+  },
+  {
+    "objectID": "slides/case-study-2.html#what-are-the-data-like",
+    "href": "slides/case-study-2.html#what-are-the-data-like",
+    "title": "Case Study 2",
+    "section": "What are the data like?",
+    "text": "What are the data like?\nExample: quarterly data on gross domestic product (GDP).\n\nEach variable gets this triangular array. The rows correspond to the period in time we are trying to measure. The columns correspond to when we are measuring it. This is the so-called vintage of the data."
+  },
+  {
+    "objectID": "slides/case-study-2.html#what-are-the-data-like-1",
+    "href": "slides/case-study-2.html#what-are-the-data-like-1",
+    "title": "Case Study 2",
+    "section": "What are the data like?",
+    "text": "What are the data like?\nExample: quarterly data on gross domestic product (GDP).\n\nThis is our estimate of GDP for 1963Q4 as measured in 1966Q4."
+  },
+  {
+    "objectID": "slides/case-study-2.html#what-are-the-data-like-2",
+    "href": "slides/case-study-2.html#what-are-the-data-like-2",
+    "title": "Case Study 2",
+    "section": "What are the data like?",
+    "text": "What are the data like?\nExample: quarterly data on gross domestic product (GDP).\n\nThis column is the 1966Q4 vintage of the data. This was the best information that an observer in 1966Q4 had access to."
+  },
+  {
+    "objectID": "slides/case-study-2.html#what-are-the-data-like-3",
+    "href": "slides/case-study-2.html#what-are-the-data-like-3",
+    "title": "Case Study 2",
+    "section": "What are the data like?",
+    "text": "What are the data like?\nExample: quarterly data on gross domestic product (GDP).\n\nThis row shows the path of revisions for the 1965Q4 observation. We got out first reading in 1966Q1 (one period later), and then it was subsequently revised several times."
+  },
+  {
+    "objectID": "slides/case-study-2.html#the-path-of-revisions-over-time",
+    "href": "slides/case-study-2.html#the-path-of-revisions-over-time",
+    "title": "Case Study 2",
+    "section": "The path of revisions over time",
+    "text": "The path of revisions over time"
+  },
+  {
+    "objectID": "slides/case-study-2.html#how-do-revisions-behave",
+    "href": "slides/case-study-2.html#how-do-revisions-behave",
+    "title": "Case Study 2",
+    "section": "How do revisions behave?",
+    "text": "How do revisions behave?"
+  },
+  {
+    "objectID": "slides/case-study-2.html#how-do-data-revisions-behave",
+    "href": "slides/case-study-2.html#how-do-data-revisions-behave",
+    "title": "Case Study 2",
+    "section": "How do data revisions behave?",
+    "text": "How do data revisions behave?\nAruoba (2008 JMCB):\n\nWe document the empirical properties of revisions to major macroeconomic variables in the United States. Our findings suggest that they do not satisfy simple desirable statistical properties. In particular, we find that these revisions do not have a zero mean, which indicates that the initial announcements by statistical agencies are biased. We also find that the revisions are quite large compared to the original variables and they are predictable using the information set at the time of the initial announcement, which means that the initial announcements of statistical agencies are not rational forecasts.\n\n\nBummer."
+  },
+  {
+    "objectID": "slides/case-study-2.html#your-task",
+    "href": "slides/case-study-2.html#your-task",
+    "title": "Case Study 2",
+    "section": "Your task",
+    "text": "Your task\nEach of you will be given a target variable. Then:\n\nDevelop a model that can predict the “final value” using only information available at the time of the initial release;\nYou must quantify uncertainty. Point predictions are not enough. You need to produce and evaluate full predictive distributions that incorporate as many sources of uncertainty as possible."
+  },
+  {
+    "objectID": "slides/case-study-2.html#deadlines",
+    "href": "slides/case-study-2.html#deadlines",
+    "title": "Case Study 2",
+    "section": "Deadlines",
+    "text": "Deadlines\n\nEDA (Wed 2/11): explore the data, but also research the data collection process for your target variable;\nAnalysis (Wed 2/18): present prediction metrics for the models you considered, and try to explain why certain approaches worked better than others;\nFinal submission (Mon 2/23)."
+  },
+  {
+    "objectID": "slides/case-study-2.html#lecture-topics",
+    "href": "slides/case-study-2.html#lecture-topics",
+    "title": "Case Study 2",
+    "section": "Lecture topics",
+    "text": "Lecture topics\n\nAutoregressive moving average (ARMA) models;\nDynamic linear models (DLMs);\nProbabilistic prediction;\nTime series cross-validation (“leave-future-out”)."
+  },
+  {
+    "objectID": "slides/case-study-2.html#words-of-caution",
+    "href": "slides/case-study-2.html#words-of-caution",
+    "title": "Case Study 2",
+    "section": "Words of caution",
+    "text": "Words of caution\n\nThe data come in this funky, unfamiliar form: each variable gets its own spreadsheet in this triangular format (row = period being measured; column = vintage). How are you going to deal with that?\nThere already exists a massive literature on this, which you are welcome to explore. However, you will quickly become overwhelmed if you’re not careful. That’s part of the challenge!\nBlack box machine learning methods may or may not work well here, but if you don’t know how to get predictive uncertainty quantification from them, or you find that the UQ is unreliable, then say goodbye to XGBoost!"
+  },
+  {
+    "objectID": "slides/case-study-2.html#not-just-point-prediction",
+    "href": "slides/case-study-2.html#not-just-point-prediction",
+    "title": "Case Study 2",
+    "section": "Not just point prediction",
+    "text": "Not just point prediction"
+  },
+  {
+    "objectID": "slides/case-study-2.html#point-prediction",
+    "href": "slides/case-study-2.html#point-prediction",
+    "title": "Case Study 2",
+    "section": "Point prediction",
+    "text": "Point prediction\nYour single-number best guess at tomorrow’s observation:"
+  },
+  {
+    "objectID": "slides/case-study-2.html#prediction-interval",
+    "href": "slides/case-study-2.html#prediction-interval",
+    "title": "Case Study 2",
+    "section": "Prediction interval",
+    "text": "Prediction interval\nA range of likely values for tomorrow’s observation:"
+  },
+  {
+    "objectID": "slides/case-study-2.html#prediction-distribution-density",
+    "href": "slides/case-study-2.html#prediction-distribution-density",
+    "title": "Case Study 2",
+    "section": "Prediction distribution (density)",
+    "text": "Prediction distribution (density)\nFull distribution capturing uncertainty about tomorrow:"
+  },
+  {
+    "objectID": "slides/case-study-2.html#and-then-tomorrow-finally-comes",
+    "href": "slides/case-study-2.html#and-then-tomorrow-finally-comes",
+    "title": "Case Study 2",
+    "section": "And then tomorrow finally comes",
+    "text": "And then tomorrow finally comes\nSo…how’d we do?"
+  },
+  {
+    "objectID": "slides/case-study-2.html#whats-the-point",
+    "href": "slides/case-study-2.html#whats-the-point",
+    "title": "Case Study 2",
+    "section": "What’s the point?",
+    "text": "What’s the point?\n\nWe want intervals and densities to communicate uncertainty about the prediction;\n\nWhat sources of uncertainty?\n\nBasic data uncertainty;\nParameter estimation uncertainty;\nHyperparameter uncertainty;\nModel uncertainty;\nUncertainty introduced by missing data;\nMany more!"
   },
   {
     "objectID": "syllabus/syllabus-assignments.html",
     "href": "syllabus/syllabus-assignments.html",
     "title": "Assignments and grading",
     "section": "",
-    "text": "Course grade\nYour final course grade breaks down as follows:\n\n[10%] Attendance and participation: we will be taking attendance at all class meetings;\n[15%] Final project: the semester ends with a data analysis project completed individually. Details to come;\n[75%] Case studies: this course is organized around a sequence of case studies where you work in teams to analyze complex, messy datasets coming from various domains. There will be 4 - 6 case studies depending on the pace of course, and they will each get equal weight in determining this course component. Within each case study, your grade breaks down as follows:\n\n(60%) written report;\n(30%) presentation;\n(10%) student-specific collaboration score.\n\n\nAt the end of the semester, your final letter grade will be determined using the usual thresholds:\n\n\n\n\nLetter Grade\nFinal Course Grade\n\n\n\n\nA\n&gt;= 93\n\n\nA-\n90 - 92.99\n\n\nB+\n87 - 89.99\n\n\nB\n83 - 86.99\n\n\nB-\n80 - 82.99\n\n\nC+\n77 - 79.99\n\n\nC\n73 - 76.99\n\n\nC-\n70 - 72.99\n\n\nD+\n67 - 69.99\n\n\nD\n63 - 66.99\n\n\nD-\n60 - 62.99\n\n\nF\n&lt; 60\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nThese thresholds will not be adjusted upward, but they may be adjusted downward in your favor.\n\n\n\n\nCase studies\nThe case studies are the heart of the class. Case studies will last 2 - 4 weeks depending on complexity, and there will be 4 - 6 in total. Sometimes the class as a whole requests more time to work on the more involved cases, and so we are prepared to be flexible and adjust the pace of the course as needed. Hence, the final number of cases is TBD.\nEach case study will go something like this:\n\nthe instructor introduces the data and the research question in lecture;\nstudents are randomly sorted into teams of 2 - 4. The teams are different for every case study;\njust like in STA 199, we share a GitHub repo with each team that contains the necessary data as well as template Quarto files for your presentation and report;\nworking inside their GitHub repo, teams use R and Quarto to collaborate on a written report and presentation slides;\nduring lecture, the instructor introduces new statistical topic that teams may find relevant to the current case study;\nEach case study has two rounds of presentation: an early stage presentation on exploratory work and a final presentation on analysis. Groups will be selected at random to present in one of these two rounds, with each group presenting at least once for each case study;\nLab sections on Friday will sometimes feature a presentation or tutorial, but for the most part these are built-in work periods where all group members can convene with access to a TA;\nAt the end of each case study, students will confidentially evaluate themselves and their group members with a survey through TEAMMATES. Only the teaching team will have access to this feedback.\n\nAs mentioned above, each case study will be graded as follows:\n\n(60%) at the end you submit a brief report describing your final analysis;\n\nsee here for the grading rubric;\n\n(30%) you will give at least one presentation, on your exploratory or final analysis;\n\nsee here for the grading rubric;\n\n(10%) based on your GitHub activity and the results of the TEAMMATES survey, each individual group member will receive a separate score reflecting their contribution to the team’s effort.",
-    "crumbs": [
-      "Syllabus",
-      "Assignments and grading"
-    ]
+    "text": "Course grade\nYour final course grade breaks down as follows:\n\n[10%] Attendance and participation: we will be taking attendance at all class meetings;\n[15%] Final project: the semester ends with a data analysis project completed individually. Details to come;\n[75%] Case studies: this course is organized around a sequence of case studies where you work in teams to analyze complex, messy datasets coming from various domains. There will be 4 - 6 case studies depending on the pace of course, and they will each get equal weight in determining this course component. Within each case study, your grade breaks down as follows:\n\n(60%) written report;\n(30%) presentation;\n(10%) student-specific collaboration score.\n\n\nAt the end of the semester, your final letter grade will be determined using the usual thresholds:\n\n\n\n\nLetter Grade\nFinal Course Grade\n\n\n\n\nA\n&gt;= 93\n\n\nA-\n90 - 92.99\n\n\nB+\n87 - 89.99\n\n\nB\n83 - 86.99\n\n\nB-\n80 - 82.99\n\n\nC+\n77 - 79.99\n\n\nC\n73 - 76.99\n\n\nC-\n70 - 72.99\n\n\nD+\n67 - 69.99\n\n\nD\n63 - 66.99\n\n\nD-\n60 - 62.99\n\n\nF\n&lt; 60\n\n\n\n\n\n\n\n\n\n\nNote\n\n\n\nThese thresholds will not be adjusted upward, but they may be adjusted downward in your favor.\n\n\n\n\nCase studies\nThe case studies are the heart of the class. Case studies will last 2 - 4 weeks depending on complexity, and there will be 4 - 6 in total. Sometimes the class as a whole requests more time to work on the more involved cases, and so we are prepared to be flexible and adjust the pace of the course as needed. Hence, the final number of cases is TBD.\nEach case study will go something like this:\n\nthe instructor introduces the data and the research question in lecture;\nstudents are randomly sorted into teams of 2 - 4. The teams are different for every case study;\njust like in STA 199, we share a GitHub repo with each team that contains the necessary data as well as template Quarto files for your presentation and report;\nworking inside their GitHub repo, teams use R and Quarto to collaborate on a written report and presentation slides;\nduring lecture, the instructor introduces new statistical topic that teams may find relevant to the current case study;\nEach case study has two rounds of presentation: an early stage presentation on exploratory work and a final presentation on analysis. Groups will be selected at random to present in one of these two rounds, with each group presenting at least once for each case study;\nLab sections on Friday will sometimes feature a presentation or tutorial, but for the most part these are built-in work periods where all group members can convene with access to a TA;\nAt the end of each case study, students will confidentially evaluate themselves and their group members with a survey through TEAMMATES. Only the teaching team will have access to this feedback.\n\nAs mentioned above, each case study will be graded as follows:\n\n(60%) at the end you submit a brief report describing your final analysis;\n\nsee here for the grading rubric;\n\n(30%) you will give at least one presentation, on your exploratory or final analysis;\n\nsee here for the grading rubric;\n\n(10%) based on your GitHub activity and the results of the TEAMMATES survey, each individual group member will receive a separate score reflecting their contribution to the team’s effort."
   },
   {
     "objectID": "syllabus/syllabus-policies.html#attendance",
     "href": "syllabus/syllabus-policies.html#attendance",
     "title": "Policies",
     "section": "Attendance",
-    "text": "Attendance",
-    "crumbs": [
-      "Syllabus",
-      "Policies"
-    ]
+    "text": "Attendance"
   },
   {
     "objectID": "syllabus/syllabus-policies.html#use-of-ai",
     "href": "syllabus/syllabus-policies.html#use-of-ai",
     "title": "Policies",
     "section": "Use of AI",
-    "text": "Use of AI",
-    "crumbs": [
-      "Syllabus",
-      "Policies"
-    ]
+    "text": "Use of AI"
   },
   {
     "objectID": "syllabus/syllabus-policies.html#academic-honesty",
     "href": "syllabus/syllabus-policies.html#academic-honesty",
     "title": "Policies",
     "section": "Academic honesty",
-    "text": "Academic honesty",
-    "crumbs": [
-      "Syllabus",
-      "Policies"
-    ]
+    "text": "Academic honesty"
   }
 ]
