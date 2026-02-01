@@ -15,6 +15,7 @@ Below is the schedule for the section that meets TuTh at 8:30 AM with John Zito.
 #| echo: false
 #| message: false
 #| warning: false
+#| eval: false
 library(googlesheets4)
 library(gt)
 library(tidyverse)
@@ -25,6 +26,7 @@ prepare_cutoff_date <- as.Date("2026-5-1")
 
 ```{r}
 #| echo: false
+#| eval: false
 #| column: screen-inset-right
 d |>
   filter(!is.na(session)) |>
