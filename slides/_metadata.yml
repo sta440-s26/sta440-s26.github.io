@@ -1,0 +1,13 @@
+institute: "Duke University <br> STA 440 Spring 2026"
+author: "Ed Iversen and John Zito"
+format:
+  revealjs:
+    html-math-method: mathjax
+    theme: slides.scss
+    transition: fade
+    slide-number: true
+    chalkboard: true
+    toc: false
+execute:
+  freeze: auto
+  echo: true

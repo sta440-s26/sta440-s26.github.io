@@ -1,0 +1,439 @@
+---
+title: "Case Study 2"
+subtitle: "Revisions to macroeconomic data"
+format: revealjs
+auto-stretch: false
+---
+
+# Macroeconomic data
+
+## A few US macro aggregates
+
+```{r}
+#| echo: false
+#| warning: false
+library(xts)
+library(quantmod)
+library(fredr)
+fredr_set_key("32ff0f847aab35def1d3d5f7216e4064")
+
+date_to_qnum <- function(d) {
+  lt <- as.POSIXlt(d)
+  year <- lt$year + 1900
+  quarter <- (lt$mon %/% 3) + 1
+  year + (quarter - 1) / 4
+}
+
+
+var_names <- c("Output growth (GDP)", "Unemployment rate", "Inflation (PCE)", "Productivity growth")
+
+fred_handles <- c("GDPC1", "UNRATE", "PCEPI", "OPHNFB")
+
+level <- c(FALSE, TRUE, FALSE, FALSE)
+
+unit <- c("Annualized % growth rate", "Percent", "Annualized % growth rate", "Annualized % growth rate")
+
+
+start_date <- as.Date("1965-01-01")
+end_date <- as.Date("2024-12-31")
+dates <- seq(1965.00, 2024.75, by = 0.25)
+rec <- fredr(
+  series_id = "USRECQ",
+  observation_start = start_date
+)
+
+rec$in_rec <- rec$value == 1
+
+# Find start and end indices of recession spells
+starts <- which(diff(c(FALSE, rec$in_rec)) == 1)
+ends   <- which(diff(c(rec$in_rec, FALSE)) == -1)
+
+recessions <- data.frame(
+  start = rec$date[starts],
+  end   = rec$date[ends]
+)
+
+recessions$q_start <- date_to_qnum(recessions$start)
+recessions$q_end   <- date_to_qnum(recessions$end)
+
+
+n <- length(fred_handles)
+T <- length(dates)
+
+Y <- matrix(0, T, n)
+
+par(mfrow = c(2, 2), mar = c(2, 5, 4, 1))
+
+for(i in 1:n){
+  
+  raw_data <- fredr(series_id = fred_handles[i],
+                    observation_start = start_date - !level[i]*365/4,
+                    observation_end = end_date,
+                    frequency = "q", 
+                    aggregation_method = "avg")$value
+  
+  if(level[i] == TRUE){
+    Y[, i] = raw_data
+  }else{
+    Y[, i] = 400 * diff(log(raw_data))
+  }
+  plot(dates, Y[, i], type = 'l', main = var_names[i], 
+       xlab = "", bty = "n", ylab = unit[i], col = "red")
+  #for (j in seq_len(nrow(recessions))) {
+  #  rect(recessions$q_start[j], -1000,
+  #       recessions$q_end[j],   1000,
+  #       col = "grey85", border = NA)
+  #}
+  lines(dates, Y[, i], col = "red")
+}
+
+```
+
+There are hundreds more. Play around on [FRED](https://fred.stlouisfed.org)!
+
+
+## Where do these data come from? {.medium}
+
+[Bureau of Labor Statistics](https://www.bls.gov) (under the Labor Department)
+
+- [Consumer Price Index (CPI)](https://fred.stlouisfed.org/series/CPIAUCSL);  
+- [Unemployment](https://fred.stlouisfed.org/series/UNRATE);
+- [Labor Productivity](https://fred.stlouisfed.org/series/OPHNFB);
+
+[Bureau of Economic Analysis](https://www.bea.gov) (under the Commerce Department)
+
+- [Gross Domestic Product (GDP)](https://fred.stlouisfed.org/series/GDP);
+- [Personal Consumption Expenditures (PCE)](https://fred.stlouisfed.org/series/PCEPI).
+
+And many many [more](https://en.wikipedia.org/wiki/Federal_statistical_system)!
+
+## Who cares? {.medium}
+
+. . .
+
+These are some of the most talked about data in the world. They are constantly being studied by...
+
+. . .
+
+|     |     |
+|-----|-----|
+| **Academics** |   ["how does the macroeconomy...work?"]{.fragment}  |
+| **Policymakers** |  ["what effect did our actions have?"]{.fragment}   |
+| **Businesses** |  ["how do we plan for the future?"]{.fragment}   |
+| **Journalists** |  [each new release is a major headline...]{.fragment}   |
+| **Investors** |  [...followed by a second headline about how the stock and bond markets reacted.]{.fragment}   |
+: {tbl-colwidths="[25,75]"}
+
+
+. . .
+
+Did I leave anybody out?
+
+## Oh, right.
+
+<iframe width="450" height="300" src="https://www.youtube.com/embed/LEsYJxh8cGI?si=wv6bbDVWfn0pkxVB" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+
+</iframe>
+
+<iframe width="450" height="300" src="https://www.youtube.com/embed/bXOhWTYDgJE?si=1al0in16Xiw1kuSx" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+
+</iframe>
+
+## What happened? {.medium}
+
+
+::: incremental 
+-   At 8:30 AM ET on Friday August 1, 2025, the BLS issued its regular [monthly report](https://www.bls.gov/news.release/archives/empsit_08012025.htm) on the US employment situation;
+
+- It includes [total nonfarm payroll employment](https://fred.stlouisfed.org/series/PAYEMS#):
+
+    >  a measure of the number of U.S. workers in the economy that excludes proprietors, private household employees, unpaid volunteers, farm employees, and the unincorporated self-employed. This measure accounts for approximately 80 percent of the workers who contribute to Gross Domestic Product (GDP). This measure provides useful insights into the current economic situation because it can represent the number of jobs added or lost in an economy.
+
+- Presidents want to take credit for this going *up* each month.
+:::
+
+## What happened? {.small .scrollable}
+
+The August 1 report announced the *initial release* of the July numbers, as well as *revisions* to the May and June numbers:
+
+![Source: Madeleine Ngo in the [New York Times](https://www.nytimes.com/2025/08/01/us/politics/jobs-report-us-economy.html), August 1 2025.](images/ngo-nyt.png){width="70%" fig-align="center"}
+
+## What happened? {.medium .scrollable}
+
+The Commissioner of Labor Statistics was fired that afternoon:
+
+::::: columns
+::: {.column width="50%"}
+![Source: [Truth Social](https://truthsocial.com/@realDonaldTrump/posts/114954846612623858).](images/trump-1.png)
+:::
+
+::: {.column width="50%"}
+![Source: [Truth Social](https://truthsocial.com/@realDonaldTrump/posts/114955222046259464)](images/trump-2.png)
+:::
+:::::
+
+# Revisions?
+
+## Whence revisions?
+
+From the [BLS report](https://www.bls.gov/news.release/archives/empsit_08012025.htm) (and more [here](https://www.bls.gov/web/empsit/cestn.htm#Revisions-Between-Preliminary-and-Final-Data)):
+
+> Monthly revisions result from additional reports received from businesses and government agencies since the last published estimates and from the recalculation of seasonal factors.
+
+The statistical agencies announce an initial estimate with a one period lag, but they continue to revise the measurement (sometimes years later) as new information arrives and measurement techniques improve.
+
+## Real-time data
+
+The Federal Reserve Bank of Philadelphia publishes a [real-time dataset](https://www.philadelphiafed.org/surveys-and-data/real-time-data-research/real-time-data-set-for-macroeconomists) of key macroeconomic variables that allows you to see how the data were revised from initial release all the way to the present.
+
+## What are the data like?
+
+Example: quarterly data on gross domestic product (GDP).
+
+![](images/vintage-1.png)
+
+Each variable gets this triangular array. The *rows* correspond to the period in time we are trying to measure. The *columns* correspond to when we are measuring it. This is the so-called *vintage* of the data.
+
+## What are the data like?
+
+Example: quarterly data on gross domestic product (GDP).
+
+![](images/vintage-4.png)
+
+This is our estimate of GDP for 1963Q4 *as measured* in 1966Q4.
+
+## What are the data like?
+
+Example: quarterly data on gross domestic product (GDP).
+
+![](images/vintage-3.png)
+
+This column is the 1966Q4 vintage of the data. This was the best information that an observer in 1966Q4 had access to.
+
+## What are the data like?
+
+Example: quarterly data on gross domestic product (GDP).
+
+![](images/vintage-2.png)
+
+This row shows the path of revisions for the 1965Q4 observation. We got out first reading in 1966Q1 (one period later), and then it was subsequently revised several times.
+
+## The path of revisions over time
+
+![](images/productivity-revisions.png){width="80%" fig-align="center"}
+
+## How do revisions behave?
+
+. . .
+
+![](images/aruoba.png){fig-align="center"}
+
+
+## How do data revisions behave? {.medium}
+
+[Aruoba (2008 JMCB)](https://doi.org/10.1111/j.1538-4616.2008.00115.x):
+
+> We document the empirical properties of revisions to major macroeconomic variables in the United States. Our findings suggest that they do not satisfy simple desirable statistical properties. In particular, we find that these revisions do not have a zero mean, which indicates that the [initial announcements by statistical agencies are biased]{style="color:red;"}. We also find that the [revisions are quite large compared to the original variables]{style="color:red;"} and they are predictable using the information set at the time of the initial announcement, which means that the [initial announcements of statistical agencies are not rational forecasts]{style="color:red;"}.
+
+. . .
+
+Bummer.
+
+# Case Study 2
+
+## Your task
+
+Each of you will be given a target variable. Then:
+
+-   Develop a model that can predict the "final value" using only information available at the time of the initial release;
+-   You *must* quantify uncertainty. Point predictions are not enough. You need to produce and evaluate full predictive distributions that incorporate as many sources of uncertainty as possible.
+
+## Deadlines
+
+-   EDA (Wed 2/11): explore the data, but also research the data collection process for your target variable;
+-   Analysis (Wed 2/18): present prediction metrics for the models you considered, and try to explain why certain approaches worked better than others;
+-   Final submission (Mon 2/23).
+
+## Lecture topics
+
+-   Autoregressive moving average (ARMA) models;
+-   Dynamic linear models (DLMs);
+-   Probabilistic prediction;
+-   Time series cross-validation ("leave-future-out").
+
+## Words of caution {.medium}
+
+::: incremental
+-   The data come in this funky, unfamiliar form: each variable gets its own spreadsheet in this triangular format (row = period being measured; column = vintage). How are you going to deal with that?
+-   There already exists a massive literature on this, which you are welcome to explore. However, you will quickly become overwhelmed if you're not careful. That's part of the challenge!
+-   Black box machine learning methods may or may not work well here, but if you don't know how to get predictive uncertainty quantification from them, or you find that the UQ is unreliable, then say goodbye to `XGBoost`!
+:::
+
+# Probabilistic prediction
+
+## Not just point prediction
+
+![](images/fan-charts.gif)
+
+## Point prediction
+
+Your single-number best guess at tomorrow's observation:
+
+```{r}
+#| echo: false
+
+library(quantmod)
+library(scoringRules)
+library(extraDistr)
+library(tidyverse)
+library(ggridges)
+library(LaplacesDemon)
+
+
+
+
+set.seed(8675309)
+my_m = c(-.5, .5)
+my_p = c(0.25, 0.75)
+my_s = c(0.3, 0.3)
+draws = rnormm(5000, my_p, my_m, my_s)
+L = quantile(draws, 0.1)
+mix.med = quantile(draws, 0.5)
+U = quantile(draws, 0.9)
+my_y = rnormm(2, my_p, my_m, my_s)[2] + 0.2
+
+curve(dnormm(x, my_p, my_m, my_s), from = -2, to = 2, n = 1000,
+      bty = "n", 
+     xaxt = "n",
+     yaxt = "n", 
+     xaxs = "i",
+     yaxs = "i",
+     ylab = "", 
+     xlab = "", 
+     xlim = c(-2, 2),
+     ylim = c(-0.1, 1.1), 
+     col = "white",
+     lwd = 3)
+abline(h = 0, lwd = 3)
+points(mix.med, 0, pch = 19, cex = 2)
+#polygon(x = c(L, U, U, L),
+#        y = c(0, 0, 100, 100),
+#        col = rgb(0, 0, 1, 0.1),
+#        border = NA)
+#text(-0.2, 0.9, expression(I["t+1 | t"]), cex = 3)
+#text(1.3, 0.4, expression(f["t+1 | t"]), cex = 3)
+#points(y, 0, pch = 19, cex = 3, col = "red")
+mtext(expression(hat(y)["t+1 | t"]), side = 1, at = mix.med, line = 2, cex = 3)
+#mtext(expression(y["t+1"]), side = 1, at = y, line = 2, cex = 3, col = "red")
+```
+
+## Prediction interval
+
+A range of likely values for tomorrow's observation:
+
+```{r}
+#| echo: false
+
+curve(dnormm(x, my_p, my_m, my_s), from = -2, to = 2, n = 1000,
+      bty = "n", 
+     xaxt = "n",
+     yaxt = "n", 
+     xaxs = "i",
+     yaxs = "i",
+     ylab = "", 
+     xlab = "", 
+     xlim = c(-2, 2),
+     ylim = c(-0.1, 1.1), 
+     col = "white",
+     lwd = 3)
+abline(h = 0, lwd = 3)
+points(mix.med, 0, pch = 19, cex = 2)
+polygon(x = c(L, U, U, L),
+        y = c(0, 0, 100, 100),
+        col = rgb(0, 0, 1, 0.1),
+        border = NA)
+text(-0.2, 0.9, expression(hat(I)["t+1 | t"]), cex = 3)
+#text(1.3, 0.4, expression(f["t+1 | t"]), cex = 3)
+#points(y, 0, pch = 19, cex = 3, col = "red")
+mtext(expression(hat(y)["t+1 | t"]), side = 1, at = mix.med, line = 2, cex = 3)
+#mtext(expression(y["t+1"]), side = 1, at = y, line = 2, cex = 3, col = "red")
+```
+
+## Prediction distribution (density)
+
+Full distribution capturing uncertainty about tomorrow:
+
+```{r}
+#| echo: false
+curve(dnormm(x, my_p, my_m, my_s), from = -2, to = 2, n = 1000,
+      bty = "n", 
+     xaxt = "n",
+     yaxt = "n", 
+     xaxs = "i",
+     yaxs = "i",
+     ylab = "", 
+     xlab = "", 
+     xlim = c(-2, 2),
+     ylim = c(-0.1, 1.1), 
+     col = "blue",
+     lwd = 3)
+abline(h = 0, lwd = 3)
+points(mix.med, 0, pch = 19, cex = 2)
+polygon(x = c(L, U, U, L),
+        y = c(0, 0, 100, 100),
+        col = rgb(0, 0, 1, 0.1),
+        border = NA)
+text(-0.2, 0.9, expression(hat(I)["t+1 | t"]), cex = 3)
+text(1.3, 0.4, expression(hat(f)["t+1 | t"]), cex = 3)
+#points(y, 0, pch = 19, cex = 3, col = "red")
+mtext(expression(hat(y)["t+1 | t"]), side = 1, at = mix.med, line = 2, cex = 3)
+#mtext(expression(y["t+1"]), side = 1, at = y, line = 2, cex = 3, col = "red")
+```
+
+## And then tomorrow finally comes
+
+So...how'd we do?
+
+```{r}
+#| echo: false
+
+curve(dnormm(x, my_p, my_m, my_s), from = -2, to = 2, n = 1000,
+      bty = "n", 
+     xaxt = "n",
+     yaxt = "n", 
+     xaxs = "i",
+     yaxs = "i",
+     ylab = "", 
+     xlab = "", 
+     xlim = c(-2, 2),
+     ylim = c(-0.1, 1.1), 
+     col = "blue",
+     lwd = 3)
+abline(h = 0, lwd = 3)
+points(mix.med, 0, pch = 19, cex = 2)
+polygon(x = c(L, U, U, L),
+        y = c(0, 0, 100, 100),
+        col = rgb(0, 0, 1, 0.1),
+        border = NA)
+text(-0.2, 0.9, expression(hat(I)["t+1 | t"]), cex = 3)
+text(1.3, 0.4, expression(hat(f)["t+1 | t"]), cex = 3)
+points(my_y, 0, pch = 19, cex = 3, col = "red")
+mtext(expression(hat(y)["t+1 | t"]), side = 1, at = mix.med, line = 2, cex = 3)
+mtext(expression(y["t+1"]), side = 1, at = my_y, line = 2, cex = 3, col = "red")
+```
+
+
+## What's the point? {.medium}
+
+::: incremental
+- We want intervals and densities to communicate *uncertainty* about the prediction; 
+
+- What sources of uncertainty?
+
+    - Basic data uncertainty;
+    - Parameter estimation uncertainty;
+    - Hyperparameter uncertainty;
+    - Model uncertainty;
+    - Uncertainty introduced by missing data;
+    - Many more!
+:::
