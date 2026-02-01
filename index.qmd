@@ -9,13 +9,13 @@ editor:
   mode: source
 ---
 
-Below is the schedule for the section that meets TuTh at 8:30 AM with John Zito.
-
 ```{r}
 #| echo: false
 #| message: false
 #| warning: false
 #| eval: false
+
+# Below is the schedule for the section that meets TuTh at 8:30 AM with John Zito.
 library(googlesheets4)
 library(gt)
 library(tidyverse)
