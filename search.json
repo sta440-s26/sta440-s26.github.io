@@ -81,14 +81,14 @@
     "href": "slides/case-study-2.html#a-few-us-macro-aggregates",
     "title": "Case Study 2",
     "section": "A few US macro aggregates",
-    "text": "A few US macro aggregates\n\n\n\n\n\n\n\n\nThere are hundreds more. Play around on FRED!"
+    "text": "A few US macro aggregates\n\n\n\n\n\n\n\n\nThere are tons more. Play around on FRED!"
   },
   {
     "objectID": "slides/case-study-2.html#where-do-these-data-come-from",
     "href": "slides/case-study-2.html#where-do-these-data-come-from",
     "title": "Case Study 2",
     "section": "Where do these data come from?",
-    "text": "Where do these data come from?\nBureau of Labor Statistics (under the Labor Department)\n\n\nConsumer Price Index (CPI);\n\n\nUnemployment;\n\nLabor Productivity;\n\nBureau of Economic Analysis (under the Commerce Department)\n\n\nGross Domestic Product (GDP);\n\nPersonal Consumption Expenditures (PCE).\n\nAnd many many more!"
+    "text": "Where do these data come from?\nBureau of Labor Statistics (under the Labor Department)\n\n\nConsumer Price Index (CPI);\n\n\nUnemployment;\n\nLabor Productivity;\n\nBureau of Economic Analysis (under the Commerce Department)\n\n\nGross Domestic Product (GDP);\n\nPersonal Consumption Expenditures (PCE).\n\nThere are 13 principal statistical agencies in the US federal government."
   },
   {
     "objectID": "slides/case-study-2.html#who-cares",
@@ -130,42 +130,42 @@
     "href": "slides/case-study-2.html#whence-revisions",
     "title": "Case Study 2",
     "section": "Whence revisions?",
-    "text": "Whence revisions?\nFrom the BLS report (and more here):\n\nMonthly revisions result from additional reports received from businesses and government agencies since the last published estimates and from the recalculation of seasonal factors.\n\nThe statistical agencies announce an initial estimate with a one period lag, but they continue to revise the measurement (sometimes years later) as new information arrives and measurement techniques improve."
+    "text": "Whence revisions?\nThe statistical agencies announce an initial estimate with a one period lag, but they continue to revise the measurement (sometimes years later) as new information arrives and measurement techniques improve.\n\nFrom the BLS report (and more here):\n\nMonthly revisions result from additional reports received from businesses and government agencies since the last published estimates and from the recalculation of seasonal factors.\n\n\n\nFrom Ben Casselman at the New York Times:\n\nThe monthly numbers are based on a huge survey of businesses and other employers. Not all businesses respond in time for the initial estimate, however, forcing government statisticians to fill in the gaps with a statistical technique that essentially assumes the businesses that didn’t respond behaved the same way as the ones that did. That approach works fine during normal times. But during periods of rapid change, that assumption can be misleading."
   },
   {
-    "objectID": "slides/case-study-2.html#real-time-data",
-    "href": "slides/case-study-2.html#real-time-data",
+    "objectID": "slides/case-study-2.html#frbps-real-time-data-set",
+    "href": "slides/case-study-2.html#frbps-real-time-data-set",
     "title": "Case Study 2",
-    "section": "Real-time data",
-    "text": "Real-time data\nThe Federal Reserve Bank of Philadelphia publishes a real-time dataset of key macroeconomic variables that allows you to see how the data were revised from initial release all the way to the present."
+    "section": "FRBP’s Real-Time Data Set",
+    "text": "FRBP’s Real-Time Data Set\n\n\n\n\n\nTracks the entire history of revisions for key macroeconomic variables."
   },
   {
-    "objectID": "slides/case-study-2.html#what-are-the-data-like",
-    "href": "slides/case-study-2.html#what-are-the-data-like",
+    "objectID": "slides/case-study-2.html#what-are-these-data-like",
+    "href": "slides/case-study-2.html#what-are-these-data-like",
     "title": "Case Study 2",
-    "section": "What are the data like?",
-    "text": "What are the data like?\nExample: quarterly data on gross domestic product (GDP).\n\nEach variable gets this triangular array. The rows correspond to the period in time we are trying to measure. The columns correspond to when we are measuring it. This is the so-called vintage of the data."
+    "section": "What are these data like?",
+    "text": "What are these data like?\nExample: quarterly data on gross domestic product (GDP).\n\nEach variable gets this triangular array. The rows correspond to the period in time we are trying to measure. The columns correspond to when we are measuring it. This is the so-called vintage of the data."
   },
   {
-    "objectID": "slides/case-study-2.html#what-are-the-data-like-1",
-    "href": "slides/case-study-2.html#what-are-the-data-like-1",
+    "objectID": "slides/case-study-2.html#what-are-these-data-like-1",
+    "href": "slides/case-study-2.html#what-are-these-data-like-1",
     "title": "Case Study 2",
-    "section": "What are the data like?",
-    "text": "What are the data like?\nExample: quarterly data on gross domestic product (GDP).\n\nThis is our estimate of GDP for 1963Q4 as measured in 1966Q4."
+    "section": "What are these data like?",
+    "text": "What are these data like?\nExample: quarterly data on gross domestic product (GDP).\n\nThis is our estimate of GDP for 1963Q4 as measured in 1966Q4."
   },
   {
-    "objectID": "slides/case-study-2.html#what-are-the-data-like-2",
-    "href": "slides/case-study-2.html#what-are-the-data-like-2",
+    "objectID": "slides/case-study-2.html#what-are-these-data-like-2",
+    "href": "slides/case-study-2.html#what-are-these-data-like-2",
     "title": "Case Study 2",
-    "section": "What are the data like?",
-    "text": "What are the data like?\nExample: quarterly data on gross domestic product (GDP).\n\nThis column is the 1966Q4 vintage of the data. This was the best information that an observer in 1966Q4 had access to."
+    "section": "What are these data like?",
+    "text": "What are these data like?\nExample: quarterly data on gross domestic product (GDP).\n\nThis column is the 1966Q4 vintage of the data. This was the best information that an observer in 1966Q4 had access to."
   },
   {
-    "objectID": "slides/case-study-2.html#what-are-the-data-like-3",
-    "href": "slides/case-study-2.html#what-are-the-data-like-3",
+    "objectID": "slides/case-study-2.html#what-are-these-data-like-3",
+    "href": "slides/case-study-2.html#what-are-these-data-like-3",
     "title": "Case Study 2",
-    "section": "What are the data like?",
-    "text": "What are the data like?\nExample: quarterly data on gross domestic product (GDP).\n\nThis row shows the path of revisions for the 1965Q4 observation. We got out first reading in 1966Q1 (one period later), and then it was subsequently revised several times."
+    "section": "What are these data like?",
+    "text": "What are these data like?\nExample: quarterly data on gross domestic product (GDP).\n\nThis row shows the path of revisions for the 1965Q4 observation. We got out first reading in 1966Q1 (one period later), and then it was subsequently revised several times."
   },
   {
     "objectID": "slides/case-study-2.html#the-path-of-revisions-over-time",
@@ -175,11 +175,25 @@
     "text": "The path of revisions over time"
   },
   {
+    "objectID": "slides/case-study-2.html#the-path-of-revisions-over-time-1",
+    "href": "slides/case-study-2.html#the-path-of-revisions-over-time-1",
+    "title": "Case Study 2",
+    "section": "The path of revisions over time",
+    "text": "The path of revisions over time"
+  },
+  {
+    "objectID": "slides/case-study-2.html#the-path-of-revisions-over-time-2",
+    "href": "slides/case-study-2.html#the-path-of-revisions-over-time-2",
+    "title": "Case Study 2",
+    "section": "The path of revisions over time",
+    "text": "The path of revisions over time"
+  },
+  {
     "objectID": "slides/case-study-2.html#how-do-revisions-behave",
     "href": "slides/case-study-2.html#how-do-revisions-behave",
     "title": "Case Study 2",
     "section": "How do revisions behave?",
-    "text": "How do revisions behave?"
+    "text": "How do revisions behave?\n\n\n\n\n\n\n\nGood heavens"
   },
   {
     "objectID": "slides/case-study-2.html#how-do-data-revisions-behave",
@@ -189,32 +203,53 @@
     "text": "How do data revisions behave?\nAruoba (2008 JMCB):\n\nWe document the empirical properties of revisions to major macroeconomic variables in the United States. Our findings suggest that they do not satisfy simple desirable statistical properties. In particular, we find that these revisions do not have a zero mean, which indicates that the initial announcements by statistical agencies are biased. We also find that the revisions are quite large compared to the original variables and they are predictable using the information set at the time of the initial announcement, which means that the initial announcements of statistical agencies are not rational forecasts.\n\n\nBummer."
   },
   {
+    "objectID": "slides/case-study-2.html#this-is-probably-getting-worse",
+    "href": "slides/case-study-2.html#this-is-probably-getting-worse",
+    "title": "Case Study 2",
+    "section": "This is probably getting worse",
+    "text": "This is probably getting worse\n\nFederal statistical agencies have faced mounting challenges in recent years as Americans have become more reluctant to respond to the surveys that are the basis for much of the nation’s economic data. Shrinking budgets have made it harder to make up for falling response rates, and to develop new approaches to replace surveys altogether.\n\nSource: New York Times."
+  },
+  {
+    "objectID": "slides/case-study-2.html#picture-this",
+    "href": "slides/case-study-2.html#picture-this",
+    "title": "Case Study 2",
+    "section": "Picture this",
+    "text": "Picture this\nImagine you work at the Federal Reserve, or the Congressional Budget Office, or Goldman Sachs, or The Wall Street Journal. Your boss taps you on the shoulder and says:\n\nWe just got an unexpected data release, but we know it will be revised. And in general, I’m sick of this crap where the numbers swing around for months after the fact and we don’t know where we stand. Can you develop a model that can predict where the measurement will settle after the revisions are done?"
+  },
+  {
+    "objectID": "slides/case-study-2.html#your-data",
+    "href": "slides/case-study-2.html#your-data",
+    "title": "Case Study 2",
+    "section": "Your data",
+    "text": "Your data\nThe full set of historical vintages for several macro variables:\n\nGDP growth;\nInflation;\nProductivity growth;\nConsumption growth;\nEmployment growth;\nIndustrial production growth;\nInvestment growth."
+  },
+  {
     "objectID": "slides/case-study-2.html#your-task",
     "href": "slides/case-study-2.html#your-task",
     "title": "Case Study 2",
     "section": "Your task",
-    "text": "Your task\nEach of you will be given a target variable. Then:\n\nDevelop a model that can predict the “final value” using only information available at the time of the initial release;\nYou must quantify uncertainty. Point predictions are not enough. You need to produce and evaluate full predictive distributions that incorporate as many sources of uncertainty as possible."
+    "text": "Your task\nEach team will be assigned a target variable. Then:\n\nDevelop a model that can predict the final release of the variable using only information available at the time of the initial release;\n\ntreat the vintage three years later as the final release;\nUse the other variables as predictors if you want;\nProduce a method with good historical performance averaged over time;\n\n\nYou must quantify uncertainty. Point predictions are not enough. You need to produce and evaluate full predictive distributions that incorporate as many sources of uncertainty as possible."
   },
   {
     "objectID": "slides/case-study-2.html#deadlines",
     "href": "slides/case-study-2.html#deadlines",
     "title": "Case Study 2",
     "section": "Deadlines",
-    "text": "Deadlines\n\nEDA (Wed 2/11): explore the data, but also research the data collection process for your target variable;\nAnalysis (Wed 2/18): present prediction metrics for the models you considered, and try to explain why certain approaches worked better than others;\nFinal submission (Mon 2/23)."
+    "text": "Deadlines\n\nEDA presentations (Wed 2/11):\n\nthe usual plots and summaries to get a feel and motivate your analysis;\nhit the books and teach the class how your assigned variable is actually measured, and what goes on during the revision process;\n\n\nAnalysis presentations (Wed 2/18):\n\nwhat models did you consider?\nhow did their predictive accuracy compare?\ncan you interpret why the models performed the way they did?\n\n\nFinal submission (Mon 2/23)."
   },
   {
     "objectID": "slides/case-study-2.html#lecture-topics",
     "href": "slides/case-study-2.html#lecture-topics",
     "title": "Case Study 2",
     "section": "Lecture topics",
-    "text": "Lecture topics\n\nAutoregressive moving average (ARMA) models;\nDynamic linear models (DLMs);\nProbabilistic prediction;\nTime series cross-validation (“leave-future-out”)."
+    "text": "Lecture topics\nA crash course in time series:\n\nAutoregressive moving average (ARMA) models;\nDynamic linear models (DLMs);\nProbabilistic prediction;\nTime series cross-validation (“leave-future-out”).\n\nYou may not ultimately choose to use these specific models, but the evaluation techniques are model-agnostic."
   },
   {
     "objectID": "slides/case-study-2.html#words-of-caution",
     "href": "slides/case-study-2.html#words-of-caution",
     "title": "Case Study 2",
     "section": "Words of caution",
-    "text": "Words of caution\n\nThe data come in this funky, unfamiliar form: each variable gets its own spreadsheet in this triangular format (row = period being measured; column = vintage). How are you going to deal with that?\nThere already exists a massive literature on this, which you are welcome to explore. However, you will quickly become overwhelmed if you’re not careful. That’s part of the challenge!\nBlack box machine learning methods may or may not work well here, but if you don’t know how to get predictive uncertainty quantification from them, or you find that the UQ is unreliable, then say goodbye to XGBoost!"
+    "text": "Words of caution\n\nThe data come in this funky, unfamiliar form: each variable gets its own data frame with this triangular structure (row = period being measured; column = vintage). How are you going to deal with that?\nWhen you generate a prediction, make sure you are conditioning only on information that would have been available at that time!\nThere already exists a massive literature on this, which you are welcome to explore. However, you will quickly become overwhelmed if you’re not careful. That’s part of the challenge!\nBlack box machine learning methods may or may not work well here, but if you don’t know how to get predictive uncertainty quantification from them, or you find that the UQ is unreliable, then say goodbye to XGBoost!"
   },
   {
     "objectID": "slides/case-study-2.html#not-just-point-prediction",
@@ -249,14 +284,112 @@
     "href": "slides/case-study-2.html#and-then-tomorrow-finally-comes",
     "title": "Case Study 2",
     "section": "And then tomorrow finally comes",
-    "text": "And then tomorrow finally comes\nSo…how’d we do?"
+    "text": "And then tomorrow finally comes\nSo…how’d we do? Any ideas?"
   },
   {
     "objectID": "slides/case-study-2.html#whats-the-point",
     "href": "slides/case-study-2.html#whats-the-point",
     "title": "Case Study 2",
     "section": "What’s the point?",
-    "text": "What’s the point?\n\nWe want intervals and densities to communicate uncertainty about the prediction;\n\nWhat sources of uncertainty?\n\nBasic data uncertainty;\nParameter estimation uncertainty;\nHyperparameter uncertainty;\nModel uncertainty;\nUncertainty introduced by missing data;\nMany more!"
+    "text": "What’s the point?\n\nWe want intervals and densities to communicate uncertainty about the prediction;\n\nWhat sources of uncertainty?\n\nData uncertainty (data are realization of random process);\nParameter estimation uncertainty;\nHyperparameter tuning uncertainty;\nModel uncertainty;\nUncertainty introduced by missing data;\nWhat else?\n\n\n\n\nNewsflash: you have seen this before."
+  },
+  {
+    "objectID": "slides/case-study-2.html#regression-101-interval-estimation",
+    "href": "slides/case-study-2.html#regression-101-interval-estimation",
+    "title": "Case Study 2",
+    "section": "Regression 101: interval estimation",
+    "text": "Regression 101: interval estimation\nRemember this picture?"
+  },
+  {
+    "objectID": "slides/case-study-2.html#regression-101",
+    "href": "slides/case-study-2.html#regression-101",
+    "title": "Case Study 2",
+    "section": "Regression 101",
+    "text": "Regression 101\nRecall the simple linear model:\n\\[\n\\begin{aligned}\ny_i&=\\mu(x_i)+\\varepsilon_i && \\varepsilon_i\\iid\\N(0\\com\\sigma^2)\\\\\n&=\\beta_0+\\beta_1x_i+\\varepsilon_i\\\\\n\\end{aligned}\n\\]\nThe OLS estimators are:\n\\[\n\\begin{aligned}\n\\hat{\\beta}_1\n&=\n\\frac{\\sum_{i=1}^n(x_i-\\bar{x})(y_i-\\bar{y})}{S_{xx}},&&S_{xx}=\\sum\\limits_{i=1}^n(x_i-\\bar{x})^2\n\\\\\n\\hat{\\beta}_0\n&=\n\\bar{y}-\\bar{x}\\hat{\\beta}_1\n\\\\\n\\hat{\\mu}(x)\n&=\n\\hat{\\beta}_0+\\hat{\\beta_1}x\n\\\\\n\\widehat{\\sigma^2}\n&=\n\\frac{1}{n-2}\\sum\\limits_{i=1}^n[y_i-\\hat{\\mu}(x_i)]^2.\n\\end{aligned}\n\\]\n\nThe main idea of classical statistics is that the estimators are random variables as a function of the data. We quantify the uncertainty in the estimate that is induced by the sampling process."
+  },
+  {
+    "objectID": "slides/case-study-2.html#sampling-distributions",
+    "href": "slides/case-study-2.html#sampling-distributions",
+    "title": "Case Study 2",
+    "section": "Sampling distributions",
+    "text": "Sampling distributions\nYou can show that the sampling distributions are independent, and\n\\[\n\\begin{aligned}\n\\begin{bmatrix}\n\\hat{\\beta}_0\n\\\\\n\\hat{\\beta}_1\n\\end{bmatrix}\n&\\sim\n\\text{N}_2\\left(\\begin{bmatrix}\\beta_0\\\\\\beta_1\\end{bmatrix}\n\\com\n\\sigma^2\n\\begin{bmatrix}\n\\frac{1}{n}+\\frac{\\bar{x}^2}{S_{xx}}&-\\bar{x}/S_{xx}\\\\-\\bar{x}/S_{xx}&1/S_{xx}\n\\end{bmatrix}\\right)\n\\\\\n\\widehat{\\sigma^2}\n&\\sim\n\\text{Gamma}\\left(\\frac{n-2}{2}\\com\\frac{n-2}{2\\sigma^2}\\right)\n.\n\\end{aligned}\n\\]\n\nThe estimator of the regression function is the sum of two correlated Gaussian terms, so it stays normal, you add the means, and you add the variances, adjusting for the covariance:\n\n\n\\[\n\\hat{\\mu}(x)=\\hat{\\beta}_0+\\hat{\\beta_1}x\\sim\\N\\left(\\beta_0+\\beta_1x\\com \\sigma^2\\left[\\frac{1}{n}+\\frac{(x-\\bar{x})^2}{S_{xx}}\\right]\\right)\n\\]\n\n\nTake my word for it!"
+  },
+  {
+    "objectID": "slides/case-study-2.html#the-confidence-interval-for-the-line",
+    "href": "slides/case-study-2.html#the-confidence-interval-for-the-line",
+    "title": "Case Study 2",
+    "section": "The confidence interval for the line",
+    "text": "The confidence interval for the line\nA tale of two pivots:\n\n\\[\n\\frac{\\hat{\\mu}(x)-\\mu(x)}{\\sigma\\sqrt{\\frac{1}{n}+\\frac{(x-\\bar{x})^2}{S_{xx}}}}\n\\sim\\N(0\\com 1) \\quad\\implies\\quad \\frac{\\hat{\\mu}(x)-\\mu(x)}{\\hat{\\sigma}\\sqrt{\\frac{1}{n}+\\frac{(x-\\bar{x})^2}{S_{xx}}}}\n\\sim t_{n-2}.\n\\]\n\n\nSo we can use quantiles of the \\(t\\) distribution to get an exact interval for the unknow regression function at a new \\(x\\):\n\n\n\\[\n\\hat{\\mu}(x)\\pm t^\\star_{n-2}\\times \\hat{\\sigma}\\sqrt{\\frac{1}{n}+\\frac{(x-\\bar{x})^2}{S_{xx}}}.\n\\]\nThis quantifies frequentist sampling uncertainty for the regression line."
+  },
+  {
+    "objectID": "slides/case-study-2.html#the-predictive-pivot",
+    "href": "slides/case-study-2.html#the-predictive-pivot",
+    "title": "Case Study 2",
+    "section": "The predictive pivot",
+    "text": "The predictive pivot\nIf a new \\(\\tilde{x}\\) joins the party, we have\n\n\n\\(\\tilde{y}\\sim\\text{N}(\\mu(\\tilde{x})\\com\\sigma^2)\\);\n\\(\\hat{\\mu}(x)\\sim\\N\\left(\\mu(\\tilde{x})\\com \\sigma^2\\left[\\frac{1}{n}+\\frac{(x-\\bar{x})^2}{S_{xx}}\\right]\\right)\\)\nThese are independent.\n\n\nSo\n\\[\n\\begin{aligned}\n\\hat{\\mu}(\\tilde{x})-\\tilde{y} &\\sim\\N\\left(0\\com \\sigma^2\\left[\\frac{1}{n}+\\frac{(\\tilde{x}-\\bar{x})^2}{S_{xx}}\\right]+\\sigma^2\\right)\n\\\\\n&\\sim\\N\\left(0\\com \\sigma^2\\left[1+\\frac{1}{n}+\\frac{(\\tilde{x}-\\bar{x})^2}{S_{xx}}\\right]\\right).\n\\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "slides/case-study-2.html#the-prediction-interval-for-a-new-observation",
+    "href": "slides/case-study-2.html#the-prediction-interval-for-a-new-observation",
+    "title": "Case Study 2",
+    "section": "The prediction interval for a new observation",
+    "text": "The prediction interval for a new observation\nA tale of two more pivots:\n\n\\[\n\\frac{\\hat{\\mu}(\\tilde{x})-\\tilde{y}}{\\sigma\\sqrt{1+\\frac{1}{n}+\\frac{(\\tilde{x}-\\bar{x})^2}{S_{xx}}}}\n\\sim\\N(0\\com 1) \\quad\\implies\\quad \\frac{\\hat{\\mu}(\\tilde{x})-\\tilde{y}}{\\hat{\\sigma}\\sqrt{1+\\frac{1}{n}+\\frac{(\\tilde{x}-\\bar{x})^2}{S_{xx}}}}\n\\sim t_{n-2}.\n\\]\n\n\nExact prediction interval for a yet-to-be-observed \\(\\tilde{y}\\):\n\n\n\\[\n\\hat{\\mu}(\\tilde{x})\\pm t^\\star_{n-2}\\times \\hat{\\sigma}\\sqrt{1+\\frac{1}{n}+\\frac{(\\tilde{x}-\\bar{x})^2}{S_{xx}}}.\n\\]\n\n\nThis is wider than the confidence interval because the inherent random sampling of the new \\(\\tilde{y}\\) (its \\(\\tilde{\\varepsilon}\\)) adds a second source of uncertainty."
+  },
+  {
+    "objectID": "slides/case-study-2.html#you-get-the-idea",
+    "href": "slides/case-study-2.html#you-get-the-idea",
+    "title": "Case Study 2",
+    "section": "You get the idea",
+    "text": "You get the idea\nThe CI incorporates one source of uncertainty. The PI incorporates two. Hence, the PI is wider:\n\nmtcars_fit &lt;- lm(mpg ~ wt, data = mtcars)\nxnew &lt;- data.frame(wt = 4.5)\n\npredict(mtcars_fit, xnew, interval = \"confidence\")\n\n     fit      lwr      upr\n1 13.235 11.40347 15.06654\n\npredict(mtcars_fit, xnew, interval = \"prediction\")\n\n     fit      lwr      upr\n1 13.235 6.750452 19.71956"
+  },
+  {
+    "objectID": "slides/case-study-2.html#bayes-101-posterior-predictive-distribution",
+    "href": "slides/case-study-2.html#bayes-101-posterior-predictive-distribution",
+    "title": "Case Study 2",
+    "section": "Bayes 101: posterior predictive distribution",
+    "text": "Bayes 101: posterior predictive distribution\nThe posterior for parameters:\n\\[\np(\\boldsymbol{\\theta}\\mid y_{1:n})\n=\n\\frac{p(y_{1:n}\\mid \\boldsymbol{\\theta})p(\\boldsymbol{\\theta})}{p(y_{1:n})}.\n\\]\n\nThe posterior for a new observation:\n\\[\np(\\tilde{y}\\mid y_{1:n})=\\int p(\\tilde{y}\\mid \\boldsymbol{\\theta})p(\\boldsymbol{\\theta}\\mid y_{1:n})\\,\\text{d}\\boldsymbol{\\theta}\n.\n\\]\n\n\nSimilar to before, it incorporates Bayesian posterior uncertainty about the parameter and inherent randomness of new \\(\\tilde{y}\\)."
+  },
+  {
+    "objectID": "slides/case-study-2.html#example-linear-regression-again",
+    "href": "slides/case-study-2.html#example-linear-regression-again",
+    "title": "Case Study 2",
+    "section": "Example: linear regression, again",
+    "text": "Example: linear regression, again\nConsider linear regression where the prior \\(p(\\sigma^2\\com\\Bbeta)\\) is conjugate:\n\n\\[\n\\begin{aligned}\n\\sigma^2\n&\\sim\n\\text{IG}(a_0\\com b_0)\n\\\\\n\\Bbeta\\mid \\sigma^2\n&\\sim\n\\text{N}_{p}(\\bar{\\Bbeta}_0\\com\\sigma^2\\BH^{-1}_0)\n\\\\\ny_i\n\\mid\n\\Bx_i\n\\com\n\\Bbeta\\com\\sigma^2\n&\\iid \\text{N}\n\\left(\n\\Bx_i^\\tr\\Bbeta\\com\\sigma^2\n\\right).\n\\end{aligned}\n\\]\n\n\nWithout revisiting the pain and tedium of the calculation, the posterior \\(p(\\sigma^2\\com\\Bbeta\\mid y_{1:n}\\com \\Bx_{1:n})\\) remains in the normal-inverse-gamma family with updated hyperparameters:\n\\[\n\\begin{aligned}\n\\sigma^2\\mid y_{1:n}\\com \\Bx_{1:n}\n&\\sim\n\\text{IG}(a_n\\com b_n)\n\\\\\n\\Bbeta\\mid \\sigma^2\\com y_{1:n}\\com \\Bx_{1:n}\n&\\sim\n\\text{N}_{p}(\\bar{\\Bbeta}_n\\com\\sigma^2\\BH^{-1}_n)\n\\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "slides/case-study-2.html#example-linear-regression-again-1",
+    "href": "slides/case-study-2.html#example-linear-regression-again-1",
+    "title": "Case Study 2",
+    "section": "Example: linear regression, again",
+    "text": "Example: linear regression, again\nImagine we’ve observed the \\((\\Bx_i\\com y_i)\\), and then a new \\(\\tilde{\\Bx}\\) joins the party:\n\n\\[\n\\begin{aligned}\n\\sigma^2\\mid y_{1:n}\\com \\Bx_{1:n}\n&\\sim\n\\text{IG}(a_n\\com b_n)\n\\\\\n\\Bbeta\\mid \\sigma^2\\com y_{1:n}\\com \\Bx_{1:n}\n&\\sim\n\\text{N}_{p}(\\bar{\\Bbeta}_n\\com\\sigma^2\\BH^{-1}_n)\n\\\\\n\\\\\n\\tilde{y}&=\\tilde{\\Bx}^\\tr\\Bbeta+\\tilde{\\varepsilon},\\quad \\tilde{\\varepsilon}\\sim\\text{N}(0\\com\\sigma^2).\n\\end{aligned}\n\\]\n\n\nThe posterior predictive distribution is the marginal:\n\n\n\\[\n\\begin{aligned}\np(\\tilde{y}\\mid \\tilde{\\Bx}\\com y_{1:n}\\com \\Bx_{1:n})\n&=\n\\int\np(\\tilde{y}\\com\\sigma^2\\com\\Bbeta\\mid \\tilde{\\Bx}\\com y_{1:n}\\com \\Bx_{1:n})\n\\,\\dd\\Bbeta\\,\\dd\\sigma^2\n\\\\\n&=\n\\int\n\\underbrace{p(\\tilde{y}\\mid \\tilde{\\Bx}\\com \\sigma^2\\com\\Bbeta)}_{\\N(\\tilde{\\Bx}^\\tr\\Bbeta\\com\\sigma^2)}\n\\underbrace{p(\\sigma^2\\com\\Bbeta\\mid y_{1:n}\\com \\Bx_{1:n})}_{\\text{NIG}_{p}(a_n\\com b_n\\com \\bar{\\Bbeta}_n\\com\\BH_n)}\n\\,\\dd\\Bbeta\\,\\dd\\sigma^2.\n\\end{aligned}\n\\]\n\n\nWe can actually solve this."
+  },
+  {
+    "objectID": "slides/case-study-2.html#first-marginalize-out-bbeta",
+    "href": "slides/case-study-2.html#first-marginalize-out-bbeta",
+    "title": "Case Study 2",
+    "section": "First: marginalize out \\(\\Bbeta\\)\n",
+    "text": "First: marginalize out \\(\\Bbeta\\)\n\nWe know that\n\\[\n\\begin{aligned}\n\\Bbeta\\mid \\sigma^2\\com y_{1:n}\\com \\Bx_{1:n}\n&\\sim\n\\text{N}_{p}(\\bar{\\Bbeta}_n\\com\\sigma^2\\BH^{-1}_n)\n\\\\\n\\tilde{y}\n&=\n\\tilde{\\Bx}^\\tr\\Bbeta\n+\n\\tilde{\\varepsilon}\n,\n&&\n\\tilde{\\varepsilon}\\sim\\N(0\\com \\sigma^2).\n\\end{aligned}\n\\]\n\nPre-multiplying by \\(\\tilde{\\Bx}^\\tr\\) is just a linear transformation, so:\n\\[\n\\tilde{\\Bx}^\\tr\\Bbeta\n\\mid \\tilde{\\Bx}\\com \\sigma^2\\com y_{1:n}\\com \\Bx_{1:n}\n\\sim\n\\N(\n\\tilde{\\Bx}^\\tr\\bar{\\Bbeta}_n\n\\com\n\\sigma^2\\tilde{\\Bx}^\\tr\\BH_n^{-1}\\tilde{\\Bx}\n).\n\\]\n\n\nSince \\(\\tilde{y}\\) is the sum of two independent normal bits (\\(\\tilde{\\Bx}^\\tr\\Bbeta\\) and \\(\\tilde{\\varepsilon}\\)), it stays normal, and you can add the means and variance:\n\n\n\\[\n\\begin{aligned}\n\\tilde{y}\\mid \\tilde{\\Bx}\\com \\sigma^2\\com y_{1:n}\\com \\Bx_{1:n}\n&\\sim\n\\N\\left(\n\\tilde{\\Bx}^\\tr\\bar{\\Bbeta}_n+0\n\\com\n\\sigma^2\\tilde{\\Bx}^\\tr\\BH_n^{-1}\\tilde{\\Bx}+\\sigma^2\n\\right)\n\\\\\n&\\sim\n\\N\\left(\n\\tilde{\\Bx}^\\tr\\bar{\\Bbeta}_n\n\\com\n\\sigma^2(1+\\tilde{\\Bx}^\\tr\\BH_n^{-1}\\tilde{\\Bx})\n\\right).\n\\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "slides/case-study-2.html#second-marginalize-out-sigma2",
+    "href": "slides/case-study-2.html#second-marginalize-out-sigma2",
+    "title": "Case Study 2",
+    "section": "Second: marginalize out \\(\\sigma^2\\)\n",
+    "text": "Second: marginalize out \\(\\sigma^2\\)\n\nWe know that\n\\[\n\\begin{aligned}\n\\sigma^2\\mid y_{1:n}\\com \\Bx_{1:n}\n&\\sim\n\\text{IG}(a_n\\com b_n)\n\\\\\n\\tilde{y}\\mid \\tilde{\\Bx}\\com \\sigma^2\\com y_{1:n}\\com \\Bx_{1:n}\n&\\sim\n\\N\\left(\n\\tilde{\\Bx}^\\tr\\bar{\\Bbeta}_n\n\\com\n\\sigma^2(1+\\tilde{\\Bx}^\\tr\\BH_n^{-1}\\tilde{\\Bx})\n\\right).\n\\end{aligned}\n\\]\n\nMarginalizing \\(\\sigma^2\\) out of this hierarchy is essentially the definition of Student’s \\(t\\):\n\n\n\\[\n\\begin{aligned}\n\\tilde{y}\\mid \\tilde{\\Bx}\\com y_{1:n}\\com \\Bx_{1:n}\n&\\sim\nt(\\nu_n\\com\\bar{y}_{n}\\com s_{n}^2)\n\\\\\n\\\\\n\\nu_{n}\n&=\n2a_n\n\\\\\n\\bar{y}_{n}\n&=\n\\tilde{\\Bx}^\\tr\\bar{\\Bbeta}_n\n\\\\\ns_{n}^2\n&=\n\\frac{b_n}{a_n}\n(1+\\tilde{\\Bx}^\\tr\\BH_n^{-1}\\tilde{\\Bx})\n.\n\\end{aligned}\n\\]\n\n\nSo, Student’s \\(t\\) with a shift and scale."
+  },
+  {
+    "objectID": "slides/case-study-2.html#comparison",
+    "href": "slides/case-study-2.html#comparison",
+    "title": "Case Study 2",
+    "section": "Comparison",
+    "text": "Comparison\n\n\nClassical prediction interval:\n\\[\n\\begin{aligned}\n\\hat{y} &\\pm t^\\star_{n-2} \\times \\text{SE}\n\\\\\n\\\\\n\\hat{y}\n&=\n\\hat{\\beta_0}+\\hat{\\beta}_1\\tilde{x}\n\\\\\n\\text{SE}^2\n&=\n\\widehat{\\sigma^2}\\left(1+\\frac{1}{n}+\\frac{(\\tilde{x}-\\bar{x})^2}{S_{xx}}\\right).\n\\end{aligned}\n\\]\n\nPosterior predictive distribution:\n\\[\n\\begin{aligned}\n\\tilde{y}\\mid \\tilde{\\Bx}\\com y_{1:n}\\com \\Bx_{1:n}\n&\\sim\nt(\\nu_n\\com\\bar{y}_{n}\\com s_{n}^2)\n\\\\\n\\\\\n\\nu_{n}\n&=\n2a_n\n\\\\\n\\bar{y}_{n}\n&=\n\\tilde{\\Bx}^\\tr\\bar{\\Bbeta}_n\n\\\\\ns_{n}^2\n&=\n\\frac{b_n}{a_n}\n(1+\\tilde{\\Bx}^\\tr\\BH_n^{-1}\\tilde{\\Bx})\n.\n\\end{aligned}\n\\]\n\n\nBoth centered at point prediction;\nPoint prediction is \\(\\tilde{\\Bx}\\) times point estimate, be it OLS or posterior mean;\nBoth scaled by a factor that incorporates uncertainty from \\(\\tilde{\\varepsilon}\\) and estimation uncertainty for \\(\\Bbeta\\), be it frequentist or Bayesian;\nBoth use Student’s \\(t\\) because \\(\\sigma^2\\) also had to be estimated;\nAs \\(n\\to\\infty\\), these will actually agree thanks to the Bernstein–von Mises theorem."
+  },
+  {
+    "objectID": "slides/case-study-2.html#you-need-to-be-thinking-about-this",
+    "href": "slides/case-study-2.html#you-need-to-be-thinking-about-this",
+    "title": "Case Study 2",
+    "section": "You need to be thinking about this",
+    "text": "You need to be thinking about this\n\nWhether you take a classical or a Bayesian approach;\nWhether you’re using the linear model or some ML behemoth;\nYou need to produce and evaluate predictive uncertainty.\n\n\nStay tuned, and we’ll show you how!"
   },
   {
     "objectID": "syllabus/syllabus-assignments.html",

@@ -28,6 +28,72 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
 <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-6e51ad904291ad622da7d287747171b4.css">
 <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -146,7 +212,24 @@ Ed Iversen and John Zito
 </div>
 
 </section><section><section id="macroeconomic-data" class="title-slide slide level1 center"><h1>Macroeconomic data</h1>
-
+<p><span class="math display">\[
+\newcommand{\iid}{\overset{\textrm{iid}}{\sim}}
+\newcommand{\indep}{\overset{\textrm{indep}}{\sim}}
+\newcommand{\tr}{{\scriptscriptstyle\mathsf{T}}}
+\newcommand{\com}{,\,}
+\newcommand{\BX}{\mathbf{X}}
+\newcommand{\BH}{\mathbf{H}}
+\newcommand{\BY}{\mathbf{Y}}
+\newcommand{\Bx}{\mathbf{x}}
+\newcommand{\By}{\mathbf{y}}
+\newcommand{\Btheta}{\boldsymbol{\theta}}
+\newcommand{\Bepsilon}{\boldsymbol{\varepsilon}}
+\newcommand{\Bbeta}{\boldsymbol{\beta}}
+\newcommand{\Bzero}{\mathbf{0}}
+\newcommand{\Bone}{\mathbf{1}}
+\newcommand{\N}{\text{N}}
+\newcommand{\dd}{\text{d}}
+\]</span></p>
 </section><section id="a-few-us-macro-aggregates" class="slide level2"><h2>A few US macro aggregates</h2>
 <div class="cell">
 <div class="cell-output-display">
@@ -156,7 +239,7 @@ Ed Iversen and John Zito
 </div>
 </div>
 </div>
-<p>There are hundreds more. Play around on <a href="https://fred.stlouisfed.org">FRED</a>!</p>
+<p>There are tons more. Play around on <a href="https://fred.stlouisfed.org">FRED</a>!</p>
 </section><section id="where-do-these-data-come-from" class="slide level2 medium"><h2>Where do these data come from?</h2>
 <p><a href="https://www.bls.gov">Bureau of Labor Statistics</a> (under the Labor Department)</p>
 <ul>
@@ -173,9 +256,9 @@ Ed Iversen and John Zito
 <li>
 <a href="https://fred.stlouisfed.org/series/GDP">Gross Domestic Product (GDP)</a>;</li>
 <li>
-<a href="https://fred.stlouisfed.org/series/PCEPI">Personal Consumption Expenditures (PCE)</a>.</li>
+<a href="https://fred.stlouisfed.org/series/PCE">Personal Consumption Expenditures (PCE)</a>.</li>
 </ul>
-<p>And many many <a href="https://en.wikipedia.org/wiki/Federal_statistical_system">more</a>!</p>
+<p>There are 13 <a href="https://en.wikipedia.org/wiki/Federal_statistical_system">principal statistical agencies</a> in the US federal government.</p>
 </section><section id="who-cares" class="slide level2 medium"><h2>Who cares?</h2>
 <div class="fragment">
 <p>These are some of the most talked about data in the world. They are constantly being studied by…</p>
@@ -250,40 +333,76 @@ Ed Iversen and John Zito
 </div></div>
 </section></section><section><section id="revisions" class="title-slide slide level1 center"><h1>Revisions?</h1>
 
-</section><section id="whence-revisions" class="slide level2"><h2>Whence revisions?</h2>
+</section><section id="whence-revisions" class="slide level2 small"><h2>Whence revisions?</h2>
+<p>The statistical agencies announce an initial estimate with a one period lag, but they continue to revise the measurement (sometimes years later) as new information arrives and measurement techniques improve.</p>
+<div class="fragment">
 <p>From the <a href="https://www.bls.gov/news.release/archives/empsit_08012025.htm">BLS report</a> (and more <a href="https://www.bls.gov/web/empsit/cestn.htm#Revisions-Between-Preliminary-and-Final-Data">here</a>):</p>
 <blockquote>
 <p>Monthly revisions result from additional reports received from businesses and government agencies since the last published estimates and from the recalculation of seasonal factors.</p>
 </blockquote>
-<p>The statistical agencies announce an initial estimate with a one period lag, but they continue to revise the measurement (sometimes years later) as new information arrives and measurement techniques improve.</p>
-</section><section id="real-time-data" class="slide level2"><h2>Real-time data</h2>
-<p>The Federal Reserve Bank of Philadelphia publishes a <a href="https://www.philadelphiafed.org/surveys-and-data/real-time-data-research/real-time-data-set-for-macroeconomists">real-time dataset</a> of key macroeconomic variables that allows you to see how the data were revised from initial release all the way to the present.</p>
-</section><section id="what-are-the-data-like" class="slide level2"><h2>What are the data like?</h2>
+</div>
+<div class="fragment">
+<p>From <a href="https://www.nytimes.com/2025/08/01/business/economy/jobs-report-revisions-us-economy.html">Ben Casselman at the New York Times</a>:</p>
+<blockquote>
+<p>The monthly numbers are based on a huge survey of businesses and other employers. Not all businesses respond in time for the initial estimate, however, forcing government statisticians to fill in the gaps with a statistical technique that essentially assumes the businesses that didn’t respond behaved the same way as the ones that did. That approach works fine during normal times. But during periods of rapid change, that assumption can be misleading.</p>
+</blockquote>
+</div>
+</section><section id="frbps-real-time-data-set" class="slide level2"><h2>FRBP’s Real-Time Data Set</h2>
+<div class="columns">
+<div class="column" style="width:37%;">
+<p><img data-src="images/real-time-data.png"></p>
+</div><div class="column" style="width:63%;">
+<p><img data-src="images/frbp.jpg"></p>
+<p>Tracks the entire history of revisions for key macroeconomic variables.</p>
+</div></div>
+</section><section id="what-are-these-data-like" class="slide level2"><h2>What are these data like?</h2>
 <p>Example: quarterly data on gross domestic product (GDP).</p>
 <p><img data-src="images/vintage-1.png"></p>
 <p>Each variable gets this triangular array. The <em>rows</em> correspond to the period in time we are trying to measure. The <em>columns</em> correspond to when we are measuring it. This is the so-called <em>vintage</em> of the data.</p>
-</section><section id="what-are-the-data-like-1" class="slide level2"><h2>What are the data like?</h2>
+</section><section id="what-are-these-data-like-1" class="slide level2"><h2>What are these data like?</h2>
 <p>Example: quarterly data on gross domestic product (GDP).</p>
 <p><img data-src="images/vintage-4.png"></p>
 <p>This is our estimate of GDP for 1963Q4 <em>as measured</em> in 1966Q4.</p>
-</section><section id="what-are-the-data-like-2" class="slide level2"><h2>What are the data like?</h2>
+</section><section id="what-are-these-data-like-2" class="slide level2"><h2>What are these data like?</h2>
 <p>Example: quarterly data on gross domestic product (GDP).</p>
 <p><img data-src="images/vintage-3.png"></p>
 <p>This column is the 1966Q4 vintage of the data. This was the best information that an observer in 1966Q4 had access to.</p>
-</section><section id="what-are-the-data-like-3" class="slide level2"><h2>What are the data like?</h2>
+</section><section id="what-are-these-data-like-3" class="slide level2"><h2>What are these data like?</h2>
 <p>Example: quarterly data on gross domestic product (GDP).</p>
 <p><img data-src="images/vintage-2.png"></p>
 <p>This row shows the path of revisions for the 1965Q4 observation. We got out first reading in 1966Q1 (one period later), and then it was subsequently revised several times.</p>
 </section><section id="the-path-of-revisions-over-time" class="slide level2"><h2>The path of revisions over time</h2>
 <div class="quarto-figure quarto-figure-center">
-<figure><p><img data-src="images/productivity-revisions.png" class="quarto-figure quarto-figure-center" style="width:80.0%"></p>
+<figure><p><img data-src="images/productivity-revisions.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></p>
+</figure>
+</div>
+</section><section id="the-path-of-revisions-over-time-1" class="slide level2"><h2>The path of revisions over time</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure><p><img data-src="images/productivity-movin.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></p>
+</figure>
+</div>
+</section><section id="the-path-of-revisions-over-time-2" class="slide level2"><h2>The path of revisions over time</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure><p><img data-src="images/croushore-pic.png" class="quarto-figure quarto-figure-center"></p>
 </figure>
 </div>
 </section><section id="how-do-revisions-behave" class="slide level2"><h2>How do revisions behave?</h2>
 <div class="fragment">
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Good heavens</strong></p>
+</div>
+<div class="callout-content">
 <div class="quarto-figure quarto-figure-center">
 <figure><p><img data-src="images/aruoba.png" class="quarto-figure quarto-figure-center"></p>
 </figure>
+</div>
+</div>
+</div>
 </div>
 </div>
 </section><section id="how-do-data-revisions-behave" class="slide level2 medium"><h2>How do data revisions behave?</h2>
@@ -294,27 +413,68 @@ Ed Iversen and John Zito
 <div class="fragment">
 <p>Bummer.</p>
 </div>
+</section><section id="this-is-probably-getting-worse" class="slide level2"><h2>This is probably getting worse</h2>
+<blockquote>
+<p>Federal statistical agencies have faced mounting challenges in recent years as Americans have become more reluctant to respond to the surveys that are the basis for much of the nation’s economic data. Shrinking budgets have made it harder to make up for falling response rates, and to develop new approaches to replace surveys altogether.</p>
+</blockquote>
+<p>Source: <a href="https://www.nytimes.com/2025/08/01/business/economy/trump-bls-firing-jobs-report.html">New York Times</a>.</p>
 </section></section><section><section id="case-study-2" class="title-slide slide level1 center"><h1>Case Study 2</h1>
 
-</section><section id="your-task" class="slide level2"><h2>Your task</h2>
-<p>Each of you will be given a target variable. Then:</p>
+</section><section id="picture-this" class="slide level2"><h2>Picture this</h2>
+<p>Imagine you work at the Federal Reserve, or the Congressional Budget Office, or Goldman Sachs, or The Wall Street Journal. Your boss taps you on the shoulder and says:</p>
+<blockquote>
+<p>We just got an unexpected data release, but we know it will be revised. And in general, I’m sick of this crap where the numbers swing around for months after the fact and we don’t know where we stand. Can you develop a model that can predict where the measurement will settle after the revisions are done?</p>
+</blockquote>
+</section><section id="your-data" class="slide level2 medium"><h2>Your data</h2>
+<p>The full set of historical vintages for several macro variables:</p>
 <ul>
-<li>Develop a model that can predict the “final value” using only information available at the time of the initial release;</li>
+<li>GDP growth;</li>
+<li>Inflation;</li>
+<li>Productivity growth;</li>
+<li>Consumption growth;</li>
+<li>Employment growth;</li>
+<li>Industrial production growth;</li>
+<li>Investment growth.</li>
+</ul></section><section id="your-task" class="slide level2 medium"><h2>Your task</h2>
+<p>Each team will be assigned a target variable. Then:</p>
+<ul>
+<li>Develop a model that can predict the final release of the variable using only information available at the time of the initial release;
+<ul>
+<li>treat the vintage <em>three years later</em> as the final release;</li>
+<li>Use the other variables as predictors if you want;</li>
+<li>Produce a method with good historical performance averaged over time;</li>
+</ul>
+</li>
 <li>You <em>must</em> quantify uncertainty. Point predictions are not enough. You need to produce and evaluate full predictive distributions that incorporate as many sources of uncertainty as possible.</li>
-</ul></section><section id="deadlines" class="slide level2"><h2>Deadlines</h2>
+</ul></section><section id="deadlines" class="slide level2 medium"><h2>Deadlines</h2>
 <ul>
-<li>EDA (Wed 2/11): explore the data, but also research the data collection process for your target variable;</li>
-<li>Analysis (Wed 2/18): present prediction metrics for the models you considered, and try to explain why certain approaches worked better than others;</li>
+<li>EDA presentations (Wed 2/11):
+<ul>
+<li>the usual plots and summaries to get a feel and motivate your analysis;</li>
+<li>hit the books and teach the class how your assigned variable is actually measured, and what goes on during the revision process;</li>
+</ul>
+</li>
+<li>Analysis presentations (Wed 2/18):
+<ul>
+<li>what models did you consider?</li>
+<li>how did their predictive accuracy compare?</li>
+<li>can you interpret why the models performed the way they did?</li>
+</ul>
+</li>
 <li>Final submission (Mon 2/23).</li>
 </ul></section><section id="lecture-topics" class="slide level2"><h2>Lecture topics</h2>
+<p>A crash course in time series:</p>
 <ul>
 <li>Autoregressive moving average (ARMA) models;</li>
 <li>Dynamic linear models (DLMs);</li>
 <li>Probabilistic prediction;</li>
 <li>Time series cross-validation (“leave-future-out”).</li>
-</ul></section><section id="words-of-caution" class="slide level2 medium"><h2>Words of caution</h2>
+</ul>
+<p>You may not ultimately choose to use these specific models, but the evaluation techniques are model-agnostic.</p>
+</section><section id="words-of-caution" class="slide level2 medium"><h2>Words of caution</h2>
 <ul>
-<li class="fragment">The data come in this funky, unfamiliar form: each variable gets its own spreadsheet in this triangular format (row = period being measured; column = vintage). How are you going to deal with that?</li>
+<li class="fragment">The data come in this funky, unfamiliar form: each variable gets its own data frame with this triangular structure (row = period being measured; column = vintage). How are you going to deal with that?</li>
+<li class="fragment">When you generate a prediction, make sure you are conditioning only on information that would have been available at that time!</li>
 <li class="fragment">There already exists a massive literature on this, which you are welcome to explore. However, you will quickly become overwhelmed if you’re not careful. That’s part of the challenge!</li>
 <li class="fragment">Black box machine learning methods may or may not work well here, but if you don’t know how to get predictive uncertainty quantification from them, or you find that the UQ is unreliable, then say goodbye to <code>XGBoost</code>!</li>
 </ul></section></section><section><section id="probabilistic-prediction" class="title-slide slide level1 center"><h1>Probabilistic prediction</h1>
@@ -352,7 +512,7 @@ Ed Iversen and John Zito
 </div>
 </div>
 </section><section id="and-then-tomorrow-finally-comes" class="slide level2"><h2>And then tomorrow finally comes</h2>
-<p>So…how’d we do?</p>
+<p>So…how’d we do? Any ideas?</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -367,17 +527,426 @@ Ed Iversen and John Zito
 <li class="fragment">
 <p>What sources of uncertainty?</p>
 <ul>
-<li class="fragment">Basic data uncertainty;</li>
+<li class="fragment">Data uncertainty (data are realization of random process);</li>
 <li class="fragment">Parameter estimation uncertainty;</li>
-<li class="fragment">Hyperparameter uncertainty;</li>
+<li class="fragment">Hyperparameter tuning uncertainty;</li>
 <li class="fragment">Model uncertainty;</li>
 <li class="fragment">Uncertainty introduced by missing data;</li>
-<li class="fragment">Many more!</li>
+<li class="fragment">What else?</li>
 </ul>
 </li>
 </ul>
+<div class="fragment">
+<p>Newsflash: you have seen this before.</p>
+</div>
+</section><section id="regression-101-interval-estimation" class="slide level2"><h2>Regression 101: interval estimation</h2>
+<p>Remember this picture?</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure><p><img data-src="case-study-2_files/figure-revealjs/unnamed-chunk-6-1.png" class="quarto-figure quarto-figure-center" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="regression-101" class="slide level2 small"><h2>Regression 101</h2>
+<p>Recall the simple linear model:</p>
+<p><span class="math display">\[
+\begin{aligned}
+y_i&amp;=\mu(x_i)+\varepsilon_i &amp;&amp; \varepsilon_i\iid\N(0\com\sigma^2)\\
+&amp;=\beta_0+\beta_1x_i+\varepsilon_i\\
+\end{aligned}
+\]</span></p>
+<p>The OLS estimators are:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\hat{\beta}_1
+&amp;=
+\frac{\sum_{i=1}^n(x_i-\bar{x})(y_i-\bar{y})}{S_{xx}},&amp;&amp;S_{xx}=\sum\limits_{i=1}^n(x_i-\bar{x})^2
+\\
+\hat{\beta}_0
+&amp;=
+\bar{y}-\bar{x}\hat{\beta}_1
+\\
+\hat{\mu}(x)
+&amp;=
+\hat{\beta}_0+\hat{\beta_1}x
+\\
+\widehat{\sigma^2}
+&amp;=
+\frac{1}{n-2}\sum\limits_{i=1}^n[y_i-\hat{\mu}(x_i)]^2.
+\end{aligned}
+\]</span></p>
+<div class="fragment">
+<p>The main idea of <em>classical</em> statistics is that the estimators are random variables as a function of the data. We quantify the uncertainty in the estimate that is induced by the sampling process.</p>
+</div>
+</section><section id="sampling-distributions" class="slide level2 small"><h2>Sampling distributions</h2>
+<p>You can show that the sampling distributions are independent, and</p>
+<p><span class="math display">\[
+\begin{aligned}
+\begin{bmatrix}
+\hat{\beta}_0
+\\
+\hat{\beta}_1
+\end{bmatrix}
+&amp;\sim
+\text{N}_2\left(\begin{bmatrix}\beta_0\\\beta_1\end{bmatrix}
+\com
+\sigma^2
+\begin{bmatrix}
+\frac{1}{n}+\frac{\bar{x}^2}{S_{xx}}&amp;-\bar{x}/S_{xx}\\-\bar{x}/S_{xx}&amp;1/S_{xx}
+\end{bmatrix}\right)
+\\
+\widehat{\sigma^2}
+&amp;\sim
+\text{Gamma}\left(\frac{n-2}{2}\com\frac{n-2}{2\sigma^2}\right)
+.
+\end{aligned}
+\]</span></p>
+<div class="fragment">
+<p>The estimator of the regression function is the sum of two correlated Gaussian terms, so it stays normal, you add the means, and you add the variances, adjusting for the covariance:</p>
+</div>
+<div class="fragment">
+<p><span class="math display">\[
+\hat{\mu}(x)=\hat{\beta}_0+\hat{\beta_1}x\sim\N\left(\beta_0+\beta_1x\com \sigma^2\left[\frac{1}{n}+\frac{(x-\bar{x})^2}{S_{xx}}\right]\right)
+\]</span></p>
+</div>
+<div class="fragment">
+<p>Take my word for it!</p>
+</div>
+</section><section id="the-confidence-interval-for-the-line" class="slide level2 medium"><h2>The confidence interval for the line</h2>
+<p>A tale of two pivots:</p>
+<div class="fragment">
+<p><span class="math display">\[
+\frac{\hat{\mu}(x)-\mu(x)}{\sigma\sqrt{\frac{1}{n}+\frac{(x-\bar{x})^2}{S_{xx}}}}
+\sim\N(0\com 1) \quad\implies\quad \frac{\hat{\mu}(x)-\mu(x)}{\hat{\sigma}\sqrt{\frac{1}{n}+\frac{(x-\bar{x})^2}{S_{xx}}}}
+\sim t_{n-2}.
+\]</span></p>
+</div>
+<div class="fragment">
+<p>So we can use quantiles of the <span class="math inline">\(t\)</span> distribution to get an <em>exact</em> interval for the unknow regression function at a new <span class="math inline">\(x\)</span>:</p>
+</div>
+<div class="fragment">
+<p><span class="math display">\[
+\hat{\mu}(x)\pm t^\star_{n-2}\times \hat{\sigma}\sqrt{\frac{1}{n}+\frac{(x-\bar{x})^2}{S_{xx}}}.
+\]</span></p>
+<p>This quantifies frequentist sampling uncertainty for the regression line.</p>
+</div>
+</section><section id="the-predictive-pivot" class="slide level2 medium"><h2>The predictive pivot</h2>
+<p>If a new <span class="math inline">\(\tilde{x}\)</span> joins the party, we have</p>
+<ul>
+<li class="fragment">
+<span class="math inline">\(\tilde{y}\sim\text{N}(\mu(\tilde{x})\com\sigma^2)\)</span>;</li>
+<li class="fragment"><span class="math inline">\(\hat{\mu}(x)\sim\N\left(\mu(\tilde{x})\com \sigma^2\left[\frac{1}{n}+\frac{(x-\bar{x})^2}{S_{xx}}\right]\right)\)</span></li>
+<li class="fragment">These are independent.</li>
+</ul>
+<div class="fragment">
+<p>So</p>
+<p><span class="math display">\[
+\begin{aligned}
+\hat{\mu}(\tilde{x})-\tilde{y} &amp;\sim\N\left(0\com \sigma^2\left[\frac{1}{n}+\frac{(\tilde{x}-\bar{x})^2}{S_{xx}}\right]+\sigma^2\right)
+\\
+&amp;\sim\N\left(0\com \sigma^2\left[1+\frac{1}{n}+\frac{(\tilde{x}-\bar{x})^2}{S_{xx}}\right]\right).
+\end{aligned}
+\]</span></p>
+</div>
+</section><section id="the-prediction-interval-for-a-new-observation" class="slide level2 medium"><h2>The prediction interval for a new observation</h2>
+<p>A tale of two more pivots:</p>
+<div class="fragment">
+<p><span class="math display">\[
+\frac{\hat{\mu}(\tilde{x})-\tilde{y}}{\sigma\sqrt{1+\frac{1}{n}+\frac{(\tilde{x}-\bar{x})^2}{S_{xx}}}}
+\sim\N(0\com 1) \quad\implies\quad \frac{\hat{\mu}(\tilde{x})-\tilde{y}}{\hat{\sigma}\sqrt{1+\frac{1}{n}+\frac{(\tilde{x}-\bar{x})^2}{S_{xx}}}}
+\sim t_{n-2}.
+\]</span></p>
+</div>
+<div class="fragment">
+<p><em>Exact</em> prediction interval for a yet-to-be-observed <span class="math inline">\(\tilde{y}\)</span>:</p>
+</div>
+<div class="fragment">
+<p><span class="math display">\[
+\hat{\mu}(\tilde{x})\pm t^\star_{n-2}\times \hat{\sigma}\sqrt{1+\frac{1}{n}+\frac{(\tilde{x}-\bar{x})^2}{S_{xx}}}.
+\]</span></p>
+</div>
+<div class="fragment">
+<p>This is wider than the confidence interval because the inherent random sampling of the new <span class="math inline">\(\tilde{y}\)</span> (its <span class="math inline">\(\tilde{\varepsilon}\)</span>) adds a second source of uncertainty.</p>
+</div>
+</section><section id="you-get-the-idea" class="slide level2"><h2>You get the idea</h2>
+<p>The CI incorporates one source of uncertainty. The PI incorporates two. Hence, the PI is wider:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a>mtcars_fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(mpg <span class="sc">~</span> wt, <span class="at">data =</span> mtcars)</span>
+<span id="cb1-2"><a></a>xnew <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">wt =</span> <span class="fl">4.5</span>)</span>
+<span id="cb1-3"><a></a></span>
+<span id="cb1-4"><a></a><span class="fu">predict</span>(mtcars_fit, xnew, <span class="at">interval =</span> <span class="st">"confidence"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     fit      lwr      upr
+1 13.235 11.40347 15.06654</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">predict</span>(mtcars_fit, xnew, <span class="at">interval =</span> <span class="st">"prediction"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     fit      lwr      upr
+1 13.235 6.750452 19.71956</code></pre>
+</div>
+</div>
+</section><section id="bayes-101-posterior-predictive-distribution" class="slide level2"><h2>Bayes 101: posterior predictive distribution</h2>
+<p>The posterior for parameters:</p>
+<p><span class="math display">\[
+p(\boldsymbol{\theta}\mid y_{1:n})
+=
+\frac{p(y_{1:n}\mid \boldsymbol{\theta})p(\boldsymbol{\theta})}{p(y_{1:n})}.
+\]</span></p>
+<div class="fragment">
+<p>The posterior for a new observation:</p>
+<p><span class="math display">\[
+p(\tilde{y}\mid y_{1:n})=\int p(\tilde{y}\mid \boldsymbol{\theta})p(\boldsymbol{\theta}\mid y_{1:n})\,\text{d}\boldsymbol{\theta}
+.
+\]</span></p>
+</div>
+<div class="fragment">
+<p>Similar to before, it incorporates Bayesian posterior uncertainty about the parameter <em>and</em> inherent randomness of new <span class="math inline">\(\tilde{y}\)</span>.</p>
+</div>
+</section><section id="example-linear-regression-again" class="slide level2 medium"><h2>Example: linear regression, again</h2>
+<p>Consider linear regression where the prior <span class="math inline">\(p(\sigma^2\com\Bbeta)\)</span> is <em>conjugate</em>:</p>
+<div class="fragment">
+<p><span class="math display">\[
+\begin{aligned}
+\sigma^2
+&amp;\sim
+\text{IG}(a_0\com b_0)
+\\
+\Bbeta\mid \sigma^2
+&amp;\sim
+\text{N}_{p}(\bar{\Bbeta}_0\com\sigma^2\BH^{-1}_0)
+\\
+y_i
+\mid
+\Bx_i
+\com
+\Bbeta\com\sigma^2
+&amp;\iid \text{N}
+\left(
+\Bx_i^\tr\Bbeta\com\sigma^2
+\right).
+\end{aligned}
+\]</span></p>
+</div>
+<div class="fragment">
+<p>Without revisiting the pain and tedium of the calculation, the posterior <span class="math inline">\(p(\sigma^2\com\Bbeta\mid y_{1:n}\com \Bx_{1:n})\)</span> remains in the normal-inverse-gamma family with updated hyperparameters:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\sigma^2\mid y_{1:n}\com \Bx_{1:n}
+&amp;\sim
+\text{IG}(a_n\com b_n)
+\\
+\Bbeta\mid \sigma^2\com y_{1:n}\com \Bx_{1:n}
+&amp;\sim
+\text{N}_{p}(\bar{\Bbeta}_n\com\sigma^2\BH^{-1}_n)
+\end{aligned}
+\]</span></p>
+</div>
+</section><section id="example-linear-regression-again-1" class="slide level2 small"><h2>Example: linear regression, again</h2>
+<p>Imagine we’ve observed the <span class="math inline">\((\Bx_i\com y_i)\)</span>, and then a new <span class="math inline">\(\tilde{\Bx}\)</span> joins the party:</p>
+<div class="fragment">
+<p><span class="math display">\[
+\begin{aligned}
+\sigma^2\mid y_{1:n}\com \Bx_{1:n}
+&amp;\sim
+\text{IG}(a_n\com b_n)
+\\
+\Bbeta\mid \sigma^2\com y_{1:n}\com \Bx_{1:n}
+&amp;\sim
+\text{N}_{p}(\bar{\Bbeta}_n\com\sigma^2\BH^{-1}_n)
+\\
+\\
+\tilde{y}&amp;=\tilde{\Bx}^\tr\Bbeta+\tilde{\varepsilon},\quad \tilde{\varepsilon}\sim\text{N}(0\com\sigma^2).
+\end{aligned}
+\]</span></p>
+</div>
+<div class="fragment">
+<p>The posterior predictive distribution is the marginal:</p>
+</div>
+<div class="fragment">
+<p><span class="math display">\[
+\begin{aligned}
+p(\tilde{y}\mid \tilde{\Bx}\com y_{1:n}\com \Bx_{1:n})
+&amp;=
+\int
+p(\tilde{y}\com\sigma^2\com\Bbeta\mid \tilde{\Bx}\com y_{1:n}\com \Bx_{1:n})
+\,\dd\Bbeta\,\dd\sigma^2
+\\
+&amp;=
+\int
+\underbrace{p(\tilde{y}\mid \tilde{\Bx}\com \sigma^2\com\Bbeta)}_{\N(\tilde{\Bx}^\tr\Bbeta\com\sigma^2)}
+\underbrace{p(\sigma^2\com\Bbeta\mid y_{1:n}\com \Bx_{1:n})}_{\text{NIG}_{p}(a_n\com b_n\com \bar{\Bbeta}_n\com\BH_n)}
+\,\dd\Bbeta\,\dd\sigma^2.
+\end{aligned}
+\]</span></p>
+</div>
+<div class="fragment">
+<p>We can actually solve this.</p>
+</div>
+</section><section id="first-marginalize-out-bbeta" class="slide level2 small"><h2>First: marginalize out <span class="math inline">\(\Bbeta\)</span>
+</h2>
+<p>We know that</p>
+<p><span class="math display">\[
+\begin{aligned}
+\Bbeta\mid \sigma^2\com y_{1:n}\com \Bx_{1:n}
+&amp;\sim
+\text{N}_{p}(\bar{\Bbeta}_n\com\sigma^2\BH^{-1}_n)
+\\
+\tilde{y}
+&amp;=
+\tilde{\Bx}^\tr\Bbeta
++
+\tilde{\varepsilon}
+,
+&amp;&amp;
+\tilde{\varepsilon}\sim\N(0\com \sigma^2).
+\end{aligned}
+\]</span></p>
+<div class="fragment">
+<p>Pre-multiplying by <span class="math inline">\(\tilde{\Bx}^\tr\)</span> is just a linear transformation, so:</p>
+<p><span class="math display">\[
+\tilde{\Bx}^\tr\Bbeta
+\mid \tilde{\Bx}\com \sigma^2\com y_{1:n}\com \Bx_{1:n}
+\sim
+\N(
+\tilde{\Bx}^\tr\bar{\Bbeta}_n
+\com
+\sigma^2\tilde{\Bx}^\tr\BH_n^{-1}\tilde{\Bx}
+).
+\]</span></p>
+</div>
+<div class="fragment">
+<p>Since <span class="math inline">\(\tilde{y}\)</span> is the sum of two independent normal bits (<span class="math inline">\(\tilde{\Bx}^\tr\Bbeta\)</span> and <span class="math inline">\(\tilde{\varepsilon}\)</span>), it stays normal, and you can add the means and variance:</p>
+</div>
+<div class="fragment">
+<p><span class="math display">\[
+\begin{aligned}
+\tilde{y}\mid \tilde{\Bx}\com \sigma^2\com y_{1:n}\com \Bx_{1:n}
+&amp;\sim
+\N\left(
+\tilde{\Bx}^\tr\bar{\Bbeta}_n+0
+\com
+\sigma^2\tilde{\Bx}^\tr\BH_n^{-1}\tilde{\Bx}+\sigma^2
+\right)
+\\
+&amp;\sim
+\N\left(
+\tilde{\Bx}^\tr\bar{\Bbeta}_n
+\com
+\sigma^2(1+\tilde{\Bx}^\tr\BH_n^{-1}\tilde{\Bx})
+\right).
+\end{aligned}
+\]</span></p>
+</div>
+</section><section id="second-marginalize-out-sigma2" class="slide level2 small"><h2>Second: marginalize out <span class="math inline">\(\sigma^2\)</span>
+</h2>
+<p>We know that</p>
+<p><span class="math display">\[
+\begin{aligned}
+\sigma^2\mid y_{1:n}\com \Bx_{1:n}
+&amp;\sim
+\text{IG}(a_n\com b_n)
+\\
+\tilde{y}\mid \tilde{\Bx}\com \sigma^2\com y_{1:n}\com \Bx_{1:n}
+&amp;\sim
+\N\left(
+\tilde{\Bx}^\tr\bar{\Bbeta}_n
+\com
+\sigma^2(1+\tilde{\Bx}^\tr\BH_n^{-1}\tilde{\Bx})
+\right).
+\end{aligned}
+\]</span></p>
+<div class="fragment">
+<p>Marginalizing <span class="math inline">\(\sigma^2\)</span> out of this hierarchy is essentially the <em>definition</em> of Student’s <span class="math inline">\(t\)</span>:</p>
+</div>
+<div class="fragment">
+<p><span class="math display">\[
+\begin{aligned}
+\tilde{y}\mid \tilde{\Bx}\com y_{1:n}\com \Bx_{1:n}
+&amp;\sim
+t(\nu_n\com\bar{y}_{n}\com s_{n}^2)
+\\
+\\
+\nu_{n}
+&amp;=
+2a_n
+\\
+\bar{y}_{n}
+&amp;=
+\tilde{\Bx}^\tr\bar{\Bbeta}_n
+\\
+s_{n}^2
+&amp;=
+\frac{b_n}{a_n}
+(1+\tilde{\Bx}^\tr\BH_n^{-1}\tilde{\Bx})
+.
+\end{aligned}
+\]</span></p>
+</div>
+<div class="fragment">
+<p>So, Student’s <span class="math inline">\(t\)</span> with a shift and scale.</p>
+</div>
+</section><section id="comparison" class="slide level2 small"><h2>Comparison</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>Classical prediction interval:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\hat{y} &amp;\pm t^\star_{n-2} \times \text{SE}
+\\
+\\
+\hat{y}
+&amp;=
+\hat{\beta_0}+\hat{\beta}_1\tilde{x}
+\\
+\text{SE}^2
+&amp;=
+\widehat{\sigma^2}\left(1+\frac{1}{n}+\frac{(\tilde{x}-\bar{x})^2}{S_{xx}}\right).
+\end{aligned}
+\]</span></p>
+</div><div class="column" style="width:50%;">
+<p>Posterior predictive distribution:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\tilde{y}\mid \tilde{\Bx}\com y_{1:n}\com \Bx_{1:n}
+&amp;\sim
+t(\nu_n\com\bar{y}_{n}\com s_{n}^2)
+\\
+\\
+\nu_{n}
+&amp;=
+2a_n
+\\
+\bar{y}_{n}
+&amp;=
+\tilde{\Bx}^\tr\bar{\Bbeta}_n
+\\
+s_{n}^2
+&amp;=
+\frac{b_n}{a_n}
+(1+\tilde{\Bx}^\tr\BH_n^{-1}\tilde{\Bx})
+.
+\end{aligned}
+\]</span></p>
+</div></div>
+<ul>
+<li class="fragment">Both centered at point prediction;</li>
+<li class="fragment">Point prediction is <span class="math inline">\(\tilde{\Bx}\)</span> times point estimate, be it OLS or posterior mean;</li>
+<li class="fragment">Both scaled by a factor that incorporates uncertainty from <span class="math inline">\(\tilde{\varepsilon}\)</span> <em>and</em> estimation uncertainty for <span class="math inline">\(\Bbeta\)</span>, be it frequentist or Bayesian;</li>
+<li class="fragment">Both use Student’s <span class="math inline">\(t\)</span> because <span class="math inline">\(\sigma^2\)</span> also had to be estimated;</li>
+<li class="fragment">As <span class="math inline">\(n\to\infty\)</span>, these will actually agree thanks to the Bernstein–von Mises theorem.</li>
+</ul></section><section id="you-need-to-be-thinking-about-this" class="slide level2"><h2>You need to be thinking about this</h2>
+<ul>
+<li>Whether you take a classical or a Bayesian approach;</li>
+<li>Whether you’re using the linear model or some ML behemoth;</li>
+<li>You need to produce and evaluate predictive uncertainty.</li>
+</ul>
+<div class="fragment">
+<p>Stay tuned, and we’ll show you how!</p>
 
 
+</div>
 </section></section>
 </div>
   <div class="quarto-auto-generated-content" style="display: none;">
