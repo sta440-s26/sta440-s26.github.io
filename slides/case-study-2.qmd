@@ -7,6 +7,25 @@ auto-stretch: false
 
 # Macroeconomic data
 
+$$
+\newcommand{\iid}{\overset{\textrm{iid}}{\sim}}
+\newcommand{\indep}{\overset{\textrm{indep}}{\sim}}
+\newcommand{\tr}{{\scriptscriptstyle\mathsf{T}}}
+\newcommand{\com}{,\,}
+\newcommand{\BX}{\mathbf{X}}
+\newcommand{\BH}{\mathbf{H}}
+\newcommand{\BY}{\mathbf{Y}}
+\newcommand{\Bx}{\mathbf{x}}
+\newcommand{\By}{\mathbf{y}}
+\newcommand{\Btheta}{\boldsymbol{\theta}}
+\newcommand{\Bepsilon}{\boldsymbol{\varepsilon}}
+\newcommand{\Bbeta}{\boldsymbol{\beta}}
+\newcommand{\Bzero}{\mathbf{0}}
+\newcommand{\Bone}{\mathbf{1}}
+\newcommand{\N}{\text{N}}
+\newcommand{\dd}{\text{d}}
+$$
+
 ## A few US macro aggregates
 
 ```{r}
@@ -89,7 +108,7 @@ for(i in 1:n){
 
 ```
 
-There are hundreds more. Play around on [FRED](https://fred.stlouisfed.org)!
+There are tons more. Play around on [FRED](https://fred.stlouisfed.org)!
 
 
 ## Where do these data come from? {.medium}
@@ -103,9 +122,9 @@ There are hundreds more. Play around on [FRED](https://fred.stlouisfed.org)!
 [Bureau of Economic Analysis](https://www.bea.gov) (under the Commerce Department)
 
 - [Gross Domestic Product (GDP)](https://fred.stlouisfed.org/series/GDP);
-- [Personal Consumption Expenditures (PCE)](https://fred.stlouisfed.org/series/PCEPI).
+- [Personal Consumption Expenditures (PCE)](https://fred.stlouisfed.org/series/PCE).
 
-And many many [more](https://en.wikipedia.org/wiki/Federal_statistical_system)!
+There are 13 [principal statistical agencies](https://en.wikipedia.org/wiki/Federal_statistical_system) in the US federal government.
 
 ## Who cares? {.medium}
 
@@ -174,19 +193,42 @@ The Commissioner of Labor Statistics was fired that afternoon:
 
 # Revisions?
 
-## Whence revisions?
+## Whence revisions? {.small}
+
+The statistical agencies announce an initial estimate with a one period lag, but they continue to revise the measurement (sometimes years later) as new information arrives and measurement techniques improve.
+
+. . .
 
 From the [BLS report](https://www.bls.gov/news.release/archives/empsit_08012025.htm) (and more [here](https://www.bls.gov/web/empsit/cestn.htm#Revisions-Between-Preliminary-and-Final-Data)):
 
 > Monthly revisions result from additional reports received from businesses and government agencies since the last published estimates and from the recalculation of seasonal factors.
 
-The statistical agencies announce an initial estimate with a one period lag, but they continue to revise the measurement (sometimes years later) as new information arrives and measurement techniques improve.
+. . .
 
-## Real-time data
+From [Ben Casselman at the New York Times](https://www.nytimes.com/2025/08/01/business/economy/jobs-report-revisions-us-economy.html):
 
-The Federal Reserve Bank of Philadelphia publishes a [real-time dataset](https://www.philadelphiafed.org/surveys-and-data/real-time-data-research/real-time-data-set-for-macroeconomists) of key macroeconomic variables that allows you to see how the data were revised from initial release all the way to the present.
+> The monthly numbers are based on a huge survey of businesses and other employers. Not all businesses respond in time for the initial estimate, however, forcing government statisticians to fill in the gaps with a statistical technique that essentially assumes the businesses that didn’t respond behaved the same way as the ones that did. That approach works fine during normal times. But during periods of rapid change, that assumption can be misleading.
 
-## What are the data like?
+## FRBP's Real-Time Data Set
+::::: columns
+
+::: {.column width="37%"}
+![](images/real-time-data.png)
+:::
+
+::: {.column width="63%"}
+![](images/frbp.jpg)
+
+
+Tracks the entire history of revisions for key macroeconomic variables.
+
+:::
+
+:::::
+
+
+
+## What are these data like?
 
 Example: quarterly data on gross domestic product (GDP).
 
@@ -194,7 +236,7 @@ Example: quarterly data on gross domestic product (GDP).
 
 Each variable gets this triangular array. The *rows* correspond to the period in time we are trying to measure. The *columns* correspond to when we are measuring it. This is the so-called *vintage* of the data.
 
-## What are the data like?
+## What are these data like?
 
 Example: quarterly data on gross domestic product (GDP).
 
@@ -202,7 +244,7 @@ Example: quarterly data on gross domestic product (GDP).
 
 This is our estimate of GDP for 1963Q4 *as measured* in 1966Q4.
 
-## What are the data like?
+## What are these data like?
 
 Example: quarterly data on gross domestic product (GDP).
 
@@ -210,7 +252,7 @@ Example: quarterly data on gross domestic product (GDP).
 
 This column is the 1966Q4 vintage of the data. This was the best information that an observer in 1966Q4 had access to.
 
-## What are the data like?
+## What are these data like?
 
 Example: quarterly data on gross domestic product (GDP).
 
@@ -220,14 +262,26 @@ This row shows the path of revisions for the 1965Q4 observation. We got out firs
 
 ## The path of revisions over time
 
-![](images/productivity-revisions.png){width="80%" fig-align="center"}
+![](images/productivity-revisions.png){width="70%" fig-align="center"}
+
+## The path of revisions over time
+
+![](images/productivity-movin.png){width="70%" fig-align="center"}
+
+## The path of revisions over time
+
+![](images/croushore-pic.png){ fig-align="center"}
+
 
 ## How do revisions behave?
 
 . . .
 
-![](images/aruoba.png){fig-align="center"}
+::: callout-warning
+## Good heavens
 
+![](images/aruoba.png){fig-align="center"}
+:::
 
 ## How do data revisions behave? {.medium}
 
@@ -239,32 +293,69 @@ This row shows the path of revisions for the 1965Q4 observation. We got out firs
 
 Bummer.
 
+## This is probably getting worse
+
+> Federal statistical agencies have faced mounting challenges in recent years as Americans have become more reluctant to respond to the surveys that are the basis for much of the nation’s economic data. Shrinking budgets have made it harder to make up for falling response rates, and to develop new approaches to replace surveys altogether.
+
+Source: [New York Times](https://www.nytimes.com/2025/08/01/business/economy/trump-bls-firing-jobs-report.html).
+
 # Case Study 2
 
-## Your task
+## Picture this
 
-Each of you will be given a target variable. Then:
+Imagine you work at the Federal Reserve, or the Congressional Budget Office, or Goldman Sachs, or The Wall Street Journal. Your boss taps you on the shoulder and says:
 
--   Develop a model that can predict the "final value" using only information available at the time of the initial release;
+> We just got an unexpected data release, but we know it will be revised. And in general, I'm sick of this crap where the numbers swing around for months after the fact and we don't know where we stand. Can you develop a model that can predict where the measurement will settle after the revisions are done?
+
+## Your data {.medium}
+
+The full set of historical vintages for several macro variables:
+
+- GDP growth;
+- Inflation;
+- Productivity growth;
+- Consumption growth;
+- Employment growth;
+- Industrial production growth;
+- Investment growth.
+
+## Your task {.medium}
+
+Each team will be assigned a target variable. Then:
+
+-   Develop a model that can predict the final release of the variable using only information available at the time of the initial release;
+    - treat the vintage *three years later* as the final release;
+    - Use the other variables as predictors if you want;
+    - Produce a method with good historical performance averaged over time;
 -   You *must* quantify uncertainty. Point predictions are not enough. You need to produce and evaluate full predictive distributions that incorporate as many sources of uncertainty as possible.
 
-## Deadlines
+## Deadlines {.medium}
 
--   EDA (Wed 2/11): explore the data, but also research the data collection process for your target variable;
--   Analysis (Wed 2/18): present prediction metrics for the models you considered, and try to explain why certain approaches worked better than others;
+-   EDA presentations (Wed 2/11):
+    - the usual plots and summaries to get a feel and motivate your analysis;
+    - hit the books and teach the class how your assigned variable is actually measured, and what goes on during the revision process;
+-   Analysis presentations (Wed 2/18):
+    - what models did you consider?
+    - how did their predictive accuracy compare?
+    - can you interpret why the models performed the way they did?
 -   Final submission (Mon 2/23).
 
 ## Lecture topics
+
+A crash course in time series:
 
 -   Autoregressive moving average (ARMA) models;
 -   Dynamic linear models (DLMs);
 -   Probabilistic prediction;
 -   Time series cross-validation ("leave-future-out").
 
+You may not ultimately choose to use these specific models, but the evaluation techniques are model-agnostic. 
+
 ## Words of caution {.medium}
 
 ::: incremental
--   The data come in this funky, unfamiliar form: each variable gets its own spreadsheet in this triangular format (row = period being measured; column = vintage). How are you going to deal with that?
+-   The data come in this funky, unfamiliar form: each variable gets its own data frame with this triangular structure (row = period being measured; column = vintage). How are you going to deal with that?
+- When you generate a prediction, make sure you are conditioning only on information that would have been available at that time!
 -   There already exists a massive literature on this, which you are welcome to explore. However, you will quickly become overwhelmed if you're not careful. That's part of the challenge!
 -   Black box machine learning methods may or may not work well here, but if you don't know how to get predictive uncertainty quantification from them, or you find that the UQ is unreliable, then say goodbye to `XGBoost`!
 :::
@@ -392,7 +483,7 @@ mtext(expression(hat(y)["t+1 | t"]), side = 1, at = mix.med, line = 2, cex = 3)
 
 ## And then tomorrow finally comes
 
-So...how'd we do?
+So...how'd we do? Any ideas?
 
 ```{r}
 #| echo: false
@@ -430,10 +521,578 @@ mtext(expression(y["t+1"]), side = 1, at = my_y, line = 2, cex = 3, col = "red")
 
 - What sources of uncertainty?
 
-    - Basic data uncertainty;
+    - Data uncertainty (data are realization of random process);
     - Parameter estimation uncertainty;
-    - Hyperparameter uncertainty;
+    - Hyperparameter tuning uncertainty;
     - Model uncertainty;
     - Uncertainty introduced by missing data;
-    - Many more!
+    - What else?
 :::
+
+. . .
+    
+Newsflash: you have seen this before.
+
+## Regression 101: interval estimation
+
+Remember this picture?
+
+```{r}
+#| echo: false
+#| fig-asp: 0.55
+#| fig-align: center
+
+## ----------------------------
+## Simulate data
+## ----------------------------
+set.seed(123)
+
+n  <- 50
+x  <- mtcars$wt#runif(n, 0, 10)
+y  <- mtcars$mpg#2 + 0.8 * x + rnorm(n, sd = 2)
+n <- length(y)
+
+dat <- data.frame(x = x, y = y)
+
+## ----------------------------
+## Fit linear model
+## ----------------------------
+fit <- lm(y ~ x, data = dat)
+
+## Grid of x values for smooth curves
+x_grid <- seq(min(x) - 2, max(x) + 2, length.out = 1000)
+newdat <- data.frame(x = x_grid)
+
+## Confidence interval for mean response
+ci <- predict(fit, newdat, interval = "confidence")
+
+## Prediction interval for new observation
+pi <- predict(fit, newdat, interval = "prediction")
+
+## ----------------------------
+## Plot
+## ----------------------------
+par(mar = c(4, 4, 3, 1))
+
+plot(
+  y ~ x, data = dat,
+  pch = 19, col = "black",
+  xlab = "Weight of the car (1000s lbs)", ylab = "Miles per gallon",
+  xlim = c(min(x) - 2, max(x) + 2),
+  ylim = c(min(y) - 2, max(y) + 2),
+  main = "The accursed mtcars data set", 
+  bty = "n"
+)
+
+## Prediction interval band (wider, plot first)
+polygon(
+  c(x_grid, rev(x_grid)),
+  c(pi[, "lwr"], rev(pi[, "upr"])),
+  col = rgb(1, 0, 0, 0.2),
+  border = NA
+)
+
+## Confidence interval band (narrower)
+polygon(
+  c(x_grid, rev(x_grid)),
+  c(ci[, "lwr"], rev(ci[, "upr"])),
+  col = rgb(0, 0, 1, 0.3),
+  border = NA
+)
+
+## Regression line
+lines(x_grid, ci[, "fit"], lwd = 3)
+
+## ----------------------------
+## Legend
+## ----------------------------
+legend(
+  "topright",
+  legend = c(
+    "Observed data",
+    "OLS regression line",
+    "95% confidence interval for the regression function",
+    "95% prediction interval for a new data point"
+  ),
+  col = c("black", "black", rgb(0, 0, 1, 0.3), rgb(1, 0, 0, 0.2)),
+  lwd = c(NA, 2, NA, NA),
+  pch = c(19, NA, 15, 15),
+  pt.cex = 1.5,
+  bty = "n"
+)
+# https://online.stat.psu.edu/stat501/lesson/3/3.3
+```
+
+
+## Regression 101 {.small}
+
+Recall the simple linear model:
+
+$$
+\begin{aligned}
+y_i&=\mu(x_i)+\varepsilon_i && \varepsilon_i\iid\N(0\com\sigma^2)\\
+&=\beta_0+\beta_1x_i+\varepsilon_i\\
+\end{aligned}
+$$
+
+The OLS estimators are:
+
+$$
+\begin{aligned}
+\hat{\beta}_1
+&=
+\frac{\sum_{i=1}^n(x_i-\bar{x})(y_i-\bar{y})}{S_{xx}},&&S_{xx}=\sum\limits_{i=1}^n(x_i-\bar{x})^2
+\\
+\hat{\beta}_0
+&=
+\bar{y}-\bar{x}\hat{\beta}_1
+\\
+\hat{\mu}(x)
+&=
+\hat{\beta}_0+\hat{\beta_1}x
+\\
+\widehat{\sigma^2}
+&=
+\frac{1}{n-2}\sum\limits_{i=1}^n[y_i-\hat{\mu}(x_i)]^2.
+\end{aligned}
+$$
+
+. . .
+
+The main idea of *classical* statistics is that the estimators are random variables as a function of the data. We quantify the uncertainty in the estimate that is induced by the sampling process.
+
+
+## Sampling distributions {.small}
+
+You can show that the sampling distributions are independent, and 
+
+$$
+\begin{aligned}
+\begin{bmatrix}
+\hat{\beta}_0
+\\
+\hat{\beta}_1
+\end{bmatrix}
+&\sim
+\text{N}_2\left(\begin{bmatrix}\beta_0\\\beta_1\end{bmatrix}
+\com
+\sigma^2
+\begin{bmatrix}
+\frac{1}{n}+\frac{\bar{x}^2}{S_{xx}}&-\bar{x}/S_{xx}\\-\bar{x}/S_{xx}&1/S_{xx}
+\end{bmatrix}\right)
+\\
+\widehat{\sigma^2}
+&\sim
+\text{Gamma}\left(\frac{n-2}{2}\com\frac{n-2}{2\sigma^2}\right)
+.
+\end{aligned}
+$$
+
+. . .
+
+The estimator of the regression function is the sum of two correlated Gaussian terms, so it stays normal, you add the means, and you add the variances, adjusting for the covariance:
+
+. . .
+
+$$
+\hat{\mu}(x)=\hat{\beta}_0+\hat{\beta_1}x\sim\N\left(\beta_0+\beta_1x\com \sigma^2\left[\frac{1}{n}+\frac{(x-\bar{x})^2}{S_{xx}}\right]\right)
+$$
+
+. . .
+
+Take my word for it!
+
+
+## The confidence interval for the line {.medium}
+
+A tale of two pivots:
+
+. . .
+
+$$
+\frac{\hat{\mu}(x)-\mu(x)}{\sigma\sqrt{\frac{1}{n}+\frac{(x-\bar{x})^2}{S_{xx}}}}
+\sim\N(0\com 1) \quad\implies\quad \frac{\hat{\mu}(x)-\mu(x)}{\hat{\sigma}\sqrt{\frac{1}{n}+\frac{(x-\bar{x})^2}{S_{xx}}}}
+\sim t_{n-2}.
+$$
+
+. . .
+
+So we can use quantiles of the $t$ distribution to get an *exact* interval for the unknow regression function at a new $x$:
+
+. . .
+
+$$
+\hat{\mu}(x)\pm t^\star_{n-2}\times \hat{\sigma}\sqrt{\frac{1}{n}+\frac{(x-\bar{x})^2}{S_{xx}}}.
+$$
+
+This quantifies frequentist sampling uncertainty for the regression line.
+
+
+## The predictive pivot {.medium}
+
+If a new $\tilde{x}$ joins the party, we have
+
+::: incremental
+- $\tilde{y}\sim\text{N}(\mu(\tilde{x})\com\sigma^2)$;
+- $\hat{\mu}(x)\sim\N\left(\mu(\tilde{x})\com \sigma^2\left[\frac{1}{n}+\frac{(x-\bar{x})^2}{S_{xx}}\right]\right)$
+- These are independent.
+:::
+
+. . .
+
+So 
+
+$$
+\begin{aligned}
+\hat{\mu}(\tilde{x})-\tilde{y} &\sim\N\left(0\com \sigma^2\left[\frac{1}{n}+\frac{(\tilde{x}-\bar{x})^2}{S_{xx}}\right]+\sigma^2\right)
+\\
+&\sim\N\left(0\com \sigma^2\left[1+\frac{1}{n}+\frac{(\tilde{x}-\bar{x})^2}{S_{xx}}\right]\right).
+\end{aligned}
+$$
+
+
+
+
+## The prediction interval for a new observation {.medium}
+
+A tale of two more pivots:
+
+. . .
+
+$$
+\frac{\hat{\mu}(\tilde{x})-\tilde{y}}{\sigma\sqrt{1+\frac{1}{n}+\frac{(\tilde{x}-\bar{x})^2}{S_{xx}}}}
+\sim\N(0\com 1) \quad\implies\quad \frac{\hat{\mu}(\tilde{x})-\tilde{y}}{\hat{\sigma}\sqrt{1+\frac{1}{n}+\frac{(\tilde{x}-\bar{x})^2}{S_{xx}}}}
+\sim t_{n-2}.
+$$
+
+. . .
+
+*Exact* prediction interval for a yet-to-be-observed $\tilde{y}$:
+
+. . .
+
+$$
+\hat{\mu}(\tilde{x})\pm t^\star_{n-2}\times \hat{\sigma}\sqrt{1+\frac{1}{n}+\frac{(\tilde{x}-\bar{x})^2}{S_{xx}}}.
+$$
+
+. . .
+
+This is wider than the confidence interval because the inherent random sampling of the new $\tilde{y}$ (its $\tilde{\varepsilon}$) adds a second source of uncertainty.
+
+## You get the idea
+
+The CI incorporates one source of uncertainty. The PI incorporates two. Hence, the PI is wider:
+
+```{r}
+mtcars_fit <- lm(mpg ~ wt, data = mtcars)
+xnew <- data.frame(wt = 4.5)
+
+predict(mtcars_fit, xnew, interval = "confidence")
+
+
+predict(mtcars_fit, xnew, interval = "prediction")
+```
+
+## Bayes 101: posterior predictive distribution
+
+The posterior for parameters:
+
+$$
+p(\boldsymbol{\theta}\mid y_{1:n}) 
+= 
+\frac{p(y_{1:n}\mid \boldsymbol{\theta})p(\boldsymbol{\theta})}{p(y_{1:n})}.
+$$
+
+. . .
+
+The posterior for a new observation:
+
+$$
+p(\tilde{y}\mid y_{1:n})=\int p(\tilde{y}\mid \boldsymbol{\theta})p(\boldsymbol{\theta}\mid y_{1:n})\,\text{d}\boldsymbol{\theta}
+.
+$$
+
+. . .
+
+Similar to before, it incorporates Bayesian posterior uncertainty about the parameter *and* inherent randomness of new $\tilde{y}$.
+
+## Example: linear regression, again {.medium}
+
+Consider linear regression where the prior $p(\sigma^2\com\Bbeta)$ is *conjugate*:
+
+. . .
+
+$$
+\begin{aligned}
+\sigma^2
+&\sim
+\text{IG}(a_0\com b_0)
+\\
+\Bbeta\mid \sigma^2
+&\sim 
+\text{N}_{p}(\bar{\Bbeta}_0\com\sigma^2\BH^{-1}_0)
+\\
+y_i
+\mid 
+\Bx_i
+\com
+\Bbeta\com\sigma^2
+&\iid \text{N}
+\left(
+\Bx_i^\tr\Bbeta\com\sigma^2
+\right).
+\end{aligned}
+$$
+
+. . .
+
+Without revisiting the pain and tedium of the calculation, the posterior $p(\sigma^2\com\Bbeta\mid y_{1:n}\com \Bx_{1:n})$ remains in the normal-inverse-gamma family with updated hyperparameters:
+
+$$
+\begin{aligned}
+\sigma^2\mid y_{1:n}\com \Bx_{1:n}
+&\sim
+\text{IG}(a_n\com b_n)
+\\
+\Bbeta\mid \sigma^2\com y_{1:n}\com \Bx_{1:n}
+&\sim 
+\text{N}_{p}(\bar{\Bbeta}_n\com\sigma^2\BH^{-1}_n)
+\end{aligned}
+$$
+
+## Example: linear regression, again {.small}
+
+Imagine we've observed the $(\Bx_i\com y_i)$, and then a new $\tilde{\Bx}$ joins the party:
+
+. . .
+
+$$
+\begin{aligned}
+\sigma^2\mid y_{1:n}\com \Bx_{1:n}
+&\sim
+\text{IG}(a_n\com b_n)
+\\
+\Bbeta\mid \sigma^2\com y_{1:n}\com \Bx_{1:n}
+&\sim 
+\text{N}_{p}(\bar{\Bbeta}_n\com\sigma^2\BH^{-1}_n)
+\\
+\\
+\tilde{y}&=\tilde{\Bx}^\tr\Bbeta+\tilde{\varepsilon},\quad \tilde{\varepsilon}\sim\text{N}(0\com\sigma^2).
+\end{aligned}
+$$
+
+. . .
+
+The posterior predictive distribution is the marginal:
+
+. . .
+
+
+$$
+\begin{aligned}
+p(\tilde{y}\mid \tilde{\Bx}\com y_{1:n}\com \Bx_{1:n})
+&=
+\int
+p(\tilde{y}\com\sigma^2\com\Bbeta\mid \tilde{\Bx}\com y_{1:n}\com \Bx_{1:n})
+\,\dd\Bbeta\,\dd\sigma^2
+\\
+&=
+\int
+\underbrace{p(\tilde{y}\mid \tilde{\Bx}\com \sigma^2\com\Bbeta)}_{\N(\tilde{\Bx}^\tr\Bbeta\com\sigma^2)}
+\underbrace{p(\sigma^2\com\Bbeta\mid y_{1:n}\com \Bx_{1:n})}_{\text{NIG}_{p}(a_n\com b_n\com \bar{\Bbeta}_n\com\BH_n)}
+\,\dd\Bbeta\,\dd\sigma^2.
+\end{aligned}
+$$
+
+. . .
+
+We can actually solve this.
+
+## First: marginalize out $\Bbeta$ {.small}
+
+We know that 
+
+$$
+\begin{aligned}
+\Bbeta\mid \sigma^2\com y_{1:n}\com \Bx_{1:n}
+&\sim 
+\text{N}_{p}(\bar{\Bbeta}_n\com\sigma^2\BH^{-1}_n)
+\\
+\tilde{y}
+&=
+\tilde{\Bx}^\tr\Bbeta
++
+\tilde{\varepsilon}
+,
+&&
+\tilde{\varepsilon}\sim\N(0\com \sigma^2).
+\end{aligned}
+$$
+
+. . .
+
+Pre-multiplying by $\tilde{\Bx}^\tr$ is just a linear transformation, so:
+
+$$
+\tilde{\Bx}^\tr\Bbeta
+\mid \tilde{\Bx}\com \sigma^2\com y_{1:n}\com \Bx_{1:n}
+\sim 
+\N(
+\tilde{\Bx}^\tr\bar{\Bbeta}_n
+\com
+\sigma^2\tilde{\Bx}^\tr\BH_n^{-1}\tilde{\Bx}
+).
+$$
+
+. . .
+
+Since $\tilde{y}$ is the sum of two independent normal bits ($\tilde{\Bx}^\tr\Bbeta$ and $\tilde{\varepsilon}$), it stays normal, and you can add the means and variance:
+
+. . .
+
+$$
+\begin{aligned}
+\tilde{y}\mid \tilde{\Bx}\com \sigma^2\com y_{1:n}\com \Bx_{1:n}
+&\sim 
+\N\left(
+\tilde{\Bx}^\tr\bar{\Bbeta}_n+0
+\com
+\sigma^2\tilde{\Bx}^\tr\BH_n^{-1}\tilde{\Bx}+\sigma^2
+\right)
+\\
+&\sim
+\N\left(
+\tilde{\Bx}^\tr\bar{\Bbeta}_n
+\com
+\sigma^2(1+\tilde{\Bx}^\tr\BH_n^{-1}\tilde{\Bx})
+\right).
+\end{aligned}
+$$
+
+## Second: marginalize out $\sigma^2$ {.small}
+
+We know that 
+
+$$
+\begin{aligned}
+\sigma^2\mid y_{1:n}\com \Bx_{1:n}
+&\sim
+\text{IG}(a_n\com b_n)
+\\
+\tilde{y}\mid \tilde{\Bx}\com \sigma^2\com y_{1:n}\com \Bx_{1:n}
+&\sim 
+\N\left(
+\tilde{\Bx}^\tr\bar{\Bbeta}_n
+\com
+\sigma^2(1+\tilde{\Bx}^\tr\BH_n^{-1}\tilde{\Bx})
+\right).
+\end{aligned}
+$$
+
+. . .
+
+Marginalizing $\sigma^2$ out of this hierarchy is essentially the *definition* of Student's $t$:
+
+. . .
+
+$$
+\begin{aligned}
+\tilde{y}\mid \tilde{\Bx}\com y_{1:n}\com \Bx_{1:n}
+&\sim
+t(\nu_n\com\bar{y}_{n}\com s_{n}^2)
+\\
+\\
+\nu_{n}
+&=
+2a_n
+\\
+\bar{y}_{n}
+&=
+\tilde{\Bx}^\tr\bar{\Bbeta}_n
+\\
+s_{n}^2
+&=
+\frac{b_n}{a_n}
+(1+\tilde{\Bx}^\tr\BH_n^{-1}\tilde{\Bx})
+.
+\end{aligned}
+$$
+
+. . .
+
+So, Student's $t$ with a shift and scale.
+
+
+
+
+## Comparison {.small}
+
+::::: columns
+::: {.column width="50%"}
+
+Classical prediction interval:
+
+$$
+\begin{aligned}
+\hat{y} &\pm t^\star_{n-2} \times \text{SE}
+\\
+\\
+\hat{y}
+&=
+\hat{\beta_0}+\hat{\beta}_1\tilde{x}
+\\
+\text{SE}^2
+&=
+\widehat{\sigma^2}\left(1+\frac{1}{n}+\frac{(\tilde{x}-\bar{x})^2}{S_{xx}}\right).
+\end{aligned}
+$$
+
+:::
+
+::: {.column width="50%"}
+
+Posterior predictive distribution:
+
+$$
+\begin{aligned}
+\tilde{y}\mid \tilde{\Bx}\com y_{1:n}\com \Bx_{1:n}
+&\sim
+t(\nu_n\com\bar{y}_{n}\com s_{n}^2)
+\\
+\\
+\nu_{n}
+&=
+2a_n
+\\
+\bar{y}_{n}
+&=
+\tilde{\Bx}^\tr\bar{\Bbeta}_n
+\\
+s_{n}^2
+&=
+\frac{b_n}{a_n}
+(1+\tilde{\Bx}^\tr\BH_n^{-1}\tilde{\Bx})
+.
+\end{aligned}
+$$
+
+:::
+:::::
+
+::: incremental
+- Both centered at point prediction;
+- Point prediction is $\tilde{\Bx}$ times point estimate, be it OLS or posterior mean;
+- Both scaled by a factor that incorporates uncertainty from $\tilde{\varepsilon}$ *and* estimation uncertainty for $\Bbeta$, be it frequentist or Bayesian;
+- Both use Student's $t$ because $\sigma^2$ also had to be estimated;
+- As $n\to\infty$, these will actually agree thanks to the Bernstein–von Mises theorem.
+:::
+
+## You need to be thinking about this
+
+- Whether you take a classical or a Bayesian approach;
+- Whether you're using the linear model or some ML behemoth;
+- You need to produce and evaluate predictive uncertainty.
+
+. . .
+
+Stay tuned, and we'll show you how!
