@@ -226,6 +226,7 @@ Tracks the entire history of revisions for key macroeconomic variables.
 
 :::::
 
+[Check it out](https://www.philadelphiafed.org/surveys-and-data/real-time-data-research/real-time-data-set-for-macroeconomists)! We'll give you a specific subset in your repos this week.
 
 
 ## What are these data like?
@@ -307,19 +308,9 @@ Imagine you work at the Federal Reserve, or the Congressional Budget Office, or 
 
 > We just got an unexpected data release, but we know it will be revised. And in general, I'm sick of this crap where the numbers swing around for months after the fact and we don't know where we stand. Can you develop a model that can predict where the measurement will settle after the revisions are done?
 
-## Your data {.medium}
-
-The full set of historical vintages for several macro variables:
-
-- GDP growth;
-- Inflation;
-- Productivity growth;
-- Consumption growth;
-- Employment growth;
-- Industrial production growth;
-- Investment growth.
-
 ## Your task {.medium}
+
+**Data**: the full set of historical vintages for several macro variables.
 
 Each team will be assigned a target variable. Then:
 
@@ -634,6 +625,8 @@ y_i&=\mu(x_i)+\varepsilon_i && \varepsilon_i\iid\N(0\com\sigma^2)\\
 &=\beta_0+\beta_1x_i+\varepsilon_i\\
 \end{aligned}
 $$
+
+. . .
 
 The OLS estimators are:
 
@@ -1096,3 +1089,14 @@ $$
 . . .
 
 Stay tuned, and we'll show you how!
+
+## Before lab on Friday
+
+Skim some background reading:
+
+- Aruoba (2008 JMCB): "[Data revisions are not well behaved](https://doi.org/10.1111/j.1538-4616.2008.00115.x);"
+- Croushore (2011 JEL): "[Frontiers of real-time data analysis](https://www.aeaweb.org/articles?id=10.1257/jel.49.1.72);"
+- Jacobs and van Norden (2016 JoM): "[Why are initial estimates of productivity growth so unreliable?](https://doi.org/10.1016/j.jmacro.2015.11.004)"
+
+Check out [FRED](https://fred.stlouisfed.org) and the [FRBP's Real-Time Data Set](https://www.philadelphiafed.org/surveys-and-data/real-time-data-research/real-time-data-set-for-macroeconomists).
+
