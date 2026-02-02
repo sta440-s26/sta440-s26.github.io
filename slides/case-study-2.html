@@ -355,6 +355,7 @@ Ed Iversen and John Zito
 <p><img data-src="images/frbp.jpg"></p>
 <p>Tracks the entire history of revisions for key macroeconomic variables.</p>
 </div></div>
+<p><a href="https://www.philadelphiafed.org/surveys-and-data/real-time-data-research/real-time-data-set-for-macroeconomists">Check it out</a>! We’ll give you a specific subset in your repos this week.</p>
 </section><section id="what-are-these-data-like" class="slide level2"><h2>What are these data like?</h2>
 <p>Example: quarterly data on gross domestic product (GDP).</p>
 <p><img data-src="images/vintage-1.png"></p>
@@ -425,17 +426,8 @@ Ed Iversen and John Zito
 <blockquote>
 <p>We just got an unexpected data release, but we know it will be revised. And in general, I’m sick of this crap where the numbers swing around for months after the fact and we don’t know where we stand. Can you develop a model that can predict where the measurement will settle after the revisions are done?</p>
 </blockquote>
-</section><section id="your-data" class="slide level2 medium"><h2>Your data</h2>
-<p>The full set of historical vintages for several macro variables:</p>
-<ul>
-<li>GDP growth;</li>
-<li>Inflation;</li>
-<li>Productivity growth;</li>
-<li>Consumption growth;</li>
-<li>Employment growth;</li>
-<li>Industrial production growth;</li>
-<li>Investment growth.</li>
-</ul></section><section id="your-task" class="slide level2 medium"><h2>Your task</h2>
+</section><section id="your-task" class="slide level2 medium"><h2>Your task</h2>
+<p><strong>Data</strong>: the full set of historical vintages for several macro variables.</p>
 <p>Each team will be assigned a target variable. Then:</p>
 <ul>
 <li>Develop a model that can predict the final release of the variable using only information available at the time of the initial release;
@@ -557,6 +549,7 @@ y_i&amp;=\mu(x_i)+\varepsilon_i &amp;&amp; \varepsilon_i\iid\N(0\com\sigma^2)\\
 &amp;=\beta_0+\beta_1x_i+\varepsilon_i\\
 \end{aligned}
 \]</span></p>
+<div class="fragment">
 <p>The OLS estimators are:</p>
 <p><span class="math display">\[
 \begin{aligned}
@@ -577,6 +570,7 @@ y_i&amp;=\mu(x_i)+\varepsilon_i &amp;&amp; \varepsilon_i\iid\N(0\com\sigma^2)\\
 \frac{1}{n-2}\sum\limits_{i=1}^n[y_i-\hat{\mu}(x_i)]^2.
 \end{aligned}
 \]</span></p>
+</div>
 <div class="fragment">
 <p>The main idea of <em>classical</em> statistics is that the estimators are random variables as a function of the data. We quantify the uncertainty in the estimate that is induced by the sampling process.</p>
 </div>
@@ -944,9 +938,17 @@ s_{n}^2
 </ul>
 <div class="fragment">
 <p>Stay tuned, and we’ll show you how!</p>
-
-
 </div>
+</section><section id="before-lab-on-friday" class="slide level2"><h2>Before lab on Friday</h2>
+<p>Skim some background reading:</p>
+<ul>
+<li>Aruoba (2008 JMCB): “<a href="https://doi.org/10.1111/j.1538-4616.2008.00115.x">Data revisions are not well behaved</a>;”</li>
+<li>Croushore (2011 JEL): “<a href="https://www.aeaweb.org/articles?id=10.1257/jel.49.1.72">Frontiers of real-time data analysis</a>;”</li>
+<li>Jacobs and van Norden (2016 JoM): “<a href="https://doi.org/10.1016/j.jmacro.2015.11.004">Why are initial estimates of productivity growth so unreliable?</a>”</li>
+</ul>
+<p>Check out <a href="https://fred.stlouisfed.org">FRED</a> and the <a href="https://www.philadelphiafed.org/surveys-and-data/real-time-data-research/real-time-data-set-for-macroeconomists">FRBP’s Real-Time Data Set</a>.</p>
+
+
 </section></section>
 </div>
   <div class="quarto-auto-generated-content" style="display: none;">
