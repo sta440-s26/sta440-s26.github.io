@@ -8,6 +8,7 @@ format:
     slide-number: true
     chalkboard: true
     toc: false
+    include-before-body: _macros.tex
 execute:
   freeze: auto
   echo: true
