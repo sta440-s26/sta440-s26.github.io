@@ -312,7 +312,7 @@
     "href": "slides/case-study-2.html#the-predictive-pivot",
     "title": "Case Study 2",
     "section": "The predictive pivot",
-    "text": "The predictive pivot\nIf a new \\(\\tilde{x}\\) joins the party, we have\n\n\n\\(\\tilde{y}\\sim\\text{N}(\\mu(\\tilde{x})\\com\\sigma^2)\\);\n\\(\\hat{\\mu}(x)\\sim\\N\\left(\\mu(\\tilde{x})\\com \\sigma^2\\left[\\frac{1}{n}+\\frac{(x-\\bar{x})^2}{S_{xx}}\\right]\\right)\\)\nThese are independent.\n\n\nSo\n\\[\n\\begin{aligned}\n\\hat{\\mu}(\\tilde{x})-\\tilde{y} &\\sim\\N\\left(0\\com \\sigma^2\\left[\\frac{1}{n}+\\frac{(\\tilde{x}-\\bar{x})^2}{S_{xx}}\\right]+\\sigma^2\\right)\n\\\\\n&\\sim\\N\\left(0\\com \\sigma^2\\left[1+\\frac{1}{n}+\\frac{(\\tilde{x}-\\bar{x})^2}{S_{xx}}\\right]\\right).\n\\end{aligned}\n\\]"
+    "text": "The predictive pivot\nIf a new \\(\\tilde{x}\\) joins the party, we have\n\n\n\\(\\tilde{y}\\sim\\text{N}(\\mu(\\tilde{x})\\com\\sigma^2)\\);\n\\(\\hat{\\mu}(x)\\sim\\N\\left(\\mu(\\tilde{x})\\com \\sigma^2\\left[\\frac{1}{n}+\\frac{(x-\\bar{x})^2}{S_{xx}}\\right]\\right)\\)\nThese are independent.\n\n\nTheir difference is normal, and you subtract the means and add the variance:\n\\[\n\\begin{aligned}\n\\hat{\\mu}(\\tilde{x})-\\tilde{y} &\\sim\\N\\left(0\\com \\sigma^2\\left[\\frac{1}{n}+\\frac{(\\tilde{x}-\\bar{x})^2}{S_{xx}}\\right]+\\sigma^2\\right)\n\\\\\n&\\sim\\N\\left(0\\com \\sigma^2\\left[1+\\frac{1}{n}+\\frac{(\\tilde{x}-\\bar{x})^2}{S_{xx}}\\right]\\right).\n\\end{aligned}\n\\]"
   },
   {
     "objectID": "slides/case-study-2.html#the-prediction-interval-for-a-new-observation",
