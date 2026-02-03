@@ -803,7 +803,7 @@ If a new $\tilde{x}$ joins the party, we have
 
 . . .
 
-So 
+Their difference is normal, and you subtract the means and add the variance:
 
 $$
 \begin{aligned}
