@@ -317,9 +317,18 @@ output_growth |>
 
 How did our measurement for 1965:Q3 evolve over time as it was revised?
 
-## In My Life
+## In My Life {.small}
 
+::::: columns
+::: {.column width="50%"}
+<iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/3KfbEIOC7YIv90FIfNSZpo?utm_source=generator" width="100%" height="75" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+:::
+
+::: {.column width="50%"}
 Moving across the columns:
+:::
+
+::::
 
 ![](images/real-time.gif){fig-align="center"}
 
