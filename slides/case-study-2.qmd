@@ -34,6 +34,13 @@ $$
 library(xts)
 library(quantmod)
 library(fredr)
+library(readxl)
+library(scoringRules)
+library(extraDistr)
+library(tidyverse)
+library(ggridges)
+library(LaplacesDemon)
+library(DT)
 fredr_set_key("32ff0f847aab35def1d3d5f7216e4064")
 
 date_to_qnum <- function(d) {
@@ -226,55 +233,128 @@ Tracks the entire history of revisions for key macroeconomic variables.
 
 :::::
 
-[Check it out](https://www.philadelphiafed.org/surveys-and-data/real-time-data-research/real-time-data-set-for-macroeconomists)! We'll give you a specific subset in your repos this week.
+[Check it out](https://www.philadelphiafed.org/surveys-and-data/real-time-data-research/real-time-data-set-for-macroeconomists)!
 
+
+## What are these data like? {.small}
+
+Quarterly GDP growth (year-over-year percent change):
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+
+ROUTPUTQvQd_2 <- read_excel("data/ROUTPUTQvQd-2.xlsx", na = "#N/A")
+
+output_growth <- ROUTPUTQvQd_2 |>
+  mutate(across(-DATE, ~ 100 * (.x / dplyr::lag(.x, 4) - 1))) |>
+  filter(DATE > "1949:Q4")
+
+colnames(output_growth) <- sub("ROUTPUT", "v", colnames(output_growth))
+
+output_growth |>
+  select(DATE, v65Q4:v67Q4) |>
+  filter(DATE > "1964:Q4")
+
+#datatable(
+#  gdp_YoY_growth,
+#  options = list(
+#    pageLength = 100,
+#    scrollX = TRUE
+#  ),
+#  rownames = FALSE
+#)
+```
+
+. . .
+
+A single variable gets a whole data frame with an upper triangular structure:
+
+- row = what period are measuring?
+- column = when were we measuring it?
 
 ## What are these data like?
 
-Example: quarterly data on gross domestic product (GDP).
+Quarterly GDP growth (year-over-year percent change):
 
-![](images/vintage-1.png)
+```{r}
+output_growth |>
+  select(DATE, v66Q3) |>
+  filter(DATE == "1965:Q3")
+```
 
-Each variable gets this triangular array. The *rows* correspond to the period in time we are trying to measure. The *columns* correspond to when we are measuring it. This is the so-called *vintage* of the data.
+This is our estimate of GDP growth in 1965:Q3 *as measured* a year later in 1966:Q3.
 
-## What are these data like?
+## Columns are *vintages* {.medium}
 
-Example: quarterly data on gross domestic product (GDP).
+Quarterly GDP growth (year-over-year percent change):
 
-![](images/vintage-4.png)
+```{r}
+output_growth |>
+  select(DATE, v66Q3)
+```
 
-This is our estimate of GDP for 1963Q4 *as measured* in 1966Q4.
+This column is the 1966:Q3 *vintage* of the data. This is history *as it was understood* in 1966:Q3.
 
-## What are these data like?
+## Rows are the history of revisions {.medium}
 
-Example: quarterly data on gross domestic product (GDP).
-
-![](images/vintage-3.png)
-
-This column is the 1966Q4 vintage of the data. This was the best information that an observer in 1966Q4 had access to.
-
-## What are these data like?
-
-Example: quarterly data on gross domestic product (GDP).
-
-![](images/vintage-2.png)
-
-This row shows the path of revisions for the 1965Q4 observation. We got out first reading in 1966Q1 (one period later), and then it was subsequently revised several times.
-
-## The path of revisions over time
-
-![](images/productivity-revisions.png){width="70%" fig-align="center"}
-
-## The path of revisions over time
-
-![](images/productivity-movin.png){width="70%" fig-align="center"}
-
-## The path of revisions over time
-
-![](images/croushore-pic.png){ fig-align="center"}
+Quarterly GDP growth (year-over-year percent change):
 
 
-## How do revisions behave?
+```{r}
+#| eval: false
+output_growth |>
+  filter(DATE == "1965:Q3")
+```
+
+```{r}
+#| echo: false
+output_growth |>
+  filter(DATE == "1965:Q3") |>
+  select(DATE, v65Q4:v68Q1)
+```
+
+How did our measurement for 1965:Q3 evolve over time as it was revised?
+
+## In My Life
+
+Moving across the columns:
+
+![](images/real-time.gif){fig-align="center"}
+
+## The path of revisions
+
+Moving across a fixed row:
+
+```{r}
+#| echo: false
+#| fig-align: center
+
+vintage_to_frac <- function(v) {
+  yr <- as.numeric(sub("v([0-9]{2})Q.*", "\\1", v))
+  yr <- ifelse(yr >= 50, 1900 + yr, 2000 + yr)
+  q <- as.numeric(sub(".*Q([1-4])", "\\1", v))
+  yr + (q - 1)/4
+}
+
+vint_frac <- vintage_to_frac(colnames(output_growth)[2:ncol(output_growth)])
+
+plot(vint_frac, 
+     output_growth[100, 2:ncol(output_growth)], 
+     type = "l",
+     xlab = "Vintage",
+     ylab = "YoY % Change",
+     main = paste("Measuring GDP growth in", output_growth$DATE[100]),
+     bty = "n",
+     col = "red",
+     lwd = 2)
+#lines(vint_frac, output_growth[90, 2:ncol(output_growth)], type = "l")
+#lines(vint_frac, output_growth[80, 2:ncol(output_growth)], type = "l")
+```
+
+
+## How do data revisions behave?
 
 . . .
 
@@ -363,16 +443,6 @@ Your single-number best guess at tomorrow's observation:
 
 ```{r}
 #| echo: false
-
-library(quantmod)
-library(scoringRules)
-library(extraDistr)
-library(tidyverse)
-library(ggridges)
-library(LaplacesDemon)
-
-
-
 
 set.seed(8675309)
 my_m = c(-.5, .5)
