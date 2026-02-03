@@ -355,39 +355,104 @@ Ed Iversen and John Zito
 <p><img data-src="images/frbp.jpg"></p>
 <p>Tracks the entire history of revisions for key macroeconomic variables.</p>
 </div></div>
-<p><a href="https://www.philadelphiafed.org/surveys-and-data/real-time-data-research/real-time-data-set-for-macroeconomists">Check it out</a>! We’ll give you a specific subset in your repos this week.</p>
-</section><section id="what-are-these-data-like" class="slide level2"><h2>What are these data like?</h2>
-<p>Example: quarterly data on gross domestic product (GDP).</p>
-<p><img data-src="images/vintage-1.png"></p>
-<p>Each variable gets this triangular array. The <em>rows</em> correspond to the period in time we are trying to measure. The <em>columns</em> correspond to when we are measuring it. This is the so-called <em>vintage</em> of the data.</p>
+<p><a href="https://www.philadelphiafed.org/surveys-and-data/real-time-data-research/real-time-data-set-for-macroeconomists">Check it out</a>!</p>
+</section><section id="what-are-these-data-like" class="slide level2 small"><h2>What are these data like?</h2>
+<p>Quarterly GDP growth (year-over-year percent change):</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 244 × 10
+   DATE    v65Q4 v66Q1 v66Q2 v66Q3 v66Q4 v67Q1 v67Q2 v67Q3 v67Q4
+   &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+ 1 1965:Q1  5.36  5.40  5.40  5.37  5.37  5.37  5.37  5.32  5.32
+ 2 1965:Q2  4.43  4.79  4.79  5.14  5.14  5.14  5.14  5.38  5.38
+ 3 1965:Q3  4.55  5.22  5.22  5.68  5.68  5.68  5.68  5.96  5.96
+ 4 1965:Q4 NA     6.33  6.79  7.49  7.49  7.49  7.49  7.80  7.80
+ 5 1966:Q1 NA    NA     6.04  6.70  6.70  6.70  6.70  7.30  7.30
+ 6 1966:Q2 NA    NA    NA     5.99  5.87  5.87  5.87  6.49  6.49
+ 7 1966:Q3 NA    NA    NA    NA     5.26  5.13  5.13  5.49  5.49
+ 8 1966:Q4 NA    NA    NA    NA    NA     4.09  4.12  4.21  4.21
+ 9 1967:Q1 NA    NA    NA    NA    NA    NA     2.61  2.37  2.37
+10 1967:Q2 NA    NA    NA    NA    NA    NA    NA     2.36  2.37
+# ℹ 234 more rows</code></pre>
+</div>
+</div>
+<div class="fragment">
+<p>A single variable gets a whole data frame with an upper triangular structure:</p>
+<ul>
+<li>row = what period are measuring?</li>
+<li>column = when were we measuring it?</li>
+</ul>
+</div>
 </section><section id="what-are-these-data-like-1" class="slide level2"><h2>What are these data like?</h2>
-<p>Example: quarterly data on gross domestic product (GDP).</p>
-<p><img data-src="images/vintage-4.png"></p>
-<p>This is our estimate of GDP for 1963Q4 <em>as measured</em> in 1966Q4.</p>
-</section><section id="what-are-these-data-like-2" class="slide level2"><h2>What are these data like?</h2>
-<p>Example: quarterly data on gross domestic product (GDP).</p>
-<p><img data-src="images/vintage-3.png"></p>
-<p>This column is the 1966Q4 vintage of the data. This was the best information that an observer in 1966Q4 had access to.</p>
-</section><section id="what-are-these-data-like-3" class="slide level2"><h2>What are these data like?</h2>
-<p>Example: quarterly data on gross domestic product (GDP).</p>
-<p><img data-src="images/vintage-2.png"></p>
-<p>This row shows the path of revisions for the 1965Q4 observation. We got out first reading in 1966Q1 (one period later), and then it was subsequently revised several times.</p>
-</section><section id="the-path-of-revisions-over-time" class="slide level2"><h2>The path of revisions over time</h2>
+<p>Quarterly GDP growth (year-over-year percent change):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>output_growth <span class="sc">|&gt;</span></span>
+<span id="cb2-2"><a></a>  <span class="fu">select</span>(DATE, v66Q3) <span class="sc">|&gt;</span></span>
+<span id="cb2-3"><a></a>  <span class="fu">filter</span>(DATE <span class="sc">==</span> <span class="st">"1965:Q3"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+  DATE    v66Q3
+  &lt;chr&gt;   &lt;dbl&gt;
+1 1965:Q3  5.68</code></pre>
+</div>
+</div>
+<p>This is our estimate of GDP growth in 1965:Q3 <em>as measured</em> a year later in 1966:Q3.</p>
+</section><section id="columns-are-vintages" class="slide level2 medium"><h2>Columns are <em>vintages</em>
+</h2>
+<p>Quarterly GDP growth (year-over-year percent change):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>output_growth <span class="sc">|&gt;</span></span>
+<span id="cb4-2"><a></a>  <span class="fu">select</span>(DATE, v66Q3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 304 × 2
+   DATE    v66Q3
+   &lt;chr&gt;   &lt;dbl&gt;
+ 1 1950:Q1  4.65
+ 2 1950:Q2  8.06
+ 3 1950:Q3 11.3 
+ 4 1950:Q4 14.5 
+ 5 1951:Q1 10.4 
+ 6 1951:Q2  9.47
+ 7 1951:Q3  7.14
+ 8 1951:Q4  5.03
+ 9 1952:Q1  4.43
+10 1952:Q2  2.12
+# ℹ 294 more rows</code></pre>
+</div>
+</div>
+<p>This column is the 1966:Q3 <em>vintage</em> of the data. This is history <em>as it was understood</em> in 1966:Q3.</p>
+</section><section id="rows-are-the-history-of-revisions" class="slide level2 medium"><h2>Rows are the history of revisions</h2>
+<p>Quarterly GDP growth (year-over-year percent change):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>output_growth <span class="sc">|&gt;</span></span>
+<span id="cb6-2"><a></a>  <span class="fu">filter</span>(DATE <span class="sc">==</span> <span class="st">"1965:Q3"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 11
+  DATE    v65Q4 v66Q1 v66Q2 v66Q3 v66Q4 v67Q1 v67Q2 v67Q3 v67Q4 v68Q1
+  &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1 1965:Q3  4.55  5.22  5.22  5.68  5.68  5.68  5.68  5.96  5.96  5.96</code></pre>
+</div>
+</div>
+<p>How did our measurement for 1965:Q3 evolve over time as it was revised?</p>
+</section><section id="in-my-life" class="slide level2"><h2>In My Life</h2>
+<p>Moving across the columns:</p>
 <div class="quarto-figure quarto-figure-center">
-<figure><p><img data-src="images/productivity-revisions.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></p>
+<figure><p><img data-src="images/real-time.gif" class="quarto-figure quarto-figure-center"></p>
 </figure>
 </div>
-</section><section id="the-path-of-revisions-over-time-1" class="slide level2"><h2>The path of revisions over time</h2>
+</section><section id="the-path-of-revisions" class="slide level2"><h2>The path of revisions</h2>
+<p>Moving across a fixed row:</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure><p><img data-src="images/productivity-movin.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></p>
+<figure><p><img data-src="case-study-2_files/figure-revealjs/unnamed-chunk-7-1.png" class="quarto-figure quarto-figure-center" width="960"></p>
 </figure>
 </div>
-</section><section id="the-path-of-revisions-over-time-2" class="slide level2"><h2>The path of revisions over time</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure><p><img data-src="images/croushore-pic.png" class="quarto-figure quarto-figure-center"></p>
-</figure>
 </div>
-</section><section id="how-do-revisions-behave" class="slide level2"><h2>How do revisions behave?</h2>
+</div>
+</section><section id="how-do-data-revisions-behave" class="slide level2"><h2>How do data revisions behave?</h2>
 <div class="fragment">
 <div class="callout callout-warning callout-titled callout-style-default">
 <div class="callout-body">
@@ -406,7 +471,7 @@ Ed Iversen and John Zito
 </div>
 </div>
 </div>
-</section><section id="how-do-data-revisions-behave" class="slide level2 medium"><h2>How do data revisions behave?</h2>
+</section><section id="how-do-data-revisions-behave-1" class="slide level2 medium"><h2>How do data revisions behave?</h2>
 <p><a href="https://doi.org/10.1111/j.1538-4616.2008.00115.x">Aruoba (2008 JMCB)</a>:</p>
 <blockquote>
 <p>We document the empirical properties of revisions to major macroeconomic variables in the United States. Our findings suggest that they do not satisfy simple desirable statistical properties. In particular, we find that these revisions do not have a zero mean, which indicates that the <span style="color:red;">initial announcements by statistical agencies are biased</span>. We also find that the <span style="color:red;">revisions are quite large compared to the original variables</span> and they are predictable using the information set at the time of the initial announcement, which means that the <span style="color:red;">initial announcements of statistical agencies are not rational forecasts</span>.</p>
@@ -478,7 +543,7 @@ Ed Iversen and John Zito
 <div class="cell">
 <div class="cell-output-display">
 <div>
-<figure><p><img data-src="case-study-2_files/figure-revealjs/unnamed-chunk-2-1.png" width="960"></p>
+<figure><p><img data-src="case-study-2_files/figure-revealjs/unnamed-chunk-8-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -488,7 +553,7 @@ Ed Iversen and John Zito
 <div class="cell">
 <div class="cell-output-display">
 <div>
-<figure><p><img data-src="case-study-2_files/figure-revealjs/unnamed-chunk-3-1.png" width="960"></p>
+<figure><p><img data-src="case-study-2_files/figure-revealjs/unnamed-chunk-9-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -498,7 +563,7 @@ Ed Iversen and John Zito
 <div class="cell">
 <div class="cell-output-display">
 <div>
-<figure><p><img data-src="case-study-2_files/figure-revealjs/unnamed-chunk-4-1.png" width="960"></p>
+<figure><p><img data-src="case-study-2_files/figure-revealjs/unnamed-chunk-10-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -508,7 +573,7 @@ Ed Iversen and John Zito
 <div class="cell">
 <div class="cell-output-display">
 <div>
-<figure><p><img data-src="case-study-2_files/figure-revealjs/unnamed-chunk-5-1.png" width="960"></p>
+<figure><p><img data-src="case-study-2_files/figure-revealjs/unnamed-chunk-11-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -536,7 +601,7 @@ Ed Iversen and John Zito
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure><p><img data-src="case-study-2_files/figure-revealjs/unnamed-chunk-6-1.png" class="quarto-figure quarto-figure-center" width="960"></p>
+<figure><p><img data-src="case-study-2_files/figure-revealjs/unnamed-chunk-12-1.png" class="quarto-figure quarto-figure-center" width="960"></p>
 </figure>
 </div>
 </div>
@@ -667,15 +732,15 @@ y_i&amp;=\mu(x_i)+\varepsilon_i &amp;&amp; \varepsilon_i\iid\N(0\com\sigma^2)\\
 </section><section id="you-get-the-idea" class="slide level2"><h2>You get the idea</h2>
 <p>The CI incorporates one source of uncertainty. The PI incorporates two. Hence, the PI is wider:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a>mtcars_fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(mpg <span class="sc">~</span> wt, <span class="at">data =</span> mtcars)</span>
-<span id="cb1-2"><a></a>xnew <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">wt =</span> <span class="fl">4.5</span>)</span>
-<span id="cb1-3"><a></a></span>
-<span id="cb1-4"><a></a><span class="fu">predict</span>(mtcars_fit, xnew, <span class="at">interval =</span> <span class="st">"confidence"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a>mtcars_fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(mpg <span class="sc">~</span> wt, <span class="at">data =</span> mtcars)</span>
+<span id="cb8-2"><a></a>xnew <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">wt =</span> <span class="fl">4.5</span>)</span>
+<span id="cb8-3"><a></a></span>
+<span id="cb8-4"><a></a><span class="fu">predict</span>(mtcars_fit, xnew, <span class="at">interval =</span> <span class="st">"confidence"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     fit      lwr      upr
 1 13.235 11.40347 15.06654</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">predict</span>(mtcars_fit, xnew, <span class="at">interval =</span> <span class="st">"prediction"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a><span class="fu">predict</span>(mtcars_fit, xnew, <span class="at">interval =</span> <span class="st">"prediction"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     fit      lwr      upr
 1 13.235 6.750452 19.71956</code></pre>

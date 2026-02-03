@@ -137,67 +137,60 @@
     "href": "slides/case-study-2.html#frbps-real-time-data-set",
     "title": "Case Study 2",
     "section": "FRBP’s Real-Time Data Set",
-    "text": "FRBP’s Real-Time Data Set\n\n\n\n\n\nTracks the entire history of revisions for key macroeconomic variables.\n\nCheck it out! We’ll give you a specific subset in your repos this week."
+    "text": "FRBP’s Real-Time Data Set\n\n\n\n\n\nTracks the entire history of revisions for key macroeconomic variables.\n\nCheck it out!"
   },
   {
     "objectID": "slides/case-study-2.html#what-are-these-data-like",
     "href": "slides/case-study-2.html#what-are-these-data-like",
     "title": "Case Study 2",
     "section": "What are these data like?",
-    "text": "What are these data like?\nExample: quarterly data on gross domestic product (GDP).\n\nEach variable gets this triangular array. The rows correspond to the period in time we are trying to measure. The columns correspond to when we are measuring it. This is the so-called vintage of the data."
+    "text": "What are these data like?\nQuarterly GDP growth (year-over-year percent change):\n\n\n# A tibble: 244 × 10\n   DATE    v65Q4 v66Q1 v66Q2 v66Q3 v66Q4 v67Q1 v67Q2 v67Q3 v67Q4\n   &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n 1 1965:Q1  5.36  5.40  5.40  5.37  5.37  5.37  5.37  5.32  5.32\n 2 1965:Q2  4.43  4.79  4.79  5.14  5.14  5.14  5.14  5.38  5.38\n 3 1965:Q3  4.55  5.22  5.22  5.68  5.68  5.68  5.68  5.96  5.96\n 4 1965:Q4 NA     6.33  6.79  7.49  7.49  7.49  7.49  7.80  7.80\n 5 1966:Q1 NA    NA     6.04  6.70  6.70  6.70  6.70  7.30  7.30\n 6 1966:Q2 NA    NA    NA     5.99  5.87  5.87  5.87  6.49  6.49\n 7 1966:Q3 NA    NA    NA    NA     5.26  5.13  5.13  5.49  5.49\n 8 1966:Q4 NA    NA    NA    NA    NA     4.09  4.12  4.21  4.21\n 9 1967:Q1 NA    NA    NA    NA    NA    NA     2.61  2.37  2.37\n10 1967:Q2 NA    NA    NA    NA    NA    NA    NA     2.36  2.37\n# ℹ 234 more rows\n\n\n\nA single variable gets a whole data frame with an upper triangular structure:\n\nrow = what period are measuring?\ncolumn = when were we measuring it?"
   },
   {
     "objectID": "slides/case-study-2.html#what-are-these-data-like-1",
     "href": "slides/case-study-2.html#what-are-these-data-like-1",
     "title": "Case Study 2",
     "section": "What are these data like?",
-    "text": "What are these data like?\nExample: quarterly data on gross domestic product (GDP).\n\nThis is our estimate of GDP for 1963Q4 as measured in 1966Q4."
+    "text": "What are these data like?\nQuarterly GDP growth (year-over-year percent change):\n\noutput_growth |&gt;\n  select(DATE, v66Q3) |&gt;\n  filter(DATE == \"1965:Q3\")\n\n# A tibble: 1 × 2\n  DATE    v66Q3\n  &lt;chr&gt;   &lt;dbl&gt;\n1 1965:Q3  5.68\n\n\nThis is our estimate of GDP growth in 1965:Q3 as measured a year later in 1966:Q3."
   },
   {
-    "objectID": "slides/case-study-2.html#what-are-these-data-like-2",
-    "href": "slides/case-study-2.html#what-are-these-data-like-2",
+    "objectID": "slides/case-study-2.html#columns-are-vintages",
+    "href": "slides/case-study-2.html#columns-are-vintages",
     "title": "Case Study 2",
-    "section": "What are these data like?",
-    "text": "What are these data like?\nExample: quarterly data on gross domestic product (GDP).\n\nThis column is the 1966Q4 vintage of the data. This was the best information that an observer in 1966Q4 had access to."
+    "section": "Columns are vintages\n",
+    "text": "Columns are vintages\n\nQuarterly GDP growth (year-over-year percent change):\n\noutput_growth |&gt;\n  select(DATE, v66Q3)\n\n# A tibble: 304 × 2\n   DATE    v66Q3\n   &lt;chr&gt;   &lt;dbl&gt;\n 1 1950:Q1  4.65\n 2 1950:Q2  8.06\n 3 1950:Q3 11.3 \n 4 1950:Q4 14.5 \n 5 1951:Q1 10.4 \n 6 1951:Q2  9.47\n 7 1951:Q3  7.14\n 8 1951:Q4  5.03\n 9 1952:Q1  4.43\n10 1952:Q2  2.12\n# ℹ 294 more rows\n\n\nThis column is the 1966:Q3 vintage of the data. This is history as it was understood in 1966:Q3."
   },
   {
-    "objectID": "slides/case-study-2.html#what-are-these-data-like-3",
-    "href": "slides/case-study-2.html#what-are-these-data-like-3",
+    "objectID": "slides/case-study-2.html#rows-are-the-history-of-revisions",
+    "href": "slides/case-study-2.html#rows-are-the-history-of-revisions",
     "title": "Case Study 2",
-    "section": "What are these data like?",
-    "text": "What are these data like?\nExample: quarterly data on gross domestic product (GDP).\n\nThis row shows the path of revisions for the 1965Q4 observation. We got out first reading in 1966Q1 (one period later), and then it was subsequently revised several times."
+    "section": "Rows are the history of revisions",
+    "text": "Rows are the history of revisions\nQuarterly GDP growth (year-over-year percent change):\n\noutput_growth |&gt;\n  filter(DATE == \"1965:Q3\")\n\n\n\n# A tibble: 1 × 11\n  DATE    v65Q4 v66Q1 v66Q2 v66Q3 v66Q4 v67Q1 v67Q2 v67Q3 v67Q4 v68Q1\n  &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1 1965:Q3  4.55  5.22  5.22  5.68  5.68  5.68  5.68  5.96  5.96  5.96\n\n\nHow did our measurement for 1965:Q3 evolve over time as it was revised?"
   },
   {
-    "objectID": "slides/case-study-2.html#the-path-of-revisions-over-time",
-    "href": "slides/case-study-2.html#the-path-of-revisions-over-time",
+    "objectID": "slides/case-study-2.html#in-my-life",
+    "href": "slides/case-study-2.html#in-my-life",
     "title": "Case Study 2",
-    "section": "The path of revisions over time",
-    "text": "The path of revisions over time"
+    "section": "In My Life",
+    "text": "In My Life\nMoving across the columns:"
   },
   {
-    "objectID": "slides/case-study-2.html#the-path-of-revisions-over-time-1",
-    "href": "slides/case-study-2.html#the-path-of-revisions-over-time-1",
+    "objectID": "slides/case-study-2.html#the-path-of-revisions",
+    "href": "slides/case-study-2.html#the-path-of-revisions",
     "title": "Case Study 2",
-    "section": "The path of revisions over time",
-    "text": "The path of revisions over time"
-  },
-  {
-    "objectID": "slides/case-study-2.html#the-path-of-revisions-over-time-2",
-    "href": "slides/case-study-2.html#the-path-of-revisions-over-time-2",
-    "title": "Case Study 2",
-    "section": "The path of revisions over time",
-    "text": "The path of revisions over time"
-  },
-  {
-    "objectID": "slides/case-study-2.html#how-do-revisions-behave",
-    "href": "slides/case-study-2.html#how-do-revisions-behave",
-    "title": "Case Study 2",
-    "section": "How do revisions behave?",
-    "text": "How do revisions behave?\n\n\n\n\n\n\n\nGood heavens"
+    "section": "The path of revisions",
+    "text": "The path of revisions\nMoving across a fixed row:"
   },
   {
     "objectID": "slides/case-study-2.html#how-do-data-revisions-behave",
     "href": "slides/case-study-2.html#how-do-data-revisions-behave",
+    "title": "Case Study 2",
+    "section": "How do data revisions behave?",
+    "text": "How do data revisions behave?\n\n\n\n\n\n\n\nGood heavens"
+  },
+  {
+    "objectID": "slides/case-study-2.html#how-do-data-revisions-behave-1",
+    "href": "slides/case-study-2.html#how-do-data-revisions-behave-1",
     "title": "Case Study 2",
     "section": "How do data revisions behave?",
     "text": "How do data revisions behave?\nAruoba (2008 JMCB):\n\nWe document the empirical properties of revisions to major macroeconomic variables in the United States. Our findings suggest that they do not satisfy simple desirable statistical properties. In particular, we find that these revisions do not have a zero mean, which indicates that the initial announcements by statistical agencies are biased. We also find that the revisions are quite large compared to the original variables and they are predictable using the information set at the time of the initial announcement, which means that the initial announcements of statistical agencies are not rational forecasts.\n\n\nBummer."
