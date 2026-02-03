@@ -828,12 +828,12 @@ y_i
 \begin{aligned}
 p(\tilde{y}\mid \tilde{\Bx}\com y_{1:n}\com \Bx_{1:n})
 &amp;=
-\int
+\int\int
 p(\tilde{y}\com\sigma^2\com\Bbeta\mid \tilde{\Bx}\com y_{1:n}\com \Bx_{1:n})
 \,\dd\Bbeta\,\dd\sigma^2
 \\
 &amp;=
-\int
+\int\int
 \underbrace{p(\tilde{y}\mid \tilde{\Bx}\com \sigma^2\com\Bbeta)}_{\N(\tilde{\Bx}^\tr\Bbeta\com\sigma^2)}
 \underbrace{p(\sigma^2\com\Bbeta\mid y_{1:n}\com \Bx_{1:n})}_{\text{NIG}_{p}(a_n\com b_n\com \bar{\Bbeta}_n\com\BH_n)}
 \,\dd\Bbeta\,\dd\sigma^2.
