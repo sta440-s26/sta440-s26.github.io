@@ -1,0 +1,1051 @@
+---
+title: "Autoregressive models"
+format: revealjs
+auto-stretch: false
+filters:
+  - shinylive
+---
+
+# Introduction
+
+## Time series {.small}
+
+- A [**time series**]{style="color:blue;"} is a set of measurements collected over time;
+
+- We model these data as a sequence of [**dependent**]{style="color:blue;"} random variables:
+
+$$
+\mathbf{y}_{0:T} = \{\mathbf{y}_0,\,\mathbf{y}_1,\,\mathbf{y}_2,\,...,\,\mathbf{y}_T\}.
+$$
+
+- A [**time series model**]{style="color:blue;"} is "just" their joint probability distribution:
+
+$$
+p(\mathbf{y}_{0:T}) = p(\mathbf{y}_0)\prod_{t=1}^Tp(\mathbf{y}_t\,|\,\mathbf{y}_{0:t-1}).
+$$
+
+. . .
+
+::: callout-tip
+## Stay grounded.
+
+Like much wisdom, that last bullet is simultaneously vacuous and profound. It tells you everything and it tells you nothing all at once. But don't let this basic fact get lost in the sea of details.
+
+:::
+
+## Notation to get used to {.small}
+
+- I will not use uppercase $Y_t$ versus lowercase $y_t$ to distinguish random variables and fixed realizations. It's all just $y_t$, and context makes clear how it functions;
+- A vector $\mathbf{y}\in\mathbb{R}^n$ is always an $n\times 1$ column. The corresponding row vector is $\By^\tr$;
+- For integers $i<j$, you will see this shorthand all the time:
+
+$$
+y_{i:j}
+=
+\{y_i\com y_{i+1}\com y_{i+2}\com...\com y_{j-2}\com y_{j-1}\com y_{j}\}
+.
+$$
+
+- The symbol "$p$" will be aggressively abused and overloaded to represent any probability distribution, sometimes several in the same line: 
+
+$$
+p(\mathbf{y}_{0:T}) = p(\mathbf{y}_0)\prod_{t=1}^Tp(\mathbf{y}_t\,|\,\mathbf{y}_{0:t-1}).
+$$
+
+# Starting small
+
+## The simplest non-trivial time series model {.medium}
+
+The autoregression of order 1, or AR(1):
+
+. . .
+
+$$
+\begin{aligned}
+y_t
+&=
+\beta_0
++
+\beta_1
+y_{t-1}
++
+\varepsilon_t,
+\quad
+\varepsilon_t\iid\text{N}(0\com\sigma^2)
+\\
+y_0
+&\sim
+\text{N}(\mu_0\com \initvar),
+\end{aligned}
+$$
+
+. . .
+
+That's the recursive form. It implies a joint distribution written marginal-conditional style:
+
+. . .
+
+$$
+\begin{aligned}
+p(y_{0:T})
+&=
+p(y_0)
+\prod_{t=1}^T
+p(y_t\given y_{0:t-1})
+\\
+&=
+p(y_0)
+\prod_{t=1}^T
+p(y_t\given y_{t-1}).
+\end{aligned}
+$$
+
+## The implied joint distribution {.small}
+
+Because the model is linear and Gaussian, the implied joint distribution across time is just a big ol' multivariate normal:
+
+$$
+\begin{bmatrix}
+y_0 & y_1 & \cdots & y_T
+\end{bmatrix}^\tr
+\sim\text{N}_{T+1}\left(\Bmu\com \BSigma\right).
+$$
+
+Just like the linear mixed model is "just" a big multivariate normal with a particular block covariance structure (dependent within and independent between groups).
+
+. . .
+
+::: callout-warning
+## Don't worry about this!
+
+The mean and covariance are given by:
+
+$$
+\begin{aligned}
+E(y_t)
+&=
+\beta_0\sum\limits_{i=0}^{t-1}\beta_1^i
++
+\beta_1^t\mu_0
+\\
+\var(y_t)
+&=
+\sigma^2
+\sum\limits_{i=0}^{t-1}\beta_1^{2i}+
+\beta_1^{2t}\initvar
+\\
+\cov(y_t\com y_s)
+&=
+\begin{cases}
+\beta_1^{s-t}\var(y_t) & t\leq s\\
+\beta_1^{t-s}\var(y_s) & s < t.
+\end{cases}
+.
+\end{aligned}
+$$
+:::
+
+## Stationarity
+
+A joint distribution is **(strictly) stationary** if it is "shift invariant":
+
+$$
+\{y_{t_1}\com y_{t_2}\com ...\com y_{t_n}\}\overset{d}{=}\{y_{t_1+h}\com y_{t_2+h}\com ...\com y_{t_n+h}\}.
+$$
+
+The Gaussian AR(1) with $|\beta_1|<1$ has this property.
+
+## Stationary AR(1) {.small}
+
+If $-1<\beta_1<1$, $\mu_0=\beta_0/(1-\beta_1)$, and $\initvar=\sigma^2/(1-\beta_1^2)$, then the AR(1) is strictly stationary with the following:
+
+$$
+\begin{aligned}
+E(y_t)
+&=
+\frac{\beta_0}{1-\beta_1}
+\\
+\var(y_t)
+&=
+\frac{\sigma^2}{1-\beta_1^2}
+\\
+\cov(y_t\com y_s)
+&=
+\beta_1^{|t-s|}\var(y_t)
+=
+\beta_1^{|t-s|}\frac{\sigma^2}{1-\beta_1^2}.
+\end{aligned}
+$$
+
+The common marginal shared by all $y_t$ is called the stationary distribution:
+
+$$
+y_t\sim\text{N}\left(\frac{\beta_0}{1-\beta_1}\com \frac{\sigma^2}{1-\beta_1^2}\right).
+$$
+
+So "did: dependent but identically distributed."
+
+## Autocovariance of a stationary process
+
+For a stationary process, the covariance kernel satisfies
+
+$$
+\cov(y_t\com y_{s})=\cov(y_{t+h}\com y_{s+h})\quad \forall (t\com s\com h).
+$$
+
+So you can define something called the **autocovariance function**:
+
+$$
+\gamma(h)=\cov(y_{t+h}\com y_{t}).
+$$
+
+For the AR(1), this is 
+
+$$
+\begin{aligned}
+\gamma(0)&=\sigma^2/(1-\beta_1^2)
+\\
+\gamma(h)&=\beta_1^h\gamma(0).
+\end{aligned}
+$$
+
+## What does the autocov function look like?
+
+```{r}
+#| echo: false
+# Parameters
+beta_1 <- 0      # AR(1) coefficient
+sigma2 <- 1        # Noise variance
+max_lag <- 20      # Number of lags to plot
+
+# Compute theoretical autocovariances
+lags <- 0:max_lag
+gamma_h <- sigma2 / (1 - beta_1^2) * beta_1^lags
+
+# Plot
+plot(lags, gamma_h, type="h", lwd=2,
+     xlab="Lag h", ylab="γ(h)",
+     main="Theoretical autocovariance of stationary AR(1)")
+points(lags, gamma_h, pch=19, col="blue")
+abline(h = 0, lty = 2, col = "darkgrey")
+
+# Add legend using Unicode
+legend_text <- paste0("β1 = ", beta_1, ", σ² = ", sigma2)
+legend("topright", legend=legend_text, bty="n")
+
+
+```
+
+## What does the autocov function look like?
+
+```{r}
+#| echo: false
+# Parameters
+beta_1 <- 0.5      # AR(1) coefficient
+sigma2 <- 1        # Noise variance
+max_lag <- 20      # Number of lags to plot
+
+# Compute theoretical autocovariances
+lags <- 0:max_lag
+gamma_h <- sigma2 / (1 - beta_1^2) * beta_1^lags
+
+# Plot
+plot(lags, gamma_h, type="h", lwd=2,
+     xlab="Lag h", ylab="γ(h)",
+     main="Theoretical autocovariance of stationary AR(1)")
+points(lags, gamma_h, pch=19, col="blue")
+
+# Add legend using Unicode
+legend_text <- paste0("β1 = ", beta_1, ", σ² = ", sigma2)
+legend("topright", legend=legend_text, bty="n")
+
+
+```
+
+## What does the autocov function look like?
+
+```{r}
+#| echo: false
+# Parameters
+beta_1 <- -0.8      # AR(1) coefficient
+sigma2 <- 1        # Noise variance
+max_lag <- 20      # Number of lags to plot
+
+# Compute theoretical autocovariances
+lags <- 0:max_lag
+gamma_h <- sigma2 / (1 - beta_1^2) * beta_1^lags
+
+# Plot
+plot(lags, gamma_h, type="h", lwd=2,
+     xlab="Lag h", ylab="γ(h)",
+     main="Theoretical autocovariance of stationary AR(1)")
+points(lags, gamma_h, pch=19, col="blue")
+abline(h = 0, lty = 2, col = "darkgrey")
+
+# Add legend using Unicode
+legend_text <- paste0("β1 = ", beta_1, ", σ² = ", sigma2)
+legend("topright", legend=legend_text, bty="n")
+
+
+```
+
+## What does the autocov function look like?
+
+```{r}
+#| echo: false
+# Parameters
+beta_1 <- 0.9      # AR(1) coefficient
+sigma2 <- 1        # Noise variance
+max_lag <- 20      # Number of lags to plot
+
+# Compute theoretical autocovariances
+lags <- 0:max_lag
+gamma_h <- sigma2 / (1 - beta_1^2) * beta_1^lags
+
+# Plot
+plot(lags, gamma_h, type="h", lwd=2,
+     xlab="Lag h", ylab="γ(h)",
+     main="Theoretical autocovariance of stationary AR(1)")
+points(lags, gamma_h, pch=19, col="blue")
+abline(h = 0, lty = 2, col = "darkgrey")
+
+# Add legend using Unicode
+legend_text <- paste0("β1 = ", beta_1, ", σ² = ", sigma2)
+legend("topright", legend=legend_text, bty="n")
+
+
+```
+
+## What does the autocov function look like?
+
+```{r}
+#| echo: false
+# Parameters
+beta_1 <- 0.99      # AR(1) coefficient
+sigma2 <- 1        # Noise variance
+max_lag <- 20      # Number of lags to plot
+
+# Compute theoretical autocovariances
+lags <- 0:max_lag
+gamma_h <- sigma2 / (1 - beta_1^2) * beta_1^lags
+
+# Plot
+plot(lags, gamma_h, type="h", lwd=2,
+     xlab="Lag h", ylab="γ(h)",
+     main="Theoretical autocovariance of stationary AR(1)")
+points(lags, gamma_h, pch=19, col="blue")
+abline(h = 0, lty = 2, col = "darkgrey")
+
+# Add legend using Unicode
+legend_text <- paste0("β1 = ", beta_1, ", σ² = ", sigma2)
+legend("topright", legend=legend_text, bty="n")
+
+```
+
+## What does the autocov function look like?
+
+```{r}
+#| echo: false
+# Parameters
+beta_1 <- 0.999      # AR(1) coefficient
+sigma2 <- 1        # Noise variance
+max_lag <- 20      # Number of lags to plot
+
+# Compute theoretical autocovariances
+lags <- 0:max_lag
+gamma_h <- sigma2 / (1 - beta_1^2) * beta_1^lags
+
+# Plot
+plot(lags, gamma_h, type="h", lwd=2,
+     xlab="Lag h", ylab="γ(h)",
+     main="Theoretical autocovariance of stationary AR(1)")
+points(lags, gamma_h, pch=19, col="blue")
+abline(h = 0, lty = 2, col = "darkgrey")
+
+# Add legend using Unicode
+legend_text <- paste0("β1 = ", beta_1, ", σ² = ", sigma2)
+legend("topright", legend=legend_text, bty="n")
+
+
+```
+
+## AR(1) sample paths
+
+```{shinylive-r}
+#| standalone: true
+#| viewerHeight: 700
+
+library(shiny)
+
+simulate_ar_1 <- function(T, b0, b1, s, m0, s0){
+  y <- numeric(T)
+  y[1] <- rnorm(1, m0, s0)
+  for(t in 2:T){
+    y[t] <- b0 + b1 * y[t - 1] + rnorm(1, 0, s)
+  }
+  return(y)
+}
+
+ar_1_mean <- function(t, b0, b1, m0){
+  if(t == 0){
+    return(m0)
+  }else{
+    return(b0 * sum(b1 ^ (0:(t-1))) + m0 * (b1^t)) 
+  }
+}
+
+ar_1_var <- function(t, b1, s, s0){
+  if(t == 0){
+    return(s0^2)
+  }else{
+    return((s0^2) * (b1^(2*t)) + (s^2) * sum(b1 ^ (2*(0:(t-1)))))
+  }
+}
+
+ar_1_sd <- function(t, b1, s, s0){
+  sqrt(ar_1_var(t, b1, s, s0))
+}
+
+# Define UI for application that draws a histogram
+ui <- fluidPage(
+  
+  # Application title
+  titlePanel("Marginal distributions and sample paths of a Gaussian AR(1)"),
+  
+  # Sidebar with a slider input for number of bins 
+  sidebarLayout(
+    sidebarPanel(
+      sliderInput("b0",
+                  "β₀",
+                  min = -5,
+                  max = 5,
+                  value = 0,
+                  step = 0.1),
+      sliderInput("b1",
+                  "β₁",
+                  min = -2,
+                  max = 2,
+                  value = 0,
+                  step = 0.1),
+      sliderInput("s",
+                  "σ",
+                  min = 0,
+                  max = 2,
+                  value = 1, 
+                  step = 0.1),
+      sliderInput("m0",
+                  "μ₀",
+                  min = -5,
+                  max = 5,
+                  value = 0,
+                  step = 0.1),
+      sliderInput("T",
+                  "T",
+                  min = 20,
+                  max = 200,
+                  step = 20,
+                  value = 100),
+      actionButton("redo", "New sample path"),
+    ),
+    
+    # Show a plot of the generated distribution
+    mainPanel(
+      plotOutput("distPlot", height = "600px")
+    )
+  )
+)
+
+# Define server logic required to draw a histogram
+server <- function(input, output) {
+  
+  output$distPlot <- renderPlot({
+    input$redo
+    b0 <- input$b0
+    b1 <- input$b1
+    redo <- input$redo
+    T <- input$T
+    s <- input$s
+    m0 <- input$m0
+    s0 = 1
+    
+    range = 0:T
+    alpha = c(0.01, seq(0.1, 0.9, by = 0.1))
+    
+    middle <- sapply(range, ar_1_mean, b0, b1, m0)
+    sds <- sapply(range, ar_1_sd, b1, s, s0)
+    
+    
+    plot(range, middle, type = "l",
+         xaxt = "n", 
+         yaxt = "n",
+         xlab = "t",
+         ylab = expression(y[t]),
+         ylim = c(-20, 20), bty = "n",
+         col = "white")
+    
+    for(a in alpha){
+      
+      U = qnorm(1 - a / 2, mean = middle, sd = sds)
+      L = qnorm(a / 2, mean = middle, sd = sds)
+      
+      polygon(
+        c(range, rev(range)),
+        c(U, rev(L)),
+        col = rgb(1, 0, 0, 0.15),
+        border = NA
+      )
+    }
+    
+    inc = 20
+    axis(1, pos = 0, at = seq(0, max(range), by = inc), 
+         labels = c(NA, seq(inc, max(range), by = inc)))
+    axis(2, pos = 0)
+    
+    lines(range, simulate_ar_1(max(range) + 1, b0, b1, s, m0, s0), col = "black", lwd = 2)
+  })
+}
+
+# Run the application 
+shinyApp(ui = ui, server = server)
+```
+
+
+# There nothing special about one lag
+
+## AR(p) {.small}
+
+The autoregression of order $p$, or AR($p$):
+
+. . .
+
+$$
+\begin{aligned}
+y_t
+&=
+\beta_0
++
+\beta_1
+y_{t-1}
++
+\beta_2
+y_{t-2}
++
+\cdots 
++
+\beta_p
+y_{t-p}
++
+\varepsilon_t,
+\quad
+\varepsilon_t\iid\text{N}(0\com\sigma^2)
+\\
+\begin{bmatrix}
+y_0
+\\
+y_{-1}
+\\
+\vdots
+\\
+y_{1-p}
+\end{bmatrix}
+&\sim
+\text{N}_p(\Bmu_0\com \BP_0).
+\end{aligned}
+$$
+
+# Maximum likelihood estimation
+
+## Let's improve the notation {.medium}
+
+The autoregression of order p, or AR(p):
+
+. . .
+
+$$
+\begin{aligned}
+y_t
+&=
+\beta_0
++
+\sum\limits_{\ell=1}^p
+\beta_\ell
+y_{t-\ell}
++
+\varepsilon_t,
+\quad
+\varepsilon_t\iid\text{N}(0\com\sigma^2).
+\end{aligned}
+$$
+
+. . .
+
+This implies a joint distribution governed by a finite set of static parameters $\Btheta = \begin{bmatrix}\beta_0&\beta_1&\cdots &\beta_p&\sigma^2\end{bmatrix}^\tr$:
+
+. . .
+
+$$
+\begin{aligned}
+p(y_{1:T}\given y_{1-p:0}\com\Btheta)
+&=
+\prod_{t=1}^T
+p(y_t\given y_{t-p:t-1}\com\Btheta).
+\end{aligned}
+$$
+
+. . .
+
+Viewed as a function of $\Btheta$, that's a (conditional) *likelihood*! 
+
+. . .
+
+Maximize it, or combine with a prior.
+
+## Maximum likelihood estimation
+
+Treating the observed data $y_{1-p:T}$ as fixed, we want:
+
+$$
+\hat{\Btheta}_T=\argmax{\Btheta}\,p(y_{1:T}\given y_{1-p:0}\com \Btheta).
+$$
+
+To do this, it helps to view the AR(p) is "just" a *multiple* linear regression where $\Bx_t$ encodes the lagged values of $y_t$:
+
+$$
+\begin{aligned}
+y_t&=\Bx_t^\tr\Bbeta+\varepsilon_t,&&\varepsilon_t\iid\N(0\com\sigma^2)
+\\
+\Bx_t&=\begin{bmatrix}
+1 & y_{t-1} & y_{t-2} & \cdots & y_{t-p}
+\end{bmatrix}^\tr\\
+\Bbeta&=\begin{bmatrix}
+\beta_0 & \beta_1 & \beta_2 & \cdots & \beta_p
+\end{bmatrix}^\tr.
+\end{aligned}
+$$
+
+## Maximum likelihood estimation {.medium}
+
+Since $y_t\given \Bx_t\com\Btheta\sim\N\left(\Bx_t^\tr\Bbeta\com\sigma^2\right)$, we have
+
+. . .
+
+$$
+\begin{aligned}
+p(y_{1:T}\given  \Bx_0\com \Btheta)
+&=
+\prod_{t=1}^T
+p(y_t\given \Bx_t\com\Btheta)
+\\
+&=
+\prod_{t=1}^T
+\frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{1}{2}\frac{(y_t-\Bx_t^\tr\Bbeta)^2}{\sigma^2}\right)
+\\
+&=
+(2\pi\sigma^2)^{-T/2}
+\exp\left(-\frac{1}{2\sigma^2}\sum\limits_{t=1}^T(y_t-\Bx_t^\tr\Bbeta)^2\right)
+.
+\end{aligned}
+$$
+
+. . .
+
+To compute the MLE, we treat this as a function of $\Btheta$ with the data fixed.
+
+## Stack 'em up {.medium .scrollable}
+
+Construct the response vector and design matrix:
+
+. . .
+
+$$
+\begin{aligned}
+\underbrace{\By_T}_{T\times 1}
+&=
+\begin{bmatrix}y_1&y_2 & \cdots & y_T\end{bmatrix}^\tr
+\\
+\underbrace{\BX_T}_{T\times (p+1)}
+&=
+\begin{bmatrix}
+1 & y_0 & y_{-1} & \cdots & y_{1-p} \\
+1 & y_1 & y_0 & \cdots & y_{2-p} \\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+1 & y_{T-1} & y_{T-2} & \cdots & y_{T-p}
+\end{bmatrix}
+=
+\begin{bmatrix}
+\Bx_1^\tr\\
+\Bx_2^\tr\\
+\vdots\\
+\Bx_T^\tr
+\end{bmatrix}
+.
+\end{aligned}
+$$
+
+. . .
+
+So the likelihood is:
+
+$$
+\begin{aligned}
+p(y_{1:T}\given  \Bx_0\com \Btheta)
+&=
+(2\pi\sigma^2)^{-T/2}
+\exp\left(-\frac{1}{2\sigma^2}\sum\limits_{t=1}^T(y_t-\Bx_t^\tr\Bbeta)^2\right)
+\\
+&=
+(2\pi\sigma^2)^{-T/2}
+\exp\left(-\frac{1}{2\sigma^2}||\By_T-\BX_T\Bbeta||_2^2\right)
+.
+\end{aligned}
+$$
+
+
+
+## What are we doing?
+
+Likelihood:
+
+$$
+\begin{aligned}
+L(\Bbeta\com\sigma^2)
+&=
+(2\pi\sigma^2)^{-T/2}
+\exp\left(-\frac{1}{2\sigma^2}||\By_T-\BX_T\Bbeta||_2^2\right)
+.
+\end{aligned}
+$$
+
+Log-likelihood:
+
+$$
+\ell(\Bbeta\com\sigma^2)
+=
+-\frac{T}{2}\ln(2\pi\sigma^2)
+-\frac{1}{2\sigma^2}
+||\By_T-\BX_T\Bbeta||_2^2
+,
+$$
+
+We want:
+
+$$
+\begin{aligned}
+\hat{\Bbeta}_T\com \hat{\sigma_T^2}
+&=\argmax{\Bbeta\com\sigma^2}\,\ell(\Bbeta\com\sigma^2).
+\end{aligned}
+$$
+
+## OLS for the AR(p) {.medium}
+
+. . .
+
+- The maximum (conditional) likelihood estimator in the AR(p) is the same as the ordinary least squares estimator:
+
+. . .
+
+$$
+\begin{aligned}
+\hat{\Bbeta}_T
+&=
+(\BX_T^\tr\BX_T)^{-1}\BX_T^\tr\By_T
+\\
+\hat{\sigma^2_T}
+&=
+||\By_T-\BX_T\hat{\Bbeta}_T||_2^2 / T.
+\end{aligned}
+$$
+
+. . .
+
+- It doesn't matter that there's time series dependence. Once the data are observed and fixed, the *mechanics* are identical to iid multiple regression;
+- For things like prediction, dependence matters, and the correspondence with iid regression breaks down.
+
+## Recursive form
+
+*Do not* incur the $O(t)$ cost of re-computing $(\BX_t^\tr\BX_t)^{-1}$ every period.
+
+. . .
+
+
+Instead:
+
+$$
+\begin{aligned}
+\hat{\Bbeta}_t
+&=
+\hat{\Bbeta}_{t-1}
++
+\Bk_t(y_t-\Bx_t^\tr\hat{\Bbeta}_{t-1})
+\\
+\Bk_t
+&=
+\frac{\BP_{t-1}\Bx_t}
+{1+\Bx_t^\tr\BP_{t-1}\Bx_t}
+\\
+\BP_t
+&=
+\BP_{t-1}
+-
+\Bk_t
+\Bx_t^\tr\BP_{t-1}
+.
+\end{aligned}
+$$
+
+. . .
+
+**Keyword**: rank-1 update!
+
+## Asymptotics
+
+::: callout-tip
+## Shumway and Stoffer (2025) Property 3.9
+If the AR(p) is stationary, then
+
+$$
+\sqrt{T} \, (\hat{\boldsymbol{\beta}}_{-0} - \boldsymbol{\beta}_{-0})\cd\N_p\bigl(\mathbf{0}, \, \sigma^2 \, \mathbf{\Gamma}_p^{-1}\bigr).
+$$
+
+where $\mathbf{\Gamma}_p$ is the $p \times p$ autocovariance matrix with $(i,j)$ entry $\gamma(|i-j|)$.
+
+:::
+
+. . .
+
+Same as Yule-Walker!
+
+# Conjugate Bayesian inference
+
+## Batch form {.small}
+
+Bayesian model with a conjugate prior:
+
+$$
+\begin{aligned}
+\sigma^2
+&\sim
+\text{IG}(a_0\com b_0)
+\\
+\Bbeta\given \sigma^2
+&\sim 
+\text{N}_{p+1}(\Bm_0\com\sigma^2\BH^{-1}_0)
+\\
+y_t
+\given 
+\Bx_t
+\com
+\Bbeta\com\sigma^2
+&\sim \text{N}
+\left(
+\Bx_t^\tr\Bbeta\com\sigma^2
+\right).
+\end{aligned}
+$$
+
+. . .
+
+The posterior is available in closed-form:
+
+$$
+\begin{aligned}
+\sigma^2\given y_{0:T}
+&\sim
+\text{IG}(a_T\com b_T)
+\\
+\Bbeta\given \sigma^2\com y_{0:T}
+&\sim 
+\text{N}_{p+2}(\Bm_T\com\sigma^2\BH^{-1}_T)
+\\
+\\
+\BH_T
+&=
+\BX_T^\tr\BX_T+\BH_0
+\\
+\Bm_T
+&=
+\BH_T^{-1}(\BX_T^\tr\By_T+\BH_0\Bm_0)
+\\
+a_T 
+&= 
+a_0 + T/2
+\\
+b_T
+&=
+b_0
++
+(\By_T^\tr\By_T+\Bm_0^\tr\BH_0\Bm_0-\Bm_T^\tr\BH_T\Bm_T)/2.
+\end{aligned}
+$$
+
+## Recursive form {.small}
+
+Define:
+
+$$
+\begin{aligned}
+e_{t|t-1}&=y_t-\Bx_t^\tr\Bm_{t-1}\\
+r_{t|t-1}^2&=1+\Bx_t^\tr\BH_{t-1}^{-1}\Bx_t\\
+\Bk_t&=\BH_{t-1}^{-1}\Bx_t/r_{t|t-1}^2.
+\end{aligned}
+$$
+
+Then:
+
+$$
+\begin{aligned}
+\Bm_t
+&=
+\Bm_{t-1}
++
+\Bk_te_{t|t-1}
+\\
+\BH_t^{-1}
+&=
+\BH_{t-1}^{-1}-\Bk_t\Bx_t^\tr\BH_{t-1}^{-1}
+\\
+a_t
+&=a_{t-1}+1/2
+\\
+b_t
+&=
+b_{t-1}
++
+\frac{1}{2}
+\frac{e_{t|t-1}^2}{r_{t|t-1}^2}.
+\end{aligned}
+$$
+
+## One-step posterior predictive distribution
+
+We want 
+
+. . .
+
+$$
+p(y_{t+1}\given y_{0:t})
+=
+\int
+\int
+p(y_{t+1}\given\Bbeta\com\sigma^2\com y_{0:t})p(\Bbeta\com\sigma^2\given y_{0:t})\,\dd\Bbeta\,\dd\sigma^2
+,
+$$
+
+. . .
+
+and we know that
+
+$$
+\begin{aligned}
+\sigma^2\given y_{0:t}
+&\sim
+\text{IG}(a_t\com b_t)
+\\
+\Bbeta\given \sigma^2\com y_{0:t}
+&\sim 
+\text{N}_{p+1}(\Bm_t\com\sigma^2\BH^{-1}_t)
+\\
+y_{t+1}\given\Bbeta\com \sigma^2\com y_{0:t}
+&\sim \N(\Bx_{t+1}^\tr\Bbeta\com\sigma^2).
+\end{aligned}
+$$
+
+. . .
+
+There is actually a closed-form solution.
+
+## Marginalize out $\Bbeta$
+
+We know that 
+
+$$
+\begin{aligned}
+\Bbeta\given \sigma^2\com y_{0:t}
+&\sim 
+\text{N}_{p+1}(\Bm_t\com\sigma^2\BH^{-1}_t)
+\\
+y_{t+1}
+&=
+\Bx_{t+1}^\tr\Bbeta
++
+\varepsilon_{t+1}
+,
+&&
+\varepsilon_{t+1}\sim\N(0\com \sigma^2).
+\end{aligned}
+$$
+
+. . .
+
+By affine transformation:
+
+$$
+\Bx_{t+1}^\tr\Bbeta
+\given \sigma^2\com y_{0:t}
+\sim 
+\N(
+\Bx_{t+1}^\tr\Bm_t
+\com
+\sigma^2\Bx_{t+1}^\tr\BH_t^{-1}\Bx_{t+1}
+).
+$$
+
+. . .
+
+By linear combination of independent normals:
+
+$$
+\begin{aligned}
+y_{t+1}\given \sigma^2\com y_{0:t}
+&\sim \N\left(\Bx_{t+1}^\tr\Bm_t\com\sigma^2(1+\Bx_{t+1}^\tr\BH_t^{-1}\Bx_{t+1})\right).
+\end{aligned}
+$$
+
+## Marginalize out $\sigma^2$ {.small}
+
+We know that 
+
+$$
+\begin{aligned}
+\sigma^2\given y_{0:t}
+&\sim
+\text{IG}(a_t\com b_t)
+\\
+y_{t+1}\given \sigma^2\com y_{0:t}
+&\sim \N\left(\Bx_{t+1}^\tr\Bm_t\com\sigma^2(1+\Bx_{t+1}^\tr\BH_t^{-1}\Bx_{t+1})\right).
+\end{aligned}
+$$
+
+. . .
+
+Marginalizing $\sigma^2$ out of this hierarchy is essentially the *definition* of Student's $t$:
+
+. . .
+
+$$
+\begin{aligned}
+y_{t+1}\given y_{0:t}
+&\sim
+t(\nu_{t+1|t}\com\bar{y}_{t+1|t}\com s_{t+1|t}^2)
+\\
+\\
+\nu_{t+1|t}
+&=
+2a_t
+\\
+\bar{y}_{t+1|t}
+&=
+\Bx_{t+1}^\tr\Bm_t
+\\
+s_{t+1|t}^2
+&=
+\frac{b_t}{a_t}
+(1+\Bx_{t+1}^\tr\BH_t^{-1}\Bx_{t+1})
+.
+\end{aligned}
+$$
+
+. . .
+
+So, Student's $t$ with location-scale.
+
