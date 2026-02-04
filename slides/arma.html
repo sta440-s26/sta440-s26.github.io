@@ -1,0 +1,1596 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-c8ad9e5dbd60b7b70b38521ab19b7da4.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<meta name="shinylive:serviceworker_dir" content="..">
+<script src="../site_libs/quarto-contrib/shinylive-0.9.1/shinylive/load-shinylive-sw.js" type="module"></script>
+<script src="../site_libs/quarto-contrib/shinylive-0.9.1/shinylive/run-python-blocks.js" type="module"></script>
+<link href="../site_libs/quarto-contrib/shinylive-0.9.1/shinylive/shinylive.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/shinylive-quarto-css/shinylive-quarto.css" rel="stylesheet"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.34">
+<meta name="author" content="Ed Iversen and John Zito">
+<title>STA 440 Spring 2026 – Autoregressive models</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+<link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
+<link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
+<style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+  </style>
+<link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-6e51ad904291ad622da7d287747171b4.css">
+<link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+<link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+<link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+<link href="../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+<link href="../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+<link href="../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+<style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+<meta property="og:title" content="Autoregressive models – STA 440 Spring 2026">
+<meta property="og:site_name" content="STA 440 Spring 2026">
+</head>
+<body class="quarto-light">
+
+$$
+\newcommand{\initvar}{v_0^2}
+\newcommand{\cd}{\overset{d}{\to}}
+\newcommand{\var}{\text{var}}
+\newcommand{\cov}{\text{cov}}
+\newcommand{\argmax}[1]{\underset{#1}{\arg\max}}
+\newcommand{\argmin}[1]{\underset{#1}{\arg\min}}
+\newcommand{\iid}{\overset{\textrm{iid}}{\sim}}
+\newcommand{\indep}{\overset{\textrm{indep}}{\sim}}
+\newcommand{\tr}{{\scriptscriptstyle\mathsf{T}}}
+\newcommand{\com}{,\,}
+\newcommand{\given}{\,|\,}
+\newcommand{\acal}{\mathcal{A}}
+\newcommand{\bcal}{\mathcal{B}}
+\newcommand{\ccal}{\mathcal{C}}
+\newcommand{\dcal}{\mathcal{D}}
+\newcommand{\ecal}{\mathcal{E}}
+\newcommand{\fcal}{\mathcal{F}}
+\newcommand{\gcal}{\mathcal{G}}
+\newcommand{\hcal}{\mathcal{H}}
+\newcommand{\ical}{\mathcal{I}}
+\newcommand{\jcal}{\mathcal{J}}
+\newcommand{\kcal}{\mathcal{K}}
+\newcommand{\lcal}{\mathcal{L}}
+\newcommand{\mcal}{\mathcal{M}}
+\newcommand{\ncal}{\mathcal{N}}
+\newcommand{\ocal}{\mathcal{O}}
+\newcommand{\pcal}{\mathcal{P}}
+\newcommand{\qcal}{\mathcal{Q}}
+\newcommand{\rcal}{\mathcal{R}}
+\newcommand{\scal}{\mathcal{S}}
+\newcommand{\tcal}{\mathcal{T}}
+\newcommand{\ucal}{\mathcal{U}}
+\newcommand{\vcal}{\mathcal{V}}
+\newcommand{\wcal}{\mathcal{W}}
+\newcommand{\xcal}{\mathcal{X}}
+\newcommand{\ycal}{\mathcal{Y}}
+\newcommand{\zcal}{\mathcal{Z}}
+\newcommand{\EE}{\mathbb{E}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\PP}{\mathbb{P}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\BA}{\mathbf{A}}
+\newcommand{\BB}{\mathbf{B}}
+\newcommand{\BC}{\mathbf{C}}
+\newcommand{\BD}{\mathbf{D}}
+\newcommand{\BE}{\mathbf{E}}
+\newcommand{\BF}{\mathbf{F}}
+\newcommand{\BG}{\mathbf{G}}
+\newcommand{\BH}{\mathbf{H}}
+\newcommand{\BI}{\mathbf{I}}
+\newcommand{\BJ}{\mathbf{J}}
+\newcommand{\BK}{\mathbf{K}}
+\newcommand{\BL}{\mathbf{L}}
+\newcommand{\BM}{\mathbf{M}}
+\newcommand{\BN}{\mathbf{N}}
+\newcommand{\BO}{\mathbf{O}}
+\newcommand{\BP}{\mathbf{P}}
+\newcommand{\BQ}{\mathbf{Q}}
+\newcommand{\BR}{\mathbf{R}}
+\newcommand{\BS}{\mathbf{S}}
+\newcommand{\BT}{\mathbf{T}}
+\newcommand{\BU}{\mathbf{U}}
+\newcommand{\BV}{\mathbf{V}}
+\newcommand{\BW}{\mathbf{W}}
+\newcommand{\BX}{\mathbf{X}}
+\newcommand{\BY}{\mathbf{Y}}
+\newcommand{\BZ}{\mathbf{Z}}
+\newcommand{\Ba}{\mathbf{a}}
+\newcommand{\Bb}{\mathbf{b}}
+\newcommand{\Bc}{\mathbf{c}}
+\newcommand{\Bd}{\mathbf{d}}
+\newcommand{\Be}{\mathbf{e}}
+\newcommand{\Bf}{\mathbf{f}}
+\newcommand{\Bg}{\mathbf{g}}
+\newcommand{\Bh}{\mathbf{h}}
+\newcommand{\Bi}{\mathbf{i}}
+\newcommand{\Bj}{\mathbf{j}}
+\newcommand{\Bk}{\mathbf{k}}
+\newcommand{\Bl}{\mathbf{l}}
+\newcommand{\Bm}{\mathbf{m}}
+\newcommand{\Bn}{\mathbf{n}}
+\newcommand{\Bo}{\mathbf{o}}
+\newcommand{\Bp}{\mathbf{p}}
+\newcommand{\Bq}{\mathbf{q}}
+\newcommand{\Br}{\mathbf{r}}
+\newcommand{\Bs}{\mathbf{s}}
+\newcommand{\Bt}{\mathbf{t}}
+\newcommand{\Bu}{\mathbf{u}}
+\newcommand{\Bv}{\mathbf{v}}
+\newcommand{\Bw}{\mathbf{w}}
+\newcommand{\Bx}{\mathbf{x}}
+\newcommand{\By}{\mathbf{y}}
+\newcommand{\Bz}{\mathbf{z}}
+\newcommand{\Balpha}{\boldsymbol{\alpha}}
+\newcommand{\Bmu}{\boldsymbol{\mu}}
+\newcommand{\Btheta}{\boldsymbol{\theta}}
+\newcommand{\Beta}{\boldsymbol{\eta}}
+\newcommand{\Bepsilon}{\boldsymbol{\varepsilon}}
+\newcommand{\Bbeta}{\boldsymbol{\beta}}
+\newcommand{\BLambda}{\boldsymbol{\Lambda}}
+\newcommand{\BSigma}{\boldsymbol{\Sigma}}
+\newcommand{\BOmega}{\boldsymbol{\Omega}}
+\newcommand{\BPsi}{\boldsymbol{\Psi}}
+\newcommand{\BGamma}{\boldsymbol{\Gamma}}
+\newcommand{\BPhi}{\boldsymbol{\Phi}}
+\newcommand{\Bphi}{\boldsymbol{\phi}}
+\newcommand{\BUpsilon}{\boldsymbol{\Upsilon}}
+\newcommand{\BXi}{\boldsymbol{\Xi}}
+\newcommand{\Bpi}{\boldsymbol{\pi}}
+\newcommand{\Bzero}{\mathbf{0}}
+\newcommand{\Bone}{\mathbf{1}}
+\newcommand{\N}{\text{N}}
+\newcommand{\dd}{\text{d}}
+$$
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center"><h1 class="title">Autoregressive models</h1>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Ed Iversen and John Zito 
+</div>
+        <p class="quarto-title-affiliation">
+            Duke University <br> STA 440 Spring 2026
+          </p>
+    </div>
+</div>
+
+</section><section><section id="introduction" class="title-slide slide level1 center"><h1>Introduction</h1>
+
+</section><section id="time-series" class="slide level2 small"><h2>Time series</h2>
+<ul>
+<li><p>A <span style="color:blue;"><strong>time series</strong></span> is a set of measurements collected over time;</p></li>
+<li><p>We model these data as a sequence of <span style="color:blue;"><strong>dependent</strong></span> random variables:</p></li>
+</ul>
+<p><span class="math display">\[
+\mathbf{y}_{0:T} = \{\mathbf{y}_0,\,\mathbf{y}_1,\,\mathbf{y}_2,\,...,\,\mathbf{y}_T\}.
+\]</span></p>
+<ul>
+<li>A <span style="color:blue;"><strong>time series model</strong></span> is “just” their joint probability distribution:</li>
+</ul>
+<p><span class="math display">\[
+p(\mathbf{y}_{0:T}) = p(\mathbf{y}_0)\prod_{t=1}^Tp(\mathbf{y}_t\,|\,\mathbf{y}_{0:t-1}).
+\]</span></p>
+<div class="fragment">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Stay grounded.</strong></p>
+</div>
+<div class="callout-content">
+<p>Like much wisdom, that last bullet is simultaneously vacuous and profound. It tells you everything and it tells you nothing all at once. But don’t let this basic fact get lost in the sea of details.</p>
+</div>
+</div>
+</div>
+</div>
+</section><section id="notation-to-get-used-to" class="slide level2 small"><h2>Notation to get used to</h2>
+<ul>
+<li>I will not use uppercase <span class="math inline">\(Y_t\)</span> versus lowercase <span class="math inline">\(y_t\)</span> to distinguish random variables and fixed realizations. It’s all just <span class="math inline">\(y_t\)</span>, and context makes clear how it functions;</li>
+<li>A vector <span class="math inline">\(\mathbf{y}\in\mathbb{R}^n\)</span> is always an <span class="math inline">\(n\times 1\)</span> column. The corresponding row vector is <span class="math inline">\(\By^\tr\)</span>;</li>
+<li>For integers <span class="math inline">\(i&lt;j\)</span>, you will see this shorthand all the time:</li>
+</ul>
+<p><span class="math display">\[
+y_{i:j}
+=
+\{y_i\com y_{i+1}\com y_{i+2}\com...\com y_{j-2}\com y_{j-1}\com y_{j}\}
+.
+\]</span></p>
+<ul>
+<li>The symbol “<span class="math inline">\(p\)</span>” will be aggressively abused and overloaded to represent any probability distribution, sometimes several in the same line:</li>
+</ul>
+<p><span class="math display">\[
+p(\mathbf{y}_{0:T}) = p(\mathbf{y}_0)\prod_{t=1}^Tp(\mathbf{y}_t\,|\,\mathbf{y}_{0:t-1}).
+\]</span></p>
+</section></section><section><section id="starting-small" class="title-slide slide level1 center"><h1>Starting small</h1>
+
+</section><section id="the-simplest-non-trivial-time-series-model" class="slide level2 medium"><h2>The simplest non-trivial time series model</h2>
+<p>The autoregression of order 1, or AR(1):</p>
+<div class="fragment">
+<p><span class="math display">\[
+\begin{aligned}
+y_t
+&amp;=
+\beta_0
++
+\beta_1
+y_{t-1}
++
+\varepsilon_t,
+\quad
+\varepsilon_t\iid\text{N}(0\com\sigma^2)
+\\
+y_0
+&amp;\sim
+\text{N}(\mu_0\com \initvar),
+\end{aligned}
+\]</span></p>
+</div>
+<div class="fragment">
+<p>That’s the recursive form. It implies a joint distribution written marginal-conditional style:</p>
+</div>
+<div class="fragment">
+<p><span class="math display">\[
+\begin{aligned}
+p(y_{0:T})
+&amp;=
+p(y_0)
+\prod_{t=1}^T
+p(y_t\given y_{0:t-1})
+\\
+&amp;=
+p(y_0)
+\prod_{t=1}^T
+p(y_t\given y_{t-1}).
+\end{aligned}
+\]</span></p>
+</div>
+</section><section id="the-implied-joint-distribution" class="slide level2 small"><h2>The implied joint distribution</h2>
+<p>Because the model is linear and Gaussian, the implied joint distribution across time is just a big ol’ multivariate normal:</p>
+<p><span class="math display">\[
+\begin{bmatrix}
+y_0 &amp; y_1 &amp; \cdots &amp; y_T
+\end{bmatrix}^\tr
+\sim\text{N}_{T+1}\left(\Bmu\com \BSigma\right).
+\]</span></p>
+<p>Just like the linear mixed model is “just” a big multivariate normal with a particular block covariance structure (dependent within and independent between groups).</p>
+<div class="fragment">
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Don’t worry about this!</strong></p>
+</div>
+<div class="callout-content">
+<p>The mean and covariance are given by:</p>
+<p><span class="math display">\[
+\begin{aligned}
+E(y_t)
+&amp;=
+\beta_0\sum\limits_{i=0}^{t-1}\beta_1^i
++
+\beta_1^t\mu_0
+\\
+\var(y_t)
+&amp;=
+\sigma^2
+\sum\limits_{i=0}^{t-1}\beta_1^{2i}+
+\beta_1^{2t}\initvar
+\\
+\cov(y_t\com y_s)
+&amp;=
+\begin{cases}
+\beta_1^{s-t}\var(y_t) &amp; t\leq s\\
+\beta_1^{t-s}\var(y_s) &amp; s &lt; t.
+\end{cases}
+.
+\end{aligned}
+\]</span></p>
+</div>
+</div>
+</div>
+</div>
+</section><section id="stationarity" class="slide level2"><h2>Stationarity</h2>
+<p>A joint distribution is <strong>(strictly) stationary</strong> if it is “shift invariant”:</p>
+<p><span class="math display">\[
+\{y_{t_1}\com y_{t_2}\com ...\com y_{t_n}\}\overset{d}{=}\{y_{t_1+h}\com y_{t_2+h}\com ...\com y_{t_n+h}\}.
+\]</span></p>
+<p>The Gaussian AR(1) with <span class="math inline">\(|\beta_1|&lt;1\)</span> has this property.</p>
+</section><section id="stationary-ar1" class="slide level2 small"><h2>Stationary AR(1)</h2>
+<p>If <span class="math inline">\(-1&lt;\beta_1&lt;1\)</span>, <span class="math inline">\(\mu_0=\beta_0/(1-\beta_1)\)</span>, and <span class="math inline">\(\initvar=\sigma^2/(1-\beta_1^2)\)</span>, then the AR(1) is strictly stationary with the following:</p>
+<p><span class="math display">\[
+\begin{aligned}
+E(y_t)
+&amp;=
+\frac{\beta_0}{1-\beta_1}
+\\
+\var(y_t)
+&amp;=
+\frac{\sigma^2}{1-\beta_1^2}
+\\
+\cov(y_t\com y_s)
+&amp;=
+\beta_1^{|t-s|}\var(y_t)
+=
+\beta_1^{|t-s|}\frac{\sigma^2}{1-\beta_1^2}.
+\end{aligned}
+\]</span></p>
+<p>The common marginal shared by all <span class="math inline">\(y_t\)</span> is called the stationary distribution:</p>
+<p><span class="math display">\[
+y_t\sim\text{N}\left(\frac{\beta_0}{1-\beta_1}\com \frac{\sigma^2}{1-\beta_1^2}\right).
+\]</span></p>
+<p>So “did: dependent but identically distributed.”</p>
+</section><section id="autocovariance-of-a-stationary-process" class="slide level2"><h2>Autocovariance of a stationary process</h2>
+<p>For a stationary process, the covariance kernel satisfies</p>
+<p><span class="math display">\[
+\cov(y_t\com y_{s})=\cov(y_{t+h}\com y_{s+h})\quad \forall (t\com s\com h).
+\]</span></p>
+<p>So you can define something called the <strong>autocovariance function</strong>:</p>
+<p><span class="math display">\[
+\gamma(h)=\cov(y_{t+h}\com y_{t}).
+\]</span></p>
+<p>For the AR(1), this is</p>
+<p><span class="math display">\[
+\begin{aligned}
+\gamma(0)&amp;=\sigma^2/(1-\beta_1^2)
+\\
+\gamma(h)&amp;=\beta_1^h\gamma(0).
+\end{aligned}
+\]</span></p>
+</section><section id="what-does-the-autocov-function-look-like" class="slide level2"><h2>What does the autocov function look like?</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure><p><img data-src="arma_files/figure-revealjs/unnamed-chunk-1-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="what-does-the-autocov-function-look-like-1" class="slide level2"><h2>What does the autocov function look like?</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure><p><img data-src="arma_files/figure-revealjs/unnamed-chunk-2-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="what-does-the-autocov-function-look-like-2" class="slide level2"><h2>What does the autocov function look like?</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure><p><img data-src="arma_files/figure-revealjs/unnamed-chunk-3-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="what-does-the-autocov-function-look-like-3" class="slide level2"><h2>What does the autocov function look like?</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure><p><img data-src="arma_files/figure-revealjs/unnamed-chunk-4-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="what-does-the-autocov-function-look-like-4" class="slide level2"><h2>What does the autocov function look like?</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure><p><img data-src="arma_files/figure-revealjs/unnamed-chunk-5-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="what-does-the-autocov-function-look-like-5" class="slide level2"><h2>What does the autocov function look like?</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure><p><img data-src="arma_files/figure-revealjs/unnamed-chunk-6-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="ar1-sample-paths" class="slide level2"><h2>AR(1) sample paths</h2>
+<div class="sourceCode" id="cb1" data-engine="r"><pre class="sourceCode numberSource shinylive-r number-lines code-with-copy"><code class="sourceCode"><span id="cb1-1"><a></a>#| '!! shinylive warning !!': |</span>
+<span id="cb1-2"><a></a>#|   shinylive does not work in self-contained HTML documents.</span>
+<span id="cb1-3"><a></a>#|   Please set `embed-resources: false` in your metadata.</span>
+<span id="cb1-4"><a></a>#| standalone: true</span>
+<span id="cb1-5"><a></a>#| viewerHeight: 700</span>
+<span id="cb1-6"><a></a></span>
+<span id="cb1-7"><a></a>library(shiny)</span>
+<span id="cb1-8"><a></a></span>
+<span id="cb1-9"><a></a>simulate_ar_1 &lt;- function(T, b0, b1, s, m0, s0){</span>
+<span id="cb1-10"><a></a>  y &lt;- numeric(T)</span>
+<span id="cb1-11"><a></a>  y[1] &lt;- rnorm(1, m0, s0)</span>
+<span id="cb1-12"><a></a>  for(t in 2:T){</span>
+<span id="cb1-13"><a></a>    y[t] &lt;- b0 + b1 * y[t - 1] + rnorm(1, 0, s)</span>
+<span id="cb1-14"><a></a>  }</span>
+<span id="cb1-15"><a></a>  return(y)</span>
+<span id="cb1-16"><a></a>}</span>
+<span id="cb1-17"><a></a></span>
+<span id="cb1-18"><a></a>ar_1_mean &lt;- function(t, b0, b1, m0){</span>
+<span id="cb1-19"><a></a>  if(t == 0){</span>
+<span id="cb1-20"><a></a>    return(m0)</span>
+<span id="cb1-21"><a></a>  }else{</span>
+<span id="cb1-22"><a></a>    return(b0 * sum(b1 ^ (0:(t-1))) + m0 * (b1^t)) </span>
+<span id="cb1-23"><a></a>  }</span>
+<span id="cb1-24"><a></a>}</span>
+<span id="cb1-25"><a></a></span>
+<span id="cb1-26"><a></a>ar_1_var &lt;- function(t, b1, s, s0){</span>
+<span id="cb1-27"><a></a>  if(t == 0){</span>
+<span id="cb1-28"><a></a>    return(s0^2)</span>
+<span id="cb1-29"><a></a>  }else{</span>
+<span id="cb1-30"><a></a>    return((s0^2) * (b1^(2*t)) + (s^2) * sum(b1 ^ (2*(0:(t-1)))))</span>
+<span id="cb1-31"><a></a>  }</span>
+<span id="cb1-32"><a></a>}</span>
+<span id="cb1-33"><a></a></span>
+<span id="cb1-34"><a></a>ar_1_sd &lt;- function(t, b1, s, s0){</span>
+<span id="cb1-35"><a></a>  sqrt(ar_1_var(t, b1, s, s0))</span>
+<span id="cb1-36"><a></a>}</span>
+<span id="cb1-37"><a></a></span>
+<span id="cb1-38"><a></a># Define UI for application that draws a histogram</span>
+<span id="cb1-39"><a></a>ui &lt;- fluidPage(</span>
+<span id="cb1-40"><a></a>  </span>
+<span id="cb1-41"><a></a>  # Application title</span>
+<span id="cb1-42"><a></a>  titlePanel("Marginal distributions and sample paths of a Gaussian AR(1)"),</span>
+<span id="cb1-43"><a></a>  </span>
+<span id="cb1-44"><a></a>  # Sidebar with a slider input for number of bins </span>
+<span id="cb1-45"><a></a>  sidebarLayout(</span>
+<span id="cb1-46"><a></a>    sidebarPanel(</span>
+<span id="cb1-47"><a></a>      sliderInput("b0",</span>
+<span id="cb1-48"><a></a>                  "β₀",</span>
+<span id="cb1-49"><a></a>                  min = -5,</span>
+<span id="cb1-50"><a></a>                  max = 5,</span>
+<span id="cb1-51"><a></a>                  value = 0,</span>
+<span id="cb1-52"><a></a>                  step = 0.1),</span>
+<span id="cb1-53"><a></a>      sliderInput("b1",</span>
+<span id="cb1-54"><a></a>                  "β₁",</span>
+<span id="cb1-55"><a></a>                  min = -2,</span>
+<span id="cb1-56"><a></a>                  max = 2,</span>
+<span id="cb1-57"><a></a>                  value = 0,</span>
+<span id="cb1-58"><a></a>                  step = 0.1),</span>
+<span id="cb1-59"><a></a>      sliderInput("s",</span>
+<span id="cb1-60"><a></a>                  "σ",</span>
+<span id="cb1-61"><a></a>                  min = 0,</span>
+<span id="cb1-62"><a></a>                  max = 2,</span>
+<span id="cb1-63"><a></a>                  value = 1, </span>
+<span id="cb1-64"><a></a>                  step = 0.1),</span>
+<span id="cb1-65"><a></a>      sliderInput("m0",</span>
+<span id="cb1-66"><a></a>                  "μ₀",</span>
+<span id="cb1-67"><a></a>                  min = -5,</span>
+<span id="cb1-68"><a></a>                  max = 5,</span>
+<span id="cb1-69"><a></a>                  value = 0,</span>
+<span id="cb1-70"><a></a>                  step = 0.1),</span>
+<span id="cb1-71"><a></a>      sliderInput("T",</span>
+<span id="cb1-72"><a></a>                  "T",</span>
+<span id="cb1-73"><a></a>                  min = 20,</span>
+<span id="cb1-74"><a></a>                  max = 200,</span>
+<span id="cb1-75"><a></a>                  step = 20,</span>
+<span id="cb1-76"><a></a>                  value = 100),</span>
+<span id="cb1-77"><a></a>      actionButton("redo", "New sample path"),</span>
+<span id="cb1-78"><a></a>    ),</span>
+<span id="cb1-79"><a></a>    </span>
+<span id="cb1-80"><a></a>    # Show a plot of the generated distribution</span>
+<span id="cb1-81"><a></a>    mainPanel(</span>
+<span id="cb1-82"><a></a>      plotOutput("distPlot", height = "600px")</span>
+<span id="cb1-83"><a></a>    )</span>
+<span id="cb1-84"><a></a>  )</span>
+<span id="cb1-85"><a></a>)</span>
+<span id="cb1-86"><a></a></span>
+<span id="cb1-87"><a></a># Define server logic required to draw a histogram</span>
+<span id="cb1-88"><a></a>server &lt;- function(input, output) {</span>
+<span id="cb1-89"><a></a>  </span>
+<span id="cb1-90"><a></a>  output$distPlot &lt;- renderPlot({</span>
+<span id="cb1-91"><a></a>    input$redo</span>
+<span id="cb1-92"><a></a>    b0 &lt;- input$b0</span>
+<span id="cb1-93"><a></a>    b1 &lt;- input$b1</span>
+<span id="cb1-94"><a></a>    redo &lt;- input$redo</span>
+<span id="cb1-95"><a></a>    T &lt;- input$T</span>
+<span id="cb1-96"><a></a>    s &lt;- input$s</span>
+<span id="cb1-97"><a></a>    m0 &lt;- input$m0</span>
+<span id="cb1-98"><a></a>    s0 = 1</span>
+<span id="cb1-99"><a></a>    </span>
+<span id="cb1-100"><a></a>    range = 0:T</span>
+<span id="cb1-101"><a></a>    alpha = c(0.01, seq(0.1, 0.9, by = 0.1))</span>
+<span id="cb1-102"><a></a>    </span>
+<span id="cb1-103"><a></a>    middle &lt;- sapply(range, ar_1_mean, b0, b1, m0)</span>
+<span id="cb1-104"><a></a>    sds &lt;- sapply(range, ar_1_sd, b1, s, s0)</span>
+<span id="cb1-105"><a></a>    </span>
+<span id="cb1-106"><a></a>    </span>
+<span id="cb1-107"><a></a>    plot(range, middle, type = "l",</span>
+<span id="cb1-108"><a></a>         xaxt = "n", </span>
+<span id="cb1-109"><a></a>         yaxt = "n",</span>
+<span id="cb1-110"><a></a>         xlab = "t",</span>
+<span id="cb1-111"><a></a>         ylab = expression(y[t]),</span>
+<span id="cb1-112"><a></a>         ylim = c(-20, 20), bty = "n",</span>
+<span id="cb1-113"><a></a>         col = "white")</span>
+<span id="cb1-114"><a></a>    </span>
+<span id="cb1-115"><a></a>    for(a in alpha){</span>
+<span id="cb1-116"><a></a>      </span>
+<span id="cb1-117"><a></a>      U = qnorm(1 - a / 2, mean = middle, sd = sds)</span>
+<span id="cb1-118"><a></a>      L = qnorm(a / 2, mean = middle, sd = sds)</span>
+<span id="cb1-119"><a></a>      </span>
+<span id="cb1-120"><a></a>      polygon(</span>
+<span id="cb1-121"><a></a>        c(range, rev(range)),</span>
+<span id="cb1-122"><a></a>        c(U, rev(L)),</span>
+<span id="cb1-123"><a></a>        col = rgb(1, 0, 0, 0.15),</span>
+<span id="cb1-124"><a></a>        border = NA</span>
+<span id="cb1-125"><a></a>      )</span>
+<span id="cb1-126"><a></a>    }</span>
+<span id="cb1-127"><a></a>    </span>
+<span id="cb1-128"><a></a>    inc = 20</span>
+<span id="cb1-129"><a></a>    axis(1, pos = 0, at = seq(0, max(range), by = inc), </span>
+<span id="cb1-130"><a></a>         labels = c(NA, seq(inc, max(range), by = inc)))</span>
+<span id="cb1-131"><a></a>    axis(2, pos = 0)</span>
+<span id="cb1-132"><a></a>    </span>
+<span id="cb1-133"><a></a>    lines(range, simulate_ar_1(max(range) + 1, b0, b1, s, m0, s0), col = "black", lwd = 2)</span>
+<span id="cb1-134"><a></a>  })</span>
+<span id="cb1-135"><a></a>}</span>
+<span id="cb1-136"><a></a></span>
+<span id="cb1-137"><a></a># Run the application </span>
+<span id="cb1-138"><a></a>shinyApp(ui = ui, server = server)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section></section><section><section id="there-nothing-special-about-one-lag" class="title-slide slide level1 center"><h1>There nothing special about one lag</h1>
+
+</section><section id="arp" class="slide level2 small"><h2>AR(p)</h2>
+<p>The autoregression of order <span class="math inline">\(p\)</span>, or AR(<span class="math inline">\(p\)</span>):</p>
+<div class="fragment">
+<p><span class="math display">\[
+\begin{aligned}
+y_t
+&amp;=
+\beta_0
++
+\beta_1
+y_{t-1}
++
+\beta_2
+y_{t-2}
++
+\cdots
++
+\beta_p
+y_{t-p}
++
+\varepsilon_t,
+\quad
+\varepsilon_t\iid\text{N}(0\com\sigma^2)
+\\
+\begin{bmatrix}
+y_0
+\\
+y_{-1}
+\\
+\vdots
+\\
+y_{1-p}
+\end{bmatrix}
+&amp;\sim
+\text{N}_p(\Bmu_0\com \BP_0).
+\end{aligned}
+\]</span></p>
+</div>
+</section></section><section><section id="maximum-likelihood-estimation" class="title-slide slide level1 center"><h1>Maximum likelihood estimation</h1>
+
+</section><section id="lets-improve-the-notation" class="slide level2 medium"><h2>Let’s improve the notation</h2>
+<p>The autoregression of order p, or AR(p):</p>
+<div class="fragment">
+<p><span class="math display">\[
+\begin{aligned}
+y_t
+&amp;=
+\beta_0
++
+\sum\limits_{\ell=1}^p
+\beta_\ell
+y_{t-\ell}
++
+\varepsilon_t,
+\quad
+\varepsilon_t\iid\text{N}(0\com\sigma^2).
+\end{aligned}
+\]</span></p>
+</div>
+<div class="fragment">
+<p>This implies a joint distribution governed by a finite set of static parameters <span class="math inline">\(\Btheta = \begin{bmatrix}\beta_0&amp;\beta_1&amp;\cdots &amp;\beta_p&amp;\sigma^2\end{bmatrix}^\tr\)</span>:</p>
+</div>
+<div class="fragment">
+<p><span class="math display">\[
+\begin{aligned}
+p(y_{1:T}\given y_{1-p:0}\com\Btheta)
+&amp;=
+\prod_{t=1}^T
+p(y_t\given y_{t-p:t-1}\com\Btheta).
+\end{aligned}
+\]</span></p>
+</div>
+<div class="fragment">
+<p>Viewed as a function of <span class="math inline">\(\Btheta\)</span>, that’s a (conditional) <em>likelihood</em>!</p>
+</div>
+<div class="fragment">
+<p>Maximize it, or combine with a prior.</p>
+</div>
+</section><section id="maximum-likelihood-estimation-1" class="slide level2"><h2>Maximum likelihood estimation</h2>
+<p>Treating the observed data <span class="math inline">\(y_{1-p:T}\)</span> as fixed, we want:</p>
+<p><span class="math display">\[
+\hat{\Btheta}_T=\argmax{\Btheta}\,p(y_{1:T}\given y_{1-p:0}\com \Btheta).
+\]</span></p>
+<p>To do this, it helps to view the AR(p) is “just” a <em>multiple</em> linear regression where <span class="math inline">\(\Bx_t\)</span> encodes the lagged values of <span class="math inline">\(y_t\)</span>:</p>
+<p><span class="math display">\[
+\begin{aligned}
+y_t&amp;=\Bx_t^\tr\Bbeta+\varepsilon_t,&amp;&amp;\varepsilon_t\iid\N(0\com\sigma^2)
+\\
+\Bx_t&amp;=\begin{bmatrix}
+1 &amp; y_{t-1} &amp; y_{t-2} &amp; \cdots &amp; y_{t-p}
+\end{bmatrix}^\tr\\
+\Bbeta&amp;=\begin{bmatrix}
+\beta_0 &amp; \beta_1 &amp; \beta_2 &amp; \cdots &amp; \beta_p
+\end{bmatrix}^\tr.
+\end{aligned}
+\]</span></p>
+</section><section id="maximum-likelihood-estimation-2" class="slide level2 medium"><h2>Maximum likelihood estimation</h2>
+<p>Since <span class="math inline">\(y_t\given \Bx_t\com\Btheta\sim\N\left(\Bx_t^\tr\Bbeta\com\sigma^2\right)\)</span>, we have</p>
+<div class="fragment">
+<p><span class="math display">\[
+\begin{aligned}
+p(y_{1:T}\given  \Bx_0\com \Btheta)
+&amp;=
+\prod_{t=1}^T
+p(y_t\given \Bx_t\com\Btheta)
+\\
+&amp;=
+\prod_{t=1}^T
+\frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{1}{2}\frac{(y_t-\Bx_t^\tr\Bbeta)^2}{\sigma^2}\right)
+\\
+&amp;=
+(2\pi\sigma^2)^{-T/2}
+\exp\left(-\frac{1}{2\sigma^2}\sum\limits_{t=1}^T(y_t-\Bx_t^\tr\Bbeta)^2\right)
+.
+\end{aligned}
+\]</span></p>
+</div>
+<div class="fragment">
+<p>To compute the MLE, we treat this as a function of <span class="math inline">\(\Btheta\)</span> with the data fixed.</p>
+</div>
+</section><section id="stack-em-up" class="slide level2 medium scrollable"><h2>Stack ’em up</h2>
+<p>Construct the response vector and design matrix:</p>
+<div class="fragment">
+<p><span class="math display">\[
+\begin{aligned}
+\underbrace{\By_T}_{T\times 1}
+&amp;=
+\begin{bmatrix}y_1&amp;y_2 &amp; \cdots &amp; y_T\end{bmatrix}^\tr
+\\
+\underbrace{\BX_T}_{T\times (p+1)}
+&amp;=
+\begin{bmatrix}
+1 &amp; y_0 &amp; y_{-1} &amp; \cdots &amp; y_{1-p} \\
+1 &amp; y_1 &amp; y_0 &amp; \cdots &amp; y_{2-p} \\
+\vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+1 &amp; y_{T-1} &amp; y_{T-2} &amp; \cdots &amp; y_{T-p}
+\end{bmatrix}
+=
+\begin{bmatrix}
+\Bx_1^\tr\\
+\Bx_2^\tr\\
+\vdots\\
+\Bx_T^\tr
+\end{bmatrix}
+.
+\end{aligned}
+\]</span></p>
+</div>
+<div class="fragment">
+<p>So the likelihood is:</p>
+<p><span class="math display">\[
+\begin{aligned}
+p(y_{1:T}\given  \Bx_0\com \Btheta)
+&amp;=
+(2\pi\sigma^2)^{-T/2}
+\exp\left(-\frac{1}{2\sigma^2}\sum\limits_{t=1}^T(y_t-\Bx_t^\tr\Bbeta)^2\right)
+\\
+&amp;=
+(2\pi\sigma^2)^{-T/2}
+\exp\left(-\frac{1}{2\sigma^2}||\By_T-\BX_T\Bbeta||_2^2\right)
+.
+\end{aligned}
+\]</span></p>
+</div>
+</section><section id="what-are-we-doing" class="slide level2"><h2>What are we doing?</h2>
+<p>Likelihood:</p>
+<p><span class="math display">\[
+\begin{aligned}
+L(\Bbeta\com\sigma^2)
+&amp;=
+(2\pi\sigma^2)^{-T/2}
+\exp\left(-\frac{1}{2\sigma^2}||\By_T-\BX_T\Bbeta||_2^2\right)
+.
+\end{aligned}
+\]</span></p>
+<p>Log-likelihood:</p>
+<p><span class="math display">\[
+\ell(\Bbeta\com\sigma^2)
+=
+-\frac{T}{2}\ln(2\pi\sigma^2)
+-\frac{1}{2\sigma^2}
+||\By_T-\BX_T\Bbeta||_2^2
+,
+\]</span></p>
+<p>We want:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\hat{\Bbeta}_T\com \hat{\sigma_T^2}
+&amp;=\argmax{\Bbeta\com\sigma^2}\,\ell(\Bbeta\com\sigma^2).
+\end{aligned}
+\]</span></p>
+</section><section id="ols-for-the-arp" class="slide level2 medium"><h2>OLS for the AR(p)</h2>
+<div class="fragment">
+<ul>
+<li>The maximum (conditional) likelihood estimator in the AR(p) is the same as the ordinary least squares estimator:</li>
+</ul>
+</div>
+<div class="fragment">
+<p><span class="math display">\[
+\begin{aligned}
+\hat{\Bbeta}_T
+&amp;=
+(\BX_T^\tr\BX_T)^{-1}\BX_T^\tr\By_T
+\\
+\hat{\sigma^2_T}
+&amp;=
+||\By_T-\BX_T\hat{\Bbeta}_T||_2^2 / T.
+\end{aligned}
+\]</span></p>
+</div>
+<div class="fragment">
+<ul>
+<li>It doesn’t matter that there’s time series dependence. Once the data are observed and fixed, the <em>mechanics</em> are identical to iid multiple regression;</li>
+<li>For things like prediction, dependence matters, and the correspondence with iid regression breaks down.</li>
+</ul>
+</div>
+</section><section id="recursive-form" class="slide level2"><h2>Recursive form</h2>
+<p><em>Do not</em> incur the <span class="math inline">\(O(t)\)</span> cost of re-computing <span class="math inline">\((\BX_t^\tr\BX_t)^{-1}\)</span> every period.</p>
+<div class="fragment">
+<p>Instead:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\hat{\Bbeta}_t
+&amp;=
+\hat{\Bbeta}_{t-1}
++
+\Bk_t(y_t-\Bx_t^\tr\hat{\Bbeta}_{t-1})
+\\
+\Bk_t
+&amp;=
+\frac{\BP_{t-1}\Bx_t}
+{1+\Bx_t^\tr\BP_{t-1}\Bx_t}
+\\
+\BP_t
+&amp;=
+\BP_{t-1}
+-
+\Bk_t
+\Bx_t^\tr\BP_{t-1}
+.
+\end{aligned}
+\]</span></p>
+</div>
+<div class="fragment">
+<p><strong>Keyword</strong>: rank-1 update!</p>
+</div>
+</section><section id="asymptotics" class="slide level2"><h2>Asymptotics</h2>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Shumway and Stoffer (2025) Property 3.9</strong></p>
+</div>
+<div class="callout-content">
+<p>If the AR(p) is stationary, then</p>
+<p><span class="math display">\[
+\sqrt{T} \, (\hat{\boldsymbol{\beta}}_{-0} - \boldsymbol{\beta}_{-0})\cd\N_p\bigl(\mathbf{0}, \, \sigma^2 \, \mathbf{\Gamma}_p^{-1}\bigr).
+\]</span></p>
+<p>where <span class="math inline">\(\mathbf{\Gamma}_p\)</span> is the <span class="math inline">\(p \times p\)</span> autocovariance matrix with <span class="math inline">\((i,j)\)</span> entry <span class="math inline">\(\gamma(|i-j|)\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="fragment">
+<p>Same as Yule-Walker!</p>
+</div>
+</section></section><section><section id="conjugate-bayesian-inference" class="title-slide slide level1 center"><h1>Conjugate Bayesian inference</h1>
+
+</section><section id="batch-form" class="slide level2 small"><h2>Batch form</h2>
+<p>Bayesian model with a conjugate prior:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\sigma^2
+&amp;\sim
+\text{IG}(a_0\com b_0)
+\\
+\Bbeta\given \sigma^2
+&amp;\sim
+\text{N}_{p+1}(\Bm_0\com\sigma^2\BH^{-1}_0)
+\\
+y_t
+\given
+\Bx_t
+\com
+\Bbeta\com\sigma^2
+&amp;\sim \text{N}
+\left(
+\Bx_t^\tr\Bbeta\com\sigma^2
+\right).
+\end{aligned}
+\]</span></p>
+<div class="fragment">
+<p>The posterior is available in closed-form:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\sigma^2\given y_{0:T}
+&amp;\sim
+\text{IG}(a_T\com b_T)
+\\
+\Bbeta\given \sigma^2\com y_{0:T}
+&amp;\sim
+\text{N}_{p+2}(\Bm_T\com\sigma^2\BH^{-1}_T)
+\\
+\\
+\BH_T
+&amp;=
+\BX_T^\tr\BX_T+\BH_0
+\\
+\Bm_T
+&amp;=
+\BH_T^{-1}(\BX_T^\tr\By_T+\BH_0\Bm_0)
+\\
+a_T
+&amp;=
+a_0 + T/2
+\\
+b_T
+&amp;=
+b_0
++
+(\By_T^\tr\By_T+\Bm_0^\tr\BH_0\Bm_0-\Bm_T^\tr\BH_T\Bm_T)/2.
+\end{aligned}
+\]</span></p>
+</div>
+</section><section id="recursive-form-1" class="slide level2 small"><h2>Recursive form</h2>
+<p>Define:</p>
+<p><span class="math display">\[
+\begin{aligned}
+e_{t|t-1}&amp;=y_t-\Bx_t^\tr\Bm_{t-1}\\
+r_{t|t-1}^2&amp;=1+\Bx_t^\tr\BH_{t-1}^{-1}\Bx_t\\
+\Bk_t&amp;=\BH_{t-1}^{-1}\Bx_t/r_{t|t-1}^2.
+\end{aligned}
+\]</span></p>
+<p>Then:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\Bm_t
+&amp;=
+\Bm_{t-1}
++
+\Bk_te_{t|t-1}
+\\
+\BH_t^{-1}
+&amp;=
+\BH_{t-1}^{-1}-\Bk_t\Bx_t^\tr\BH_{t-1}^{-1}
+\\
+a_t
+&amp;=a_{t-1}+1/2
+\\
+b_t
+&amp;=
+b_{t-1}
++
+\frac{1}{2}
+\frac{e_{t|t-1}^2}{r_{t|t-1}^2}.
+\end{aligned}
+\]</span></p>
+</section><section id="one-step-posterior-predictive-distribution" class="slide level2"><h2>One-step posterior predictive distribution</h2>
+<p>We want</p>
+<div class="fragment">
+<p><span class="math display">\[
+p(y_{t+1}\given y_{0:t})
+=
+\int
+\int
+p(y_{t+1}\given\Bbeta\com\sigma^2\com y_{0:t})p(\Bbeta\com\sigma^2\given y_{0:t})\,\dd\Bbeta\,\dd\sigma^2
+,
+\]</span></p>
+</div>
+<div class="fragment">
+<p>and we know that</p>
+<p><span class="math display">\[
+\begin{aligned}
+\sigma^2\given y_{0:t}
+&amp;\sim
+\text{IG}(a_t\com b_t)
+\\
+\Bbeta\given \sigma^2\com y_{0:t}
+&amp;\sim
+\text{N}_{p+1}(\Bm_t\com\sigma^2\BH^{-1}_t)
+\\
+y_{t+1}\given\Bbeta\com \sigma^2\com y_{0:t}
+&amp;\sim \N(\Bx_{t+1}^\tr\Bbeta\com\sigma^2).
+\end{aligned}
+\]</span></p>
+</div>
+<div class="fragment">
+<p>There is actually a closed-form solution.</p>
+</div>
+</section><section id="marginalize-out-bbeta" class="slide level2"><h2>Marginalize out <span class="math inline">\(\Bbeta\)</span>
+</h2>
+<p>We know that</p>
+<p><span class="math display">\[
+\begin{aligned}
+\Bbeta\given \sigma^2\com y_{0:t}
+&amp;\sim
+\text{N}_{p+1}(\Bm_t\com\sigma^2\BH^{-1}_t)
+\\
+y_{t+1}
+&amp;=
+\Bx_{t+1}^\tr\Bbeta
++
+\varepsilon_{t+1}
+,
+&amp;&amp;
+\varepsilon_{t+1}\sim\N(0\com \sigma^2).
+\end{aligned}
+\]</span></p>
+<div class="fragment">
+<p>By affine transformation:</p>
+<p><span class="math display">\[
+\Bx_{t+1}^\tr\Bbeta
+\given \sigma^2\com y_{0:t}
+\sim
+\N(
+\Bx_{t+1}^\tr\Bm_t
+\com
+\sigma^2\Bx_{t+1}^\tr\BH_t^{-1}\Bx_{t+1}
+).
+\]</span></p>
+</div>
+<div class="fragment">
+<p>By linear combination of independent normals:</p>
+<p><span class="math display">\[
+\begin{aligned}
+y_{t+1}\given \sigma^2\com y_{0:t}
+&amp;\sim \N\left(\Bx_{t+1}^\tr\Bm_t\com\sigma^2(1+\Bx_{t+1}^\tr\BH_t^{-1}\Bx_{t+1})\right).
+\end{aligned}
+\]</span></p>
+</div>
+</section><section id="marginalize-out-sigma2" class="slide level2 small"><h2>Marginalize out <span class="math inline">\(\sigma^2\)</span>
+</h2>
+<p>We know that</p>
+<p><span class="math display">\[
+\begin{aligned}
+\sigma^2\given y_{0:t}
+&amp;\sim
+\text{IG}(a_t\com b_t)
+\\
+y_{t+1}\given \sigma^2\com y_{0:t}
+&amp;\sim \N\left(\Bx_{t+1}^\tr\Bm_t\com\sigma^2(1+\Bx_{t+1}^\tr\BH_t^{-1}\Bx_{t+1})\right).
+\end{aligned}
+\]</span></p>
+<div class="fragment">
+<p>Marginalizing <span class="math inline">\(\sigma^2\)</span> out of this hierarchy is essentially the <em>definition</em> of Student’s <span class="math inline">\(t\)</span>:</p>
+</div>
+<div class="fragment">
+<p><span class="math display">\[
+\begin{aligned}
+y_{t+1}\given y_{0:t}
+&amp;\sim
+t(\nu_{t+1|t}\com\bar{y}_{t+1|t}\com s_{t+1|t}^2)
+\\
+\\
+\nu_{t+1|t}
+&amp;=
+2a_t
+\\
+\bar{y}_{t+1|t}
+&amp;=
+\Bx_{t+1}^\tr\Bm_t
+\\
+s_{t+1|t}^2
+&amp;=
+\frac{b_t}{a_t}
+(1+\Bx_{t+1}^\tr\BH_t^{-1}\Bx_{t+1})
+.
+\end{aligned}
+\]</span></p>
+</div>
+<div class="fragment">
+<p>So, Student’s <span class="math inline">\(t\)</span> with location-scale.</p>
+
+
+</div>
+</section></section>
+</div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="../site_libs/revealjs/dist/reveal.js"></script><!-- reveal.js plugins --><script src="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script><script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script><script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script><script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script><script src="../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script><script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script><script src="../site_libs/revealjs/plugin/notes/notes.js"></script><script src="../site_libs/revealjs/plugin/search/search.js"></script><script src="../site_libs/revealjs/plugin/zoom/zoom.js"></script><script src="../site_libs/revealjs/plugin/math/math.js"></script><script>window.define = window.backupDefine; window.backupDefine = undefined;</script><script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'fade',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script><script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script><script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+            const codeEl = trigger.previousElementSibling.cloneNode(true);
+            for (const childEl of codeEl.children) {
+              if (isCodeAnnotation(childEl)) {
+                childEl.remove();
+              }
+            }
+            return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp("https:\/\/sta440-s26\.github\.io\/");
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+
+
+</body></html>

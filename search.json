@@ -172,7 +172,7 @@
     "href": "slides/case-study-2.html#in-my-life",
     "title": "Case Study 2",
     "section": "In My Life",
-    "text": "In My Life\nMoving across the columns:"
+    "text": "In My Life\n\n\n\n\n\nMoving across the columns:"
   },
   {
     "objectID": "slides/case-study-2.html#the-path-of-revisions",
@@ -383,6 +383,202 @@
     "title": "Case Study 2",
     "section": "Before lab on Friday",
     "text": "Before lab on Friday\nSkim some background reading:\n\nAruoba (2008 JMCB): “Data revisions are not well behaved;”\nCroushore (2011 JEL): “Frontiers of real-time data analysis;”\nJacobs and van Norden (2016 JoM): “Why are initial estimates of productivity growth so unreliable?”\n\nCheck out FRED and the FRBP’s Real-Time Data Set."
+  },
+  {
+    "objectID": "slides/arma.html#time-series",
+    "href": "slides/arma.html#time-series",
+    "title": "Autoregressive models",
+    "section": "Time series",
+    "text": "Time series\n\nA time series is a set of measurements collected over time;\nWe model these data as a sequence of dependent random variables:\n\n\\[\n\\mathbf{y}_{0:T} = \\{\\mathbf{y}_0,\\,\\mathbf{y}_1,\\,\\mathbf{y}_2,\\,...,\\,\\mathbf{y}_T\\}.\n\\]\n\nA time series model is “just” their joint probability distribution:\n\n\\[\np(\\mathbf{y}_{0:T}) = p(\\mathbf{y}_0)\\prod_{t=1}^Tp(\\mathbf{y}_t\\,|\\,\\mathbf{y}_{0:t-1}).\n\\]\n\n\n\n\n\n\n\nStay grounded.\n\n\nLike much wisdom, that last bullet is simultaneously vacuous and profound. It tells you everything and it tells you nothing all at once. But don’t let this basic fact get lost in the sea of details."
+  },
+  {
+    "objectID": "slides/arma.html#notation-to-get-used-to",
+    "href": "slides/arma.html#notation-to-get-used-to",
+    "title": "Autoregressive models",
+    "section": "Notation to get used to",
+    "text": "Notation to get used to\n\nI will not use uppercase \\(Y_t\\) versus lowercase \\(y_t\\) to distinguish random variables and fixed realizations. It’s all just \\(y_t\\), and context makes clear how it functions;\nA vector \\(\\mathbf{y}\\in\\mathbb{R}^n\\) is always an \\(n\\times 1\\) column. The corresponding row vector is \\(\\By^\\tr\\);\nFor integers \\(i&lt;j\\), you will see this shorthand all the time:\n\n\\[\ny_{i:j}\n=\n\\{y_i\\com y_{i+1}\\com y_{i+2}\\com...\\com y_{j-2}\\com y_{j-1}\\com y_{j}\\}\n.\n\\]\n\nThe symbol “\\(p\\)” will be aggressively abused and overloaded to represent any probability distribution, sometimes several in the same line:\n\n\\[\np(\\mathbf{y}_{0:T}) = p(\\mathbf{y}_0)\\prod_{t=1}^Tp(\\mathbf{y}_t\\,|\\,\\mathbf{y}_{0:t-1}).\n\\]"
+  },
+  {
+    "objectID": "slides/arma.html#the-simplest-non-trivial-time-series-model",
+    "href": "slides/arma.html#the-simplest-non-trivial-time-series-model",
+    "title": "Autoregressive models",
+    "section": "The simplest non-trivial time series model",
+    "text": "The simplest non-trivial time series model\nThe autoregression of order 1, or AR(1):\n\n\\[\n\\begin{aligned}\ny_t\n&=\n\\beta_0\n+\n\\beta_1\ny_{t-1}\n+\n\\varepsilon_t,\n\\quad\n\\varepsilon_t\\iid\\text{N}(0\\com\\sigma^2)\n\\\\\ny_0\n&\\sim\n\\text{N}(\\mu_0\\com \\initvar),\n\\end{aligned}\n\\]\n\n\nThat’s the recursive form. It implies a joint distribution written marginal-conditional style:\n\n\n\\[\n\\begin{aligned}\np(y_{0:T})\n&=\np(y_0)\n\\prod_{t=1}^T\np(y_t\\given y_{0:t-1})\n\\\\\n&=\np(y_0)\n\\prod_{t=1}^T\np(y_t\\given y_{t-1}).\n\\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "slides/arma.html#the-implied-joint-distribution",
+    "href": "slides/arma.html#the-implied-joint-distribution",
+    "title": "Autoregressive models",
+    "section": "The implied joint distribution",
+    "text": "The implied joint distribution\nBecause the model is linear and Gaussian, the implied joint distribution across time is just a big ol’ multivariate normal:\n\\[\n\\begin{bmatrix}\ny_0 & y_1 & \\cdots & y_T\n\\end{bmatrix}^\\tr\n\\sim\\text{N}_{T+1}\\left(\\Bmu\\com \\BSigma\\right).\n\\]\nJust like the linear mixed model is “just” a big multivariate normal with a particular block covariance structure (dependent within and independent between groups).\n\n\n\n\n\n\n\nDon’t worry about this!\n\n\nThe mean and covariance are given by:\n\\[\n\\begin{aligned}\nE(y_t)\n&=\n\\beta_0\\sum\\limits_{i=0}^{t-1}\\beta_1^i\n+\n\\beta_1^t\\mu_0\n\\\\\n\\var(y_t)\n&=\n\\sigma^2\n\\sum\\limits_{i=0}^{t-1}\\beta_1^{2i}+\n\\beta_1^{2t}\\initvar\n\\\\\n\\cov(y_t\\com y_s)\n&=\n\\begin{cases}\n\\beta_1^{s-t}\\var(y_t) & t\\leq s\\\\\n\\beta_1^{t-s}\\var(y_s) & s &lt; t.\n\\end{cases}\n.\n\\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "slides/arma.html#stationarity",
+    "href": "slides/arma.html#stationarity",
+    "title": "Autoregressive models",
+    "section": "Stationarity",
+    "text": "Stationarity\nA joint distribution is (strictly) stationary if it is “shift invariant”:\n\\[\n\\{y_{t_1}\\com y_{t_2}\\com ...\\com y_{t_n}\\}\\overset{d}{=}\\{y_{t_1+h}\\com y_{t_2+h}\\com ...\\com y_{t_n+h}\\}.\n\\]\nThe Gaussian AR(1) with \\(|\\beta_1|&lt;1\\) has this property."
+  },
+  {
+    "objectID": "slides/arma.html#stationary-ar1",
+    "href": "slides/arma.html#stationary-ar1",
+    "title": "Autoregressive models",
+    "section": "Stationary AR(1)",
+    "text": "Stationary AR(1)\nIf \\(-1&lt;\\beta_1&lt;1\\), \\(\\mu_0=\\beta_0/(1-\\beta_1)\\), and \\(\\initvar=\\sigma^2/(1-\\beta_1^2)\\), then the AR(1) is strictly stationary with the following:\n\\[\n\\begin{aligned}\nE(y_t)\n&=\n\\frac{\\beta_0}{1-\\beta_1}\n\\\\\n\\var(y_t)\n&=\n\\frac{\\sigma^2}{1-\\beta_1^2}\n\\\\\n\\cov(y_t\\com y_s)\n&=\n\\beta_1^{|t-s|}\\var(y_t)\n=\n\\beta_1^{|t-s|}\\frac{\\sigma^2}{1-\\beta_1^2}.\n\\end{aligned}\n\\]\nThe common marginal shared by all \\(y_t\\) is called the stationary distribution:\n\\[\ny_t\\sim\\text{N}\\left(\\frac{\\beta_0}{1-\\beta_1}\\com \\frac{\\sigma^2}{1-\\beta_1^2}\\right).\n\\]\nSo “did: dependent but identically distributed.”"
+  },
+  {
+    "objectID": "slides/arma.html#autocovariance-of-a-stationary-process",
+    "href": "slides/arma.html#autocovariance-of-a-stationary-process",
+    "title": "Autoregressive models",
+    "section": "Autocovariance of a stationary process",
+    "text": "Autocovariance of a stationary process\nFor a stationary process, the covariance kernel satisfies\n\\[\n\\cov(y_t\\com y_{s})=\\cov(y_{t+h}\\com y_{s+h})\\quad \\forall (t\\com s\\com h).\n\\]\nSo you can define something called the autocovariance function:\n\\[\n\\gamma(h)=\\cov(y_{t+h}\\com y_{t}).\n\\]\nFor the AR(1), this is\n\\[\n\\begin{aligned}\n\\gamma(0)&=\\sigma^2/(1-\\beta_1^2)\n\\\\\n\\gamma(h)&=\\beta_1^h\\gamma(0).\n\\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "slides/arma.html#what-does-the-autocov-function-look-like",
+    "href": "slides/arma.html#what-does-the-autocov-function-look-like",
+    "title": "Autoregressive models",
+    "section": "What does the autocov function look like?",
+    "text": "What does the autocov function look like?"
+  },
+  {
+    "objectID": "slides/arma.html#what-does-the-autocov-function-look-like-1",
+    "href": "slides/arma.html#what-does-the-autocov-function-look-like-1",
+    "title": "Autoregressive models",
+    "section": "What does the autocov function look like?",
+    "text": "What does the autocov function look like?"
+  },
+  {
+    "objectID": "slides/arma.html#what-does-the-autocov-function-look-like-2",
+    "href": "slides/arma.html#what-does-the-autocov-function-look-like-2",
+    "title": "Autoregressive models",
+    "section": "What does the autocov function look like?",
+    "text": "What does the autocov function look like?"
+  },
+  {
+    "objectID": "slides/arma.html#what-does-the-autocov-function-look-like-3",
+    "href": "slides/arma.html#what-does-the-autocov-function-look-like-3",
+    "title": "Autoregressive models",
+    "section": "What does the autocov function look like?",
+    "text": "What does the autocov function look like?"
+  },
+  {
+    "objectID": "slides/arma.html#what-does-the-autocov-function-look-like-4",
+    "href": "slides/arma.html#what-does-the-autocov-function-look-like-4",
+    "title": "Autoregressive models",
+    "section": "What does the autocov function look like?",
+    "text": "What does the autocov function look like?"
+  },
+  {
+    "objectID": "slides/arma.html#what-does-the-autocov-function-look-like-5",
+    "href": "slides/arma.html#what-does-the-autocov-function-look-like-5",
+    "title": "Autoregressive models",
+    "section": "What does the autocov function look like?",
+    "text": "What does the autocov function look like?"
+  },
+  {
+    "objectID": "slides/arma.html#ar1-sample-paths",
+    "href": "slides/arma.html#ar1-sample-paths",
+    "title": "Autoregressive models",
+    "section": "AR(1) sample paths",
+    "text": "AR(1) sample paths\n#| '!! shinylive warning !!': |\n#|   shinylive does not work in self-contained HTML documents.\n#|   Please set `embed-resources: false` in your metadata.\n#| standalone: true\n#| viewerHeight: 700\n\nlibrary(shiny)\n\nsimulate_ar_1 &lt;- function(T, b0, b1, s, m0, s0){\n  y &lt;- numeric(T)\n  y[1] &lt;- rnorm(1, m0, s0)\n  for(t in 2:T){\n    y[t] &lt;- b0 + b1 * y[t - 1] + rnorm(1, 0, s)\n  }\n  return(y)\n}\n\nar_1_mean &lt;- function(t, b0, b1, m0){\n  if(t == 0){\n    return(m0)\n  }else{\n    return(b0 * sum(b1 ^ (0:(t-1))) + m0 * (b1^t)) \n  }\n}\n\nar_1_var &lt;- function(t, b1, s, s0){\n  if(t == 0){\n    return(s0^2)\n  }else{\n    return((s0^2) * (b1^(2*t)) + (s^2) * sum(b1 ^ (2*(0:(t-1)))))\n  }\n}\n\nar_1_sd &lt;- function(t, b1, s, s0){\n  sqrt(ar_1_var(t, b1, s, s0))\n}\n\n# Define UI for application that draws a histogram\nui &lt;- fluidPage(\n  \n  # Application title\n  titlePanel(\"Marginal distributions and sample paths of a Gaussian AR(1)\"),\n  \n  # Sidebar with a slider input for number of bins \n  sidebarLayout(\n    sidebarPanel(\n      sliderInput(\"b0\",\n                  \"β₀\",\n                  min = -5,\n                  max = 5,\n                  value = 0,\n                  step = 0.1),\n      sliderInput(\"b1\",\n                  \"β₁\",\n                  min = -2,\n                  max = 2,\n                  value = 0,\n                  step = 0.1),\n      sliderInput(\"s\",\n                  \"σ\",\n                  min = 0,\n                  max = 2,\n                  value = 1, \n                  step = 0.1),\n      sliderInput(\"m0\",\n                  \"μ₀\",\n                  min = -5,\n                  max = 5,\n                  value = 0,\n                  step = 0.1),\n      sliderInput(\"T\",\n                  \"T\",\n                  min = 20,\n                  max = 200,\n                  step = 20,\n                  value = 100),\n      actionButton(\"redo\", \"New sample path\"),\n    ),\n    \n    # Show a plot of the generated distribution\n    mainPanel(\n      plotOutput(\"distPlot\", height = \"600px\")\n    )\n  )\n)\n\n# Define server logic required to draw a histogram\nserver &lt;- function(input, output) {\n  \n  output$distPlot &lt;- renderPlot({\n    input$redo\n    b0 &lt;- input$b0\n    b1 &lt;- input$b1\n    redo &lt;- input$redo\n    T &lt;- input$T\n    s &lt;- input$s\n    m0 &lt;- input$m0\n    s0 = 1\n    \n    range = 0:T\n    alpha = c(0.01, seq(0.1, 0.9, by = 0.1))\n    \n    middle &lt;- sapply(range, ar_1_mean, b0, b1, m0)\n    sds &lt;- sapply(range, ar_1_sd, b1, s, s0)\n    \n    \n    plot(range, middle, type = \"l\",\n         xaxt = \"n\", \n         yaxt = \"n\",\n         xlab = \"t\",\n         ylab = expression(y[t]),\n         ylim = c(-20, 20), bty = \"n\",\n         col = \"white\")\n    \n    for(a in alpha){\n      \n      U = qnorm(1 - a / 2, mean = middle, sd = sds)\n      L = qnorm(a / 2, mean = middle, sd = sds)\n      \n      polygon(\n        c(range, rev(range)),\n        c(U, rev(L)),\n        col = rgb(1, 0, 0, 0.15),\n        border = NA\n      )\n    }\n    \n    inc = 20\n    axis(1, pos = 0, at = seq(0, max(range), by = inc), \n         labels = c(NA, seq(inc, max(range), by = inc)))\n    axis(2, pos = 0)\n    \n    lines(range, simulate_ar_1(max(range) + 1, b0, b1, s, m0, s0), col = \"black\", lwd = 2)\n  })\n}\n\n# Run the application \nshinyApp(ui = ui, server = server)"
+  },
+  {
+    "objectID": "slides/arma.html#arp",
+    "href": "slides/arma.html#arp",
+    "title": "Autoregressive models",
+    "section": "AR(p)",
+    "text": "AR(p)\nThe autoregression of order \\(p\\), or AR(\\(p\\)):\n\n\\[\n\\begin{aligned}\ny_t\n&=\n\\beta_0\n+\n\\beta_1\ny_{t-1}\n+\n\\beta_2\ny_{t-2}\n+\n\\cdots\n+\n\\beta_p\ny_{t-p}\n+\n\\varepsilon_t,\n\\quad\n\\varepsilon_t\\iid\\text{N}(0\\com\\sigma^2)\n\\\\\n\\begin{bmatrix}\ny_0\n\\\\\ny_{-1}\n\\\\\n\\vdots\n\\\\\ny_{1-p}\n\\end{bmatrix}\n&\\sim\n\\text{N}_p(\\Bmu_0\\com \\BP_0).\n\\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "slides/arma.html#lets-improve-the-notation",
+    "href": "slides/arma.html#lets-improve-the-notation",
+    "title": "Autoregressive models",
+    "section": "Let’s improve the notation",
+    "text": "Let’s improve the notation\nThe autoregression of order p, or AR(p):\n\n\\[\n\\begin{aligned}\ny_t\n&=\n\\beta_0\n+\n\\sum\\limits_{\\ell=1}^p\n\\beta_\\ell\ny_{t-\\ell}\n+\n\\varepsilon_t,\n\\quad\n\\varepsilon_t\\iid\\text{N}(0\\com\\sigma^2).\n\\end{aligned}\n\\]\n\n\nThis implies a joint distribution governed by a finite set of static parameters \\(\\Btheta = \\begin{bmatrix}\\beta_0&\\beta_1&\\cdots &\\beta_p&\\sigma^2\\end{bmatrix}^\\tr\\):\n\n\n\\[\n\\begin{aligned}\np(y_{1:T}\\given y_{1-p:0}\\com\\Btheta)\n&=\n\\prod_{t=1}^T\np(y_t\\given y_{t-p:t-1}\\com\\Btheta).\n\\end{aligned}\n\\]\n\n\nViewed as a function of \\(\\Btheta\\), that’s a (conditional) likelihood!\n\n\nMaximize it, or combine with a prior."
+  },
+  {
+    "objectID": "slides/arma.html#maximum-likelihood-estimation-1",
+    "href": "slides/arma.html#maximum-likelihood-estimation-1",
+    "title": "Autoregressive models",
+    "section": "Maximum likelihood estimation",
+    "text": "Maximum likelihood estimation\nTreating the observed data \\(y_{1-p:T}\\) as fixed, we want:\n\\[\n\\hat{\\Btheta}_T=\\argmax{\\Btheta}\\,p(y_{1:T}\\given y_{1-p:0}\\com \\Btheta).\n\\]\nTo do this, it helps to view the AR(p) is “just” a multiple linear regression where \\(\\Bx_t\\) encodes the lagged values of \\(y_t\\):\n\\[\n\\begin{aligned}\ny_t&=\\Bx_t^\\tr\\Bbeta+\\varepsilon_t,&&\\varepsilon_t\\iid\\N(0\\com\\sigma^2)\n\\\\\n\\Bx_t&=\\begin{bmatrix}\n1 & y_{t-1} & y_{t-2} & \\cdots & y_{t-p}\n\\end{bmatrix}^\\tr\\\\\n\\Bbeta&=\\begin{bmatrix}\n\\beta_0 & \\beta_1 & \\beta_2 & \\cdots & \\beta_p\n\\end{bmatrix}^\\tr.\n\\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "slides/arma.html#maximum-likelihood-estimation-2",
+    "href": "slides/arma.html#maximum-likelihood-estimation-2",
+    "title": "Autoregressive models",
+    "section": "Maximum likelihood estimation",
+    "text": "Maximum likelihood estimation\nSince \\(y_t\\given \\Bx_t\\com\\Btheta\\sim\\N\\left(\\Bx_t^\\tr\\Bbeta\\com\\sigma^2\\right)\\), we have\n\n\\[\n\\begin{aligned}\np(y_{1:T}\\given  \\Bx_0\\com \\Btheta)\n&=\n\\prod_{t=1}^T\np(y_t\\given \\Bx_t\\com\\Btheta)\n\\\\\n&=\n\\prod_{t=1}^T\n\\frac{1}{\\sqrt{2\\pi\\sigma^2}}\\exp\\left(-\\frac{1}{2}\\frac{(y_t-\\Bx_t^\\tr\\Bbeta)^2}{\\sigma^2}\\right)\n\\\\\n&=\n(2\\pi\\sigma^2)^{-T/2}\n\\exp\\left(-\\frac{1}{2\\sigma^2}\\sum\\limits_{t=1}^T(y_t-\\Bx_t^\\tr\\Bbeta)^2\\right)\n.\n\\end{aligned}\n\\]\n\n\nTo compute the MLE, we treat this as a function of \\(\\Btheta\\) with the data fixed."
+  },
+  {
+    "objectID": "slides/arma.html#stack-em-up",
+    "href": "slides/arma.html#stack-em-up",
+    "title": "Autoregressive models",
+    "section": "Stack ’em up",
+    "text": "Stack ’em up\nConstruct the response vector and design matrix:\n\n\\[\n\\begin{aligned}\n\\underbrace{\\By_T}_{T\\times 1}\n&=\n\\begin{bmatrix}y_1&y_2 & \\cdots & y_T\\end{bmatrix}^\\tr\n\\\\\n\\underbrace{\\BX_T}_{T\\times (p+1)}\n&=\n\\begin{bmatrix}\n1 & y_0 & y_{-1} & \\cdots & y_{1-p} \\\\\n1 & y_1 & y_0 & \\cdots & y_{2-p} \\\\\n\\vdots & \\vdots & \\vdots & \\ddots & \\vdots \\\\\n1 & y_{T-1} & y_{T-2} & \\cdots & y_{T-p}\n\\end{bmatrix}\n=\n\\begin{bmatrix}\n\\Bx_1^\\tr\\\\\n\\Bx_2^\\tr\\\\\n\\vdots\\\\\n\\Bx_T^\\tr\n\\end{bmatrix}\n.\n\\end{aligned}\n\\]\n\n\nSo the likelihood is:\n\\[\n\\begin{aligned}\np(y_{1:T}\\given  \\Bx_0\\com \\Btheta)\n&=\n(2\\pi\\sigma^2)^{-T/2}\n\\exp\\left(-\\frac{1}{2\\sigma^2}\\sum\\limits_{t=1}^T(y_t-\\Bx_t^\\tr\\Bbeta)^2\\right)\n\\\\\n&=\n(2\\pi\\sigma^2)^{-T/2}\n\\exp\\left(-\\frac{1}{2\\sigma^2}||\\By_T-\\BX_T\\Bbeta||_2^2\\right)\n.\n\\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "slides/arma.html#what-are-we-doing",
+    "href": "slides/arma.html#what-are-we-doing",
+    "title": "Autoregressive models",
+    "section": "What are we doing?",
+    "text": "What are we doing?\nLikelihood:\n\\[\n\\begin{aligned}\nL(\\Bbeta\\com\\sigma^2)\n&=\n(2\\pi\\sigma^2)^{-T/2}\n\\exp\\left(-\\frac{1}{2\\sigma^2}||\\By_T-\\BX_T\\Bbeta||_2^2\\right)\n.\n\\end{aligned}\n\\]\nLog-likelihood:\n\\[\n\\ell(\\Bbeta\\com\\sigma^2)\n=\n-\\frac{T}{2}\\ln(2\\pi\\sigma^2)\n-\\frac{1}{2\\sigma^2}\n||\\By_T-\\BX_T\\Bbeta||_2^2\n,\n\\]\nWe want:\n\\[\n\\begin{aligned}\n\\hat{\\Bbeta}_T\\com \\hat{\\sigma_T^2}\n&=\\argmax{\\Bbeta\\com\\sigma^2}\\,\\ell(\\Bbeta\\com\\sigma^2).\n\\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "slides/arma.html#ols-for-the-arp",
+    "href": "slides/arma.html#ols-for-the-arp",
+    "title": "Autoregressive models",
+    "section": "OLS for the AR(p)",
+    "text": "OLS for the AR(p)\n\n\nThe maximum (conditional) likelihood estimator in the AR(p) is the same as the ordinary least squares estimator:\n\n\n\n\\[\n\\begin{aligned}\n\\hat{\\Bbeta}_T\n&=\n(\\BX_T^\\tr\\BX_T)^{-1}\\BX_T^\\tr\\By_T\n\\\\\n\\hat{\\sigma^2_T}\n&=\n||\\By_T-\\BX_T\\hat{\\Bbeta}_T||_2^2 / T.\n\\end{aligned}\n\\]\n\n\n\nIt doesn’t matter that there’s time series dependence. Once the data are observed and fixed, the mechanics are identical to iid multiple regression;\nFor things like prediction, dependence matters, and the correspondence with iid regression breaks down."
+  },
+  {
+    "objectID": "slides/arma.html#recursive-form",
+    "href": "slides/arma.html#recursive-form",
+    "title": "Autoregressive models",
+    "section": "Recursive form",
+    "text": "Recursive form\nDo not incur the \\(O(t)\\) cost of re-computing \\((\\BX_t^\\tr\\BX_t)^{-1}\\) every period.\n\nInstead:\n\\[\n\\begin{aligned}\n\\hat{\\Bbeta}_t\n&=\n\\hat{\\Bbeta}_{t-1}\n+\n\\Bk_t(y_t-\\Bx_t^\\tr\\hat{\\Bbeta}_{t-1})\n\\\\\n\\Bk_t\n&=\n\\frac{\\BP_{t-1}\\Bx_t}\n{1+\\Bx_t^\\tr\\BP_{t-1}\\Bx_t}\n\\\\\n\\BP_t\n&=\n\\BP_{t-1}\n-\n\\Bk_t\n\\Bx_t^\\tr\\BP_{t-1}\n.\n\\end{aligned}\n\\]\n\n\nKeyword: rank-1 update!"
+  },
+  {
+    "objectID": "slides/arma.html#asymptotics",
+    "href": "slides/arma.html#asymptotics",
+    "title": "Autoregressive models",
+    "section": "Asymptotics",
+    "text": "Asymptotics\n\n\n\n\n\n\nShumway and Stoffer (2025) Property 3.9\n\n\nIf the AR(p) is stationary, then\n\\[\n\\sqrt{T} \\, (\\hat{\\boldsymbol{\\beta}}_{-0} - \\boldsymbol{\\beta}_{-0})\\cd\\N_p\\bigl(\\mathbf{0}, \\, \\sigma^2 \\, \\mathbf{\\Gamma}_p^{-1}\\bigr).\n\\]\nwhere \\(\\mathbf{\\Gamma}_p\\) is the \\(p \\times p\\) autocovariance matrix with \\((i,j)\\) entry \\(\\gamma(|i-j|)\\).\n\n\n\n\nSame as Yule-Walker!"
+  },
+  {
+    "objectID": "slides/arma.html#batch-form",
+    "href": "slides/arma.html#batch-form",
+    "title": "Autoregressive models",
+    "section": "Batch form",
+    "text": "Batch form\nBayesian model with a conjugate prior:\n\\[\n\\begin{aligned}\n\\sigma^2\n&\\sim\n\\text{IG}(a_0\\com b_0)\n\\\\\n\\Bbeta\\given \\sigma^2\n&\\sim\n\\text{N}_{p+1}(\\Bm_0\\com\\sigma^2\\BH^{-1}_0)\n\\\\\ny_t\n\\given\n\\Bx_t\n\\com\n\\Bbeta\\com\\sigma^2\n&\\sim \\text{N}\n\\left(\n\\Bx_t^\\tr\\Bbeta\\com\\sigma^2\n\\right).\n\\end{aligned}\n\\]\n\nThe posterior is available in closed-form:\n\\[\n\\begin{aligned}\n\\sigma^2\\given y_{0:T}\n&\\sim\n\\text{IG}(a_T\\com b_T)\n\\\\\n\\Bbeta\\given \\sigma^2\\com y_{0:T}\n&\\sim\n\\text{N}_{p+2}(\\Bm_T\\com\\sigma^2\\BH^{-1}_T)\n\\\\\n\\\\\n\\BH_T\n&=\n\\BX_T^\\tr\\BX_T+\\BH_0\n\\\\\n\\Bm_T\n&=\n\\BH_T^{-1}(\\BX_T^\\tr\\By_T+\\BH_0\\Bm_0)\n\\\\\na_T\n&=\na_0 + T/2\n\\\\\nb_T\n&=\nb_0\n+\n(\\By_T^\\tr\\By_T+\\Bm_0^\\tr\\BH_0\\Bm_0-\\Bm_T^\\tr\\BH_T\\Bm_T)/2.\n\\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "slides/arma.html#recursive-form-1",
+    "href": "slides/arma.html#recursive-form-1",
+    "title": "Autoregressive models",
+    "section": "Recursive form",
+    "text": "Recursive form\nDefine:\n\\[\n\\begin{aligned}\ne_{t|t-1}&=y_t-\\Bx_t^\\tr\\Bm_{t-1}\\\\\nr_{t|t-1}^2&=1+\\Bx_t^\\tr\\BH_{t-1}^{-1}\\Bx_t\\\\\n\\Bk_t&=\\BH_{t-1}^{-1}\\Bx_t/r_{t|t-1}^2.\n\\end{aligned}\n\\]\nThen:\n\\[\n\\begin{aligned}\n\\Bm_t\n&=\n\\Bm_{t-1}\n+\n\\Bk_te_{t|t-1}\n\\\\\n\\BH_t^{-1}\n&=\n\\BH_{t-1}^{-1}-\\Bk_t\\Bx_t^\\tr\\BH_{t-1}^{-1}\n\\\\\na_t\n&=a_{t-1}+1/2\n\\\\\nb_t\n&=\nb_{t-1}\n+\n\\frac{1}{2}\n\\frac{e_{t|t-1}^2}{r_{t|t-1}^2}.\n\\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "slides/arma.html#one-step-posterior-predictive-distribution",
+    "href": "slides/arma.html#one-step-posterior-predictive-distribution",
+    "title": "Autoregressive models",
+    "section": "One-step posterior predictive distribution",
+    "text": "One-step posterior predictive distribution\nWe want\n\n\\[\np(y_{t+1}\\given y_{0:t})\n=\n\\int\n\\int\np(y_{t+1}\\given\\Bbeta\\com\\sigma^2\\com y_{0:t})p(\\Bbeta\\com\\sigma^2\\given y_{0:t})\\,\\dd\\Bbeta\\,\\dd\\sigma^2\n,\n\\]\n\n\nand we know that\n\\[\n\\begin{aligned}\n\\sigma^2\\given y_{0:t}\n&\\sim\n\\text{IG}(a_t\\com b_t)\n\\\\\n\\Bbeta\\given \\sigma^2\\com y_{0:t}\n&\\sim\n\\text{N}_{p+1}(\\Bm_t\\com\\sigma^2\\BH^{-1}_t)\n\\\\\ny_{t+1}\\given\\Bbeta\\com \\sigma^2\\com y_{0:t}\n&\\sim \\N(\\Bx_{t+1}^\\tr\\Bbeta\\com\\sigma^2).\n\\end{aligned}\n\\]\n\n\nThere is actually a closed-form solution."
+  },
+  {
+    "objectID": "slides/arma.html#marginalize-out-bbeta",
+    "href": "slides/arma.html#marginalize-out-bbeta",
+    "title": "Autoregressive models",
+    "section": "Marginalize out \\(\\Bbeta\\)\n",
+    "text": "Marginalize out \\(\\Bbeta\\)\n\nWe know that\n\\[\n\\begin{aligned}\n\\Bbeta\\given \\sigma^2\\com y_{0:t}\n&\\sim\n\\text{N}_{p+1}(\\Bm_t\\com\\sigma^2\\BH^{-1}_t)\n\\\\\ny_{t+1}\n&=\n\\Bx_{t+1}^\\tr\\Bbeta\n+\n\\varepsilon_{t+1}\n,\n&&\n\\varepsilon_{t+1}\\sim\\N(0\\com \\sigma^2).\n\\end{aligned}\n\\]\n\nBy affine transformation:\n\\[\n\\Bx_{t+1}^\\tr\\Bbeta\n\\given \\sigma^2\\com y_{0:t}\n\\sim\n\\N(\n\\Bx_{t+1}^\\tr\\Bm_t\n\\com\n\\sigma^2\\Bx_{t+1}^\\tr\\BH_t^{-1}\\Bx_{t+1}\n).\n\\]\n\n\nBy linear combination of independent normals:\n\\[\n\\begin{aligned}\ny_{t+1}\\given \\sigma^2\\com y_{0:t}\n&\\sim \\N\\left(\\Bx_{t+1}^\\tr\\Bm_t\\com\\sigma^2(1+\\Bx_{t+1}^\\tr\\BH_t^{-1}\\Bx_{t+1})\\right).\n\\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "slides/arma.html#marginalize-out-sigma2",
+    "href": "slides/arma.html#marginalize-out-sigma2",
+    "title": "Autoregressive models",
+    "section": "Marginalize out \\(\\sigma^2\\)\n",
+    "text": "Marginalize out \\(\\sigma^2\\)\n\nWe know that\n\\[\n\\begin{aligned}\n\\sigma^2\\given y_{0:t}\n&\\sim\n\\text{IG}(a_t\\com b_t)\n\\\\\ny_{t+1}\\given \\sigma^2\\com y_{0:t}\n&\\sim \\N\\left(\\Bx_{t+1}^\\tr\\Bm_t\\com\\sigma^2(1+\\Bx_{t+1}^\\tr\\BH_t^{-1}\\Bx_{t+1})\\right).\n\\end{aligned}\n\\]\n\nMarginalizing \\(\\sigma^2\\) out of this hierarchy is essentially the definition of Student’s \\(t\\):\n\n\n\\[\n\\begin{aligned}\ny_{t+1}\\given y_{0:t}\n&\\sim\nt(\\nu_{t+1|t}\\com\\bar{y}_{t+1|t}\\com s_{t+1|t}^2)\n\\\\\n\\\\\n\\nu_{t+1|t}\n&=\n2a_t\n\\\\\n\\bar{y}_{t+1|t}\n&=\n\\Bx_{t+1}^\\tr\\Bm_t\n\\\\\ns_{t+1|t}^2\n&=\n\\frac{b_t}{a_t}\n(1+\\Bx_{t+1}^\\tr\\BH_t^{-1}\\Bx_{t+1})\n.\n\\end{aligned}\n\\]\n\n\nSo, Student’s \\(t\\) with location-scale."
   },
   {
     "objectID": "syllabus/syllabus-assignments.html",

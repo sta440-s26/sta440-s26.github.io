@@ -194,6 +194,124 @@
 <meta property="og:site_name" content="STA 440 Spring 2026">
 </head>
 <body class="quarto-light">
+
+$$
+\newcommand{\initvar}{v_0^2}
+\newcommand{\cd}{\overset{d}{\to}}
+\newcommand{\var}{\text{var}}
+\newcommand{\cov}{\text{cov}}
+\newcommand{\argmax}[1]{\underset{#1}{\arg\max}}
+\newcommand{\argmin}[1]{\underset{#1}{\arg\min}}
+\newcommand{\iid}{\overset{\textrm{iid}}{\sim}}
+\newcommand{\indep}{\overset{\textrm{indep}}{\sim}}
+\newcommand{\tr}{{\scriptscriptstyle\mathsf{T}}}
+\newcommand{\com}{,\,}
+\newcommand{\given}{\,|\,}
+\newcommand{\acal}{\mathcal{A}}
+\newcommand{\bcal}{\mathcal{B}}
+\newcommand{\ccal}{\mathcal{C}}
+\newcommand{\dcal}{\mathcal{D}}
+\newcommand{\ecal}{\mathcal{E}}
+\newcommand{\fcal}{\mathcal{F}}
+\newcommand{\gcal}{\mathcal{G}}
+\newcommand{\hcal}{\mathcal{H}}
+\newcommand{\ical}{\mathcal{I}}
+\newcommand{\jcal}{\mathcal{J}}
+\newcommand{\kcal}{\mathcal{K}}
+\newcommand{\lcal}{\mathcal{L}}
+\newcommand{\mcal}{\mathcal{M}}
+\newcommand{\ncal}{\mathcal{N}}
+\newcommand{\ocal}{\mathcal{O}}
+\newcommand{\pcal}{\mathcal{P}}
+\newcommand{\qcal}{\mathcal{Q}}
+\newcommand{\rcal}{\mathcal{R}}
+\newcommand{\scal}{\mathcal{S}}
+\newcommand{\tcal}{\mathcal{T}}
+\newcommand{\ucal}{\mathcal{U}}
+\newcommand{\vcal}{\mathcal{V}}
+\newcommand{\wcal}{\mathcal{W}}
+\newcommand{\xcal}{\mathcal{X}}
+\newcommand{\ycal}{\mathcal{Y}}
+\newcommand{\zcal}{\mathcal{Z}}
+\newcommand{\EE}{\mathbb{E}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\PP}{\mathbb{P}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\BA}{\mathbf{A}}
+\newcommand{\BB}{\mathbf{B}}
+\newcommand{\BC}{\mathbf{C}}
+\newcommand{\BD}{\mathbf{D}}
+\newcommand{\BE}{\mathbf{E}}
+\newcommand{\BF}{\mathbf{F}}
+\newcommand{\BG}{\mathbf{G}}
+\newcommand{\BH}{\mathbf{H}}
+\newcommand{\BI}{\mathbf{I}}
+\newcommand{\BJ}{\mathbf{J}}
+\newcommand{\BK}{\mathbf{K}}
+\newcommand{\BL}{\mathbf{L}}
+\newcommand{\BM}{\mathbf{M}}
+\newcommand{\BN}{\mathbf{N}}
+\newcommand{\BO}{\mathbf{O}}
+\newcommand{\BP}{\mathbf{P}}
+\newcommand{\BQ}{\mathbf{Q}}
+\newcommand{\BR}{\mathbf{R}}
+\newcommand{\BS}{\mathbf{S}}
+\newcommand{\BT}{\mathbf{T}}
+\newcommand{\BU}{\mathbf{U}}
+\newcommand{\BV}{\mathbf{V}}
+\newcommand{\BW}{\mathbf{W}}
+\newcommand{\BX}{\mathbf{X}}
+\newcommand{\BY}{\mathbf{Y}}
+\newcommand{\BZ}{\mathbf{Z}}
+\newcommand{\Ba}{\mathbf{a}}
+\newcommand{\Bb}{\mathbf{b}}
+\newcommand{\Bc}{\mathbf{c}}
+\newcommand{\Bd}{\mathbf{d}}
+\newcommand{\Be}{\mathbf{e}}
+\newcommand{\Bf}{\mathbf{f}}
+\newcommand{\Bg}{\mathbf{g}}
+\newcommand{\Bh}{\mathbf{h}}
+\newcommand{\Bi}{\mathbf{i}}
+\newcommand{\Bj}{\mathbf{j}}
+\newcommand{\Bk}{\mathbf{k}}
+\newcommand{\Bl}{\mathbf{l}}
+\newcommand{\Bm}{\mathbf{m}}
+\newcommand{\Bn}{\mathbf{n}}
+\newcommand{\Bo}{\mathbf{o}}
+\newcommand{\Bp}{\mathbf{p}}
+\newcommand{\Bq}{\mathbf{q}}
+\newcommand{\Br}{\mathbf{r}}
+\newcommand{\Bs}{\mathbf{s}}
+\newcommand{\Bt}{\mathbf{t}}
+\newcommand{\Bu}{\mathbf{u}}
+\newcommand{\Bv}{\mathbf{v}}
+\newcommand{\Bw}{\mathbf{w}}
+\newcommand{\Bx}{\mathbf{x}}
+\newcommand{\By}{\mathbf{y}}
+\newcommand{\Bz}{\mathbf{z}}
+\newcommand{\Balpha}{\boldsymbol{\alpha}}
+\newcommand{\Bmu}{\boldsymbol{\mu}}
+\newcommand{\Btheta}{\boldsymbol{\theta}}
+\newcommand{\Beta}{\boldsymbol{\eta}}
+\newcommand{\Bepsilon}{\boldsymbol{\varepsilon}}
+\newcommand{\Bbeta}{\boldsymbol{\beta}}
+\newcommand{\BLambda}{\boldsymbol{\Lambda}}
+\newcommand{\BSigma}{\boldsymbol{\Sigma}}
+\newcommand{\BOmega}{\boldsymbol{\Omega}}
+\newcommand{\BPsi}{\boldsymbol{\Psi}}
+\newcommand{\BGamma}{\boldsymbol{\Gamma}}
+\newcommand{\BPhi}{\boldsymbol{\Phi}}
+\newcommand{\Bphi}{\boldsymbol{\phi}}
+\newcommand{\BUpsilon}{\boldsymbol{\Upsilon}}
+\newcommand{\BXi}{\boldsymbol{\Xi}}
+\newcommand{\Bpi}{\boldsymbol{\pi}}
+\newcommand{\Bzero}{\mathbf{0}}
+\newcommand{\Bone}{\mathbf{1}}
+\newcommand{\N}{\text{N}}
+\newcommand{\dd}{\text{d}}
+$$
   <div class="reveal">
     <div class="slides">
 
@@ -436,8 +554,14 @@ Ed Iversen and John Zito
 </div>
 </div>
 <p>How did our measurement for 1965:Q3 evolve over time as it was revised?</p>
-</section><section id="in-my-life" class="slide level2"><h2>In My Life</h2>
+</section><section id="in-my-life" class="slide level2 small"><h2>In My Life</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/3KfbEIOC7YIv90FIfNSZpo?utm_source=generator" width="100%" height="75" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy">
+</iframe>
+</div><div class="column" style="width:50%;">
 <p>Moving across the columns:</p>
+</div></div>
 <div class="quarto-figure quarto-figure-center">
 <figure><p><img data-src="images/real-time.gif" class="quarto-figure quarto-figure-center"></p>
 </figure>
