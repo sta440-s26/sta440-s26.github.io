@@ -369,7 +369,7 @@ legend("topright", legend=legend_text, bty="n")
 
 ```
 
-## AR(1) sample paths
+## AR(1) sample paths {.scrollable}
 
 ```{shinylive-r}
 #| standalone: true
@@ -761,63 +761,9 @@ $$
 - It doesn't matter that there's time series dependence. Once the data are observed and fixed, the *mechanics* are identical to iid multiple regression;
 - For things like prediction, dependence matters, and the correspondence with iid regression breaks down.
 
-## Recursive form
-
-*Do not* incur the $O(t)$ cost of re-computing $(\BX_t^\tr\BX_t)^{-1}$ every period.
-
-. . .
-
-
-Instead:
-
-$$
-\begin{aligned}
-\hat{\Bbeta}_t
-&=
-\hat{\Bbeta}_{t-1}
-+
-\Bk_t(y_t-\Bx_t^\tr\hat{\Bbeta}_{t-1})
-\\
-\Bk_t
-&=
-\frac{\BP_{t-1}\Bx_t}
-{1+\Bx_t^\tr\BP_{t-1}\Bx_t}
-\\
-\BP_t
-&=
-\BP_{t-1}
--
-\Bk_t
-\Bx_t^\tr\BP_{t-1}
-.
-\end{aligned}
-$$
-
-. . .
-
-**Keyword**: rank-1 update!
-
-## Asymptotics
-
-::: callout-tip
-## Shumway and Stoffer (2025) Property 3.9
-If the AR(p) is stationary, then
-
-$$
-\sqrt{T} \, (\hat{\boldsymbol{\beta}}_{-0} - \boldsymbol{\beta}_{-0})\cd\N_p\bigl(\mathbf{0}, \, \sigma^2 \, \mathbf{\Gamma}_p^{-1}\bigr).
-$$
-
-where $\mathbf{\Gamma}_p$ is the $p \times p$ autocovariance matrix with $(i,j)$ entry $\gamma(|i-j|)$.
-
-:::
-
-. . .
-
-Same as Yule-Walker!
-
 # Conjugate Bayesian inference
 
-## Batch form {.small}
+## Bayes is just like iid regression too {.small}
 
 Bayesian model with a conjugate prior:
 
@@ -875,44 +821,6 @@ b_T
 b_0
 +
 (\By_T^\tr\By_T+\Bm_0^\tr\BH_0\Bm_0-\Bm_T^\tr\BH_T\Bm_T)/2.
-\end{aligned}
-$$
-
-## Recursive form {.small}
-
-Define:
-
-$$
-\begin{aligned}
-e_{t|t-1}&=y_t-\Bx_t^\tr\Bm_{t-1}\\
-r_{t|t-1}^2&=1+\Bx_t^\tr\BH_{t-1}^{-1}\Bx_t\\
-\Bk_t&=\BH_{t-1}^{-1}\Bx_t/r_{t|t-1}^2.
-\end{aligned}
-$$
-
-Then:
-
-$$
-\begin{aligned}
-\Bm_t
-&=
-\Bm_{t-1}
-+
-\Bk_te_{t|t-1}
-\\
-\BH_t^{-1}
-&=
-\BH_{t-1}^{-1}-\Bk_t\Bx_t^\tr\BH_{t-1}^{-1}
-\\
-a_t
-&=a_{t-1}+1/2
-\\
-b_t
-&=
-b_{t-1}
-+
-\frac{1}{2}
-\frac{e_{t|t-1}^2}{r_{t|t-1}^2}.
 \end{aligned}
 $$
 
