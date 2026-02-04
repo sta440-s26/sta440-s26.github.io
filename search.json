@@ -532,32 +532,11 @@
     "text": "OLS for the AR(p)\n\n\nThe maximum (conditional) likelihood estimator in the AR(p) is the same as the ordinary least squares estimator:\n\n\n\n\\[\n\\begin{aligned}\n\\hat{\\Bbeta}_T\n&=\n(\\BX_T^\\tr\\BX_T)^{-1}\\BX_T^\\tr\\By_T\n\\\\\n\\hat{\\sigma^2_T}\n&=\n||\\By_T-\\BX_T\\hat{\\Bbeta}_T||_2^2 / T.\n\\end{aligned}\n\\]\n\n\n\nIt doesn’t matter that there’s time series dependence. Once the data are observed and fixed, the mechanics are identical to iid multiple regression;\nFor things like prediction, dependence matters, and the correspondence with iid regression breaks down."
   },
   {
-    "objectID": "slides/arma.html#recursive-form",
-    "href": "slides/arma.html#recursive-form",
+    "objectID": "slides/arma.html#bayes-is-just-like-iid-regression-too",
+    "href": "slides/arma.html#bayes-is-just-like-iid-regression-too",
     "title": "Autoregressive models",
-    "section": "Recursive form",
-    "text": "Recursive form\nDo not incur the \\(O(t)\\) cost of re-computing \\((\\BX_t^\\tr\\BX_t)^{-1}\\) every period.\n\nInstead:\n\\[\n\\begin{aligned}\n\\hat{\\Bbeta}_t\n&=\n\\hat{\\Bbeta}_{t-1}\n+\n\\Bk_t(y_t-\\Bx_t^\\tr\\hat{\\Bbeta}_{t-1})\n\\\\\n\\Bk_t\n&=\n\\frac{\\BP_{t-1}\\Bx_t}\n{1+\\Bx_t^\\tr\\BP_{t-1}\\Bx_t}\n\\\\\n\\BP_t\n&=\n\\BP_{t-1}\n-\n\\Bk_t\n\\Bx_t^\\tr\\BP_{t-1}\n.\n\\end{aligned}\n\\]\n\n\nKeyword: rank-1 update!"
-  },
-  {
-    "objectID": "slides/arma.html#asymptotics",
-    "href": "slides/arma.html#asymptotics",
-    "title": "Autoregressive models",
-    "section": "Asymptotics",
-    "text": "Asymptotics\n\n\n\n\n\n\nShumway and Stoffer (2025) Property 3.9\n\n\nIf the AR(p) is stationary, then\n\\[\n\\sqrt{T} \\, (\\hat{\\boldsymbol{\\beta}}_{-0} - \\boldsymbol{\\beta}_{-0})\\cd\\N_p\\bigl(\\mathbf{0}, \\, \\sigma^2 \\, \\mathbf{\\Gamma}_p^{-1}\\bigr).\n\\]\nwhere \\(\\mathbf{\\Gamma}_p\\) is the \\(p \\times p\\) autocovariance matrix with \\((i,j)\\) entry \\(\\gamma(|i-j|)\\).\n\n\n\n\nSame as Yule-Walker!"
-  },
-  {
-    "objectID": "slides/arma.html#batch-form",
-    "href": "slides/arma.html#batch-form",
-    "title": "Autoregressive models",
-    "section": "Batch form",
-    "text": "Batch form\nBayesian model with a conjugate prior:\n\\[\n\\begin{aligned}\n\\sigma^2\n&\\sim\n\\text{IG}(a_0\\com b_0)\n\\\\\n\\Bbeta\\given \\sigma^2\n&\\sim\n\\text{N}_{p+1}(\\Bm_0\\com\\sigma^2\\BH^{-1}_0)\n\\\\\ny_t\n\\given\n\\Bx_t\n\\com\n\\Bbeta\\com\\sigma^2\n&\\sim \\text{N}\n\\left(\n\\Bx_t^\\tr\\Bbeta\\com\\sigma^2\n\\right).\n\\end{aligned}\n\\]\n\nThe posterior is available in closed-form:\n\\[\n\\begin{aligned}\n\\sigma^2\\given y_{0:T}\n&\\sim\n\\text{IG}(a_T\\com b_T)\n\\\\\n\\Bbeta\\given \\sigma^2\\com y_{0:T}\n&\\sim\n\\text{N}_{p+2}(\\Bm_T\\com\\sigma^2\\BH^{-1}_T)\n\\\\\n\\\\\n\\BH_T\n&=\n\\BX_T^\\tr\\BX_T+\\BH_0\n\\\\\n\\Bm_T\n&=\n\\BH_T^{-1}(\\BX_T^\\tr\\By_T+\\BH_0\\Bm_0)\n\\\\\na_T\n&=\na_0 + T/2\n\\\\\nb_T\n&=\nb_0\n+\n(\\By_T^\\tr\\By_T+\\Bm_0^\\tr\\BH_0\\Bm_0-\\Bm_T^\\tr\\BH_T\\Bm_T)/2.\n\\end{aligned}\n\\]"
-  },
-  {
-    "objectID": "slides/arma.html#recursive-form-1",
-    "href": "slides/arma.html#recursive-form-1",
-    "title": "Autoregressive models",
-    "section": "Recursive form",
-    "text": "Recursive form\nDefine:\n\\[\n\\begin{aligned}\ne_{t|t-1}&=y_t-\\Bx_t^\\tr\\Bm_{t-1}\\\\\nr_{t|t-1}^2&=1+\\Bx_t^\\tr\\BH_{t-1}^{-1}\\Bx_t\\\\\n\\Bk_t&=\\BH_{t-1}^{-1}\\Bx_t/r_{t|t-1}^2.\n\\end{aligned}\n\\]\nThen:\n\\[\n\\begin{aligned}\n\\Bm_t\n&=\n\\Bm_{t-1}\n+\n\\Bk_te_{t|t-1}\n\\\\\n\\BH_t^{-1}\n&=\n\\BH_{t-1}^{-1}-\\Bk_t\\Bx_t^\\tr\\BH_{t-1}^{-1}\n\\\\\na_t\n&=a_{t-1}+1/2\n\\\\\nb_t\n&=\nb_{t-1}\n+\n\\frac{1}{2}\n\\frac{e_{t|t-1}^2}{r_{t|t-1}^2}.\n\\end{aligned}\n\\]"
+    "section": "Bayes is just like iid regression too",
+    "text": "Bayes is just like iid regression too\nBayesian model with a conjugate prior:\n\\[\n\\begin{aligned}\n\\sigma^2\n&\\sim\n\\text{IG}(a_0\\com b_0)\n\\\\\n\\Bbeta\\given \\sigma^2\n&\\sim\n\\text{N}_{p+1}(\\Bm_0\\com\\sigma^2\\BH^{-1}_0)\n\\\\\ny_t\n\\given\n\\Bx_t\n\\com\n\\Bbeta\\com\\sigma^2\n&\\sim \\text{N}\n\\left(\n\\Bx_t^\\tr\\Bbeta\\com\\sigma^2\n\\right).\n\\end{aligned}\n\\]\n\nThe posterior is available in closed-form:\n\\[\n\\begin{aligned}\n\\sigma^2\\given y_{0:T}\n&\\sim\n\\text{IG}(a_T\\com b_T)\n\\\\\n\\Bbeta\\given \\sigma^2\\com y_{0:T}\n&\\sim\n\\text{N}_{p+2}(\\Bm_T\\com\\sigma^2\\BH^{-1}_T)\n\\\\\n\\\\\n\\BH_T\n&=\n\\BX_T^\\tr\\BX_T+\\BH_0\n\\\\\n\\Bm_T\n&=\n\\BH_T^{-1}(\\BX_T^\\tr\\By_T+\\BH_0\\Bm_0)\n\\\\\na_T\n&=\na_0 + T/2\n\\\\\nb_T\n&=\nb_0\n+\n(\\By_T^\\tr\\By_T+\\Bm_0^\\tr\\BH_0\\Bm_0-\\Bm_T^\\tr\\BH_T\\Bm_T)/2.\n\\end{aligned}\n\\]"
   },
   {
     "objectID": "slides/arma.html#one-step-posterior-predictive-distribution",

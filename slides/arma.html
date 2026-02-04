@@ -572,7 +572,7 @@ y_t\sim\text{N}\left(\frac{\beta_0}{1-\beta_1}\com \frac{\sigma^2}{1-\beta_1^2}\
 </div>
 </div>
 </div>
-</section><section id="ar1-sample-paths" class="slide level2"><h2>AR(1) sample paths</h2>
+</section><section id="ar1-sample-paths" class="slide level2 scrollable"><h2>AR(1) sample paths</h2>
 <div class="sourceCode" id="cb1" data-engine="r"><pre class="sourceCode numberSource shinylive-r number-lines code-with-copy"><code class="sourceCode"><span id="cb1-1"><a></a>#| '!! shinylive warning !!': |</span>
 <span id="cb1-2"><a></a>#|   shinylive does not work in self-contained HTML documents.</span>
 <span id="cb1-3"><a></a>#|   Please set `embed-resources: false` in your metadata.</span>
@@ -929,60 +929,9 @@ L(\Bbeta\com\sigma^2)
 <li>For things like prediction, dependence matters, and the correspondence with iid regression breaks down.</li>
 </ul>
 </div>
-</section><section id="recursive-form" class="slide level2"><h2>Recursive form</h2>
-<p><em>Do not</em> incur the <span class="math inline">\(O(t)\)</span> cost of re-computing <span class="math inline">\((\BX_t^\tr\BX_t)^{-1}\)</span> every period.</p>
-<div class="fragment">
-<p>Instead:</p>
-<p><span class="math display">\[
-\begin{aligned}
-\hat{\Bbeta}_t
-&amp;=
-\hat{\Bbeta}_{t-1}
-+
-\Bk_t(y_t-\Bx_t^\tr\hat{\Bbeta}_{t-1})
-\\
-\Bk_t
-&amp;=
-\frac{\BP_{t-1}\Bx_t}
-{1+\Bx_t^\tr\BP_{t-1}\Bx_t}
-\\
-\BP_t
-&amp;=
-\BP_{t-1}
--
-\Bk_t
-\Bx_t^\tr\BP_{t-1}
-.
-\end{aligned}
-\]</span></p>
-</div>
-<div class="fragment">
-<p><strong>Keyword</strong>: rank-1 update!</p>
-</div>
-</section><section id="asymptotics" class="slide level2"><h2>Asymptotics</h2>
-<div class="callout callout-tip callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Shumway and Stoffer (2025) Property 3.9</strong></p>
-</div>
-<div class="callout-content">
-<p>If the AR(p) is stationary, then</p>
-<p><span class="math display">\[
-\sqrt{T} \, (\hat{\boldsymbol{\beta}}_{-0} - \boldsymbol{\beta}_{-0})\cd\N_p\bigl(\mathbf{0}, \, \sigma^2 \, \mathbf{\Gamma}_p^{-1}\bigr).
-\]</span></p>
-<p>where <span class="math inline">\(\mathbf{\Gamma}_p\)</span> is the <span class="math inline">\(p \times p\)</span> autocovariance matrix with <span class="math inline">\((i,j)\)</span> entry <span class="math inline">\(\gamma(|i-j|)\)</span>.</p>
-</div>
-</div>
-</div>
-<div class="fragment">
-<p>Same as Yule-Walker!</p>
-</div>
 </section></section><section><section id="conjugate-bayesian-inference" class="title-slide slide level1 center"><h1>Conjugate Bayesian inference</h1>
 
-</section><section id="batch-form" class="slide level2 small"><h2>Batch form</h2>
+</section><section id="bayes-is-just-like-iid-regression-too" class="slide level2 small"><h2>Bayes is just like iid regression too</h2>
 <p>Bayesian model with a conjugate prior:</p>
 <p><span class="math display">\[
 \begin{aligned}
@@ -1038,39 +987,6 @@ b_0
 \end{aligned}
 \]</span></p>
 </div>
-</section><section id="recursive-form-1" class="slide level2 small"><h2>Recursive form</h2>
-<p>Define:</p>
-<p><span class="math display">\[
-\begin{aligned}
-e_{t|t-1}&amp;=y_t-\Bx_t^\tr\Bm_{t-1}\\
-r_{t|t-1}^2&amp;=1+\Bx_t^\tr\BH_{t-1}^{-1}\Bx_t\\
-\Bk_t&amp;=\BH_{t-1}^{-1}\Bx_t/r_{t|t-1}^2.
-\end{aligned}
-\]</span></p>
-<p>Then:</p>
-<p><span class="math display">\[
-\begin{aligned}
-\Bm_t
-&amp;=
-\Bm_{t-1}
-+
-\Bk_te_{t|t-1}
-\\
-\BH_t^{-1}
-&amp;=
-\BH_{t-1}^{-1}-\Bk_t\Bx_t^\tr\BH_{t-1}^{-1}
-\\
-a_t
-&amp;=a_{t-1}+1/2
-\\
-b_t
-&amp;=
-b_{t-1}
-+
-\frac{1}{2}
-\frac{e_{t|t-1}^2}{r_{t|t-1}^2}.
-\end{aligned}
-\]</span></p>
 </section><section id="one-step-posterior-predictive-distribution" class="slide level2"><h2>One-step posterior predictive distribution</h2>
 <p>We want</p>
 <div class="fragment">
