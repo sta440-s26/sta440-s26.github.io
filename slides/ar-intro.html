@@ -11,17 +11,17 @@
 <script src="../site_libs/quarto-contrib/shinylive-0.9.1/shinylive/load-shinylive-sw.js" type="module"></script>
 <script src="../site_libs/quarto-contrib/shinylive-0.9.1/shinylive/run-python-blocks.js" type="module"></script>
 <link href="../site_libs/quarto-contrib/shinylive-0.9.1/shinylive/shinylive.css" rel="stylesheet">
-<link href="../site_libs/quarto-contrib/shinylive-quarto-css/shinylive-quarto.css" rel="stylesheet"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.34">
-<meta name="author" content="Ed Iversen and John Zito">
-<title>STA 440 Spring 2026 – Autoregressive models</title>
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-<link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
-<link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
-<style>
+<link href="../site_libs/quarto-contrib/shinylive-quarto-css/shinylive-quarto.css" rel="stylesheet"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.7.34">
+
+  <meta name="author" content="Ed Iversen and John Zito">
+  <title>STA 440 Spring 2026 – Autoregressive models</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
+  <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
     div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -100,14 +100,14 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-<link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-6e51ad904291ad622da7d287747171b4.css">
-<link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-<link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-<link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-<link href="../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
-<link href="../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
-<link href="../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
-<style type="text/css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-6e51ad904291ad622da7d287747171b4.css">
+  <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
     .reveal div.sourceCode {
       margin: 0;
       overflow: auto;
@@ -319,7 +319,8 @@ $$
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" class="quarto-title-block center"><h1 class="title">Autoregressive models</h1>
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">Autoregressive models</h1>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -332,9 +333,29 @@ Ed Iversen and John Zito
     </div>
 </div>
 
-</section><section><section id="introduction" class="title-slide slide level1 center"><h1>Introduction</h1>
+</section>
+<section>
+<section id="introduction" class="title-slide slide level1 center">
+<h1>Introduction</h1>
 
-</section><section id="time-series" class="slide level2 small"><h2>Time series</h2>
+</section>
+<section id="where-were-going" class="slide level2">
+<h2>Where we’re going</h2>
+<ul>
+<li>We’ll introduce the most basic time series models;
+<ul>
+<li>autoregression (AR);</li>
+<li>dynamic linear model (DLM);</li>
+</ul></li>
+<li>You may or may not use them;</li>
+<li>The basic models will provide a sandbox for illustrating <em>probabilistic</em> prediction and evaluation;
+<ul>
+<li>You will definitely use this!</li>
+</ul></li>
+</ul>
+</section>
+<section id="time-series" class="slide level2 small">
+<h2>Time series</h2>
 <ul>
 <li><p>A <span style="color:blue;"><strong>time series</strong></span> is a set of measurements collected over time;</p></li>
 <li><p>We model these data as a sequence of <span style="color:blue;"><strong>dependent</strong></span> random variables:</p></li>
@@ -363,7 +384,9 @@ p(\mathbf{y}_{0:T}) = p(\mathbf{y}_0)\prod_{t=1}^Tp(\mathbf{y}_t\,|\,\mathbf{y}_
 </div>
 </div>
 </div>
-</section><section id="notation-to-get-used-to" class="slide level2 small"><h2>Notation to get used to</h2>
+</section>
+<section id="notation-to-get-used-to" class="slide level2 small">
+<h2>Notation to get used to</h2>
 <ul>
 <li>I will not use uppercase <span class="math inline">\(Y_t\)</span> versus lowercase <span class="math inline">\(y_t\)</span> to distinguish random variables and fixed realizations. It’s all just <span class="math inline">\(y_t\)</span>, and context makes clear how it functions;</li>
 <li>A vector <span class="math inline">\(\mathbf{y}\in\mathbb{R}^n\)</span> is always an <span class="math inline">\(n\times 1\)</span> column. The corresponding row vector is <span class="math inline">\(\By^\tr\)</span>;</li>
@@ -381,9 +404,14 @@ y_{i:j}
 <p><span class="math display">\[
 p(\mathbf{y}_{0:T}) = p(\mathbf{y}_0)\prod_{t=1}^Tp(\mathbf{y}_t\,|\,\mathbf{y}_{0:t-1}).
 \]</span></p>
-</section></section><section><section id="starting-small" class="title-slide slide level1 center"><h1>Starting small</h1>
+</section></section>
+<section>
+<section id="starting-small" class="title-slide slide level1 center">
+<h1>Starting small</h1>
 
-</section><section id="the-simplest-non-trivial-time-series-model" class="slide level2 medium"><h2>The simplest non-trivial time series model</h2>
+</section>
+<section id="the-simplest-non-trivial-time-series-model" class="slide level2 small">
+<h2>The simplest non-trivial time series model</h2>
 <p>The autoregression of order 1, or AR(1):</p>
 <div class="fragment">
 <p><span class="math display">\[
@@ -398,10 +426,7 @@ y_{t-1}
 \varepsilon_t,
 \quad
 \varepsilon_t\iid\text{N}(0\com\sigma^2)
-\\
-y_0
-&amp;\sim
-\text{N}(\mu_0\com \initvar),
+.
 \end{aligned}
 \]</span></p>
 </div>
@@ -411,26 +436,26 @@ y_0
 <div class="fragment">
 <p><span class="math display">\[
 \begin{aligned}
-p(y_{0:T})
+p(y_{1:T}\mid y_0)
 &amp;=
-p(y_0)
 \prod_{t=1}^T
 p(y_t\given y_{0:t-1})
 \\
 &amp;=
-p(y_0)
 \prod_{t=1}^T
-p(y_t\given y_{t-1}).
+\underbrace{p(y_t\given y_{t-1})}_{\N(\beta_0+\beta_1y_{t-1}\com\sigma^2)}
 \end{aligned}
 \]</span></p>
 </div>
-</section><section id="the-implied-joint-distribution" class="slide level2 small"><h2>The implied joint distribution</h2>
+</section>
+<section id="the-implied-joint-distribution" class="slide level2 small">
+<h2>The implied joint distribution</h2>
 <p>Because the model is linear and Gaussian, the implied joint distribution across time is just a big ol’ multivariate normal:</p>
 <p><span class="math display">\[
 \begin{bmatrix}
-y_0 &amp; y_1 &amp; \cdots &amp; y_T
-\end{bmatrix}^\tr
-\sim\text{N}_{T+1}\left(\Bmu\com \BSigma\right).
+y_1 &amp; y_2 &amp; \cdots &amp; y_T
+\end{bmatrix}^\tr\mid y_0
+\sim\text{N}_{T}\left(\Bmu\com \BSigma\right).
 \]</span></p>
 <p>Just like the linear mixed model is “just” a big multivariate normal with a particular block covariance structure (dependent within and independent between groups).</p>
 <div class="fragment">
@@ -446,19 +471,18 @@ y_0 &amp; y_1 &amp; \cdots &amp; y_T
 <p>The mean and covariance are given by:</p>
 <p><span class="math display">\[
 \begin{aligned}
-E(y_t)
+E(y_t\mid y_0)
 &amp;=
 \beta_0\sum\limits_{i=0}^{t-1}\beta_1^i
 +
-\beta_1^t\mu_0
+\beta_1^ty_0
 \\
-\var(y_t)
+\var(y_t\mid y_0)
 &amp;=
 \sigma^2
-\sum\limits_{i=0}^{t-1}\beta_1^{2i}+
-\beta_1^{2t}\initvar
+\sum\limits_{i=0}^{t-1}\beta_1^{2i}
 \\
-\cov(y_t\com y_s)
+\cov(y_t\com y_s\mid y_0)
 &amp;=
 \begin{cases}
 \beta_1^{s-t}\var(y_t) &amp; t\leq s\\
@@ -471,108 +495,9 @@ E(y_t)
 </div>
 </div>
 </div>
-</section><section id="stationarity" class="slide level2"><h2>Stationarity</h2>
-<p>A joint distribution is <strong>(strictly) stationary</strong> if it is “shift invariant”:</p>
-<p><span class="math display">\[
-\{y_{t_1}\com y_{t_2}\com ...\com y_{t_n}\}\overset{d}{=}\{y_{t_1+h}\com y_{t_2+h}\com ...\com y_{t_n+h}\}.
-\]</span></p>
-<p>The Gaussian AR(1) with <span class="math inline">\(|\beta_1|&lt;1\)</span> has this property.</p>
-</section><section id="stationary-ar1" class="slide level2 small"><h2>Stationary AR(1)</h2>
-<p>If <span class="math inline">\(-1&lt;\beta_1&lt;1\)</span>, <span class="math inline">\(\mu_0=\beta_0/(1-\beta_1)\)</span>, and <span class="math inline">\(\initvar=\sigma^2/(1-\beta_1^2)\)</span>, then the AR(1) is strictly stationary with the following:</p>
-<p><span class="math display">\[
-\begin{aligned}
-E(y_t)
-&amp;=
-\frac{\beta_0}{1-\beta_1}
-\\
-\var(y_t)
-&amp;=
-\frac{\sigma^2}{1-\beta_1^2}
-\\
-\cov(y_t\com y_s)
-&amp;=
-\beta_1^{|t-s|}\var(y_t)
-=
-\beta_1^{|t-s|}\frac{\sigma^2}{1-\beta_1^2}.
-\end{aligned}
-\]</span></p>
-<p>The common marginal shared by all <span class="math inline">\(y_t\)</span> is called the stationary distribution:</p>
-<p><span class="math display">\[
-y_t\sim\text{N}\left(\frac{\beta_0}{1-\beta_1}\com \frac{\sigma^2}{1-\beta_1^2}\right).
-\]</span></p>
-<p>So “did: dependent but identically distributed.”</p>
-</section><section id="autocovariance-of-a-stationary-process" class="slide level2"><h2>Autocovariance of a stationary process</h2>
-<p>For a stationary process, the covariance kernel satisfies</p>
-<p><span class="math display">\[
-\cov(y_t\com y_{s})=\cov(y_{t+h}\com y_{s+h})\quad \forall (t\com s\com h).
-\]</span></p>
-<p>So you can define something called the <strong>autocovariance function</strong>:</p>
-<p><span class="math display">\[
-\gamma(h)=\cov(y_{t+h}\com y_{t}).
-\]</span></p>
-<p>For the AR(1), this is</p>
-<p><span class="math display">\[
-\begin{aligned}
-\gamma(0)&amp;=\sigma^2/(1-\beta_1^2)
-\\
-\gamma(h)&amp;=\beta_1^h\gamma(0).
-\end{aligned}
-\]</span></p>
-</section><section id="what-does-the-autocov-function-look-like" class="slide level2"><h2>What does the autocov function look like?</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure><p><img data-src="ar-intro_files/figure-revealjs/unnamed-chunk-1-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-</section><section id="what-does-the-autocov-function-look-like-1" class="slide level2"><h2>What does the autocov function look like?</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure><p><img data-src="ar-intro_files/figure-revealjs/unnamed-chunk-2-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-</section><section id="what-does-the-autocov-function-look-like-2" class="slide level2"><h2>What does the autocov function look like?</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure><p><img data-src="ar-intro_files/figure-revealjs/unnamed-chunk-3-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-</section><section id="what-does-the-autocov-function-look-like-3" class="slide level2"><h2>What does the autocov function look like?</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure><p><img data-src="ar-intro_files/figure-revealjs/unnamed-chunk-4-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-</section><section id="what-does-the-autocov-function-look-like-4" class="slide level2"><h2>What does the autocov function look like?</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure><p><img data-src="ar-intro_files/figure-revealjs/unnamed-chunk-5-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-</section><section id="what-does-the-autocov-function-look-like-5" class="slide level2"><h2>What does the autocov function look like?</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure><p><img data-src="ar-intro_files/figure-revealjs/unnamed-chunk-6-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-</section><section id="ar1-sample-paths" class="slide level2 scrollable"><h2>AR(1) sample paths</h2>
+</section>
+<section id="what-does-this-look-like" class="slide level2 scrollable">
+<h2>What does this look like?</h2>
 <div class="sourceCode" id="cb1" data-engine="r"><pre class="sourceCode numberSource shinylive-r number-lines code-with-copy"><code class="sourceCode"><span id="cb1-1"><a></a>#| '!! shinylive warning !!': |</span>
 <span id="cb1-2"><a></a>#|   shinylive does not work in self-contained HTML documents.</span>
 <span id="cb1-3"><a></a>#|   Please set `embed-resources: false` in your metadata.</span>
@@ -638,7 +563,7 @@ y_t\sim\text{N}\left(\frac{\beta_0}{1-\beta_1}\com \frac{\sigma^2}{1-\beta_1^2}\
 <span id="cb1-63"><a></a>                  value = 1, </span>
 <span id="cb1-64"><a></a>                  step = 0.1),</span>
 <span id="cb1-65"><a></a>      sliderInput("m0",</span>
-<span id="cb1-66"><a></a>                  "μ₀",</span>
+<span id="cb1-66"><a></a>                  "y₀",</span>
 <span id="cb1-67"><a></a>                  min = -5,</span>
 <span id="cb1-68"><a></a>                  max = 5,</span>
 <span id="cb1-69"><a></a>                  value = 0,</span>
@@ -670,7 +595,7 @@ y_t\sim\text{N}\left(\frac{\beta_0}{1-\beta_1}\com \frac{\sigma^2}{1-\beta_1^2}\
 <span id="cb1-95"><a></a>    T &lt;- input$T</span>
 <span id="cb1-96"><a></a>    s &lt;- input$s</span>
 <span id="cb1-97"><a></a>    m0 &lt;- input$m0</span>
-<span id="cb1-98"><a></a>    s0 = 1</span>
+<span id="cb1-98"><a></a>    s0 = 0</span>
 <span id="cb1-99"><a></a>    </span>
 <span id="cb1-100"><a></a>    range = 0:T</span>
 <span id="cb1-101"><a></a>    alpha = c(0.01, seq(0.1, 0.9, by = 0.1))</span>
@@ -711,9 +636,167 @@ y_t\sim\text{N}\left(\frac{\beta_0}{1-\beta_1}\com \frac{\sigma^2}{1-\beta_1^2}\
 <span id="cb1-136"><a></a></span>
 <span id="cb1-137"><a></a># Run the application </span>
 <span id="cb1-138"><a></a>shinyApp(ui = ui, server = server)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section></section><section><section id="there-nothing-special-about-one-lag" class="title-slide slide level1 center"><h1>There nothing special about one lag</h1>
-
-</section><section id="arp" class="slide level2 small"><h2>AR(p)</h2>
+</section>
+<section id="observations" class="slide level2">
+<h2>Observations</h2>
+<ul>
+<li><span class="math inline">\(|\beta_1|&lt;1\)</span>: stable;</li>
+<li><span class="math inline">\(|\beta_1|&gt;1\)</span>: explosive;</li>
+<li><span class="math inline">\(\beta_1&lt;0\)</span>: oscillation;</li>
+<li><span class="math inline">\(|\beta_1|=1\)</span>: random walk (w/ drift if <span class="math inline">\(\beta_0\neq0\)</span>).</li>
+</ul>
+</section>
+<section id="what-do-we-mean-by-stable" class="slide level2">
+<h2>What do we mean by stable?</h2>
+<ul>
+<li>A joint distribution is <strong>(strictly) stationary</strong> if it is “shift invariant”:</li>
+</ul>
+<p><span class="math display">\[
+\{y_{t_1}\com y_{t_2}\com ...\com y_{t_n}\}\overset{d}{=}\{y_{t_1+h}\com y_{t_2+h}\com ...\com y_{t_n+h}\}.
+\]</span></p>
+<ul>
+<li><p>The joint distribution is the same anywhere you choose to zoom in;</p></li>
+<li><p>The Gaussian AR(1) with <span class="math inline">\(|\beta_1|&lt;1\)</span> has this property.</p></li>
+</ul>
+</section>
+<section id="stationary-ar1" class="slide level2 small">
+<h2>Stationary AR(1)</h2>
+<p>If <span class="math inline">\(-1&lt;\beta_1&lt;1\)</span> and <span class="math inline">\(y_0=\beta_0/(1-\beta_1)\)</span>, then the AR(1) is strictly stationary with the following:</p>
+<p><span class="math display">\[
+\begin{aligned}
+E(y_t)
+&amp;=
+\frac{\beta_0}{1-\beta_1}
+\\
+\var(y_t)
+&amp;=
+\frac{\sigma^2}{1-\beta_1^2}
+\\
+\cov(y_t\com y_s)
+&amp;=
+\beta_1^{|t-s|}\var(y_t)
+=
+\beta_1^{|t-s|}\frac{\sigma^2}{1-\beta_1^2}.
+\end{aligned}
+\]</span></p>
+<p>The common marginal shared by all <span class="math inline">\(y_t\)</span> is called the <em>stationary distribution</em>:</p>
+<p><span class="math display">\[
+y_t\sim\text{N}\left(\frac{\beta_0}{1-\beta_1}\com \frac{\sigma^2}{1-\beta_1^2}\right).
+\]</span></p>
+<p>So “did: dependent but identically distributed.”</p>
+</section>
+<section id="autocovariance-of-a-stationary-process" class="slide level2">
+<h2>Autocovariance of a stationary process</h2>
+<p>For a stationary process, the covariance kernel satisfies</p>
+<p><span class="math display">\[
+\cov(y_t\com y_{s})=\cov(y_{t+h}\com y_{s+h})\quad \forall (t\com s\com h).
+\]</span></p>
+<p>So you can define something called the <strong>autocovariance function</strong>:</p>
+<p><span class="math display">\[
+\gamma(h)=\cov(y_{t+h}\com y_{t}).
+\]</span></p>
+<p>For the AR(1), this is</p>
+<p><span class="math display">\[
+\begin{aligned}
+\gamma(0)&amp;=\sigma^2/(1-\beta_1^2)
+\\
+\gamma(h)&amp;=\beta_1^h\gamma(0).
+\end{aligned}
+\]</span></p>
+</section>
+<section id="what-does-the-autocov-function-look-like" class="slide level2">
+<h2>What does the autocov function look like?</h2>
+<div class="sourceCode" id="cb2" data-engine="r"><pre class="sourceCode numberSource shinylive-r number-lines code-with-copy"><code class="sourceCode"><span id="cb2-1"><a></a>#| '!! shinylive warning !!': |</span>
+<span id="cb2-2"><a></a>#|   shinylive does not work in self-contained HTML documents.</span>
+<span id="cb2-3"><a></a>#|   Please set `embed-resources: false` in your metadata.</span>
+<span id="cb2-4"><a></a>#| standalone: true</span>
+<span id="cb2-5"><a></a>#| viewerHeight: 700</span>
+<span id="cb2-6"><a></a></span>
+<span id="cb2-7"><a></a>library(shiny)</span>
+<span id="cb2-8"><a></a></span>
+<span id="cb2-9"><a></a># Define UI for application that draws a histogram</span>
+<span id="cb2-10"><a></a>ui &lt;- fluidPage(</span>
+<span id="cb2-11"><a></a>  </span>
+<span id="cb2-12"><a></a>  # Application title</span>
+<span id="cb2-13"><a></a>  titlePanel("Theoretical autocovariance of a stationary AR(1)"),</span>
+<span id="cb2-14"><a></a>  </span>
+<span id="cb2-15"><a></a>  # Sidebar with a slider input for number of bins </span>
+<span id="cb2-16"><a></a>  sidebarLayout(</span>
+<span id="cb2-17"><a></a>    sidebarPanel(</span>
+<span id="cb2-18"><a></a>      sliderInput("b1",</span>
+<span id="cb2-19"><a></a>                  "β₁",</span>
+<span id="cb2-20"><a></a>                  min = -0.99,</span>
+<span id="cb2-21"><a></a>                  max = 0.99,</span>
+<span id="cb2-22"><a></a>                  value = 0,</span>
+<span id="cb2-23"><a></a>                  step = 0.01),</span>
+<span id="cb2-24"><a></a>      sliderInput("s",</span>
+<span id="cb2-25"><a></a>                  "σ",</span>
+<span id="cb2-26"><a></a>                  min = 0,</span>
+<span id="cb2-27"><a></a>                  max = 2,</span>
+<span id="cb2-28"><a></a>                  value = 1, </span>
+<span id="cb2-29"><a></a>                  step = 0.1),</span>
+<span id="cb2-30"><a></a>      sliderInput("H",</span>
+<span id="cb2-31"><a></a>                  "H",</span>
+<span id="cb2-32"><a></a>                  min = 0,</span>
+<span id="cb2-33"><a></a>                  max = 50,</span>
+<span id="cb2-34"><a></a>                  step = 1,</span>
+<span id="cb2-35"><a></a>                  value = 20)</span>
+<span id="cb2-36"><a></a>    ),</span>
+<span id="cb2-37"><a></a>    </span>
+<span id="cb2-38"><a></a>    # Show a plot of the generated distribution</span>
+<span id="cb2-39"><a></a>    mainPanel(</span>
+<span id="cb2-40"><a></a>      plotOutput("distPlot", height = "500px")</span>
+<span id="cb2-41"><a></a>    )</span>
+<span id="cb2-42"><a></a>  )</span>
+<span id="cb2-43"><a></a>)</span>
+<span id="cb2-44"><a></a></span>
+<span id="cb2-45"><a></a># Define server logic required to draw a histogram</span>
+<span id="cb2-46"><a></a>server &lt;- function(input, output) {</span>
+<span id="cb2-47"><a></a>  </span>
+<span id="cb2-48"><a></a>  output$distPlot &lt;- renderPlot({</span>
+<span id="cb2-49"><a></a>    beta_1 &lt;- input$b1</span>
+<span id="cb2-50"><a></a>    max_lag &lt;- input$H</span>
+<span id="cb2-51"><a></a>    sigma2 &lt;- input$s^2</span>
+<span id="cb2-52"><a></a></span>
+<span id="cb2-53"><a></a>    # Compute theoretical autocovariances</span>
+<span id="cb2-54"><a></a>    lags &lt;- 0:max_lag</span>
+<span id="cb2-55"><a></a>    gamma_h &lt;- sigma2 / (1 - beta_1^2) * beta_1^lags</span>
+<span id="cb2-56"><a></a>    </span>
+<span id="cb2-57"><a></a>    # Plot</span>
+<span id="cb2-58"><a></a>    plot(lags, gamma_h, type="h", lwd=2,</span>
+<span id="cb2-59"><a></a>         xlab="Lag h", ylab="γ(h)",</span>
+<span id="cb2-60"><a></a>         main="")</span>
+<span id="cb2-61"><a></a>    points(lags, gamma_h, pch=19, col="blue")</span>
+<span id="cb2-62"><a></a>    abline(h = 0, lty = 2, col = "darkgrey")</span>
+<span id="cb2-63"><a></a>    </span>
+<span id="cb2-64"><a></a>    # Add legend using Unicode</span>
+<span id="cb2-65"><a></a>    legend_text &lt;- paste0("β1 = ", beta_1, ", σ² = ", sigma2)</span>
+<span id="cb2-66"><a></a>    legend("topright", legend=legend_text, bty="n")</span>
+<span id="cb2-67"><a></a></span>
+<span id="cb2-68"><a></a>  })</span>
+<span id="cb2-69"><a></a>}</span>
+<span id="cb2-70"><a></a></span>
+<span id="cb2-71"><a></a># Run the application </span>
+<span id="cb2-72"><a></a>shinyApp(ui = ui, server = server)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="observations-1" class="slide level2">
+<h2>Observations</h2>
+<p>The autocovariance of a stationary AR(1) is:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\gamma(0)&amp;=\sigma^2/(1-\beta_1^2)
+\\
+\gamma(h)&amp;=\beta_1^h\gamma(0).
+\end{aligned}
+\]</span></p>
+<ul>
+<li><span class="math inline">\(\gamma(h)\to0\)</span> as <span class="math inline">\(h\to\infty\)</span>;</li>
+<li>The larger <span class="math inline">\(|\beta_1|\)</span>, the stronger the serial dependence, the slower the decay;</li>
+<li>If <span class="math inline">\(-1&lt;\beta_1&lt;0\)</span>, you get oscillation because <span class="math inline">\(\beta_1^h\)</span> is positive for even <span class="math inline">\(h\)</span> and negative for odd <span class="math inline">\(h\)</span>.</li>
+</ul>
+</section>
+<section id="theres-nothing-special-about-one-lag" class="slide level2 small">
+<h2>There’s nothing special about one lag</h2>
 <p>The autoregression of order <span class="math inline">\(p\)</span>, or AR(<span class="math inline">\(p\)</span>):</p>
 <div class="fragment">
 <p><span class="math display">\[
@@ -738,10 +821,27 @@ y_{t-p}
 \varepsilon_t\iid\text{N}(0\com\sigma^2)
 \end{aligned}
 \]</span></p>
+<p>This again implies a joint distribution written marginal-conditional style:</p>
+<p><span class="math display">\[
+\begin{aligned}
+p(y_{1:T}\mid y_0\com y_{-1}\com ...\com y_{1-p})
+&amp;=
+\prod_{t=1}^Tp(y_t\mid y_{1-p:t-1})\\
+\\
+&amp;=
+\prod_{t=1}^Tp(y_t\mid y_{t-p:t-1}).
+\end{aligned}
+\]</span></p>
+<p>As before, the joint distribution is just a big ol’ multivariate normal, but the mean and covariance are harder to characterize.</p>
 </div>
-</section></section><section><section id="maximum-likelihood-estimation" class="title-slide slide level1 center"><h1>Maximum likelihood estimation</h1>
+</section></section>
+<section>
+<section id="likelihood-based-inference" class="title-slide slide level1 center">
+<h1>Likelihood-based inference</h1>
 
-</section><section id="lets-improve-the-notation" class="slide level2 medium"><h2>Let’s improve the notation</h2>
+</section>
+<section id="lets-improve-the-notation" class="slide level2 medium">
+<h2>Let’s improve the notation</h2>
 <p>The autoregression of order p, or AR(p):</p>
 <div class="fragment">
 <p><span class="math display">\[
@@ -776,10 +876,9 @@ p(y_t\given y_{t-p:t-1}\com\Btheta).
 <div class="fragment">
 <p>Viewed as a function of <span class="math inline">\(\Btheta\)</span>, that’s a (conditional) <em>likelihood</em>!</p>
 </div>
-<div class="fragment">
-<p>Maximize it, or combine with a prior.</p>
-</div>
-</section><section id="maximum-likelihood-estimation-1" class="slide level2"><h2>Maximum likelihood estimation</h2>
+</section>
+<section id="maximum-likelihood-estimation" class="slide level2">
+<h2>Maximum likelihood estimation</h2>
 <p>Treating the observed data <span class="math inline">\(y_{1-p:T}\)</span> as fixed, we want:</p>
 <p><span class="math display">\[
 \hat{\Btheta}_T=\argmax{\Btheta}\,p(y_{1:T}\given y_{1-p:0}\com \Btheta).
@@ -797,31 +896,9 @@ y_t&amp;=\Bx_t^\tr\Bbeta+\varepsilon_t,&amp;&amp;\varepsilon_t\iid\N(0\com\sigma
 \end{bmatrix}^\tr.
 \end{aligned}
 \]</span></p>
-</section><section id="maximum-likelihood-estimation-2" class="slide level2 medium"><h2>Maximum likelihood estimation</h2>
-<p>Since <span class="math inline">\(y_t\given \Bx_t\com\Btheta\sim\N\left(\Bx_t^\tr\Bbeta\com\sigma^2\right)\)</span>, we have</p>
-<div class="fragment">
-<p><span class="math display">\[
-\begin{aligned}
-p(y_{1:T}\given  \Bx_0\com \Btheta)
-&amp;=
-\prod_{t=1}^T
-p(y_t\given \Bx_t\com\Btheta)
-\\
-&amp;=
-\prod_{t=1}^T
-\frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{1}{2}\frac{(y_t-\Bx_t^\tr\Bbeta)^2}{\sigma^2}\right)
-\\
-&amp;=
-(2\pi\sigma^2)^{-T/2}
-\exp\left(-\frac{1}{2\sigma^2}\sum\limits_{t=1}^T(y_t-\Bx_t^\tr\Bbeta)^2\right)
-.
-\end{aligned}
-\]</span></p>
-</div>
-<div class="fragment">
-<p>To compute the MLE, we treat this as a function of <span class="math inline">\(\Btheta\)</span> with the data fixed.</p>
-</div>
-</section><section id="stack-em-up" class="slide level2 medium scrollable"><h2>Stack ’em up</h2>
+</section>
+<section id="stack-em-up" class="slide level2 medium scrollable">
+<h2>Stack ’em up</h2>
 <p>Construct the response vector and design matrix:</p>
 <div class="fragment">
 <p><span class="math display">\[
@@ -849,55 +926,12 @@ p(y_t\given \Bx_t\com\Btheta)
 \end{aligned}
 \]</span></p>
 </div>
-<div class="fragment">
-<p>So the likelihood is:</p>
-<p><span class="math display">\[
-\begin{aligned}
-p(y_{1:T}\given  \Bx_0\com \Btheta)
-&amp;=
-(2\pi\sigma^2)^{-T/2}
-\exp\left(-\frac{1}{2\sigma^2}\sum\limits_{t=1}^T(y_t-\Bx_t^\tr\Bbeta)^2\right)
-\\
-&amp;=
-(2\pi\sigma^2)^{-T/2}
-\exp\left(-\frac{1}{2\sigma^2}||\By_T-\BX_T\Bbeta||_2^2\right)
-.
-\end{aligned}
-\]</span></p>
-</div>
-</section><section id="what-are-we-doing" class="slide level2"><h2>What are we doing?</h2>
-<p>Likelihood:</p>
-<p><span class="math display">\[
-\begin{aligned}
-L(\Bbeta\com\sigma^2)
-&amp;=
-(2\pi\sigma^2)^{-T/2}
-\exp\left(-\frac{1}{2\sigma^2}||\By_T-\BX_T\Bbeta||_2^2\right)
-.
-\end{aligned}
-\]</span></p>
-<p>Log-likelihood:</p>
-<p><span class="math display">\[
-\ell(\Bbeta\com\sigma^2)
-=
--\frac{T}{2}\ln(2\pi\sigma^2)
--\frac{1}{2\sigma^2}
-||\By_T-\BX_T\Bbeta||_2^2
-,
-\]</span></p>
-<p>We want:</p>
-<p><span class="math display">\[
-\begin{aligned}
-\hat{\Bbeta}_T\com \hat{\sigma_T^2}
-&amp;=\argmax{\Bbeta\com\sigma^2}\,\ell(\Bbeta\com\sigma^2).
-\end{aligned}
-\]</span></p>
-</section><section id="ols-for-the-arp" class="slide level2 medium"><h2>OLS for the AR(p)</h2>
-<div class="fragment">
+</section>
+<section id="ols-for-the-arp" class="slide level2 medium">
+<h2>OLS for the AR(p)</h2>
 <ul>
-<li>The maximum (conditional) likelihood estimator in the AR(p) is the same as the ordinary least squares estimator:</li>
+<li>Turns out, the maximum (conditional) likelihood estimator in the AR(p) is the same as the ordinary least squares estimator:</li>
 </ul>
-</div>
 <div class="fragment">
 <p><span class="math display">\[
 \begin{aligned}
@@ -913,13 +947,13 @@ L(\Bbeta\com\sigma^2)
 </div>
 <div class="fragment">
 <ul>
-<li>It doesn’t matter that there’s time series dependence. Once the data are observed and fixed, the <em>mechanics</em> are identical to iid multiple regression;</li>
-<li>For things like prediction, dependence matters, and the correspondence with iid regression breaks down.</li>
+<li>It doesn’t matter that there’s time series dependence. Once the data are observed and fixed, the <em>mechanics</em> of computing the estimate are identical to iid multiple regression;</li>
+<li>The analogy breaks down after that: different sampling distributions, intervals, etc. No exact procedures. Need bootstrap, etc.</li>
 </ul>
 </div>
-</section></section><section><section id="conjugate-bayesian-inference" class="title-slide slide level1 center"><h1>Conjugate Bayesian inference</h1>
-
-</section><section id="bayes-is-just-like-iid-regression-too" class="slide level2 small"><h2>Bayes is just like iid regression too</h2>
+</section>
+<section id="bayes-is-just-like-iid-regression-too" class="slide level2 small">
+<h2>Bayes is just like iid regression too</h2>
 <p>Bayesian model with a conjugate prior:</p>
 <p><span class="math display">\[
 \begin{aligned}
@@ -974,18 +1008,155 @@ b_0
 (\By_T^\tr\By_T+\Bm_0^\tr\BH_0\Bm_0-\Bm_T^\tr\BH_T\Bm_T)/2.
 \end{aligned}
 \]</span></p>
+</div>
+</section></section>
+<section>
+<section id="hyperparameter-tuning" class="title-slide slide level1 center">
+<h1>Hyperparameter tuning</h1>
+
+</section>
+<section id="lag-order-selection" class="slide level2">
+<h2>Lag order selection</h2>
+<p>The lag order <span class="math inline">\(p\)</span> is a <em>hyperparameter</em> that needs to be selected. <span class="math inline">\(p\)</span> determines the number of predictions in the (auto)regression model, and so selecting the lag order is analogous to variable selection in iid regression.</p>
+</section>
+<section id="rules-of-thumb" class="slide level2">
+<h2>Rules of thumb</h2>
+<p>Pick <span class="math inline">\(p\)</span> = number of observations in one natural cycle of the data:</p>
+<div class="fragment">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Data frequency</th>
+<th>Typical lag length (p)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Hourly</td>
+<td>24</td>
+</tr>
+<tr class="even">
+<td>Daily</td>
+<td>7</td>
+</tr>
+<tr class="odd">
+<td>Monthly</td>
+<td>12</td>
+</tr>
+<tr class="even">
+<td>Quarterly</td>
+<td>4</td>
+</tr>
+<tr class="odd">
+<td>Annual</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="fragment">
+<p>Fine as a quick-and-dirty solution. Guidance on this will be domain-specific.</p>
+</div>
+</section>
+<section id="minimize-some-criterion" class="slide level2 medium">
+<h2>Minimize some criterion</h2>
+<p>Take:</p>
+<p><span class="math display">\[
+\hat{p}=\argmin{p=1\com2\com...\com\bar{p}}\,\text{C}(p;\,\By_T\com\BX_T).
+\]</span></p>
+<div class="fragment">
+<p>Common choices:</p>
+<ul>
+<li class="fragment">Akaike information criterion (AIC);</li>
+<li class="fragment">Bayesian information criterion (BIC);</li>
+<li class="fragment">Cross-validation error;</li>
+</ul>
+</div>
+<div class="fragment">
+<p>CV assesses out-of-sample performance and is highly customizeable, but can be more labor-intensive to implement.</p>
+</div>
+</section>
+<section id="recall-loo-cv-for-iid-regression" class="slide level2 small">
+<h2>Recall: LOO-CV for iid regression</h2>
+<p>Leave-one-out cross-validation:</p>
+<div class="fragment">
+<ul>
+<li>For each model configuration, train on all data except observation <span class="math inline">\(i\)</span>, and then test on held-out <span class="math inline">\((\Bx_i\com y_i)\)</span>;</li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li>Average prediction error over all training/test splits, and pick the best model:</li>
+</ul>
+</div>
+<div class="fragment">
+<p><span class="math display">\[
+\hat{\lambda}=\argmin{\lambda\geq0}\,\sum\limits_{i=1}^n\left(y_i-\Bx_i^\tr\hat{\Bbeta}_\lambda^{(-i)}\right)^2
+\]</span></p>
+</div>
+<div class="fragment">
+<ul>
+<li>Optimizes out-of-sample point prediction accuracy;</li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li>Fine for iid, but with serially dependent time series data, it’s not appropriate to randomly rip observations out of the middle and fit a model to what’s left before and after.</li>
+</ul>
+</div>
+</section>
+<section id="time-series-cross-validation" class="slide level2 small scrollable">
+<h2>Time series cross-validation</h2>
+<p>Leave-<span style="color:red;">future</span>-out cross-validation (LFO-CV):</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp;{\color{blue}\bullet\,\text{training}}\quad{\color{red}\bullet\,\text{test}}\\
+&amp;\begin{matrix}
+\color{blue}{y_1} &amp; \color{lightgray}{y_2} &amp; \color{lightgray}{y_3} &amp; \color{red}{y_4} &amp; \color{lightgray}{y_5} &amp; \color{lightgray}{y_6} &amp; \color{lightgray}{y_7} &amp; \color{lightgray}{y_8} &amp; \color{lightgray}{y_9} &amp; \color{lightgray}{y_{10}}&amp; \cdots &amp; \longrightarrow &amp; \text{error}_1^{(p)} \\
+\color{blue}{y_1} &amp; \color{blue}{y_2} &amp; \color{lightgray}{y_3} &amp; \color{lightgray}{y_4} &amp; \color{red}{y_5} &amp; \color{lightgray}{y_6} &amp; \color{lightgray}{y_7} &amp; \color{lightgray}{y_8} &amp; \color{lightgray}{y_9} &amp; \color{lightgray}{y_{10}}&amp; \cdots &amp; \longrightarrow &amp; \text{error}_2^{(p)} \\
+\color{blue}{y_1} &amp; \color{blue}{y_2} &amp; \color{blue}{y_3} &amp; \color{lightgray}{y_4} &amp; \color{lightgray}{y_5} &amp; \color{red}{y_6} &amp; \color{lightgray}{y_7} &amp; \color{lightgray}{y_8} &amp; \color{lightgray}{y_9} &amp; \color{lightgray}{y_{10}}&amp; \cdots &amp; \longrightarrow &amp; \text{error}_3^{(p)} \\
+\color{blue}{y_1} &amp; \color{blue}{y_2} &amp; \color{blue}{y_3} &amp; \color{blue}{y_4} &amp; \color{lightgray}{y_5} &amp; \color{lightgray}{y_6} &amp; \color{red}{y_7} &amp; \color{lightgray}{y_8} &amp; \color{lightgray}{y_9} &amp; \color{lightgray}{y_{10}}&amp; \cdots &amp; \longrightarrow &amp; \text{error}_4^{(p)} \\
+\color{blue}{y_1} &amp; \color{blue}{y_2} &amp; \color{blue}{y_3} &amp; \color{blue}{y_4} &amp; \color{blue}{y_5} &amp; \color{lightgray}{y_6} &amp; \color{lightgray}{y_7} &amp; \color{red}{y_8} &amp; \color{lightgray}{y_9} &amp; \color{lightgray}{y_{10}}&amp; \cdots &amp; \longrightarrow &amp; \text{error}_5^{(p)} \\
+\color{blue}{y_1} &amp; \color{blue}{y_2} &amp; \color{blue}{y_3} &amp; \color{blue}{y_4} &amp; \color{blue}{y_5} &amp; \color{blue}{y_6} &amp; \color{lightgray}{y_7} &amp; \color{lightgray}{y_8} &amp; \color{red}{y_9} &amp; \color{lightgray}{y_{10}}&amp; \cdots &amp; \longrightarrow &amp; \text{error}_6^{(p)} \\
+\color{blue}{y_1} &amp; \color{blue}{y_2} &amp; \color{blue}{y_3} &amp; \color{blue}{y_4} &amp; \color{blue}{y_5} &amp; \color{blue}{y_6} &amp; \color{blue}{y_7} &amp; \color{lightgray}{y_8} &amp; \color{lightgray}{y_9} &amp; \color{red}{y_{10}}&amp; \cdots &amp; \longrightarrow &amp; \text{error}_7^{(p)}\\
+&amp;&amp;&amp;&amp;&amp;\vdots&amp;&amp;&amp;&amp;&amp;&amp;&amp;\vdots\\
+\end{matrix}
+\end{aligned}
+\]</span></p>
+<div class="fragment">
+<p>Then pick:</p>
+<p><span class="math display">\[
+\hat{p}=\argmin{p=1\com2\com...\com\bar{p}}\,\sum\limits_{t=1}^T\text{error}_t^{(p)}
+\]</span></p>
 
 
 </div>
 </section></section>
-</div>
+    </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
 
 </div>
 </div></div>
 
-  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="../site_libs/revealjs/dist/reveal.js"></script><!-- reveal.js plugins --><script src="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script><script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script><script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script><script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script><script src="../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script><script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script><script src="../site_libs/revealjs/plugin/notes/notes.js"></script><script src="../site_libs/revealjs/plugin/search/search.js"></script><script src="../site_libs/revealjs/plugin/zoom/zoom.js"></script><script src="../site_libs/revealjs/plugin/math/math.js"></script><script>window.define = window.backupDefine; window.backupDefine = undefined;</script><script>
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="../site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
 
       // Full list of configuration options available at:
       // https://revealjs.com/config/
@@ -1177,42 +1348,8 @@ b_0
           RevealZoom
         ]
       });
-    </script><script>
-      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
-      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
-      // slide changes (different for each slide format).
-      (function () {
-        // dispatch for htmlwidgets
-        function fireSlideEnter() {
-          const event = window.document.createEvent("Event");
-          event.initEvent("slideenter", true, true);
-          window.document.dispatchEvent(event);
-        }
-
-        function fireSlideChanged(previousSlide, currentSlide) {
-          fireSlideEnter();
-
-          // dispatch for shiny
-          if (window.jQuery) {
-            if (previousSlide) {
-              window.jQuery(previousSlide).trigger("hidden");
-            }
-            if (currentSlide) {
-              window.jQuery(currentSlide).trigger("shown");
-            }
-          }
-        }
-
-        // hookup for slidy
-        if (window.w3c_slidy) {
-          window.w3c_slidy.add_observer(function (slide_num) {
-            // slide_num starts at position 1
-            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
-          });
-        }
-
-      })();
-    </script><script id="quarto-html-after-body" type="application/javascript">
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
       window.document.addEventListener("DOMContentLoaded", function (event) {
         const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
         tabsets.forEach(function(tabset) {
@@ -1379,6 +1516,6 @@ b_0
         }
       });
       </script>
-
+    
 
 </body></html>

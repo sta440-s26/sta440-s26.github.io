@@ -740,7 +740,7 @@ Ed Iversen and John Zito
 <p>Recall the simple linear model:</p>
 <p><span class="math display">\[
 \begin{aligned}
-y_i&amp;=\mu(x_i)+\varepsilon_i=\beta_0+\beta_1x_i+\varepsilon_i &amp;&amp; \varepsilon_i\iid\N(0\com\sigma^2)\\
+y_i&amp;=\mu(x_i)+\varepsilon_i=\beta_0+\beta_1x_i+\varepsilon_i, &amp;&amp; \varepsilon_i\iid\N(0\com\sigma^2)\\
 \end{aligned}
 \]</span></p>
 <div class="fragment">
@@ -831,7 +831,7 @@ y_i&amp;=\mu(x_i)+\varepsilon_i=\beta_0+\beta_1x_i+\varepsilon_i &amp;&amp; \var
 <p>Their difference is normal, and you subtract the means and add the variances:</p>
 <p><span class="math display">\[
 \begin{aligned}
-\hat{\mu}(\tilde{x})-\tilde{y} &amp;\sim\N\left(0\com \sigma^2\left[\frac{1}{n}+\frac{(\tilde{x}-\bar{x})^2}{S_{xx}}\right]+\sigma^2\right)
+\hat{\mu}(\tilde{x})-\tilde{y} &amp;\sim\N\left(\mu(\tilde{x})-\mu(\tilde{x})\com \sigma^2\left[\frac{1}{n}+\frac{(\tilde{x}-\bar{x})^2}{S_{xx}}\right]+\sigma^2\right)
 \\
 &amp;\sim\N\left(0\com \sigma^2\left[1+\frac{1}{n}+\frac{(\tilde{x}-\bar{x})^2}{S_{xx}}\right]\right).
 \end{aligned}
@@ -866,7 +866,7 @@ y_i&amp;=\mu(x_i)+\varepsilon_i=\beta_0+\beta_1x_i+\varepsilon_i &amp;&amp; \var
 \]</span></p>
 <p>One source of uncertainty:</p>
 <ul>
-<li>sampling uncertainty for unknown <span class="math inline">\(\beta\)</span>.</li>
+<li>estimation uncertainty from <span class="math inline">\(\hat{\beta}\)</span>.</li>
 </ul>
 </div><div class="column" style="width:50%;">
 <p>Prediction interval for <span class="math inline">\(\tilde{y}\)</span>.</p>
@@ -875,7 +875,7 @@ y_i&amp;=\mu(x_i)+\varepsilon_i=\beta_0+\beta_1x_i+\varepsilon_i &amp;&amp; \var
 \]</span></p>
 <p>Two sources of uncertainty:</p>
 <ul>
-<li>sampling uncertainty for unknown <span class="math inline">\(\beta\)</span>;</li>
+<li>estimation uncertainty from <span class="math inline">\(\hat{\beta}\)</span>;</li>
 <li>new <span class="math inline">\(\tilde{\varepsilon}\)</span>. That’s where we picked up the extra 1 in the standard error.</li>
 </ul>
 </div></div>
