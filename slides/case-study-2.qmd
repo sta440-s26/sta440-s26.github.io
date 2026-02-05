@@ -819,7 +819,7 @@ Their difference is normal, and you subtract the means and add the variances:
 
 $$
 \begin{aligned}
-\hat{\mu}(\tilde{x})-\tilde{y} &\sim\N\left(0\com \sigma^2\left[\frac{1}{n}+\frac{(\tilde{x}-\bar{x})^2}{S_{xx}}\right]+\sigma^2\right)
+\hat{\mu}(\tilde{x})-\tilde{y} &\sim\N\left(\mu(\tilde{x})-\mu(\tilde{x})\com \sigma^2\left[\frac{1}{n}+\frac{(\tilde{x}-\bar{x})^2}{S_{xx}}\right]+\sigma^2\right)
 \\
 &\sim\N\left(0\com \sigma^2\left[1+\frac{1}{n}+\frac{(\tilde{x}-\bar{x})^2}{S_{xx}}\right]\right).
 \end{aligned}
