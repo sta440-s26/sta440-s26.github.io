@@ -286,7 +286,7 @@ output_growth |>
 
 This is our estimate of GDP growth in 1965:Q3 *as measured* a year later in 1966:Q3.
 
-## Columns are *vintages* {.medium}
+## Columns are *vintages* {.small}
 
 Quarterly GDP growth (year-over-year percent change):
 
@@ -408,6 +408,12 @@ Each team will be assigned a target variable. Then:
     - Use the other variables as predictors if you want;
     - Produce a method with good historical performance averaged over time;
 -   You *must* quantify uncertainty. Point predictions are not enough. You need to produce and evaluate full predictive distributions that incorporate as many sources of uncertainty as possible.
+
+## Your task {.scrollable .small}
+
+Given the latest release and everything that's come before, can you predict where the revisions will ultimately settle down?
+
+![](images/predicting-revisions.png){fig-align="center" width="70%"}
 
 ## Deadlines {.medium}
 
@@ -700,8 +706,7 @@ Recall the simple linear model:
 
 $$
 \begin{aligned}
-y_i&=\mu(x_i)+\varepsilon_i && \varepsilon_i\iid\N(0\com\sigma^2)\\
-&=\beta_0+\beta_1x_i+\varepsilon_i\\
+y_i&=\mu(x_i)+\varepsilon_i=\beta_0+\beta_1x_i+\varepsilon_i && \varepsilon_i\iid\N(0\com\sigma^2)\\
 \end{aligned}
 $$
 
@@ -729,9 +734,7 @@ $$
 \end{aligned}
 $$
 
-. . .
-
-The main idea of *classical* statistics is that the estimators are random variables as a function of the data. We quantify the uncertainty in the estimate that is induced by the sampling process.
+The main idea of *classical* statistics: estimators are random variables as a function of the data. Estimation uncertainty comes from the sampling process.
 
 
 ## Sampling distributions {.small}
@@ -800,19 +803,19 @@ $$
 This quantifies frequentist sampling uncertainty for the regression line.
 
 
-## The predictive pivot {.medium}
+## The predictive pivot {.small}
 
 If a new $\tilde{x}$ joins the party, we have
 
 ::: incremental
 - $\tilde{y}\sim\text{N}(\mu(\tilde{x})\com\sigma^2)$;
-- $\hat{\mu}(x)\sim\N\left(\mu(\tilde{x})\com \sigma^2\left[\frac{1}{n}+\frac{(x-\bar{x})^2}{S_{xx}}\right]\right)$
+- $\hat{\mu}(x)\sim\N\left(\mu(\tilde{x})\com \sigma^2\left[\frac{1}{n}+\frac{(x-\bar{x})^2}{S_{xx}}\right]\right)$;
 - These are independent.
 :::
 
 . . .
 
-Their difference is normal, and you subtract the means and add the variance:
+Their difference is normal, and you subtract the means and add the variances:
 
 $$
 \begin{aligned}
@@ -851,9 +854,43 @@ $$
 
 This is wider than the confidence interval because the inherent random sampling of the new $\tilde{y}$ (its $\tilde{\varepsilon}$) adds a second source of uncertainty.
 
-## You get the idea
 
-The CI incorporates one source of uncertainty. The PI incorporates two. Hence, the PI is wider:
+## Comparison {.small}
+
+::::: columns
+::: {.column width="50%"}
+
+Confidence interval for $\mu(\tilde{x})$.
+
+$$
+\hat{\mu}(\tilde{x})\pm t^\star_{n-2}\times \hat{\sigma}\sqrt{\frac{1}{n}+\frac{(\tilde{x}-\bar{x})^2}{S_{xx}}}.
+$$
+
+One source of uncertainty:
+
+- sampling uncertainty for unknown $\beta$.
+
+:::
+
+::: {.column width="50%"}
+
+Prediction interval for $\tilde{y}$.
+
+$$
+\hat{\mu}(\tilde{x})\pm t^\star_{n-2}\times \hat{\sigma}\sqrt{1+\frac{1}{n}+\frac{(\tilde{x}-\bar{x})^2}{S_{xx}}}.
+$$
+
+Two sources of uncertainty: 
+
+- sampling uncertainty for unknown $\beta$;
+- new $\tilde{\varepsilon}$. That's where we picked up the extra 1 in the standard error.
+
+:::
+:::::
+
+## So the PI is wider than the CI
+
+Behold:
 
 ```{r}
 mtcars_fit <- lm(mpg ~ wt, data = mtcars)
@@ -864,6 +901,95 @@ predict(mtcars_fit, xnew, interval = "confidence")
 
 predict(mtcars_fit, xnew, interval = "prediction")
 ```
+
+## Hence the famous picture
+
+```{r}
+#| echo: false
+#| fig-asp: 0.55
+#| fig-align: center
+
+## ----------------------------
+## Simulate data
+## ----------------------------
+set.seed(123)
+
+n  <- 50
+x  <- mtcars$wt#runif(n, 0, 10)
+y  <- mtcars$mpg#2 + 0.8 * x + rnorm(n, sd = 2)
+n <- length(y)
+
+dat <- data.frame(x = x, y = y)
+
+## ----------------------------
+## Fit linear model
+## ----------------------------
+fit <- lm(y ~ x, data = dat)
+
+## Grid of x values for smooth curves
+x_grid <- seq(min(x) - 2, max(x) + 2, length.out = 1000)
+newdat <- data.frame(x = x_grid)
+
+## Confidence interval for mean response
+ci <- predict(fit, newdat, interval = "confidence")
+
+## Prediction interval for new observation
+pi <- predict(fit, newdat, interval = "prediction")
+
+## ----------------------------
+## Plot
+## ----------------------------
+par(mar = c(4, 4, 3, 1))
+
+plot(
+  y ~ x, data = dat,
+  pch = 19, col = "black",
+  xlab = "Weight of the car (1000s lbs)", ylab = "Miles per gallon",
+  xlim = c(min(x) - 2, max(x) + 2),
+  ylim = c(min(y) - 2, max(y) + 2),
+  main = "The accursed mtcars data set", 
+  bty = "n"
+)
+
+## Prediction interval band (wider, plot first)
+polygon(
+  c(x_grid, rev(x_grid)),
+  c(pi[, "lwr"], rev(pi[, "upr"])),
+  col = rgb(1, 0, 0, 0.2),
+  border = NA
+)
+
+## Confidence interval band (narrower)
+polygon(
+  c(x_grid, rev(x_grid)),
+  c(ci[, "lwr"], rev(ci[, "upr"])),
+  col = rgb(0, 0, 1, 0.3),
+  border = NA
+)
+
+## Regression line
+lines(x_grid, ci[, "fit"], lwd = 3)
+
+## ----------------------------
+## Legend
+## ----------------------------
+legend(
+  "topright",
+  legend = c(
+    "Observed data",
+    "OLS regression line",
+    "95% confidence interval for the regression function",
+    "95% prediction interval for a new data point"
+  ),
+  col = c("black", "black", rgb(0, 0, 1, 0.3), rgb(1, 0, 0, 0.2)),
+  lwd = c(NA, 2, NA, NA),
+  pch = c(19, NA, 15, 15),
+  pt.cex = 1.5,
+  bty = "n"
+)
+# https://online.stat.psu.edu/stat501/lesson/3/3.3
+```
+
 
 ## Bayes 101: posterior predictive distribution
 
@@ -886,7 +1012,7 @@ $$
 
 . . .
 
-Similar to before, it incorporates Bayesian posterior uncertainty about the parameter *and* inherent randomness of new $\tilde{y}$.
+Similar to before, it incorporates parameter uncertainty from the posterior *and* inherent randomness of new $\tilde{y}$ from the likelihood.
 
 ## Example: linear regression, again {.medium}
 
@@ -1018,7 +1144,7 @@ $$
 
 . . .
 
-Since $\tilde{y}$ is the sum of two independent normal bits ($\tilde{\Bx}^\tr\Bbeta$ and $\tilde{\varepsilon}$), it stays normal, and you can add the means and variance:
+Since $\tilde{y}$ is the sum of two independent normal bits ($\tilde{\Bx}^\tr\Bbeta$ and $\tilde{\varepsilon}$), it stays normal, and you can add the means and variances:
 
 . . .
 
@@ -1092,7 +1218,7 @@ $$
 
 . . .
 
-So, Student's $t$ with a shift and scale.
+So, Student's $t$ with a shift and scale. See the slides at the very end for the derivation.
 
 
 
@@ -1179,3 +1305,147 @@ Skim some background reading:
 
 Check out [FRED](https://fred.stlouisfed.org) and the [FRBP's Real-Time Data Set](https://www.philadelphiafed.org/surveys-and-data/real-time-data-research/real-time-data-set-for-macroeconomists).
 
+# BONUS: Student's $t$
+
+## Here's an old friend
+
+If $X\sim t_\nu$ has Student's $t$-distribution, then its density is
+
+$$
+f_X(x)=\frac{\Gamma \left(\frac{\nu + 1}{2}\right)}{\sqrt{\pi\nu}\, \Gamma\left(\frac{\nu}{2}\right)} \left(1 + \frac{x^2}{\nu}\right)^{-\frac{\nu+1}{2}},\quad x\in\mathbb{R}.
+$$
+
+## Non-standard Student's $t$ {.small}
+
+If you define a location-scale transformation $Y=\mu+\tau X$ for constants $\mu\in\mathbb{R}$ and $\tau>0$, then the new random variable $Y\sim t(\nu,\,\mu,\,\tau^2)$ has a *non-standard* Student's $t$-distribution. By the change-of-variables formula, the new density is 
+
+$$
+f_Y(y)
+=
+\frac{1}{\sigma}f_X\left(\frac{y-\mu}{\sigma}\right)
+=
+\frac{1}{\sigma}
+\frac{\Gamma{\left(\frac{\nu+1}{2}\right)}}{\sqrt{\pi\nu}\,\Gamma{\left(\frac{\nu}{2}\right)}} \left(1 + \frac{1}{\nu}\left(\frac{y-\mu}{\sigma}\right)^2\right)^{-(\nu + 1)/2}.
+$$
+
+Be careful not to immediately interpret $\mu$ and $\tau^2$ as *mean* and *variance*. Only if $\nu>1$ is $E(Y)=\mu$, and $\tau^2$ is only *proportional* to the variance if $\nu>2$. 
+
+
+## Whence Student's $t$?
+
+::: callout-tip
+## Theorem
+
+Consider a bivariate distribution $p(y,\,\sigma^2)$ written hierarchically:
+
+$$
+\begin{aligned}
+\sigma^2
+&
+\sim
+\text{IG}(a,\,b)
+\\
+y
+\,|\,
+\sigma^2
+&
+\sim
+\text{N}
+(m
+,\,
+\sigma^2v^2)
+.
+\end{aligned}
+$$
+
+If you integrate $\sigma^2$ out, the marginal distribution is $y\sim t\left(2a,\,m,\,\frac{b}{a}v^2\right)$.
+
+:::
+
+This is precisely the sort of hierarchy we get when we consider the posterior predictive distribution in the linear model with conjugate prior!
+
+## Gird your loins! {.small .scrollable}
+
+Integrate $\sigma^2$ out:
+
+$$
+\begin{aligned}
+p(y)
+&=
+\int_0^\infty p(y,\,\sigma^2)\,\text{d}\sigma^2
+\\
+&=
+\int_0^\infty p(y\mid\sigma^2)p(\sigma^2)\,\text{d}\sigma^2
+\\
+&=
+\int_0^\infty \underbrace{\frac{1}{\sqrt{2\pi\sigma^2v^2}}\exp\left(-\frac{(y-m)^2}{2\sigma^2v^2}\right)}_{\text{normal pdf}}\underbrace{\frac{b^a}{\Gamma(a)}(\sigma^2)^{-a-1}\exp\left(-b/\sigma^2\right)}_{\text{inverse gamma pdf}}\,\dd\sigma^2
+\\
+&=
+\frac{b^a}{\Gamma(a)\sqrt{2\pi v^2}}
+\int_0^\infty (\sigma^2)^{-1/2}\exp\left(-\frac{(y-m)^2}{2\sigma^2v^2}\right)(\sigma^2)^{-a-1}\exp\left(-b/\sigma^2\right)\,\dd\sigma^2
+\\
+&=
+\frac{b^a}{\Gamma(a)\sqrt{2\pi v^2}}
+\int_0^\infty \underbrace{(\sigma^2)^{-(a+1/2)-1}\exp\left(-\left[b+\frac{(y-m)^2}{2v^2}\right]\frac{1}{\sigma^2}\right)}_{\text{kernel of IG}(a+1/2,\,b+(y-m)^2/2v^2)}\,\dd\sigma^2
+\\
+&=
+\frac{b^a}{\Gamma(a)\sqrt{2\pi v^2}}
+\frac{\Gamma\left(a+\frac{1}{2}\right)}{\left(b+\frac{(y-m)^2}{2v^2}\right)^{a+1/2}}
+.
+\end{aligned}
+$$
+
+## Gird your loins! {.scrollable .small}
+
+Now let's jerk it around until we recognize that it's (non-standard) Student's $t$:
+
+$$
+\begin{aligned}
+p(y)
+&=
+\frac{b^a}{\Gamma(a)\sqrt{2\pi v^2}}
+\frac{\Gamma\left(a+\frac{1}{2}\right)}{\left(b+\frac{(y-m)^2}{2v^2}\right)^{a+1/2}}
+\\
+&=
+\frac{\Gamma\left(\frac{2a+1}{2}\right)}{\Gamma\left(\frac{2a}{2}\right)\sqrt{\pi 2 v^2}}
+b^a
+\left(b+\frac{(y-m)^2}{2v^2}\right)^{-(a+1/2)}
+\\
+&=
+\frac{\Gamma\left(\frac{2a+1}{2}\right)}{\Gamma\left(\frac{2a}{2}\right)\sqrt{\pi 2 \frac{a}{a}v^2}}
+b^a
+\left(b+\frac{(y-m)^2}{2\frac{a}{a}v^2}\right)^{-(a+1/2)}
+\\
+&=
+\frac{\Gamma\left(\frac{2a+1}{2}\right)}{\Gamma\left(\frac{2a}{2}\right)\sqrt{\pi 2 a}}
+\frac{b^a}{\sqrt{v^2/a}}
+\left(b+\frac{(y-m)^2}{2av^2/a}\right)^{-(a+1/2)}
+\\
+&=
+\frac{\Gamma\left(\frac{2a+1}{2}\right)}{\Gamma\left(\frac{2a}{2}\right)\sqrt{\pi 2 a}}
+\frac{b^a}{\sqrt{v^2/a}}
+\left[b\left(1+\frac{(y-m)^2}{2abv^2/a}\right)\right]^{-(a+1/2)}
+\\
+&=
+\frac{\Gamma\left(\frac{2a+1}{2}\right)}{\Gamma\left(\frac{2a}{2}\right)\sqrt{\pi 2 a}}
+\frac{b^a}{\sqrt{v^2/a}}
+b^{-(a+1/2)}\left(1+\frac{1}{2a}\left(\frac{y-m}{\sqrt{bv^2/a}}\right)^2\right)^{-(a+1/2)}
+\\
+&=
+\frac{\Gamma\left(\frac{2a+1}{2}\right)}{\Gamma\left(\frac{2a}{2}\right)\sqrt{\pi 2 a}}
+\frac{b^a}{b^ab^{1/2}\sqrt{v^2/a}}
+\left(1+\frac{1}{2a}\left(\frac{y-m}{\sqrt{bv^2/a}}\right)^2\right)^{-(a+1/2)}
+\\
+&=
+\frac{1}{\sqrt{bv^2/a}}
+\frac{\Gamma\left(\frac{2a+1}{2}\right)}{\Gamma\left(\frac{2a}{2}\right)\sqrt{\pi 2 a}}
+\left(1+\frac{1}{2a}\left(\frac{y-m}{\sqrt{bv^2/a}}\right)^2\right)^{-(a+1/2)}
+\\
+&=
+\frac{1}{\sqrt{bv^2/a}}
+\frac{\Gamma\left(\frac{2a+1}{2}\right)}{\Gamma\left(\frac{2a}{2}\right)\sqrt{\pi 2 a}}
+\left(1+\frac{1}{2a}\left(\frac{y-m}{\sqrt{bv^2/a}}\right)^2\right)^{-(2a+1)/2)}.
+\end{aligned}
+$$
+
+If you started with $X\sim t_{2a}$ and then defined $Y=m+\sqrt{\frac{b}{a}v^2}X$, that's the density you would get.
