@@ -515,7 +515,7 @@ Ed Iversen and John Zito
 </div>
 </div>
 <p>This is our estimate of GDP growth in 1965:Q3 <em>as measured</em> a year later in 1966:Q3.</p>
-</section><section id="columns-are-vintages" class="slide level2 medium"><h2>Columns are <em>vintages</em>
+</section><section id="columns-are-vintages" class="slide level2 small"><h2>Columns are <em>vintages</em>
 </h2>
 <p>Quarterly GDP growth (year-over-year percent change):</p>
 <div class="cell">
@@ -627,7 +627,13 @@ Ed Iversen and John Zito
 </ul>
 </li>
 <li>You <em>must</em> quantify uncertainty. Point predictions are not enough. You need to produce and evaluate full predictive distributions that incorporate as many sources of uncertainty as possible.</li>
-</ul></section><section id="deadlines" class="slide level2 medium"><h2>Deadlines</h2>
+</ul></section><section id="your-task-1" class="slide level2 scrollable small"><h2>Your task</h2>
+<p>Given the latest release and everything that’s come before, can you predict where the revisions will ultimately settle down?</p>
+<div class="quarto-figure quarto-figure-center">
+<figure><p><img data-src="images/predicting-revisions.png" class="quarto-figure quarto-figure-center" style="width:70.0%"></p>
+</figure>
+</div>
+</section><section id="deadlines" class="slide level2 medium"><h2>Deadlines</h2>
 <ul>
 <li>EDA presentations (Wed 2/11):
 <ul>
@@ -734,8 +740,7 @@ Ed Iversen and John Zito
 <p>Recall the simple linear model:</p>
 <p><span class="math display">\[
 \begin{aligned}
-y_i&amp;=\mu(x_i)+\varepsilon_i &amp;&amp; \varepsilon_i\iid\N(0\com\sigma^2)\\
-&amp;=\beta_0+\beta_1x_i+\varepsilon_i\\
+y_i&amp;=\mu(x_i)+\varepsilon_i=\beta_0+\beta_1x_i+\varepsilon_i &amp;&amp; \varepsilon_i\iid\N(0\com\sigma^2)\\
 \end{aligned}
 \]</span></p>
 <div class="fragment">
@@ -759,9 +764,7 @@ y_i&amp;=\mu(x_i)+\varepsilon_i &amp;&amp; \varepsilon_i\iid\N(0\com\sigma^2)\\
 \frac{1}{n-2}\sum\limits_{i=1}^n[y_i-\hat{\mu}(x_i)]^2.
 \end{aligned}
 \]</span></p>
-</div>
-<div class="fragment">
-<p>The main idea of <em>classical</em> statistics is that the estimators are random variables as a function of the data. We quantify the uncertainty in the estimate that is induced by the sampling process.</p>
+<p>The main idea of <em>classical</em> statistics: estimators are random variables as a function of the data. Estimation uncertainty comes from the sampling process.</p>
 </div>
 </section><section id="sampling-distributions" class="slide level2 small"><h2>Sampling distributions</h2>
 <p>You can show that the sampling distributions are independent, and</p>
@@ -815,16 +818,17 @@ y_i&amp;=\mu(x_i)+\varepsilon_i &amp;&amp; \varepsilon_i\iid\N(0\com\sigma^2)\\
 \]</span></p>
 <p>This quantifies frequentist sampling uncertainty for the regression line.</p>
 </div>
-</section><section id="the-predictive-pivot" class="slide level2 medium"><h2>The predictive pivot</h2>
+</section><section id="the-predictive-pivot" class="slide level2 small"><h2>The predictive pivot</h2>
 <p>If a new <span class="math inline">\(\tilde{x}\)</span> joins the party, we have</p>
 <ul>
 <li class="fragment">
 <span class="math inline">\(\tilde{y}\sim\text{N}(\mu(\tilde{x})\com\sigma^2)\)</span>;</li>
-<li class="fragment"><span class="math inline">\(\hat{\mu}(x)\sim\N\left(\mu(\tilde{x})\com \sigma^2\left[\frac{1}{n}+\frac{(x-\bar{x})^2}{S_{xx}}\right]\right)\)</span></li>
+<li class="fragment">
+<span class="math inline">\(\hat{\mu}(x)\sim\N\left(\mu(\tilde{x})\com \sigma^2\left[\frac{1}{n}+\frac{(x-\bar{x})^2}{S_{xx}}\right]\right)\)</span>;</li>
 <li class="fragment">These are independent.</li>
 </ul>
 <div class="fragment">
-<p>Their difference is normal, and you subtract the means and add the variance:</p>
+<p>Their difference is normal, and you subtract the means and add the variances:</p>
 <p><span class="math display">\[
 \begin{aligned}
 \hat{\mu}(\tilde{x})-\tilde{y} &amp;\sim\N\left(0\com \sigma^2\left[\frac{1}{n}+\frac{(\tilde{x}-\bar{x})^2}{S_{xx}}\right]+\sigma^2\right)
@@ -853,8 +857,30 @@ y_i&amp;=\mu(x_i)+\varepsilon_i &amp;&amp; \varepsilon_i\iid\N(0\com\sigma^2)\\
 <div class="fragment">
 <p>This is wider than the confidence interval because the inherent random sampling of the new <span class="math inline">\(\tilde{y}\)</span> (its <span class="math inline">\(\tilde{\varepsilon}\)</span>) adds a second source of uncertainty.</p>
 </div>
-</section><section id="you-get-the-idea" class="slide level2"><h2>You get the idea</h2>
-<p>The CI incorporates one source of uncertainty. The PI incorporates two. Hence, the PI is wider:</p>
+</section><section id="comparison" class="slide level2 small"><h2>Comparison</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>Confidence interval for <span class="math inline">\(\mu(\tilde{x})\)</span>.</p>
+<p><span class="math display">\[
+\hat{\mu}(\tilde{x})\pm t^\star_{n-2}\times \hat{\sigma}\sqrt{\frac{1}{n}+\frac{(\tilde{x}-\bar{x})^2}{S_{xx}}}.
+\]</span></p>
+<p>One source of uncertainty:</p>
+<ul>
+<li>sampling uncertainty for unknown <span class="math inline">\(\beta\)</span>.</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p>Prediction interval for <span class="math inline">\(\tilde{y}\)</span>.</p>
+<p><span class="math display">\[
+\hat{\mu}(\tilde{x})\pm t^\star_{n-2}\times \hat{\sigma}\sqrt{1+\frac{1}{n}+\frac{(\tilde{x}-\bar{x})^2}{S_{xx}}}.
+\]</span></p>
+<p>Two sources of uncertainty:</p>
+<ul>
+<li>sampling uncertainty for unknown <span class="math inline">\(\beta\)</span>;</li>
+<li>new <span class="math inline">\(\tilde{\varepsilon}\)</span>. That’s where we picked up the extra 1 in the standard error.</li>
+</ul>
+</div></div>
+</section><section id="so-the-pi-is-wider-than-the-ci" class="slide level2"><h2>So the PI is wider than the CI</h2>
+<p>Behold:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a>mtcars_fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(mpg <span class="sc">~</span> wt, <span class="at">data =</span> mtcars)</span>
 <span id="cb8-2"><a></a>xnew <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">wt =</span> <span class="fl">4.5</span>)</span>
@@ -868,6 +894,15 @@ y_i&amp;=\mu(x_i)+\varepsilon_i &amp;&amp; \varepsilon_i\iid\N(0\com\sigma^2)\\
 <div class="cell-output cell-output-stdout">
 <pre><code>     fit      lwr      upr
 1 13.235 6.750452 19.71956</code></pre>
+</div>
+</div>
+</section><section id="hence-the-famous-picture" class="slide level2"><h2>Hence the famous picture</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure><p><img data-src="case-study-2_files/figure-revealjs/unnamed-chunk-14-1.png" class="quarto-figure quarto-figure-center" width="960"></p>
+</figure>
+</div>
 </div>
 </div>
 </section><section id="bayes-101-posterior-predictive-distribution" class="slide level2"><h2>Bayes 101: posterior predictive distribution</h2>
@@ -885,7 +920,7 @@ p(\tilde{y}\mid y_{1:n})=\int p(\tilde{y}\mid \boldsymbol{\theta})p(\boldsymbol{
 \]</span></p>
 </div>
 <div class="fragment">
-<p>Similar to before, it incorporates Bayesian posterior uncertainty about the parameter <em>and</em> inherent randomness of new <span class="math inline">\(\tilde{y}\)</span>.</p>
+<p>Similar to before, it incorporates parameter uncertainty from the posterior <em>and</em> inherent randomness of new <span class="math inline">\(\tilde{y}\)</span> from the likelihood.</p>
 </div>
 </section><section id="example-linear-regression-again" class="slide level2 medium"><h2>Example: linear regression, again</h2>
 <p>Consider linear regression where the prior <span class="math inline">\(p(\sigma^2\com\Bbeta)\)</span> is <em>conjugate</em>:</p>
@@ -1000,7 +1035,7 @@ p(\tilde{y}\com\sigma^2\com\Bbeta\mid \tilde{\Bx}\com y_{1:n}\com \Bx_{1:n})
 \]</span></p>
 </div>
 <div class="fragment">
-<p>Since <span class="math inline">\(\tilde{y}\)</span> is the sum of two independent normal bits (<span class="math inline">\(\tilde{\Bx}^\tr\Bbeta\)</span> and <span class="math inline">\(\tilde{\varepsilon}\)</span>), it stays normal, and you can add the means and variance:</p>
+<p>Since <span class="math inline">\(\tilde{y}\)</span> is the sum of two independent normal bits (<span class="math inline">\(\tilde{\Bx}^\tr\Bbeta\)</span> and <span class="math inline">\(\tilde{\varepsilon}\)</span>), it stays normal, and you can add the means and variances:</p>
 </div>
 <div class="fragment">
 <p><span class="math display">\[
@@ -1068,9 +1103,9 @@ s_{n}^2
 \]</span></p>
 </div>
 <div class="fragment">
-<p>So, Student’s <span class="math inline">\(t\)</span> with a shift and scale.</p>
+<p>So, Student’s <span class="math inline">\(t\)</span> with a shift and scale. See the slides at the very end for the derivation.</p>
 </div>
-</section><section id="comparison" class="slide level2 small"><h2>Comparison</h2>
+</section><section id="comparison-1" class="slide level2 small"><h2>Comparison</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <p>Classical prediction interval:</p>
@@ -1136,6 +1171,140 @@ s_{n}^2
 <li>Jacobs and van Norden (2016 JoM): “<a href="https://doi.org/10.1016/j.jmacro.2015.11.004">Why are initial estimates of productivity growth so unreliable?</a>”</li>
 </ul>
 <p>Check out <a href="https://fred.stlouisfed.org">FRED</a> and the <a href="https://www.philadelphiafed.org/surveys-and-data/real-time-data-research/real-time-data-set-for-macroeconomists">FRBP’s Real-Time Data Set</a>.</p>
+</section></section><section><section id="bonus-students-t" class="title-slide slide level1 center"><h1>BONUS: Student’s <span class="math inline">\(t\)</span>
+</h1>
+
+</section><section id="heres-an-old-friend" class="slide level2"><h2>Here’s an old friend</h2>
+<p>If <span class="math inline">\(X\sim t_\nu\)</span> has Student’s <span class="math inline">\(t\)</span>-distribution, then its density is</p>
+<p><span class="math display">\[
+f_X(x)=\frac{\Gamma \left(\frac{\nu + 1}{2}\right)}{\sqrt{\pi\nu}\, \Gamma\left(\frac{\nu}{2}\right)} \left(1 + \frac{x^2}{\nu}\right)^{-\frac{\nu+1}{2}},\quad x\in\mathbb{R}.
+\]</span></p>
+</section><section id="non-standard-students-t" class="slide level2 small"><h2>Non-standard Student’s <span class="math inline">\(t\)</span>
+</h2>
+<p>If you define a location-scale transformation <span class="math inline">\(Y=\mu+\tau X\)</span> for constants <span class="math inline">\(\mu\in\mathbb{R}\)</span> and <span class="math inline">\(\tau&gt;0\)</span>, then the new random variable <span class="math inline">\(Y\sim t(\nu,\,\mu,\,\tau^2)\)</span> has a <em>non-standard</em> Student’s <span class="math inline">\(t\)</span>-distribution. By the change-of-variables formula, the new density is</p>
+<p><span class="math display">\[
+f_Y(y)
+=
+\frac{1}{\sigma}f_X\left(\frac{y-\mu}{\sigma}\right)
+=
+\frac{1}{\sigma}
+\frac{\Gamma{\left(\frac{\nu+1}{2}\right)}}{\sqrt{\pi\nu}\,\Gamma{\left(\frac{\nu}{2}\right)}} \left(1 + \frac{1}{\nu}\left(\frac{y-\mu}{\sigma}\right)^2\right)^{-(\nu + 1)/2}.
+\]</span></p>
+<p>Be careful not to immediately interpret <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\tau^2\)</span> as <em>mean</em> and <em>variance</em>. Only if <span class="math inline">\(\nu&gt;1\)</span> is <span class="math inline">\(E(Y)=\mu\)</span>, and <span class="math inline">\(\tau^2\)</span> is only <em>proportional</em> to the variance if <span class="math inline">\(\nu&gt;2\)</span>.</p>
+</section><section id="whence-students-t" class="slide level2"><h2>Whence Student’s <span class="math inline">\(t\)</span>?</h2>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Theorem</strong></p>
+</div>
+<div class="callout-content">
+<p>Consider a bivariate distribution <span class="math inline">\(p(y,\,\sigma^2)\)</span> written hierarchically:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\sigma^2
+&amp;
+\sim
+\text{IG}(a,\,b)
+\\
+y
+\,|\,
+\sigma^2
+&amp;
+\sim
+\text{N}
+(m
+,\,
+\sigma^2v^2)
+.
+\end{aligned}
+\]</span></p>
+<p>If you integrate <span class="math inline">\(\sigma^2\)</span> out, the marginal distribution is <span class="math inline">\(y\sim t\left(2a,\,m,\,\frac{b}{a}v^2\right)\)</span>.</p>
+</div>
+</div>
+</div>
+<p>This is precisely the sort of hierarchy we get when we consider the posterior predictive distribution in the linear model with conjugate prior!</p>
+</section><section id="gird-your-loins" class="slide level2 small scrollable"><h2>Gird your loins!</h2>
+<p>Integrate <span class="math inline">\(\sigma^2\)</span> out:</p>
+<p><span class="math display">\[
+\begin{aligned}
+p(y)
+&amp;=
+\int_0^\infty p(y,\,\sigma^2)\,\text{d}\sigma^2
+\\
+&amp;=
+\int_0^\infty p(y\mid\sigma^2)p(\sigma^2)\,\text{d}\sigma^2
+\\
+&amp;=
+\int_0^\infty \underbrace{\frac{1}{\sqrt{2\pi\sigma^2v^2}}\exp\left(-\frac{(y-m)^2}{2\sigma^2v^2}\right)}_{\text{normal pdf}}\underbrace{\frac{b^a}{\Gamma(a)}(\sigma^2)^{-a-1}\exp\left(-b/\sigma^2\right)}_{\text{inverse gamma pdf}}\,\dd\sigma^2
+\\
+&amp;=
+\frac{b^a}{\Gamma(a)\sqrt{2\pi v^2}}
+\int_0^\infty (\sigma^2)^{-1/2}\exp\left(-\frac{(y-m)^2}{2\sigma^2v^2}\right)(\sigma^2)^{-a-1}\exp\left(-b/\sigma^2\right)\,\dd\sigma^2
+\\
+&amp;=
+\frac{b^a}{\Gamma(a)\sqrt{2\pi v^2}}
+\int_0^\infty \underbrace{(\sigma^2)^{-(a+1/2)-1}\exp\left(-\left[b+\frac{(y-m)^2}{2v^2}\right]\frac{1}{\sigma^2}\right)}_{\text{kernel of IG}(a+1/2,\,b+(y-m)^2/2v^2)}\,\dd\sigma^2
+\\
+&amp;=
+\frac{b^a}{\Gamma(a)\sqrt{2\pi v^2}}
+\frac{\Gamma\left(a+\frac{1}{2}\right)}{\left(b+\frac{(y-m)^2}{2v^2}\right)^{a+1/2}}
+.
+\end{aligned}
+\]</span></p>
+</section><section id="gird-your-loins-1" class="slide level2 scrollable small"><h2>Gird your loins!</h2>
+<p>Now let’s jerk it around until we recognize that it’s (non-standard) Student’s <span class="math inline">\(t\)</span>:</p>
+<p><span class="math display">\[
+\begin{aligned}
+p(y)
+&amp;=
+\frac{b^a}{\Gamma(a)\sqrt{2\pi v^2}}
+\frac{\Gamma\left(a+\frac{1}{2}\right)}{\left(b+\frac{(y-m)^2}{2v^2}\right)^{a+1/2}}
+\\
+&amp;=
+\frac{\Gamma\left(\frac{2a+1}{2}\right)}{\Gamma\left(\frac{2a}{2}\right)\sqrt{\pi 2 v^2}}
+b^a
+\left(b+\frac{(y-m)^2}{2v^2}\right)^{-(a+1/2)}
+\\
+&amp;=
+\frac{\Gamma\left(\frac{2a+1}{2}\right)}{\Gamma\left(\frac{2a}{2}\right)\sqrt{\pi 2 \frac{a}{a}v^2}}
+b^a
+\left(b+\frac{(y-m)^2}{2\frac{a}{a}v^2}\right)^{-(a+1/2)}
+\\
+&amp;=
+\frac{\Gamma\left(\frac{2a+1}{2}\right)}{\Gamma\left(\frac{2a}{2}\right)\sqrt{\pi 2 a}}
+\frac{b^a}{\sqrt{v^2/a}}
+\left(b+\frac{(y-m)^2}{2av^2/a}\right)^{-(a+1/2)}
+\\
+&amp;=
+\frac{\Gamma\left(\frac{2a+1}{2}\right)}{\Gamma\left(\frac{2a}{2}\right)\sqrt{\pi 2 a}}
+\frac{b^a}{\sqrt{v^2/a}}
+\left[b\left(1+\frac{(y-m)^2}{2abv^2/a}\right)\right]^{-(a+1/2)}
+\\
+&amp;=
+\frac{\Gamma\left(\frac{2a+1}{2}\right)}{\Gamma\left(\frac{2a}{2}\right)\sqrt{\pi 2 a}}
+\frac{b^a}{\sqrt{v^2/a}}
+b^{-(a+1/2)}\left(1+\frac{1}{2a}\left(\frac{y-m}{\sqrt{bv^2/a}}\right)^2\right)^{-(a+1/2)}
+\\
+&amp;=
+\frac{\Gamma\left(\frac{2a+1}{2}\right)}{\Gamma\left(\frac{2a}{2}\right)\sqrt{\pi 2 a}}
+\frac{b^a}{b^ab^{1/2}\sqrt{v^2/a}}
+\left(1+\frac{1}{2a}\left(\frac{y-m}{\sqrt{bv^2/a}}\right)^2\right)^{-(a+1/2)}
+\\
+&amp;=
+\frac{1}{\sqrt{bv^2/a}}
+\frac{\Gamma\left(\frac{2a+1}{2}\right)}{\Gamma\left(\frac{2a}{2}\right)\sqrt{\pi 2 a}}
+\left(1+\frac{1}{2a}\left(\frac{y-m}{\sqrt{bv^2/a}}\right)^2\right)^{-(a+1/2)}
+\\
+&amp;=
+\frac{1}{\sqrt{bv^2/a}}
+\frac{\Gamma\left(\frac{2a+1}{2}\right)}{\Gamma\left(\frac{2a}{2}\right)\sqrt{\pi 2 a}}
+\left(1+\frac{1}{2a}\left(\frac{y-m}{\sqrt{bv^2/a}}\right)^2\right)^{-(2a+1)/2)}.
+\end{aligned}
+\]</span></p>
+<p>If you started with <span class="math inline">\(X\sim t_{2a}\)</span> and then defined <span class="math inline">\(Y=m+\sqrt{\frac{b}{a}v^2}X\)</span>, that’s the density you would get.</p>
 
 
 </section></section>
