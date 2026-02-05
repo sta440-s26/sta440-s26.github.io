@@ -706,7 +706,7 @@ Recall the simple linear model:
 
 $$
 \begin{aligned}
-y_i&=\mu(x_i)+\varepsilon_i=\beta_0+\beta_1x_i+\varepsilon_i && \varepsilon_i\iid\N(0\com\sigma^2)\\
+y_i&=\mu(x_i)+\varepsilon_i=\beta_0+\beta_1x_i+\varepsilon_i, && \varepsilon_i\iid\N(0\com\sigma^2)\\
 \end{aligned}
 $$
 
@@ -882,7 +882,7 @@ $$
 
 Two sources of uncertainty: 
 
-- estimation uncertainty from $\hat{\beta}$.
+- estimation uncertainty from $\hat{\beta}$;
 - new $\tilde{\varepsilon}$. That's where we picked up the extra 1 in the standard error.
 
 :::
