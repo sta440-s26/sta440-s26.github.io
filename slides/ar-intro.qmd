@@ -831,4 +831,6 @@ $$
 
 **Vices**:
 
-- high computational overhead to actually implement.
+High computational overhead to actually implement. Ideally, you fully re-train the entire procedure on every possible split. This can be *very* costly. So then what? Parallelize over splits? Only partially re-train? Randomly sample a subset of the splits and accept a noisier estimate of the CV error?
+
+Sacrifices will have to be made somewhere.
