@@ -784,6 +784,13 @@
     "text": "Authors and papers to know\n\nGneiting & Raftery (2007): “Strictly Proper Scoring Rules, Prediction, and Estimation,” JASA;\n\nHard to read, but packed with useful info;\n\n\nGneiting, Balabdaoui, & Raftery (2007): “Probabilistic Forecasts, Calibration and Sharpness,” JRSSB;\n\n“We propose a diagnostic approach to the evaluation of predictive performance that is based on the paradigm of maximizing the sharpness of the predictive distributions subject to calibration.” Bada bing."
   },
   {
+    "objectID": "slides/ar-intro.html#support-your-classmates-this-weekend",
+    "href": "slides/ar-intro.html#support-your-classmates-this-weekend",
+    "title": "Autoregressive models",
+    "section": "Support your classmates this weekend!",
+    "text": "Support your classmates this weekend!\n\n\n\n\n\nPaige Auditorium;\nFriday and Saturday @ 7pm;\nHelp me cheer on past and present students from 101, 199, 240, 440:\n\nDuke Chinese Dance\nTemptasians\nDefining Movement\nClub Taekwondo\n…"
+  },
+  {
     "objectID": "slides/ar-intro.html#where-were-going",
     "href": "slides/ar-intro.html#where-were-going",
     "title": "Autoregressive models",
@@ -914,7 +921,7 @@
     "href": "slides/ar-intro.html#lag-order-selection",
     "title": "Autoregressive models",
     "section": "Lag order selection",
-    "text": "Lag order selection\nThe lag order \\(p\\) is a hyperparameter that needs to be selected. \\(p\\) determines the number of predictions in the (auto)regression model, and so selecting the lag order is analogous to variable selection in iid regression."
+    "text": "Lag order selection\nThe lag order \\(p\\) is a hyperparameter that needs to be selected. \\(p\\) determines the number of predictors in the (auto)regression model, and so selecting the lag order is analogous to variable selection in iid regression."
   },
   {
     "objectID": "slides/ar-intro.html#rules-of-thumb",
@@ -928,14 +935,21 @@
     "href": "slides/ar-intro.html#minimize-some-criterion",
     "title": "Autoregressive models",
     "section": "Minimize some criterion",
-    "text": "Minimize some criterion\nTake:\n\\[\n\\hat{p}=\\argmin{p=1\\com2\\com...\\com\\bar{p}}\\,\\text{C}(p;\\,\\By_T\\com\\BX_T).\n\\]\n\nCommon choices:\n\nAkaike information criterion (AIC);\nBayesian information criterion (BIC);\nCross-validation error;\n\n\n\nCV assesses out-of-sample performance and is highly customizeable, but can be more labor-intensive to implement."
+    "text": "Minimize some criterion\nTake:\n\\[\n\\hat{p}=\\argmin{p=1\\com2\\com...\\com\\bar{p}}\\,\\text{C}(p;\\,\\By_T\\com\\BX_T).\n\\]\n\nCommon choices:\n\nAkaike information criterion (AIC);\nBayesian information criterion (BIC);\nCross-validation error;\n\n\n\nCV assesses out-of-sample performance and is highly customizable, but can be more labor-intensive to implement."
+  },
+  {
+    "objectID": "slides/ar-intro.html#recall-penalized-iid-regression",
+    "href": "slides/ar-intro.html#recall-penalized-iid-regression",
+    "title": "Autoregressive models",
+    "section": "Recall: penalized iid regression",
+    "text": "Recall: penalized iid regression\nPenalized estimator for the linear model:\n\\[\n\\hat{\\Bbeta}_{\\lambda}\n=\n\\underset{\\Bbeta}{\\arg\\min}\\left\\{||\\By-\\BX\\Bbeta||_2^2+\\lambda\\mathcal{P}(\\Bbeta)\\right\\}.\n\\] The penalty provides shrinkage or regularization, and the tuning parameter \\(\\lambda&gt;0\\) governs how much:\n\nRidge regression: \\(\\mathcal{P}(\\Bbeta)=||\\Bbeta||_2^2\\);\nLASSO: \\(\\mathcal{P}(\\Bbeta)=||\\Bbeta||_1\\);\netc.\n\nHow do you tune \\(\\lambda\\)?"
   },
   {
     "objectID": "slides/ar-intro.html#recall-loo-cv-for-iid-regression",
     "href": "slides/ar-intro.html#recall-loo-cv-for-iid-regression",
     "title": "Autoregressive models",
     "section": "Recall: LOO-CV for iid regression",
-    "text": "Recall: LOO-CV for iid regression\nLeave-one-out cross-validation:\n\n\nFor each model configuration, train on all data except observation \\(i\\), and then test on held-out \\((\\Bx_i\\com y_i)\\);\n\n\n\n\nAverage prediction error over all training/test splits, and pick the best model:\n\n\n\n\\[\n\\hat{\\lambda}=\\argmin{\\lambda\\geq0}\\,\\sum\\limits_{i=1}^n\\left(y_i-\\Bx_i^\\tr\\hat{\\Bbeta}_\\lambda^{(-i)}\\right)^2\n\\]\n\n\n\nOptimizes out-of-sample point prediction accuracy;\n\n\n\n\nFine for iid, but with serially dependent time series data, it’s not appropriate to randomly rip observations out of the middle and fit a model to what’s left before and after."
+    "text": "Recall: LOO-CV for iid regression\nLeave-one-out cross-validation:\n\n\nFor each model configuration, train on all data except observation \\(i\\), and then test on held-out \\((\\Bx_i\\com y_i)\\);\n\n\n\n\nAverage prediction error over all training/test splits, and pick the best model:\n\n\n\n\\[\n\\hat{\\lambda}=\\argmin{\\lambda\\geq0}\\,\\sum\\limits_{i=1}^n\\left(y_i-\\Bx_i^\\tr\\hat{\\Bbeta}_\\lambda^{(-i)}\\right)^2\n.\n\\]\n\n\n\nOptimizes out-of-sample point prediction accuracy;\n\n\n\n\nFine for iid, but with serially dependent time series data, it’s not appropriate to randomly rip observations out of the middle and fit a model to what’s left before and after. Gotta respect the time-ordering."
   },
   {
     "objectID": "slides/ar-intro.html#time-series-cross-validation",
@@ -943,6 +957,13 @@
     "title": "Autoregressive models",
     "section": "Time series cross-validation",
     "text": "Time series cross-validation\nLeave-future-out cross-validation (LFO-CV):\n\\[\n\\begin{aligned}\n&{\\color{blue}\\bullet\\,\\text{training}}\\quad{\\color{red}\\bullet\\,\\text{test}}\\\\\n&\\begin{matrix}\n\\color{blue}{y_1} & \\color{lightgray}{y_2} & \\color{lightgray}{y_3} & \\color{red}{y_4} & \\color{lightgray}{y_5} & \\color{lightgray}{y_6} & \\color{lightgray}{y_7} & \\color{lightgray}{y_8} & \\color{lightgray}{y_9} & \\color{lightgray}{y_{10}}& \\cdots & \\longrightarrow & \\text{error}_1^{(p)} \\\\\n\\color{blue}{y_1} & \\color{blue}{y_2} & \\color{lightgray}{y_3} & \\color{lightgray}{y_4} & \\color{red}{y_5} & \\color{lightgray}{y_6} & \\color{lightgray}{y_7} & \\color{lightgray}{y_8} & \\color{lightgray}{y_9} & \\color{lightgray}{y_{10}}& \\cdots & \\longrightarrow & \\text{error}_2^{(p)} \\\\\n\\color{blue}{y_1} & \\color{blue}{y_2} & \\color{blue}{y_3} & \\color{lightgray}{y_4} & \\color{lightgray}{y_5} & \\color{red}{y_6} & \\color{lightgray}{y_7} & \\color{lightgray}{y_8} & \\color{lightgray}{y_9} & \\color{lightgray}{y_{10}}& \\cdots & \\longrightarrow & \\text{error}_3^{(p)} \\\\\n\\color{blue}{y_1} & \\color{blue}{y_2} & \\color{blue}{y_3} & \\color{blue}{y_4} & \\color{lightgray}{y_5} & \\color{lightgray}{y_6} & \\color{red}{y_7} & \\color{lightgray}{y_8} & \\color{lightgray}{y_9} & \\color{lightgray}{y_{10}}& \\cdots & \\longrightarrow & \\text{error}_4^{(p)} \\\\\n\\color{blue}{y_1} & \\color{blue}{y_2} & \\color{blue}{y_3} & \\color{blue}{y_4} & \\color{blue}{y_5} & \\color{lightgray}{y_6} & \\color{lightgray}{y_7} & \\color{red}{y_8} & \\color{lightgray}{y_9} & \\color{lightgray}{y_{10}}& \\cdots & \\longrightarrow & \\text{error}_5^{(p)} \\\\\n\\color{blue}{y_1} & \\color{blue}{y_2} & \\color{blue}{y_3} & \\color{blue}{y_4} & \\color{blue}{y_5} & \\color{blue}{y_6} & \\color{lightgray}{y_7} & \\color{lightgray}{y_8} & \\color{red}{y_9} & \\color{lightgray}{y_{10}}& \\cdots & \\longrightarrow & \\text{error}_6^{(p)} \\\\\n\\color{blue}{y_1} & \\color{blue}{y_2} & \\color{blue}{y_3} & \\color{blue}{y_4} & \\color{blue}{y_5} & \\color{blue}{y_6} & \\color{blue}{y_7} & \\color{lightgray}{y_8} & \\color{lightgray}{y_9} & \\color{red}{y_{10}}& \\cdots & \\longrightarrow & \\text{error}_7^{(p)}\\\\\n&&&&&\\vdots&&&&&&&\\vdots\\\\\n\\end{matrix}\n\\end{aligned}\n\\]\n\nThen pick:\n\\[\n\\hat{p}=\\argmin{p=1\\com2\\com...\\com\\bar{p}}\\,\\sum\\limits_{t=1}^T\\text{error}_t^{(p)}\n\\]"
+  },
+  {
+    "objectID": "slides/ar-intro.html#cross-validation",
+    "href": "slides/ar-intro.html#cross-validation",
+    "title": "Autoregressive models",
+    "section": "Cross-validation",
+    "text": "Cross-validation\nVirtues:\n\nout-of-sample: we care most about how methods perform on data we haven’t seen yet. CV mimics that directly;\ncustomizable: whatever prediction task you care about (8-step-ahead point prediction, interval prediction, density, etc), simply plug-in the error metric that matches;\nmethod-agnostic: once we have the predictions, it doesn’t matter where they came from. CV provides an apples-to-apples comparison across wildly differing procedures;\n\nVices:\n\nhigh computational overhead to actually implement."
   },
   {
     "objectID": "slides/ar-forecast.html#the-simplest-non-trivial-time-series-model",

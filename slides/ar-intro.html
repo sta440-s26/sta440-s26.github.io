@@ -334,6 +334,26 @@ Ed Iversen and John Zito
 </div>
 
 </section>
+<section id="support-your-classmates-this-weekend" class="slide level2">
+<h2>Support your classmates this weekend!</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<p><img data-src="images/asa-converge.png"></p>
+</div><div class="column" style="width:60%;">
+<ul>
+<li>Paige Auditorium;</li>
+<li>Friday and Saturday @ 7pm;</li>
+<li>Help me cheer on past and present students from 101, 199, 240, 440:
+<ul>
+<li>Duke Chinese Dance</li>
+<li>Temptasians</li>
+<li>Defining Movement</li>
+<li>Club Taekwondo</li>
+<li>…</li>
+</ul></li>
+</ul>
+</div></div>
+</section>
 <section>
 <section id="introduction" class="title-slide slide level1 center">
 <h1>Introduction</h1>
@@ -1017,7 +1037,7 @@ b_0
 </section>
 <section id="lag-order-selection" class="slide level2">
 <h2>Lag order selection</h2>
-<p>The lag order <span class="math inline">\(p\)</span> is a <em>hyperparameter</em> that needs to be selected. <span class="math inline">\(p\)</span> determines the number of predictions in the (auto)regression model, and so selecting the lag order is analogous to variable selection in iid regression.</p>
+<p>The lag order <span class="math inline">\(p\)</span> is a <em>hyperparameter</em> that needs to be selected. <span class="math inline">\(p\)</span> determines the number of predictors in the (auto)regression model, and so selecting the lag order is analogous to variable selection in iid regression.</p>
 </section>
 <section id="rules-of-thumb" class="slide level2">
 <h2>Rules of thumb</h2>
@@ -1073,8 +1093,23 @@ b_0
 </ul>
 </div>
 <div class="fragment">
-<p>CV assesses out-of-sample performance and is highly customizeable, but can be more labor-intensive to implement.</p>
+<p>CV assesses out-of-sample performance and is highly customizable, but can be more labor-intensive to implement.</p>
 </div>
+</section>
+<section id="recall-penalized-iid-regression" class="slide level2 medium">
+<h2>Recall: penalized iid regression</h2>
+<p>Penalized estimator for the linear model:</p>
+<p><span class="math display">\[
+\hat{\Bbeta}_{\lambda}
+=
+\underset{\Bbeta}{\arg\min}\left\{||\By-\BX\Bbeta||_2^2+\lambda\mathcal{P}(\Bbeta)\right\}.
+\]</span> The penalty provides <em>shrinkage</em> or <em>regularization</em>, and the tuning parameter <span class="math inline">\(\lambda&gt;0\)</span> governs how much:</p>
+<ul>
+<li>Ridge regression: <span class="math inline">\(\mathcal{P}(\Bbeta)=||\Bbeta||_2^2\)</span>;</li>
+<li>LASSO: <span class="math inline">\(\mathcal{P}(\Bbeta)=||\Bbeta||_1\)</span>;</li>
+<li>etc.</li>
+</ul>
+<p>How do you tune <span class="math inline">\(\lambda\)</span>?</p>
 </section>
 <section id="recall-loo-cv-for-iid-regression" class="slide level2 small">
 <h2>Recall: LOO-CV for iid regression</h2>
@@ -1092,6 +1127,7 @@ b_0
 <div class="fragment">
 <p><span class="math display">\[
 \hat{\lambda}=\argmin{\lambda\geq0}\,\sum\limits_{i=1}^n\left(y_i-\Bx_i^\tr\hat{\Bbeta}_\lambda^{(-i)}\right)^2
+.
 \]</span></p>
 </div>
 <div class="fragment">
@@ -1101,7 +1137,7 @@ b_0
 </div>
 <div class="fragment">
 <ul>
-<li>Fine for iid, but with serially dependent time series data, it’s not appropriate to randomly rip observations out of the middle and fit a model to what’s left before and after.</li>
+<li>Fine for iid, but with serially dependent time series data, it’s not appropriate to randomly rip observations out of the middle and fit a model to what’s left before and after. Gotta respect the time-ordering.</li>
 </ul>
 </div>
 </section>
@@ -1128,9 +1164,22 @@ b_0
 <p><span class="math display">\[
 \hat{p}=\argmin{p=1\com2\com...\com\bar{p}}\,\sum\limits_{t=1}^T\text{error}_t^{(p)}
 \]</span></p>
-
-
 </div>
+</section>
+<section id="cross-validation" class="slide level2 small">
+<h2>Cross-validation</h2>
+<p><strong>Virtues</strong>:</p>
+<ul>
+<li><span style="color:blue;">out-of-sample</span>: we care most about how methods perform on data we haven’t seen yet. CV mimics that directly;</li>
+<li><span style="color:blue;">customizable</span>: whatever prediction task you care about (8-step-ahead point prediction, interval prediction, density, etc), simply plug-in the error metric that matches;</li>
+<li><span style="color:blue;">method-agnostic</span>: once we have the predictions, it doesn’t matter where they came from. CV provides an apples-to-apples comparison across wildly differing procedures;</li>
+</ul>
+<p><strong>Vices</strong>:</p>
+<ul>
+<li>high computational overhead to actually implement.</li>
+</ul>
+
+
 </section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
