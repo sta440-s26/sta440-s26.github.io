@@ -784,13 +784,6 @@
     "text": "Authors and papers to know\n\nGneiting & Raftery (2007): “Strictly Proper Scoring Rules, Prediction, and Estimation,” JASA;\n\nHard to read, but packed with useful info;\n\n\nGneiting, Balabdaoui, & Raftery (2007): “Probabilistic Forecasts, Calibration and Sharpness,” JRSSB;\n\n“We propose a diagnostic approach to the evaluation of predictive performance that is based on the paradigm of maximizing the sharpness of the predictive distributions subject to calibration.” Bada bing."
   },
   {
-    "objectID": "slides/ar-intro.html#support-your-classmates-this-weekend",
-    "href": "slides/ar-intro.html#support-your-classmates-this-weekend",
-    "title": "Autoregressive models",
-    "section": "Support your classmates this weekend!",
-    "text": "Support your classmates this weekend!\n\n\n\n\n\nPaige Auditorium;\nFriday and Saturday @ 7pm;\nHelp me cheer on past and present students from 101, 199, 240, 440:\n\nDuke Chinese Dance\nTemptasians\nDefining Movement\nClub Taekwondo\n…"
-  },
-  {
     "objectID": "slides/ar-intro.html#where-were-going",
     "href": "slides/ar-intro.html#where-were-going",
     "title": "Autoregressive models",
@@ -963,7 +956,7 @@
     "href": "slides/ar-intro.html#cross-validation",
     "title": "Autoregressive models",
     "section": "Cross-validation",
-    "text": "Cross-validation\nVirtues:\n\nout-of-sample: we care most about how methods perform on data we haven’t seen yet. CV mimics that directly;\ncustomizable: whatever prediction task you care about (8-step-ahead point prediction, interval prediction, density, etc), simply plug-in the error metric that matches;\nmethod-agnostic: once we have the predictions, it doesn’t matter where they came from. CV provides an apples-to-apples comparison across wildly differing procedures;\n\nVices:\n\nhigh computational overhead to actually implement."
+    "text": "Cross-validation\nVirtues:\n\nout-of-sample: we care most about how methods perform on data we haven’t seen yet. CV mimics that directly;\ncustomizable: whatever prediction task you care about (8-step-ahead point prediction, interval prediction, density, etc), simply plug-in the error metric that matches;\nmethod-agnostic: once we have the predictions, it doesn’t matter where they came from. CV provides an apples-to-apples comparison across wildly differing procedures;\n\nVices:\nHigh computational overhead to actually implement. Ideally, you fully re-train the entire procedure on every possible split. This can be very costly. So then what? Parallelize over splits? Only partially re-train? Randomly sample a subset of the splits and accept a noisier estimate of the CV error?\nSacrifices will have to be made somewhere."
   },
   {
     "objectID": "slides/ar-forecast.html#the-simplest-non-trivial-time-series-model",

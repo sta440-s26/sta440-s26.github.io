@@ -334,26 +334,6 @@ Ed Iversen and John Zito
 </div>
 
 </section>
-<section id="support-your-classmates-this-weekend" class="slide level2">
-<h2>Support your classmates this weekend!</h2>
-<div class="columns">
-<div class="column" style="width:40%;">
-<p><img data-src="images/asa-converge.png"></p>
-</div><div class="column" style="width:60%;">
-<ul>
-<li>Paige Auditorium;</li>
-<li>Friday and Saturday @ 7pm;</li>
-<li>Help me cheer on past and present students from 101, 199, 240, 440:
-<ul>
-<li>Duke Chinese Dance</li>
-<li>Temptasians</li>
-<li>Defining Movement</li>
-<li>Club Taekwondo</li>
-<li>…</li>
-</ul></li>
-</ul>
-</div></div>
-</section>
 <section>
 <section id="introduction" class="title-slide slide level1 center">
 <h1>Introduction</h1>
@@ -1175,9 +1155,8 @@ b_0
 <li><span style="color:blue;">method-agnostic</span>: once we have the predictions, it doesn’t matter where they came from. CV provides an apples-to-apples comparison across wildly differing procedures;</li>
 </ul>
 <p><strong>Vices</strong>:</p>
-<ul>
-<li>high computational overhead to actually implement.</li>
-</ul>
+<p>High computational overhead to actually implement. Ideally, you fully re-train the entire procedure on every possible split. This can be <em>very</em> costly. So then what? Parallelize over splits? Only partially re-train? Randomly sample a subset of the splits and accept a noisier estimate of the CV error?</p>
+<p>Sacrifices will have to be made somewhere.</p>
 
 
 </section></section>
