@@ -8,6 +8,15 @@ filters:
 
 # Introduction
 
+## Where we're going
+
+- We'll introduce the most basic time series models;
+  - autoregression (AR);
+  - dynamic linear model (DLM);
+- You may or may not use them;
+- The basic models will provide a sandbox for illustrating *probabilistic* prediction and evaluation;
+  - You will definitely use this!
+
 ## Time series {.small}
 
 - A [**time series**]{style="color:blue;"} is a set of measurements collected over time;
@@ -54,7 +63,7 @@ $$
 
 # Starting small
 
-## The simplest non-trivial time series model {.medium}
+## The simplest non-trivial time series model {.small}
 
 The autoregression of order 1, or AR(1):
 
@@ -72,10 +81,7 @@ y_{t-1}
 \varepsilon_t,
 \quad
 \varepsilon_t\iid\text{N}(0\com\sigma^2)
-\\
-y_0
-&\sim
-\text{N}(\mu_0\com \initvar),
+.
 \end{aligned}
 $$
 
@@ -87,16 +93,14 @@ That's the recursive form. It implies a joint distribution written marginal-cond
 
 $$
 \begin{aligned}
-p(y_{0:T})
+p(y_{1:T}\mid y_0)
 &=
-p(y_0)
 \prod_{t=1}^T
 p(y_t\given y_{0:t-1})
 \\
 &=
-p(y_0)
 \prod_{t=1}^T
-p(y_t\given y_{t-1}).
+\underbrace{p(y_t\given y_{t-1})}_{\N(\beta_0+\beta_1y_{t-1}\com\sigma^2)}
 \end{aligned}
 $$
 
@@ -106,9 +110,9 @@ Because the model is linear and Gaussian, the implied joint distribution across 
 
 $$
 \begin{bmatrix}
-y_0 & y_1 & \cdots & y_T
-\end{bmatrix}^\tr
-\sim\text{N}_{T+1}\left(\Bmu\com \BSigma\right).
+y_1 & y_2 & \cdots & y_T
+\end{bmatrix}^\tr\mid y_0
+\sim\text{N}_{T}\left(\Bmu\com \BSigma\right).
 $$
 
 Just like the linear mixed model is "just" a big multivariate normal with a particular block covariance structure (dependent within and independent between groups).
@@ -122,19 +126,18 @@ The mean and covariance are given by:
 
 $$
 \begin{aligned}
-E(y_t)
+E(y_t\mid y_0)
 &=
 \beta_0\sum\limits_{i=0}^{t-1}\beta_1^i
 +
-\beta_1^t\mu_0
+\beta_1^ty_0
 \\
-\var(y_t)
+\var(y_t\mid y_0)
 &=
 \sigma^2
-\sum\limits_{i=0}^{t-1}\beta_1^{2i}+
-\beta_1^{2t}\initvar
+\sum\limits_{i=0}^{t-1}\beta_1^{2i}
 \\
-\cov(y_t\com y_s)
+\cov(y_t\com y_s\mid y_0)
 &=
 \begin{cases}
 \beta_1^{s-t}\var(y_t) & t\leq s\\
@@ -145,231 +148,7 @@ E(y_t)
 $$
 :::
 
-## Stationarity
-
-A joint distribution is **(strictly) stationary** if it is "shift invariant":
-
-$$
-\{y_{t_1}\com y_{t_2}\com ...\com y_{t_n}\}\overset{d}{=}\{y_{t_1+h}\com y_{t_2+h}\com ...\com y_{t_n+h}\}.
-$$
-
-The Gaussian AR(1) with $|\beta_1|<1$ has this property.
-
-## Stationary AR(1) {.small}
-
-If $-1<\beta_1<1$, $\mu_0=\beta_0/(1-\beta_1)$, and $\initvar=\sigma^2/(1-\beta_1^2)$, then the AR(1) is strictly stationary with the following:
-
-$$
-\begin{aligned}
-E(y_t)
-&=
-\frac{\beta_0}{1-\beta_1}
-\\
-\var(y_t)
-&=
-\frac{\sigma^2}{1-\beta_1^2}
-\\
-\cov(y_t\com y_s)
-&=
-\beta_1^{|t-s|}\var(y_t)
-=
-\beta_1^{|t-s|}\frac{\sigma^2}{1-\beta_1^2}.
-\end{aligned}
-$$
-
-The common marginal shared by all $y_t$ is called the stationary distribution:
-
-$$
-y_t\sim\text{N}\left(\frac{\beta_0}{1-\beta_1}\com \frac{\sigma^2}{1-\beta_1^2}\right).
-$$
-
-So "did: dependent but identically distributed."
-
-## Autocovariance of a stationary process
-
-For a stationary process, the covariance kernel satisfies
-
-$$
-\cov(y_t\com y_{s})=\cov(y_{t+h}\com y_{s+h})\quad \forall (t\com s\com h).
-$$
-
-So you can define something called the **autocovariance function**:
-
-$$
-\gamma(h)=\cov(y_{t+h}\com y_{t}).
-$$
-
-For the AR(1), this is 
-
-$$
-\begin{aligned}
-\gamma(0)&=\sigma^2/(1-\beta_1^2)
-\\
-\gamma(h)&=\beta_1^h\gamma(0).
-\end{aligned}
-$$
-
-## What does the autocov function look like?
-
-```{r}
-#| echo: false
-# Parameters
-beta_1 <- 0      # AR(1) coefficient
-sigma2 <- 1        # Noise variance
-max_lag <- 20      # Number of lags to plot
-
-# Compute theoretical autocovariances
-lags <- 0:max_lag
-gamma_h <- sigma2 / (1 - beta_1^2) * beta_1^lags
-
-# Plot
-plot(lags, gamma_h, type="h", lwd=2,
-     xlab="Lag h", ylab="γ(h)",
-     main="Theoretical autocovariance of stationary AR(1)")
-points(lags, gamma_h, pch=19, col="blue")
-abline(h = 0, lty = 2, col = "darkgrey")
-
-# Add legend using Unicode
-legend_text <- paste0("β1 = ", beta_1, ", σ² = ", sigma2)
-legend("topright", legend=legend_text, bty="n")
-
-
-```
-
-## What does the autocov function look like?
-
-```{r}
-#| echo: false
-# Parameters
-beta_1 <- 0.5      # AR(1) coefficient
-sigma2 <- 1        # Noise variance
-max_lag <- 20      # Number of lags to plot
-
-# Compute theoretical autocovariances
-lags <- 0:max_lag
-gamma_h <- sigma2 / (1 - beta_1^2) * beta_1^lags
-
-# Plot
-plot(lags, gamma_h, type="h", lwd=2,
-     xlab="Lag h", ylab="γ(h)",
-     main="Theoretical autocovariance of stationary AR(1)")
-points(lags, gamma_h, pch=19, col="blue")
-
-# Add legend using Unicode
-legend_text <- paste0("β1 = ", beta_1, ", σ² = ", sigma2)
-legend("topright", legend=legend_text, bty="n")
-
-
-```
-
-## What does the autocov function look like?
-
-```{r}
-#| echo: false
-# Parameters
-beta_1 <- -0.8      # AR(1) coefficient
-sigma2 <- 1        # Noise variance
-max_lag <- 20      # Number of lags to plot
-
-# Compute theoretical autocovariances
-lags <- 0:max_lag
-gamma_h <- sigma2 / (1 - beta_1^2) * beta_1^lags
-
-# Plot
-plot(lags, gamma_h, type="h", lwd=2,
-     xlab="Lag h", ylab="γ(h)",
-     main="Theoretical autocovariance of stationary AR(1)")
-points(lags, gamma_h, pch=19, col="blue")
-abline(h = 0, lty = 2, col = "darkgrey")
-
-# Add legend using Unicode
-legend_text <- paste0("β1 = ", beta_1, ", σ² = ", sigma2)
-legend("topright", legend=legend_text, bty="n")
-
-
-```
-
-## What does the autocov function look like?
-
-```{r}
-#| echo: false
-# Parameters
-beta_1 <- 0.9      # AR(1) coefficient
-sigma2 <- 1        # Noise variance
-max_lag <- 20      # Number of lags to plot
-
-# Compute theoretical autocovariances
-lags <- 0:max_lag
-gamma_h <- sigma2 / (1 - beta_1^2) * beta_1^lags
-
-# Plot
-plot(lags, gamma_h, type="h", lwd=2,
-     xlab="Lag h", ylab="γ(h)",
-     main="Theoretical autocovariance of stationary AR(1)")
-points(lags, gamma_h, pch=19, col="blue")
-abline(h = 0, lty = 2, col = "darkgrey")
-
-# Add legend using Unicode
-legend_text <- paste0("β1 = ", beta_1, ", σ² = ", sigma2)
-legend("topright", legend=legend_text, bty="n")
-
-
-```
-
-## What does the autocov function look like?
-
-```{r}
-#| echo: false
-# Parameters
-beta_1 <- 0.99      # AR(1) coefficient
-sigma2 <- 1        # Noise variance
-max_lag <- 20      # Number of lags to plot
-
-# Compute theoretical autocovariances
-lags <- 0:max_lag
-gamma_h <- sigma2 / (1 - beta_1^2) * beta_1^lags
-
-# Plot
-plot(lags, gamma_h, type="h", lwd=2,
-     xlab="Lag h", ylab="γ(h)",
-     main="Theoretical autocovariance of stationary AR(1)")
-points(lags, gamma_h, pch=19, col="blue")
-abline(h = 0, lty = 2, col = "darkgrey")
-
-# Add legend using Unicode
-legend_text <- paste0("β1 = ", beta_1, ", σ² = ", sigma2)
-legend("topright", legend=legend_text, bty="n")
-
-```
-
-## What does the autocov function look like?
-
-```{r}
-#| echo: false
-# Parameters
-beta_1 <- 0.999      # AR(1) coefficient
-sigma2 <- 1        # Noise variance
-max_lag <- 20      # Number of lags to plot
-
-# Compute theoretical autocovariances
-lags <- 0:max_lag
-gamma_h <- sigma2 / (1 - beta_1^2) * beta_1^lags
-
-# Plot
-plot(lags, gamma_h, type="h", lwd=2,
-     xlab="Lag h", ylab="γ(h)",
-     main="Theoretical autocovariance of stationary AR(1)")
-points(lags, gamma_h, pch=19, col="blue")
-abline(h = 0, lty = 2, col = "darkgrey")
-
-# Add legend using Unicode
-legend_text <- paste0("β1 = ", beta_1, ", σ² = ", sigma2)
-legend("topright", legend=legend_text, bty="n")
-
-
-```
-
-## AR(1) sample paths {.scrollable}
+## What does this look like? {.scrollable}
 
 ```{shinylive-r}
 #| standalone: true
@@ -434,7 +213,7 @@ ui <- fluidPage(
                   value = 1, 
                   step = 0.1),
       sliderInput("m0",
-                  "μ₀",
+                  "y₀",
                   min = -5,
                   max = 5,
                   value = 0,
@@ -466,7 +245,7 @@ server <- function(input, output) {
     T <- input$T
     s <- input$s
     m0 <- input$m0
-    s0 = 1
+    s0 = 0
     
     range = 0:T
     alpha = c(0.01, seq(0.1, 0.9, by = 0.1))
@@ -509,10 +288,172 @@ server <- function(input, output) {
 shinyApp(ui = ui, server = server)
 ```
 
+## Observations
 
-# There nothing special about one lag
+- $|\beta_1|<1$: stable;
+- $|\beta_1|>1$: explosive;
+- $\beta_1<0$: oscillation;
+- $|\beta_1|=1$: random walk (w/ drift if $\beta_0\neq0$).
 
-## AR(p) {.small}
+
+
+## What do we mean by stable?
+
+- A joint distribution is **(strictly) stationary** if it is "shift invariant":
+
+$$
+\{y_{t_1}\com y_{t_2}\com ...\com y_{t_n}\}\overset{d}{=}\{y_{t_1+h}\com y_{t_2+h}\com ...\com y_{t_n+h}\}.
+$$
+
+- The joint distribution is the same anywhere you choose to zoom in;
+
+- The Gaussian AR(1) with $|\beta_1|<1$ has this property.
+
+## Stationary AR(1) {.small}
+
+If $-1<\beta_1<1$ and $y_0=\beta_0/(1-\beta_1)$, then the AR(1) is strictly stationary with the following:
+
+$$
+\begin{aligned}
+E(y_t)
+&=
+\frac{\beta_0}{1-\beta_1}
+\\
+\var(y_t)
+&=
+\frac{\sigma^2}{1-\beta_1^2}
+\\
+\cov(y_t\com y_s)
+&=
+\beta_1^{|t-s|}\var(y_t)
+=
+\beta_1^{|t-s|}\frac{\sigma^2}{1-\beta_1^2}.
+\end{aligned}
+$$
+
+The common marginal shared by all $y_t$ is called the *stationary distribution*:
+
+$$
+y_t\sim\text{N}\left(\frac{\beta_0}{1-\beta_1}\com \frac{\sigma^2}{1-\beta_1^2}\right).
+$$
+
+So "did: dependent but identically distributed."
+
+## Autocovariance of a stationary process
+
+For a stationary process, the covariance kernel satisfies
+
+$$
+\cov(y_t\com y_{s})=\cov(y_{t+h}\com y_{s+h})\quad \forall (t\com s\com h).
+$$
+
+So you can define something called the **autocovariance function**:
+
+$$
+\gamma(h)=\cov(y_{t+h}\com y_{t}).
+$$
+
+For the AR(1), this is 
+
+$$
+\begin{aligned}
+\gamma(0)&=\sigma^2/(1-\beta_1^2)
+\\
+\gamma(h)&=\beta_1^h\gamma(0).
+\end{aligned}
+$$
+
+## What does the autocov function look like?
+
+```{shinylive-r}
+#| standalone: true
+#| viewerHeight: 700
+
+library(shiny)
+
+# Define UI for application that draws a histogram
+ui <- fluidPage(
+  
+  # Application title
+  titlePanel("Theoretical autocovariance of a stationary AR(1)"),
+  
+  # Sidebar with a slider input for number of bins 
+  sidebarLayout(
+    sidebarPanel(
+      sliderInput("b1",
+                  "β₁",
+                  min = -0.99,
+                  max = 0.99,
+                  value = 0,
+                  step = 0.01),
+      sliderInput("s",
+                  "σ",
+                  min = 0,
+                  max = 2,
+                  value = 1, 
+                  step = 0.1),
+      sliderInput("H",
+                  "H",
+                  min = 0,
+                  max = 50,
+                  step = 1,
+                  value = 20)
+    ),
+    
+    # Show a plot of the generated distribution
+    mainPanel(
+      plotOutput("distPlot", height = "500px")
+    )
+  )
+)
+
+# Define server logic required to draw a histogram
+server <- function(input, output) {
+  
+  output$distPlot <- renderPlot({
+    beta_1 <- input$b1
+    max_lag <- input$H
+    sigma2 <- input$s^2
+
+    # Compute theoretical autocovariances
+    lags <- 0:max_lag
+    gamma_h <- sigma2 / (1 - beta_1^2) * beta_1^lags
+    
+    # Plot
+    plot(lags, gamma_h, type="h", lwd=2,
+         xlab="Lag h", ylab="γ(h)",
+         main="")
+    points(lags, gamma_h, pch=19, col="blue")
+    abline(h = 0, lty = 2, col = "darkgrey")
+    
+    # Add legend using Unicode
+    legend_text <- paste0("β1 = ", beta_1, ", σ² = ", sigma2)
+    legend("topright", legend=legend_text, bty="n")
+
+  })
+}
+
+# Run the application 
+shinyApp(ui = ui, server = server)
+```
+
+## Observations
+
+The autocovariance of a stationary AR(1) is:
+
+$$
+\begin{aligned}
+\gamma(0)&=\sigma^2/(1-\beta_1^2)
+\\
+\gamma(h)&=\beta_1^h\gamma(0).
+\end{aligned}
+$$
+
+- $\gamma(h)\to0$ as $h\to\infty$;
+- The larger $|\beta_1|$, the stronger the serial dependence, the slower the decay;
+- If $-1<\beta_1<0$, you get oscillation because $\beta_1^h$ is positive for even $h$ and negative for odd $h$.
+
+## There's nothing special about one lag {.small}
 
 The autoregression of order $p$, or AR($p$):
 
@@ -538,22 +479,25 @@ y_{t-p}
 \varepsilon_t,
 \quad
 \varepsilon_t\iid\text{N}(0\com\sigma^2)
-\\
-\begin{bmatrix}
-y_0
-\\
-y_{-1}
-\\
-\vdots
-\\
-y_{1-p}
-\end{bmatrix}
-&\sim
-\text{N}_p(\Bmu_0\com \BP_0).
 \end{aligned}
 $$
 
-# Maximum likelihood estimation
+This again implies a joint distribution written marginal-conditional style:
+
+$$
+\begin{aligned}
+p(y_{1:T}\mid y_0\com y_{-1}\com ...\com y_{1-p})
+&=
+\prod_{t=1}^Tp(y_t\mid y_{1-p:t-1})\\
+\\
+&=
+\prod_{t=1}^Tp(y_t\mid y_{t-p:t-1}).
+\end{aligned}
+$$
+
+As before, the joint distribution is just a big ol' multivariate normal, but the mean and covariance are harder to characterize.
+
+# Likelihood-based inference
 
 ## Let's improve the notation {.medium}
 
@@ -596,9 +540,6 @@ $$
 
 Viewed as a function of $\Btheta$, that's a (conditional) *likelihood*! 
 
-. . .
-
-Maximize it, or combine with a prior.
 
 ## Maximum likelihood estimation
 
@@ -622,34 +563,6 @@ y_t&=\Bx_t^\tr\Bbeta+\varepsilon_t,&&\varepsilon_t\iid\N(0\com\sigma^2)
 \end{bmatrix}^\tr.
 \end{aligned}
 $$
-
-## Maximum likelihood estimation {.medium}
-
-Since $y_t\given \Bx_t\com\Btheta\sim\N\left(\Bx_t^\tr\Bbeta\com\sigma^2\right)$, we have
-
-. . .
-
-$$
-\begin{aligned}
-p(y_{1:T}\given  \Bx_0\com \Btheta)
-&=
-\prod_{t=1}^T
-p(y_t\given \Bx_t\com\Btheta)
-\\
-&=
-\prod_{t=1}^T
-\frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{1}{2}\frac{(y_t-\Bx_t^\tr\Bbeta)^2}{\sigma^2}\right)
-\\
-&=
-(2\pi\sigma^2)^{-T/2}
-\exp\left(-\frac{1}{2\sigma^2}\sum\limits_{t=1}^T(y_t-\Bx_t^\tr\Bbeta)^2\right)
-.
-\end{aligned}
-$$
-
-. . .
-
-To compute the MLE, we treat this as a function of $\Btheta$ with the data fixed.
 
 ## Stack 'em up {.medium .scrollable}
 
@@ -682,65 +595,11 @@ $$
 \end{aligned}
 $$
 
-. . .
-
-So the likelihood is:
-
-$$
-\begin{aligned}
-p(y_{1:T}\given  \Bx_0\com \Btheta)
-&=
-(2\pi\sigma^2)^{-T/2}
-\exp\left(-\frac{1}{2\sigma^2}\sum\limits_{t=1}^T(y_t-\Bx_t^\tr\Bbeta)^2\right)
-\\
-&=
-(2\pi\sigma^2)^{-T/2}
-\exp\left(-\frac{1}{2\sigma^2}||\By_T-\BX_T\Bbeta||_2^2\right)
-.
-\end{aligned}
-$$
-
-
-
-## What are we doing?
-
-Likelihood:
-
-$$
-\begin{aligned}
-L(\Bbeta\com\sigma^2)
-&=
-(2\pi\sigma^2)^{-T/2}
-\exp\left(-\frac{1}{2\sigma^2}||\By_T-\BX_T\Bbeta||_2^2\right)
-.
-\end{aligned}
-$$
-
-Log-likelihood:
-
-$$
-\ell(\Bbeta\com\sigma^2)
-=
--\frac{T}{2}\ln(2\pi\sigma^2)
--\frac{1}{2\sigma^2}
-||\By_T-\BX_T\Bbeta||_2^2
-,
-$$
-
-We want:
-
-$$
-\begin{aligned}
-\hat{\Bbeta}_T\com \hat{\sigma_T^2}
-&=\argmax{\Bbeta\com\sigma^2}\,\ell(\Bbeta\com\sigma^2).
-\end{aligned}
-$$
 
 ## OLS for the AR(p) {.medium}
 
-. . .
 
-- The maximum (conditional) likelihood estimator in the AR(p) is the same as the ordinary least squares estimator:
+- Turns out, the maximum (conditional) likelihood estimator in the AR(p) is the same as the ordinary least squares estimator:
 
 . . .
 
@@ -758,10 +617,8 @@ $$
 
 . . .
 
-- It doesn't matter that there's time series dependence. Once the data are observed and fixed, the *mechanics* are identical to iid multiple regression;
-- For things like prediction, dependence matters, and the correspondence with iid regression breaks down.
-
-# Conjugate Bayesian inference
+- It doesn't matter that there's time series dependence. Once the data are observed and fixed, the *mechanics* of computing the estimate are identical to iid multiple regression;
+- The analogy breaks down after that: different sampling distributions, intervals, etc. No exact procedures. Need bootstrap, etc.
 
 ## Bayes is just like iid regression too {.small}
 
@@ -824,3 +681,104 @@ b_0
 \end{aligned}
 $$
 
+# Hyperparameter tuning
+
+## Lag order selection
+
+The lag order $p$ is a *hyperparameter* that needs to be selected. $p$ determines the number of predictions in the (auto)regression model, and so selecting the lag order is analogous to variable selection in iid regression.
+
+## Rules of thumb
+
+Pick $p$ = number of observations in one natural cycle of the data:
+
+. . .
+
+| Data frequency | Typical lag length (p) |
+|----------------|-------------------------|
+| Hourly         | 24                      |
+| Daily          | 7                       |
+| Monthly        | 12                      |
+| Quarterly      | 4                       |
+| Annual         | 1                       |
+
+. . .
+
+Fine as a quick-and-dirty solution. Guidance on this will be domain-specific.
+
+
+## Minimize some criterion {.medium}
+
+Take:
+
+$$
+\hat{p}=\argmin{p=1\com2\com...\com\bar{p}}\,\text{C}(p;\,\By_T\com\BX_T).
+$$
+
+. . .
+
+Common choices:
+
+:::incremental 
+- Akaike information criterion (AIC);
+- Bayesian information criterion (BIC);
+- Cross-validation error;
+:::
+
+. . .
+
+CV assesses out-of-sample performance and is highly customizeable, but can be more labor-intensive to implement.
+
+## Recall: LOO-CV for iid regression {.small}
+
+Leave-one-out cross-validation:
+
+. . .
+
+- For each model configuration, train on all data except observation $i$, and then test on held-out $(\Bx_i\com y_i)$;
+
+. . .
+
+- Average prediction error over all training/test splits, and pick the best model:
+
+. . .
+
+$$
+\hat{\lambda}=\argmin{\lambda\geq0}\,\sum\limits_{i=1}^n\left(y_i-\Bx_i^\tr\hat{\Bbeta}_\lambda^{(-i)}\right)^2
+$$
+
+. . .
+
+- Optimizes out-of-sample point prediction accuracy;
+
+. . .
+
+
+- Fine for iid, but with serially dependent time series data, it's not appropriate to randomly rip observations out of the middle and fit a model to what's left before and after.
+
+## Time series cross-validation {.small .scrollable}
+
+Leave-[future]{style="color:red;"}-out cross-validation (LFO-CV):
+
+$$
+\begin{aligned}
+&{\color{blue}\bullet\,\text{training}}\quad{\color{red}\bullet\,\text{test}}\\
+&\begin{matrix}
+\color{blue}{y_1} & \color{lightgray}{y_2} & \color{lightgray}{y_3} & \color{red}{y_4} & \color{lightgray}{y_5} & \color{lightgray}{y_6} & \color{lightgray}{y_7} & \color{lightgray}{y_8} & \color{lightgray}{y_9} & \color{lightgray}{y_{10}}& \cdots & \longrightarrow & \text{error}_1^{(p)} \\
+\color{blue}{y_1} & \color{blue}{y_2} & \color{lightgray}{y_3} & \color{lightgray}{y_4} & \color{red}{y_5} & \color{lightgray}{y_6} & \color{lightgray}{y_7} & \color{lightgray}{y_8} & \color{lightgray}{y_9} & \color{lightgray}{y_{10}}& \cdots & \longrightarrow & \text{error}_2^{(p)} \\
+\color{blue}{y_1} & \color{blue}{y_2} & \color{blue}{y_3} & \color{lightgray}{y_4} & \color{lightgray}{y_5} & \color{red}{y_6} & \color{lightgray}{y_7} & \color{lightgray}{y_8} & \color{lightgray}{y_9} & \color{lightgray}{y_{10}}& \cdots & \longrightarrow & \text{error}_3^{(p)} \\
+\color{blue}{y_1} & \color{blue}{y_2} & \color{blue}{y_3} & \color{blue}{y_4} & \color{lightgray}{y_5} & \color{lightgray}{y_6} & \color{red}{y_7} & \color{lightgray}{y_8} & \color{lightgray}{y_9} & \color{lightgray}{y_{10}}& \cdots & \longrightarrow & \text{error}_4^{(p)} \\
+\color{blue}{y_1} & \color{blue}{y_2} & \color{blue}{y_3} & \color{blue}{y_4} & \color{blue}{y_5} & \color{lightgray}{y_6} & \color{lightgray}{y_7} & \color{red}{y_8} & \color{lightgray}{y_9} & \color{lightgray}{y_{10}}& \cdots & \longrightarrow & \text{error}_5^{(p)} \\
+\color{blue}{y_1} & \color{blue}{y_2} & \color{blue}{y_3} & \color{blue}{y_4} & \color{blue}{y_5} & \color{blue}{y_6} & \color{lightgray}{y_7} & \color{lightgray}{y_8} & \color{red}{y_9} & \color{lightgray}{y_{10}}& \cdots & \longrightarrow & \text{error}_6^{(p)} \\
+\color{blue}{y_1} & \color{blue}{y_2} & \color{blue}{y_3} & \color{blue}{y_4} & \color{blue}{y_5} & \color{blue}{y_6} & \color{blue}{y_7} & \color{lightgray}{y_8} & \color{lightgray}{y_9} & \color{red}{y_{10}}& \cdots & \longrightarrow & \text{error}_7^{(p)}\\
+&&&&&\vdots&&&&&&&\vdots\\
+\end{matrix}
+\end{aligned}
+$$
+
+. . .
+
+Then pick:
+
+$$
+\hat{p}=\argmin{p=1\com2\com...\com\bar{p}}\,\sum\limits_{t=1}^T\text{error}_t^{(p)}
+$$
