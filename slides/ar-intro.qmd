@@ -6,6 +6,25 @@ filters:
   - shinylive
 ---
 
+## Support your classmates this weekend!
+
+::: columns
+::: {.column width="40%"}
+![](images/asa-converge.png)
+:::
+
+::: {.column width="60%"}
+- Paige Auditorium;
+- Friday and Saturday @ 7pm;
+- Help me cheer on past and present students from 101, 199, 240, 440:
+  - Duke Chinese Dance
+  - Temptasians
+  - Defining Movement
+  - Club Taekwondo
+  - ...
+:::
+:::
+
 # Introduction
 
 ## Where we're going
@@ -685,7 +704,7 @@ $$
 
 ## Lag order selection
 
-The lag order $p$ is a *hyperparameter* that needs to be selected. $p$ determines the number of predictions in the (auto)regression model, and so selecting the lag order is analogous to variable selection in iid regression.
+The lag order $p$ is a *hyperparameter* that needs to be selected. $p$ determines the number of predictors in the (auto)regression model, and so selecting the lag order is analogous to variable selection in iid regression.
 
 ## Rules of thumb
 
@@ -726,7 +745,24 @@ Common choices:
 
 . . .
 
-CV assesses out-of-sample performance and is highly customizeable, but can be more labor-intensive to implement.
+CV assesses out-of-sample performance and is highly customizable, but can be more labor-intensive to implement.
+
+## Recall: penalized iid regression {.medium}
+
+Penalized estimator for the linear model:
+
+$$
+\hat{\Bbeta}_{\lambda}
+=
+\underset{\Bbeta}{\arg\min}\left\{||\By-\BX\Bbeta||_2^2+\lambda\mathcal{P}(\Bbeta)\right\}.
+$$
+The penalty provides *shrinkage* or *regularization*, and the tuning parameter $\lambda>0$ governs how much:
+
+- Ridge regression: $\mathcal{P}(\Bbeta)=||\Bbeta||_2^2$;
+- LASSO: $\mathcal{P}(\Bbeta)=||\Bbeta||_1$;
+- etc.
+
+How do you tune $\lambda$?
 
 ## Recall: LOO-CV for iid regression {.small}
 
@@ -744,6 +780,7 @@ Leave-one-out cross-validation:
 
 $$
 \hat{\lambda}=\argmin{\lambda\geq0}\,\sum\limits_{i=1}^n\left(y_i-\Bx_i^\tr\hat{\Bbeta}_\lambda^{(-i)}\right)^2
+.
 $$
 
 . . .
@@ -753,7 +790,7 @@ $$
 . . .
 
 
-- Fine for iid, but with serially dependent time series data, it's not appropriate to randomly rip observations out of the middle and fit a model to what's left before and after.
+- Fine for iid, but with serially dependent time series data, it's not appropriate to randomly rip observations out of the middle and fit a model to what's left before and after. Gotta respect the time-ordering.
 
 ## Time series cross-validation {.small .scrollable}
 
@@ -782,3 +819,16 @@ Then pick:
 $$
 \hat{p}=\argmin{p=1\com2\com...\com\bar{p}}\,\sum\limits_{t=1}^T\text{error}_t^{(p)}
 $$
+
+
+## Cross-validation {.small}
+
+**Virtues**:
+
+- [out-of-sample]{style="color:blue;"}: we care most about how methods perform on data we haven't seen yet. CV mimics that directly;
+- [customizable]{style="color:blue;"}: whatever prediction task you care about (8-step-ahead point prediction, interval prediction, density, etc), simply plug-in the error metric that matches;
+- [method-agnostic]{style="color:blue;"}: once we have the predictions, it doesn't matter where they came from. CV provides an apples-to-apples comparison across wildly differing procedures;
+
+**Vices**:
+
+- high computational overhead to actually implement.
