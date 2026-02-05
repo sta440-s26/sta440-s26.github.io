@@ -868,7 +868,7 @@ $$
 
 One source of uncertainty:
 
-- sampling uncertainty for unknown $\beta$.
+- estimation uncertainty from $\hat{\beta}$.
 
 :::
 
@@ -882,7 +882,7 @@ $$
 
 Two sources of uncertainty: 
 
-- sampling uncertainty for unknown $\beta$;
+- estimation uncertainty from $\hat{\beta}$.
 - new $\tilde{\varepsilon}$. That's where we picked up the extra 1 in the standard error.
 
 :::
