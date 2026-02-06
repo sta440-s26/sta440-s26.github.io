@@ -399,7 +399,7 @@ Imagine you work at the Federal Reserve, or the Congressional Budget Office, or 
 
 ## Your task {.medium}
 
-**Data**: the full set of historical vintages for several macro variables.
+**Data**: the full set of historical vintages for eight macro variables.
 
 Each team will be assigned a target variable. Then:
 
