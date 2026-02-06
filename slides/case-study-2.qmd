@@ -271,7 +271,7 @@ output_growth |>
 
 A single variable gets a whole data frame with an upper triangular structure:
 
-- row = what period are measuring?
+- row = what period are we measuring?
 - column = when were we measuring it?
 
 ## What are these data like?
@@ -1322,10 +1322,10 @@ If you define a location-scale transformation $Y=\mu+\tau X$ for constants $\mu\
 $$
 f_Y(y)
 =
-\frac{1}{\sigma}f_X\left(\frac{y-\mu}{\sigma}\right)
+\frac{1}{\tau}f_X\left(\frac{y-\mu}{\tau}\right)
 =
-\frac{1}{\sigma}
-\frac{\Gamma{\left(\frac{\nu+1}{2}\right)}}{\sqrt{\pi\nu}\,\Gamma{\left(\frac{\nu}{2}\right)}} \left(1 + \frac{1}{\nu}\left(\frac{y-\mu}{\sigma}\right)^2\right)^{-(\nu + 1)/2}.
+\frac{1}{\tau}
+\frac{\Gamma{\left(\frac{\nu+1}{2}\right)}}{\sqrt{\pi\nu}\,\Gamma{\left(\frac{\nu}{2}\right)}} \left(1 + \frac{1}{\nu}\left(\frac{y-\mu}{\tau}\right)^2\right)^{-(\nu + 1)/2}.
 $$
 
 Be careful not to immediately interpret $\mu$ and $\tau^2$ as *mean* and *variance*. Only if $\nu>1$ is $E(Y)=\mu$, and $\tau^2$ is only *proportional* to the variance if $\nu>2$. 
