@@ -1800,11 +1800,11 @@ $$
 
 Let's check!
 
-## iid normal method on simulated data
+## iid normal method on simulated data {.small}
 
 ```{r}
 #| echo: false
-#| fig-asp: 0.6
+#| fig-asp: 0.5
 
 PIT <- mapply(function(y_t, df_t, mu_t, sigma_t) {
                   if(any(is.na(c(y_t, df_t, mu_t, sigma_t)))) return(NA)
@@ -1819,11 +1819,11 @@ hist(PIT, breaks = "Scott", freq = FALSE, col = "lightblue", border = "white")
 abline(h = 1)
 ```
 
-## Bayesian AR(1) on simulated data
+## Bayesian AR(1) on simulated data {.small}
 
 ```{r}
 #| echo: false
-#| fig-asp: 0.6
+#| fig-asp: 0.5
 
 PIT <- mapply(function(y_t, df_t, mu_t, sigma_t) {
                   if(any(is.na(c(y_t, df_t, mu_t, sigma_t)))) return(NA)
@@ -1842,11 +1842,11 @@ abline(h = 1)
 
 Remember: up to estimation error, this method *is* exactly correct by construction.
 
-## iid normal method on GDP growth
+## iid normal method on GDP growth {.small}
 
 ```{r}
 #| echo: false
-#| fig-asp: 0.6
+#| fig-asp: 0.5
 
 PIT <- mapply(function(y_t, df_t, mu_t, sigma_t) {
                   if(any(is.na(c(y_t, df_t, mu_t, sigma_t)))) return(NA)
@@ -1863,11 +1863,11 @@ abline(h = 1)
 
 Clearly not uniform.
 
-## Bayesian AR(1) on GDP growth
+## Bayesian AR(1) on GDP growth {.small}
 
 ```{r}
 #| echo: false
-#| fig-asp: 0.6
+#| fig-asp: 0.5
 
 PIT <- mapply(function(y_t, df_t, mu_t, sigma_t) {
                   if(any(is.na(c(y_t, df_t, mu_t, sigma_t)))) return(NA)
