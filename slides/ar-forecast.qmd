@@ -1,5 +1,6 @@
 ---
-title: "How do you compute probabilistic forecasts from the AR(1)?"
+title: "Probabilistic predictions"
+subtitle: "And how to evaluate them"
 format: revealjs
 auto-stretch: false
 filters:
@@ -25,131 +26,30 @@ y_{t-1}
 +
 \varepsilon_t,
 \quad
-\varepsilon_t\iid\text{N}(0\com\sigma^2)
-\\
-y_0
-&\sim
-\text{N}(\mu_0\com \initvar),
+\varepsilon_t\iid\text{N}(0\com\sigma^2).
 \end{aligned}
 $$
 
-. . .
-
-This implies a joint distribution governed by a finite set of static parameters $\Btheta = \begin{bmatrix}\beta_0&\beta_1&\sigma^2\end{bmatrix}^\tr$:
-
-. . .
+This implies a joint distribution (it's multivariate normal!) governed by a finite set of static parameters $\Btheta = \begin{bmatrix}\beta_0&\beta_1&\sigma^2\end{bmatrix}^\tr$:
 
 $$
 \begin{aligned}
-p(y_{0:T}\given \Btheta)
+p(y_{1:T}\given y_0\com \Btheta)
 &=
-p(y_0)
 \prod_{t=1}^T
 p(y_t\given y_{t-1}\com\Btheta).
 \end{aligned}
 $$
 
-. . .
+Viewed as a function of $\Btheta$, that's a (conditional) *likelihood*! 
 
-Viewed as a function of $\Btheta$, that's a *likelihood*! 
-
-## The AR(1) joint distribution {.medium}
-
-Joint distribution:
-
-$$
-\begin{bmatrix}
-y_0 & y_1 & \cdots & y_T
-\end{bmatrix}^\tr
-\sim\text{N}_{T+1}\left(\Bmu\com \BSigma\right).
-$$
-
-. . .
-
-Moments:
-
-$$
-\begin{aligned}
-E(y_t)
-&=
-\beta_0\sum\limits_{i=0}^{t-1}\beta_1^i
-+
-\beta_1^t\mu_0
-\\
-\var(y_t)
-&=
-\sigma^2
-\sum\limits_{i=0}^{t-1}\beta_1^{2i}+
-\beta_1^{2t}\initvar
-\\
-\cov(y_t\com y_s)
-&=
-\begin{cases}
-\beta_1^{s-t}\var(y_t) & t\leq s\\
-\beta_1^{t-s}\var(y_s) & s < t.
-\end{cases}
-.
-\end{aligned}
-$$
-
-## The special case when $|\beta_1|<1$ {.small}
-
-The mean and variance are *time-invariant*, and the covariance structure is *shift-invariant*:
-
-. . .
-
-$$
-\begin{aligned}
-E(y_t)
-&=
-\frac{\beta_0}{1-\beta_1}
-\\
-\var(y_t)
-&=
-\frac{\sigma^2}{1-\beta_1^2}
-\\
-\gamma(h)
-&=
-\cov(y_{t+h}\com y_t)
-=
-\beta_1^{h}\frac{\sigma^2}{1-\beta_1^2}.
-\end{aligned}
-$$
-
-. . .
-
-The common marginal shared by all $y_t$ is called the [**stationary distribution**]{style="color:blue;"}:
-
-. . .
-
-$$
-y_t\sim\text{N}\left(\frac{\beta_0}{1-\beta_1}\com \frac{\sigma^2}{1-\beta_1^2}\right).
-$$
-
-. . .
-
-So "did: dependent but identically distributed."
-
-## Likelihood-based inference {.small}
-
-In practice it is easiest to work with the conditional likelihood:
-
-$$
-p(y_{1:T}\given  y_0\com \Btheta)
-=
-\prod_{t=1}^T
-p(y_t\given y_{t-1}\com\Btheta).
-$$
-
-. . .
+## Likelihood-based inference 
 
 Classical route:
 
 $$
 \hat{\Btheta}_T=\argmax{\Btheta}\,p(y_{1:T}\given y_0\com \Btheta).
 $$
-
-. . .
 
 Bayesian route:
 
@@ -160,13 +60,11 @@ p(\Btheta\given y_{0:T})
 .
 $$
 
-. . .
-
-Either way, everything you know about inference for iid regression goes through unmodified.
+The raw calculations are similar to iid regression, but the inferential theory can be very different because the $y_t$ are now dependent.
 
 ## Maximum likelihood {.medium}
 
-It's just ordinary least squares (OLS):
+It's "just" ordinary least squares (OLS):
 
 . . .
 
@@ -198,9 +96,7 @@ y_0 & y_1 & \cdots & y_{T-1}
 \end{aligned}
 $$
 
-. . .
 
-Things can get weird, but we have asymptotic theory for this regardless whether or not things are stationary.
 
 ## Conjugate Bayes {.small}
 
@@ -265,14 +161,8 @@ b_0
 \end{aligned}
 $$
 
-. . .
 
-Make it recursive on Problem Set 1!
-
-
-# Probabilistic forecasting
-
-## A classic example
+## Let's think about probabilistic prediction
 
 ![](images/fan-charts.gif){fig-align="center" width="80%"}
 
@@ -423,11 +313,11 @@ mtext(expression(y["t+1"]), side = 1, at = y, line = 2, cex = 3, col = "red")
 
 - What sources of uncertainty?
 
-    - Basic data uncertainty;
+    - Data uncertainty (data are realization of random process);
     - Parameter estimation uncertainty;
-    - Hyperparameter uncertainty;
+    - Hyperparameter tuning uncertainty;
     - Model uncertainty;
-    - Uncertainty introduced by missing data.
+    - Uncertainty introduced by missing data;
     
 - In the small world of the AR(1), mainly the first two for now.
 :::
@@ -435,223 +325,56 @@ mtext(expression(y["t+1"]), side = 1, at = y, line = 2, cex = 3, col = "red")
 
 # A classical approach
 
-
-
 ## Forecast distribution
 
-Given the data we've seen, we want a distribution for the data we haven't seen. 
-
-. . .
-
-In other words:
+- *Given* the data $y_{0:t}$ we've seen, we want a full distribution for a future observation $y_{t+h}$ we haven't seen yet;
+- In other words, we want a *conditional* distribution for the future given the past;
+- We will momentarily treat the point estimate $\hat{\Btheta} = \begin{bmatrix}\hat{\beta}_0&\hat{\beta}_1&\widehat{\sigma^2}\end{bmatrix}^\tr$ as if it were the fixed and known truth (newsflash: it isn't!), and we will forecast using 
 
 $$
-p(y_{t+1:t+H}\given y_{0:t})
+p(y_{t+h}\mid y_{0:t}\com \hat{\Btheta}).
 $$
 
-. . .
+So, what is that conditional distribution?
 
-Assume for now the parameters are fixed and known (red flag!).
+## It's a normal! {.small}
 
-## Clumsy, but true {.small}
-
-. . .
-
-We know 
+Writing down an AR(1) is "just" an alternative way of writing down a big multivariate normal across all time:
 
 $$
 \begin{bmatrix}
-\mathbf{y}_t \\ 
-\mathbf{y}_{t+H}
-\end{bmatrix}
-\sim
-\text{N}_{1+t+H}
-\left(
-\begin{bmatrix}
-\boldsymbol{\mu}_t \\ 
-\boldsymbol{\mu}_{t+H}
-\end{bmatrix}
-,\,
-\begin{bmatrix}
-\boldsymbol{\Sigma}_t & \boldsymbol{\Sigma}_{t,t+H}\\ 
-\boldsymbol{\Sigma}_{t,t+H}^{\scriptscriptstyle\mathsf{T}} & \boldsymbol{\Sigma}_{t+H}
-\end{bmatrix}
-\right),
+y_1 & y_2 & \cdots & y_t & y_{t+1} & y_{t+2} & \cdots & y_{t+H}
+\end{bmatrix}^\tr\mid y_0\com \hat{\Btheta}
+\sim\text{N}_{T}\left(\Bmu(\hat{\Btheta})\com \BSigma(\hat{\Btheta})\right).
 $$
 
-. . .
-
-and so strictly speaking:
+All of the marginals and conditionals of the multivariate normal are normal, and so however far into the future you want to go, you get:
 
 $$
-\mathbf{y}_{t+H} \,|\,\mathbf{y}_t
-\sim
-\text{N}_H
-\left(
-\boldsymbol{\mu}_{t+H} + \boldsymbol{\Sigma}_{t,t+H}^{\scriptscriptstyle\mathsf{T}}\boldsymbol{\Sigma}_t^{-1}(\mathbf{y}_t-\boldsymbol{\mu}_t)
-,\,
-\boldsymbol{\Sigma}_{t+H} - \boldsymbol{\Sigma}_{t,t+H}^{\scriptscriptstyle\mathsf{T}}
-\boldsymbol{\Sigma}_t^{-1}
-\boldsymbol{\Sigma}_{t,t+H}
-\right).
+y_{t+h} \mid y_{0:t}\com \hat{\Btheta}\sim\N\left(\mu_{t+h|t}\com \sigma^2_{t+h|t}\right).
 $$
 
-. . .
-
-But let's make this...useful. 
-
-. . .
-
-(Also, ignore all this ridiculous notation)
-
-## Let's give it some thought
-
-. . .
-
-First, the AR(1) is first order Markov, so 
-
-. . .
-
-$$
-p(y_{t+1:t+H}\given y_{0:t})=p(y_{t+1:t+H}\given y_{t}).
-$$
-
-. . .
-
-The future data behaves just like the past, with a fixed initial condition:
-
-. . .
-
-$$
-\begin{aligned}
-y_{t+h}
-&=
-\beta_0
-+
-\beta_1
-y_{t+h-1}
-+
-\varepsilon_{t+h},
-\quad
-\varepsilon_t\iid\text{N}(0\com\sigma^2)
-\\
-y_t
-&\text{ fixed}.
-\end{aligned}
-$$
-
-So the conditional distribution has the same structure as the unconditional joint that we have already studied. Just starts in a different spot.
-
-## Forecast distributions
-
-$$
-\begin{aligned}
-y_{t+h}\given y_{0:t}
-&\sim\N\left(\mu_{t+h|t}\com \tau^2_{t+h|t}\right)
-\\
-\\
-\mu_{t+h|t}
-&=
-\beta_0\sum\limits_{i=0}^{h-1}\beta_1^i
-+
-\beta_1^hy_t
-\\
-&=
-\beta_0
-+
-\beta_1
-\mu_{t+h-1|t}
- && \mu_{t|t}=y_t
-\\
-\tau^2_{t+h|t}
-&=
-\sigma^2
-\sum\limits_{i=0}^{h-1}\beta_1^{2i}
-\\
-&=
-\sigma^2
-+ 
-\beta_1^2
-\tau^2_{t+h-1|t}
-&&
-\tau^2_{t|t}=0.
-\end{aligned}
-$$
+Let the computer deal with the means and variances.
 
 ## Prediction intervals
 
-Full distribution:
+The full predictive distribution is 
 
 $$
-y_{t+h}\given y_{0:t}
-\sim\N\left(\mu_{t+h|t}\com \tau^2_{t+h|t}\right)
+y_{t+h} \mid y_{0:t}\com \hat{\Btheta}\sim\N\left(\mu_{t+h|t}\com \sigma^2_{t+h|t}\right),
 $$
 
-Prediction interval:
-
-$$
-\begin{aligned}
-\mu_{t+h-1|t}
-&\pm 
-z_{1-\frac{\alpha}{2}}
-\tau_{t+h|t}
-\\
-\beta_0\sum\limits_{i=0}^{h-1}\beta_1^i
-&\pm 
-z_{1-\frac{\alpha}{2}}
-\sqrt{\sigma^2
-\sum\limits_{i=0}^{h-1}\beta_1^{2i}}
-\end{aligned}
-$$
-
-## Summary {.small}
-
-Distribution forecasts:
+The point prediction is $\mu_{t+h|t}$, and the prediction interval has the usual form:
 
 $$
 \begin{aligned}
-y_{t+h}\given y_{0:t}
-&\sim\N\left(\mu_{t+h|t}\com \tau^2_{t+h|t}\right)
-\\
-\\
 \mu_{t+h|t}
-&=
-\beta_0\sum\limits_{i=0}^{h-1}\beta_1^i
-+
-\beta_1^hy_t
-\\
-&=
-\beta_0
-+
-\beta_1
-\mu_{t+h-1|t}
- && \mu_{t|t}=y_t
-\\
-\tau^2_{t+h|t}
-&=
-\sigma^2
-\sum\limits_{i=0}^{h-1}\beta_1^{2i}
-\\
-&=
-\sigma^2
-+ 
-\beta_1^2
-\tau^2_{t+h-1|t}
-&&
-\tau^2_{t|t}=0.
+&\pm 
+z_{1-\frac{\alpha}{2}}^\star
+\sigma_{t+h|t}
+.
 \end{aligned}
 $$
-
-Prediction intervals:
-
-$$
-\mu_{t+h-1|t}
-\pm 
-z_{1-\frac{\alpha}{2}}
-\tau_{t+h|t}
-.
-$$
-
 
 ## Pics or it didn't happen {.scrollable}
 
@@ -686,7 +409,7 @@ ar_1_var <- function(h, b1, s){
 }
 
 ui <- fluidPage(
-  titlePanel("Forecast distribution of a Gaussian AR(1)"),
+  titlePanel("Forecast distribution of a Gaussian AR(1) with known parameters"),
   sidebarLayout(
     sidebarPanel(
       sliderInput("b0", "β₀", min = -5, max = 5, value = 0, step = 0.1),
@@ -715,12 +438,12 @@ server <- function(input, output) {
     range <- 1:(T_obs + H)
     
     # plot window
-    plot(range, c(y_obs, rep(NA,H)), type="n",
+    plot(range, c(y_obs, rep(NA,H)), type = "n",
          xlab = "t", ylab = expression(y[t]),
-         ylim = c(-20,20), bty="n")
+         ylim = c(-20,20), bty="n", main = "This is called a fan chart.")
     
     # grey forecast region
-    rect(T_obs+0.5, -20, T_obs+H+0.5, 20, col=rgb(0.8,0.8,0.8,0.5), border=NA)
+    rect(T_obs+0.5, -20, T_obs + H + 0.5, 20, col = rgb(0.8,0.8,0.8,0.5), border = NA)
     
     # observed data
     lines(1:T_obs, y_obs, col="black", lwd=2)
@@ -750,132 +473,23 @@ shinyApp(ui = ui, server = server)
 
 ## But wait!
 
-The parameters are not known. They have to be estimated.
+The parameters *aren't* known. They're a noisy estimate computed from imperfect data. There is sampling uncertainty associated with $\hat{\Btheta}$. Shouldn't that extra source of uncertainty be propagated through to the predictive distribution?
 
 . . .
 
-$$
-\mu_{t+h-1|t}
-\pm 
-z_{1-\frac{\alpha}{2}}
-\tau_{t+h|t}
-.
-$$
+You bet. But how? Can we just replace $z$ quantiles with $t$ quantiles?
 
-. . .
-
-Can we plug-in estimates and replace $z$ with $t$?
 
 . . .
 
 Not quite.
 
-## Bootstrapping for dependent data with iid errors {.small .scrollable}
+## The hard truth
 
-. . .
+Jabber about bootstrap
 
-1. Data come from an AR(1) with mean zero iid errors (may not be normal!):
+## Show them some code they could actually use
 
-. . .
-
-$$
-y_t
-=
-\beta_0
-+
-\beta_1
-y_{t-1}
-+
-\varepsilon_t,
-\quad 
-\varepsilon_t
-\overset{\text{iid}}{\sim}F;
-$$
-
-. . .
-
-2. Use observed $y_{0:T}$ to compute OLS estimate $\hat{\Bbeta}_T$;
-
-. . .
-
-3. Estimate residuals and center them:
-
-$$
-\hat{\varepsilon}_t=y_t-\hat{\beta}_0-\hat{\beta}_1y_{t-1}\quad \to\quad e_t=\hat{\varepsilon}_t-\sum\limits_{j=1}^T\hat{\varepsilon}_j/T.
-$$
-
-. . .
-
-4. Construct alternative time series by resampling residuals:
-
-$$
-\begin{aligned}
-\tilde{y}_0&=y_0\\
-\tilde{y}_t&=\hat{\beta}_0+\hat{\beta}_1\tilde{y}_{t-1}+\tilde{e}_{t},&&\tilde{e}_{t}\overset{\text{iid}}{\sim} \hat{F}_T.
-\end{aligned}
-$$
-
-. . .
-
-Repeats the last step many times, and from then on it's bootstrap like normal.
-
-## Bootstrapping the residuals {.small .scrollable}
-
-Gird your loins:
-
-. . .
-
-$$
-\begin{matrix}
-\text{1. Original data} &&& y_{0:n} && \\
-&&& \downarrow && \\
-\text{2. OLS} &&& \hat{\Btheta}_{T} && \\
-&&& \downarrow && \\
-\text{3. Estimate (centered) residuals} &&& e_{1:T} && \\
-&\swarrow &\swarrow& \cdots &\searrow&\searrow \\
-\text{4. Resample residuals}&\tilde{e}_{1:T}^{(1)} &\tilde{e}_{1:T}^{(2)}& \cdots &\tilde{e}_{1:T}^{(k-1)}&\tilde{e}_{1:T}^{(k)} \\
-&\downarrow &\downarrow& \cdots &\downarrow&\downarrow \\
-\text{5. Bootstrap time series}&\tilde{y}_{0:T}^{(1)} &\tilde{y}_{0:T}^{(2)}& \cdots &\tilde{y}_{0:T}^{(k-1)}&\tilde{y}_{0:T}^{(k)} \\
-&\downarrow &\downarrow& \cdots &\downarrow&\downarrow \\
-\text{6. Bootstrap estimates}&\tilde{\Btheta}_{T}^{(1)} &\tilde{\Btheta}_{T}^{(2)}& \cdots &\tilde{\Btheta}_{T}^{(k-1)}&\tilde{\Btheta}_{T}^{(k)} \\
-&\downarrow &\downarrow& \cdots &\downarrow&\downarrow \\
-\text{7. Draw more residuals}&\tilde{e}_{T+1:T+h}^{(1)} &\tilde{e}_{T+1:T+h}^{(2)}& \cdots &\tilde{e}_{T+1:T+h}^{(k-1)}&\tilde{e}_{T+1:T+h}^{(k)} \\
-&\downarrow &\downarrow& \cdots &\downarrow&\downarrow \\
-\text{8. Simulate forecasts}&\tilde{y}_{T+1:T+h}^{(1)} &\tilde{y}_{T+1:T+h}^{(2)}& \cdots &\tilde{y}_{T+1:T+h}^{(k-1)}&\tilde{y}_{T+1:T+h}^{(k)} \\
-\end{matrix}
-$$
-
-. . .
-
-In other words, it's awful.
-
-## Probabilistic forecasting via Monte Carlo {.small}
-
-Use the simulations $\tilde{y}_{t+h}^{(1:k)}=\left\{\tilde{y}_{t+h}^{(1)}\com \tilde{y}_{t+h}^{(2)}\com ...\com \tilde{y}_{t+h}^{(k)}\right\}$ to construct whatever forecast object you want:
-
-. . .
-
-$$
-\hat{y}_{t+h|t}=\frac{1}{k}\sum\limits_{j=1}^k\tilde{y}_{t+h}^{(j)}. \quad (\text{...or median})
-$$
-
-. . .
-
-Forecast interval:
-
-$$
-\hat{I}_{t+h|t} = \left[\hat{Q}_{\frac{\alpha}{2}}\left(\tilde{y}_{t+h}^{(1:k)}\right)\com \hat{Q}_{1-\frac{\alpha}{2}}\left(\tilde{y}_{t+h}^{(1:k)}\right)\right]. \quad (...\text{or hdi})
-$$
-
-. . .
-
-Forecast distribution:
-
-$$
-\hat{f}_{t+h|t}
-= 
-\text{histogram}\left(\tilde{y}_{t+h}^{(1:k)}\right). \quad (...\text{or kde})
-$$
 
 ## Compare intervals {.scrollable}
 
@@ -1059,31 +673,18 @@ shinyApp(ui, server)
 
 ```
 
-## That's just the tip of the iceberg
 
-::::: {.columns .v-center-container}
-::: {.column width="40%"}
-![](images/lahiri.png)
-:::
-
-::: {.column width="60%"}
-If you really want to know, 
-
-[Lahiri](https://doi.org/10.1007/978-1-4757-3803-2) is your man.
-:::
-:::::
 
 # A Bayesian approach
 
 ## Posterior predictive distribution {.medium}
 
-After computing the posterior
+After computing the posterior for parameters
 
 $$
-p(\Btheta\given y_{0:T})
+p(\Btheta\given y_{0:t})
 =
-\frac{p(y_{1:T}\given y_0\com \Btheta)p(\Btheta)}{p(y_{1:T}\given y_0)}
-,
+\frac{p(y_{1:t}\given y_0\com \Btheta)p(\Btheta)}{p(y_{1:t}\given y_0)},
 $$
 
 . . .
@@ -1091,11 +692,11 @@ $$
 you base forecasts on the posterior predictive distribution:
 
 $$
-p(y_{T+1:T+H}\,|\,y_{1:T})
+p(y_{t+1}\,|\,y_{0:t})
 =
 \int
-p(y_{T+1:T+H}\,|\,y_{1:T},\,\boldsymbol{\theta})
-p(\boldsymbol{\theta}\,|\,y_{1:T})
+p(y_{t+1}\,|\,y_{0:t},\,\boldsymbol{\theta})
+p(\boldsymbol{\theta}\,|\,y_{0:t})
 \,\text{d}\boldsymbol{\theta}.
 $$
 
@@ -1103,13 +704,11 @@ $$
 
 Immediately incorporates both data and parameter uncertainty by construction.
 
-. . .
-
-There's...nothing else to say about this.
-
-## Probabilistic prediction is a natural byproduct of a Bayesian approach
+## Probabilistic prediction: a natural byproduct of Bayes {.medium}
 
 It falls out basically for free:
+
+. . .
 
 ::: callout-tip
 ## [Bjørnstad, Jan (1990): "Predictive likelihood: a review," *Statistical Science*](https://doi.org/10.1214/ss/1177012175)
@@ -1119,24 +718,100 @@ It falls out basically for free:
 
 . . .
 
-It's a price I'm willing to pay, dude.
+"If one does not want to pay the Bayesian price of having to determine a prior..." 🙄
 
-## In general, just simulate
+. . .
 
-Simulate the posterior somehow (iid, MCMC, HMC, SMC, whatever), and then for each draw, simulate the model forward:
+::: callout-warning
+## [Andrew Gelman, coming in hot](https://statmodeling.stat.columbia.edu/2012/02/07/philosophy-of-bayesian-statistics-my-reactions-to-hendry/)
+"The anti-Bayesian is standing at the back window with a shotgun, scanning for priors coming over the hill, while a million assumptions just walk right into his house through the front door."
+:::
+
+## Conjugate Bayes behaves like iid regression
+
+you get student's t for 1 step, which begets intervals and densities and points
+
+
+
+
+## One-step-ahead probabilistic prediction {.medium}
+
+. . .
+
+Our density forecast is:
+
+$$
+y_{t+1}\mid y_{0:t}
+\sim
+t(\nu_{t+1|t}\com\bar{y}_{t+1|t}\com s_{t+1|t}^2).
+$$
+
+. . .
+
+This gives a $100\times(1-\alpha)\%$ credible interval:
+
+$$
+\bar{y}_{t+1|t}
+\pm
+\underbrace{t_{\nu_{t+1|t}}
+\left(
+1-\frac{\alpha}{2}
+\right)}_{\text{quantile of }t(\nu_{t+1|t}\com 0\com 1)}
+s_{t+1|t}
+.
+$$
+
+. . .
+
+And the moments are 
 
 $$
 \begin{aligned}
-\Btheta^{(j)} &\sim p(\boldsymbol{\theta}\,|\,y_{0:T})\\
-\tilde{y}^{(j)}_{T+1:T+H}
-&\sim 
-p(y_{T+1:T+H}\,|\,y_{0:T},\,\Btheta^{(j)}), &&j = 1\com 2\com ...\com k.
+E(y_{t+1}\mid y_{0:t})
+&=
+\bar{y}_{t+1|t}
+,
+&&
+\nu_{t+1|t}>1
+\\
+\text{var}(y_{t+1}\mid y_{0:t})
+&=
+\frac{\nu_{t+1|t}}{\nu_{t+1|t}-2}
+s_{t+1|t}^2
+,
+&&
+\nu_{t+1|t}>2.
 \end{aligned}
 $$
 
-The retained sample $\tilde{y}^{(1:k)}_{T+1:T+H}$ is drawn from the posterior predictive.
+# Monte Carlo
 
-## Same slide as before {.small}
+
+## How do you get full predictive distributions?
+
+. . .
+
+In general, use simulation:
+
+::: incremental
+- Classical approach: bootstrapping;
+- Bayesian approach: posterior predictive simulation.
+:::
+
+. . .
+
+Either way, you get Monte Carlo draws from a forecast distribution:
+
+$$
+\tilde{y}_{t+h}^{(1)}\com \tilde{y}_{t+h}^{(2)}\com ...\com \tilde{y}_{t+h}^{(k)}
+\sim \hat{F}_{t+h|t}.
+$$
+
+. . .
+
+What do you do with them?
+
+## Probabilistic forecasting via Monte Carlo {.small}
 
 Use the simulations $\tilde{y}_{t+h}^{(1:k)}=\left\{\tilde{y}_{t+h}^{(1)}\com \tilde{y}_{t+h}^{(2)}\com ...\com \tilde{y}_{t+h}^{(k)}\right\}$ to construct whatever forecast object you want:
 
@@ -1164,24 +839,300 @@ $$
 \text{histogram}\left(\tilde{y}_{t+h}^{(1:k)}\right). \quad (...\text{or kde})
 $$
 
-## One-step-ahead in the conjugate case
 
-We want 
+
+# Evaluating probabilistic predictions
+
+## How do you evaluate the forecasts?
+
+You generate a sequence of one-step-ahead predictions:
+
+$$
+\begin{matrix}
+\hat{y}_{1|0} & \hat{y}_{2|1} & \hat{y}_{3|2} & \hat{y}_{4|3} & \hat{y}_{5|4} & \cdots&\hat{y}_{t|t-1} & \cdots\\
+\hat{I}_{1|0} & \hat{I}_{2|1} & \hat{I}_{3|2} & \hat{I}_{4|3} & \hat{I}_{5|4} & \cdots&\hat{I}_{t|t-1} & \cdots\\
+\hat{f}_{1|0} & \hat{f}_{2|1} & \hat{f}_{3|2} & \hat{f}_{4|3} & \hat{f}_{5|4} & \cdots&\hat{f}_{t|t-1} & \cdots
+\end{matrix}
+$$
+
+. . .
+
+But then the data you were trying to forecast eventually arrive:
+
+
+$$
+\begin{matrix}
+ y_1 & y_2 & y_3 & y_4 & y_5 & \cdots &y_t & \cdots
+\end{matrix}
+$$
+
+How do we *score* the forecasts and summarize?
+
+## The game {.medium}
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+# ==========================================================
+# load packages
+# ==========================================================
+
+library(quantmod)
+library(scoringRules)
+library(extraDistr)
+library(tidyverse)
+library(ggridges)
+library(LaplacesDemon)
+
+# ==========================================================
+# helper function
+# ==========================================================
+
+# online update of AR(1) posterior
+
+nig_update <- function(y_t, x_t, a, b, m, V) {
+  # x_t: column vector (p x 1), m: column vector (p x 1), V: (p x p)
+  
+  # predictive residual
+  r <- as.numeric(y_t - t(x_t) %*% m)
+  
+  # scalar c = 1 + x' V x
+  c_val <- as.numeric(1 + t(x_t) %*% V %*% x_t)
+  
+  # update mean
+  m_new <- m + (V %*% x_t / c_val) * r
+  
+  # update covariance
+  Vx <- V %*% x_t
+  V_new <- V - (Vx %*% t(Vx)) / c_val
+  
+  # update shape and scale
+  a_new <- a + 0.5
+  b_new <- b + 0.5 * (r^2 / c_val)
+  
+  return(list(a = a_new, b = b_new, m = m_new, V = V_new))
+}
+
+# Simulate AR(1)
+
+simulate_ar_1 <- function(T, b0, b1, s, m0, s0) {
+  y <- numeric(T)
+  y[1] <- rnorm(1, m0, s0)
+  for (t in 2:T) {
+    y[t] <- b0 + b1 * y[t - 1] + rnorm(1, 0, s)
+  }
+  return(y)
+}
+
+compute_PI_coverage <- function(y, pred_params, alpha = 0.10){
+  # y = vector of actual observations
+  # pred_params = matrix with columns: df, location, scale
+  # alpha = 1 - nominal coverage (default 0.10 for 90% PI)
+  
+  Tlen <- length(y)
+  PI_results <- matrix(NA, nrow = Tlen, ncol = 2)
+  colnames(PI_results) <- c(paste0("width_", 100*(1-alpha)), 
+                            paste0("covered_", 100*(1-alpha)))
+  
+  for(t in 1:Tlen){
+    df_t <- pred_params[t, "df"]
+    mu_t <- pred_params[t, "location"]
+    sigma_t <- pred_params[t, "scale"]
+    
+    # Skip if any parameters are NA
+    if(any(is.na(c(df_t, mu_t, sigma_t)))) next
+    
+    # Compute lower and upper bounds of the PI
+    lower <- qlst(alpha/2, df = df_t, mu = mu_t, sigma = sigma_t)
+    upper <- qlst(1 - alpha/2, df = df_t, mu = mu_t, sigma = sigma_t)
+    
+    # Store interval width
+    PI_results[t, 1] <- upper - lower
+    
+    # Store coverage indicator (0/1)
+    PI_results[t, 2] <- as.numeric(y[t] >= lower & y[t] <= upper)
+  }
+  
+  return(PI_results)
+}
+
+library(ggplot2)
+library(ggridges)
+library(dplyr)
+library(extraDistr)
+
+plot_waterfall <- function(pred_params, 
+                           n_display = 50, 
+                           height_scale = 0.9, 
+                           grid_size = 300, 
+                           main = "Waterfall plot of one-step-ahead predictive densities",
+                           xlab = "",
+                           ylab = "Period",
+                           submain = "",
+                           xlims = NULL) {
+  # --------- basic checks ----------
+  if(!all(c("df","location","scale") %in% colnames(pred_params))) {
+    stop("pred_params must have columns named 'df','location','scale'")
+  }
+  
+  # keep only rows with valid predictive params
+  valid_rows <- which(!is.na(pred_params[,"df"]) & 
+                      !is.na(pred_params[,"location"]) & 
+                      !is.na(pred_params[,"scale"]))
+  if(length(valid_rows) == 0) stop("No complete predictive parameters found in pred_params.")
+  
+  # --------- choose how many curves to plot ----------
+  if(length(valid_rows) <= n_display) {
+    idx <- valid_rows
+  } else {
+    idx <- round(seq(min(valid_rows), max(valid_rows), length.out = n_display))
+  }
+  
+  # --------- build a common x-grid ----------
+  locs   <- pred_params[idx, "location"]
+  scales <- pred_params[idx, "scale"]
+  dfs    <- pred_params[idx, "df"]
+  
+  if(is.null(xlims)){
+    x_min <- min(locs - 6 * scales, na.rm = TRUE)
+    x_max <- max(locs + 6 * scales, na.rm = TRUE)
+  }else{
+    x_min = xlims[1]
+    x_max = xlims[2]
+  }
+
+  x_grid <- seq(x_min, x_max, length.out = grid_size)
+  
+  # --------- compute densities ----------
+  dens_list <- lapply(seq_along(idx), function(i) {
+    ti <- idx[i]
+    df  <- as.numeric(pred_params[ti, "df"])
+    loc <- as.numeric(pred_params[ti, "location"])
+    sc  <- as.numeric(pred_params[ti, "scale"])
+    dens <- dlst(x_grid, df, mu = loc, sigma = sc)
+    data.frame(x = x_grid, ypos = i, density = dens, time_index = ti, loc = loc, scale = sc)
+  })
+  
+  dens_df <- do.call(rbind, dens_list) |>
+    group_by(time_index) |>
+    mutate(density_norm = density / max(density)) |>
+    ungroup() |>
+    mutate(height = density_norm * height_scale)
+  
+  y_positions <- seq_along(idx)
+  label_vec <- idx
+  
+  # --------- plot ----------
+  p <- ggplot(dens_df, aes(x = x, y = ypos, height = height, group = time_index, fill = ypos)) +
+    geom_ridgeline(scale = 1, colour = "black", alpha = 0.8, show.legend = FALSE) +
+    scale_y_continuous(breaks = y_positions, labels = label_vec, expand = c(0.01, 0)) +
+    scale_fill_viridis_c(option = "C") +
+    labs(x = xlab, y = ylab, 
+         title = main,
+         subtitle = submain) +
+    theme_minimal(base_size = 13) +
+    theme(axis.text.y = element_text(size = 7),
+          panel.grid.major.y = element_blank())
+  
+  print(p)
+  invisible(NULL)
+}
+
+average_log_score <- function(y, pred_params) {
+  # y = vector of realized data
+  # pred_params = matrix with columns: df, location, scale
+  if(!all(c("df","location","scale") %in% colnames(pred_params))) {
+    stop("pred_params must have columns named 'df','location','scale'")
+  }
+  
+  Tlen <- length(y)
+  log_scores <- rep(NA, Tlen)
+  
+  for(t in 1:Tlen){
+    df_t <- pred_params[t, "df"]
+    mu_t <- pred_params[t, "location"]
+    sigma_t <- pred_params[t, "scale"]
+    
+    # skip if any NA
+    if(any(is.na(c(df_t, mu_t, sigma_t, y[t])))) next
+    
+    #eps <- 1e-300  # a very small number
+    #log_scores[t] <- log(max(dlst(y[t], df = df_t, mu = mu_t, sigma = sigma_t), eps))
+    log_scores[t] <- log(dlst(y[t], df = df_t, mu = mu_t, sigma = sigma_t))
+  }
+  
+  mean(log_scores, na.rm = TRUE)
+}
+
+set.seed(8675309)
+my_m = c(-.5, .5)
+my_p = c(0.25, 0.75)
+my_s = c(0.3, 0.3)
+draws = rnormm(5000, my_p, my_m, my_s)
+L = quantile(draws, 0.1)
+mix.med = quantile(draws, 0.5)
+U = quantile(draws, 0.9)
+my_y = rnormm(2, my_p, my_m, my_s)[2] + 0.2
+
+```
+
+We will illustrate by comparing the performance of two well-behaved methods:
+
+    A. classical predictive distribution from iid normal model;
+    B. posterior predictive distribution from conjugate, Gaussian AR(1).
+    
+There will be two running examples: 
+
+    1. Simulated data from AR(1)
+    
+        - Method A (iid normal) is wrong by construction;
+        - Method B is right by construction;
+        
+    2. Quarterly real GDP growth
+    
+        - both methods are "wrong," but is one strictly preferred?
+
+Our forecast metrics will tease all of that out.
+
+## Method A {.small .scrollable}
+
+. . .
+
+Assume 
 
 . . .
 
 $$
-p(y_{t+1}\given y_{0:t})
-=
-\int
-\int
-p(y_{t+1}\given\Bbeta\com\sigma^2\com y_{0:t})p(\Bbeta\com\sigma^2\given y_{0:t})\,\dd\Bbeta\,\dd\sigma^2
-,
+y_1\com y_2\com ...\com y_n\com y_{n+1}\iid\N(\mu\com\sigma^2).
 $$
 
 . . .
 
-and we know that
+We know $\bar{y}_n\sim\N(\mu\com \sigma^2/n)$ independent of $y_{n+1}$, and so:
+
+$$
+\frac{\bar{y}_n-y_{n+1}}{\sigma\sqrt{1+\frac{1}{n}}}\sim\N(0\com 1)
+\quad
+\implies
+\quad 
+\frac{\bar{y}_n-y_{n+1}}{\hat{\sigma}\sqrt{1+\frac{1}{n}}}\sim t_{n-1}.
+$$
+
+. . .
+
+The (classical) predictive distribution for the next $y_{n+1}$ is:
+
+$$
+t\left(n-1\com \bar{y}_n\com \widehat{\sigma^2}\left(1+\frac{1}{n}\right)\right).
+$$
+
+This incorporates sampling uncertainty for the mean and variance, and the inherent uncertainty in new $y_{n+1}$.
+
+## Method B: you know the drill {.small}
+
+A conjugate normal-inverse-gamma prior begets a conjugate posterior:
 
 $$
 \begin{aligned}
@@ -1194,81 +1145,13 @@ $$
 \text{N}_2(\Bm_t\com\sigma^2\BH^{-1}_t)
 \\
 y_{t+1}\given\Bbeta\com \sigma^2\com y_{0:t}
-&\sim \N(\Bx_{t+1}^\tr\Bbeta\com\sigma^2).
+&\sim \N(\Bx_{t+1}^\tr\Bbeta\com\sigma^2),\quad \Bx_{t+1}=\begin{bmatrix}1 & y_{t}\end{bmatrix}^\tr.
 \end{aligned}
 $$
 
 . . .
 
-There is actually a closed-form solution.
-
-## Marginalize out $\Bbeta$
-
-We know that 
-
-$$
-\begin{aligned}
-\Bbeta\given \sigma^2\com y_{0:t}
-&\sim 
-\text{N}_2(\Bm_t\com\sigma^2\BH^{-1}_t)
-\\
-y_{t+1}
-&=
-\Bx_{t+1}^\tr\Bbeta
-+
-\varepsilon_{t+1}
-,
-&&
-\varepsilon_{t+1}\sim\N(0\com \sigma^2).
-\end{aligned}
-$$
-
-. . .
-
-By affine transformation:
-
-$$
-\Bx_{t+1}^\tr\Bbeta
-\given \sigma^2\com y_{0:t}
-\sim 
-\N(
-\Bx_{t+1}^\tr\Bm_t
-\com
-\sigma^2\Bx_{t+1}^\tr\BH_t^{-1}\Bx_{t+1}
-).
-$$
-
-. . .
-
-By linear combination of independent normals:
-
-$$
-\begin{aligned}
-y_{t+1}\given \sigma^2\com y_{0:t}
-&\sim \N\left(\Bx_{t+1}^\tr\Bm_t\com\sigma^2(1+\Bx_{t+1}^\tr\BH_t^{-1}\Bx_{t+1})\right).
-\end{aligned}
-$$
-
-## Marginalize out $\sigma^2$ {.small}
-
-We know that 
-
-$$
-\begin{aligned}
-\sigma^2\given y_{0:t}
-&\sim
-\text{IG}(a_t\com b_t)
-\\
-y_{t+1}\given \sigma^2\com y_{0:t}
-&\sim \N\left(\Bx_{t+1}^\tr\Bm_t\com\sigma^2(1+\Bx_{t+1}^\tr\BH_t^{-1}\Bx_{t+1})\right).
-\end{aligned}
-$$
-
-. . .
-
-Marginalizing $\sigma^2$ out of this hierarchy is essentially the *definition* of Student's $t$:
-
-. . .
+The one-step posterior predictive distribution is non-standard Student's $t$:
 
 $$
 \begin{aligned}
@@ -1293,76 +1176,1083 @@ s_{t+1|t}^2
 \end{aligned}
 $$
 
+## Dataset 1: simulated
+
+
+
+
+```{r}
+#| echo: false
+
+set.seed(8675309)
+T <- 5000
+b0 <- 0
+b1 <- 0.99
+s <- 2
+m0 <- 0
+s0 <- 1
+y <- simulate_ar_1(T, b0, b1, s, m0, s0)
+
+main_title <- paste0("Simulated AR(1) data: ",
+                     "β0 = ", b0, ", ",
+                     "β1 = ", b1, ", ",
+                     "\u03C3 = ", s)
+
+plot(1:T, y, type = "l", main = main_title,
+     xlab = "t", ylab = expression(y[t]))
+
+pred_params_ar1_sim <- matrix(NA, nrow = T, ncol = 3,
+                              dimnames = list(NULL, c("df", "location", "scale")))
+
+pred_params_iid_sim <- matrix(NA, nrow = T, ncol = 3,
+                              dimnames = list(NULL, c("df", "location", "scale")))
+
+# ==========================================================
+# prior
+# ==========================================================
+
+p <- 2  
+m <- matrix(0, nrow = p, ncol = 1)
+V <- diag(1, p) 
+a <- 3
+b <- 1
+
+# ==========================================================
+# process data
+# ==========================================================
+
+for (t in 2:T) {
+  
+  y_past <- y[1:(t-1)]
+  n <- length(y_past)
+  
+  x_t <- matrix(c(1, y[t-1]), nrow = p)
+  
+  df <- 2 * a
+  loc <- as.numeric(t(x_t) %*% m)
+  scale <- sqrt((b / a) * (1 + t(x_t) %*% V %*% x_t))
+  
+  pred_params_ar1_sim[t, ] <- c(df, loc, scale)
+  
+  res <- nig_update(y[t], x_t, a, b, m, V)
+  a <- res$a; b <- res$b; m <- res$m; V <- res$V
+  
+  if (n >= 2) {
+    ybar <- mean(y_past)
+    s <- sd(y_past)
+    
+    # predictive parameters
+    pred_params_iid_sim[t, "df"] <- n - 1
+    pred_params_iid_sim[t, "location"] <- ybar
+    pred_params_iid_sim[t, "scale"] <- s * sqrt(1 + 1/n)
+  }
+}
+```
+
+## Forecast distributions from iid normal model
+
+```{r}
+#| echo: false
+plot_waterfall(pred_params_iid_sim, 
+               n_display = 60, 
+               height_scale = 0.9, 
+               grid_size = 300,
+               submain = "Non-standard Student's t from iid normal",
+               xlab = expression(y[t]), 
+               xlim = c(-40, 40)) 
+```
+
+## Forecast distributions from Bayesian AR(1)
+
+```{r}
+#| echo: false
+plot_waterfall(pred_params_ar1_sim, 
+               n_display = 60, 
+               height_scale = 0.9, 
+               grid_size = 300,
+               submain = "Non-standard Student's t from conjugate Bayesian analysis of Gaussian AR(1)",
+               xlab = expression(y[t]), 
+               xlim = c(-40, 40)) 
+```
+
+
+## Dataset 2: US quarterly real GDP growth {.small}
+
+
+```{r}
+#| echo: false
+load("data/macro-vintages.RData")
+
+output <- na.omit(rgdp_growth$v26Q1)
+timespan <- rgdp_growth$quarter[!is.na(rgdp_growth$v26Q1)]
+
+plot(timespan, output, type = "l", bty = "n", xlab = "Quarter", ylab = "YoY % Change")
+grid()
+
+stonks <- output
+Tlen <- length(stonks)
+
+pred_params_ar1_real <- matrix(NA, nrow = Tlen, ncol = 3,
+                              dimnames = list(NULL, c("df", "location", "scale")))
+
+pred_params_iid_real <- matrix(NA, nrow = Tlen, ncol = 3,
+                              dimnames = list(NULL, c("df", "location", "scale")))
+
+# ==========================================================
+# prior
+# ==========================================================
+
+p <- 2  
+m <- matrix(0, nrow = p, ncol = 1)
+V <- diag(1, p) 
+a <- 3
+b <- 1
+
+# ==========================================================
+# process data
+# ==========================================================
+
+for (t in 2:Tlen) {
+  
+  y_past <- stonks[1:(t-1)]
+  n <- length(y_past)
+  
+  x_t <- matrix(c(1, stonks[t-1]), nrow = p)
+  
+  df <- 2 * a
+  loc <- as.numeric(t(x_t) %*% m)
+  scale <- sqrt((b / a) * (1 + t(x_t) %*% V %*% x_t))
+  
+  pred_params_ar1_real[t, ] <- c(df, loc, scale)
+  
+  res <- nig_update(stonks[t], x_t, a, b, m, V)
+  a <- res$a; b <- res$b; m <- res$m; V <- res$V
+  
+  if (n >= 2) {
+    ybar <- mean(y_past)
+    s <- sd(y_past)
+    
+    # predictive parameters
+    pred_params_iid_real[t, "df"] <- n - 1
+    pred_params_iid_real[t, "location"] <- ybar
+    pred_params_iid_real[t, "scale"] <- s * sqrt(1 + 1/n)
+  }
+}
+```
+
+## Forecast distributions from iid normal model
+
+```{r}
+#| echo: false
+plot_waterfall(pred_params_iid_real, 
+               n_display = 60, 
+               height_scale = 0.9, 
+               grid_size = 300,
+               submain = "Non-standard Student's t from iid normal",
+               xlab = "YoY % Change",
+               xlims = c(-5, 15)) 
+```
+
+## Forecast distributions from Bayesian AR(1)
+
+```{r}
+#| echo: false
+plot_waterfall(pred_params_ar1_real, 
+               n_display = 60, 
+               height_scale = 0.9, 
+               grid_size = 1000,
+               submain = "Non-standard Student's t from conjugate Bayesian analysis of Gaussian AR(1)",
+               xlab = "YoY % Change",
+               xlim = c(-5, 15)) 
+```
+
+# Evaluating point forecasts 
+
+## Any ideas?
+
+```{r}
+#| echo: false
+
+curve(dnormm(x, my_p, my_m, my_s), from = -2, to = 2, n = 1000,
+      bty = "n", 
+     xaxt = "n",
+     yaxt = "n", 
+     xaxs = "i",
+     yaxs = "i",
+     ylab = "", 
+     xlab = "", 
+     xlim = c(-2, 2),
+     ylim = c(-0.1, 1.1), 
+     col = "blue",
+     lwd = 3)
+abline(h = 0, lwd = 3)
+points(mix.med, 0, pch = 19, cex = 2)
+polygon(x = c(L, U, U, L),
+        y = c(0, 0, 100, 100),
+        col = rgb(0, 0, 1, 0.1),
+        border = NA)
+text(-0.2, 0.9, expression(hat(I)["t+1 | t"]), cex = 3)
+text(1.3, 0.4, expression(hat(f)["t+1 | t"]), cex = 3)
+points(my_y, 0, pch = 19, cex = 3, col = "red")
+mtext(expression(hat(y)["t+1 | t"]), side = 1, at = mix.med, line = 2, cex = 3)
+mtext(expression(y["t+1"]), side = 1, at = my_y, line = 2, cex = 3, col = "red")
+```
+
+## Point prediction
+
+We want the point prediction that minimizes expected loss:
+
 . . .
 
-So, Student's $t$ with location-scale.
-
-## One-step-ahead probabilistic prediction {.medium}
-
-. . .
-
-Our density forecast is:
-
 $$
-y_{t+1}\given y_{0:t}
-\sim
-t(\nu_{t+1|t}\com\bar{y}_{t+1|t}\com s_{t+1|t}^2).
+\hat{y}_{t+1|t}
+\;=\;
+\argmin{\hat{y}\in\mathbb{R}}
+\; E\big[\, L\big(y_{t+1},\,\hat{y}\big) \,\big|\, y_{0:t} \big].
 $$
 
 . . .
 
-This gives a $100\times(1-\alpha)\%$ credible interval:
+The expectation is taken with respect to the "true" or "idealized" conditional distribution $p(y_{t+1}\given y_{0:t})$, which we don't know.
+
+. . .
+
+We approximate it with whatever forecast distribution we've generated.
+
+## Picking a loss function
+
+. . .
+
+We have nice results for some loss functions:
+
+. . .
 
 $$
-\bar{y}_{t+1|t}
-\pm
-\underbrace{t_{\nu_{t+1|t}}
-\left(
-1-\frac{\alpha}{2}
-\right)}_{\text{quantile of }t(\nu_{t+1|t}\com 0\com 1)}
-s_{t+1|t}
-.
+\begin{array}{rcl}
+L(y_{t+1},\hat{y}) = (y_{t+1} - \hat{y})^2 
+& \implies & 
+\hat{y}_{t+1|t} = E[\,y_{t+1}\mid y_{0:t}\,] \\[1.2em]
+L(y_{t+1},\hat{y}) = |y_{t+1} - \hat{y}| 
+& \implies & 
+\hat{y}_{t+1|t} = \operatorname{median}(y_{t+1}\mid y_{0:t}).
+\end{array}
 $$
 
 . . .
 
-And the moments are 
+And there are many more where that came from.
+
+
+## In practice {.medium}
+
+Metrics for scoring the average quality of the point predictions over time:
 
 $$
 \begin{aligned}
-E(y_{t+1}\given y_{0:t})
+\text{MSFE}
 &=
-\bar{y}_{t+1|t}
-,
-&&
-\nu_{t+1|t}>1
+\frac{1}{T}
+\sum\limits_{t=1}^T
+(y_t-\hat{y}_{t|t-1})^2
 \\
-\text{var}(y_{t+1}\given y_{0:t})
+\text{MAFE}
 &=
-\frac{\nu_{t+1|t}}{\nu_{t+1|t}-2}
-s_{t+1|t}^2
-,
-&&
-\nu_{t+1|t}>2.
+\frac{1}{T}
+\sum\limits_{t=1}^T
+|y_t-\hat{y}_{t|t-1}|.
 \end{aligned}
 $$
 
-## Things to notice {.medium}
+We want these to be small.
 
 . . .
 
-[**Goal**]{style="color:red;"}: generate probabilistic predictions incorporating many sources of uncertainty. In the small world of the AR(1), these are mainly uncertainty from parameter estimation and the inherent randomness of future observations.
+::: callout-warning
+## Make sure your loss function and your point prediction play nice
+
+- If you're looking at MAFE, use forecast median;
+- If you're looking at MSFE, use the forecast mean.
+:::
+
+
+## Our simulated data {.medium}
+
+MSE of forecast mean:
+
+```{r}
+mean((y - pred_params_iid_sim[,"location"])^2, na.rm = TRUE)
+mean((y - pred_params_ar1_sim[,"location"])^2, na.rm = TRUE)
+```
 
 . . .
 
-- **Classical approach**: pretty unnatural. Can't do anything analytically. Whole books have been written about how the bootstrapping ought to go;
+MAE of forecast median (same as mean for these methods):
+
+```{r}
+mean(abs(y - pred_params_iid_sim[,"location"]), na.rm = TRUE)
+mean(abs(y - pred_params_ar1_sim[,"location"]), na.rm = TRUE)
+```
+
+## Our real data {.medium}
+
+MSE of forecast mean:
+
+```{r}
+mean((stonks - pred_params_iid_real[,"location"])^2, na.rm = TRUE)
+mean((stonks - pred_params_ar1_real[,"location"])^2, na.rm = TRUE)
+```
+
 
 . . .
 
-- **Bayesian approach**: totally natural. Everything is probabilistic already. Posterior predictive simulation is conceptually straightforward. We can even do the math in a special case.
+MAE of forecast median (same as mean for these methods):
+
+```{r}
+mean(abs(stonks - pred_params_iid_real[,"location"]), na.rm = TRUE)
+mean(abs(stonks - pred_params_ar1_real[,"location"]), na.rm = TRUE)
+```
+
+# Evaluating interval forecasts
+
+## Any ideas?
+
+```{r}
+#| echo: false
+
+curve(dnormm(x, my_p, my_m, my_s), from = -2, to = 2, n = 1000,
+      bty = "n", 
+     xaxt = "n",
+     yaxt = "n", 
+     xaxs = "i",
+     yaxs = "i",
+     ylab = "", 
+     xlab = "", 
+     xlim = c(-2, 2),
+     ylim = c(-0.1, 1.1), 
+     col = "blue",
+     lwd = 3)
+abline(h = 0, lwd = 3)
+points(mix.med, 0, pch = 19, cex = 2)
+polygon(x = c(L, U, U, L),
+        y = c(0, 0, 100, 100),
+        col = rgb(0, 0, 1, 0.1),
+        border = NA)
+text(-0.2, 0.9, expression(hat(I)["t+1 | t"]), cex = 3)
+text(1.3, 0.4, expression(hat(f)["t+1 | t"]), cex = 3)
+points(my_y, 0, pch = 19, cex = 3, col = "red")
+mtext(expression(hat(y)["t+1 | t"]), side = 1, at = mix.med, line = 2, cex = 3)
+mtext(expression(y["t+1"]), side = 1, at = my_y, line = 2, cex = 3, col = "red")
+```
+
+## Interval width and coverage {.medium}
+
+::: incremental
+- You want intervals that are small enough to be informative, but large enough to swallow the truth often, and there's a trade-off. 
+- $\hat{I}=(-\infty\com \infty)$ always has perfect coverage but teaches you nothing;
+- Look at average size and empirical coverage:
+:::
 
 . . .
 
-But in fairness, the Bayes stuff leans hard into normality. The bootstrap stuff less so.
+$$
+\begin{aligned}
+\overline{\text{Size}} 
+&= \frac{1}{T} \sum_{t=1}^{T} \Big( \hat{I}_{t\mid t-1}^{\text{upper}} - \hat{I}_{t\mid t-1}^{\text{lower}} \Big), \\[0.8em]
+\overline{\text{Coverage}} 
+&= \frac{1}{T} \sum_{t=1}^{T} \mathbf{1}\Big( y_t \in \hat{I}_{t\mid t-1} \Big).
+\end{aligned}
+$$
+
+
+
+## Interval performance on simulated data {.medium}
+
+```{r}
+#| echo: false
+PI_iid_sim <- compute_PI_coverage(y, pred_params_iid_sim, alpha = 0.10)
+
+PI_ar1_sim <- compute_PI_coverage(y, pred_params_ar1_sim, alpha = 0.10)
+
+```
+
+. . .
+
+Size of 90% intervals:
+
+```{r}
+mean(PI_iid_sim[,1], na.rm = TRUE)   
+mean(PI_ar1_sim[,1], na.rm = TRUE)   
+```
+
+. . .
+
+Coverage of 90% intervals:
+
+```{r}
+mean(PI_iid_sim[,2], na.rm = TRUE)   
+mean(PI_ar1_sim[,2], na.rm = TRUE)   
+```
+
+
+## Interval performance on GDP growth {.medium}
+
+```{r}
+#| echo: false
+PI_iid_real <- compute_PI_coverage(stonks, pred_params_iid_real, alpha = 0.10)
+
+PI_ar1_real <- compute_PI_coverage(stonks, pred_params_ar1_real, alpha = 0.10)
+
+```
+
+. . .
+
+Size of 90% intervals:
+
+```{r}
+mean(PI_iid_real[,1], na.rm = TRUE)   
+mean(PI_ar1_real[,1], na.rm = TRUE)   
+```
+
+. . .
+
+Coverage of 90% intervals:
+
+```{r}
+mean(PI_iid_real[,2], na.rm = TRUE)   
+mean(PI_ar1_real[,2], na.rm = TRUE)   
+```
+
+. . .
+
+In this case it turns out that you get the same (over-)coverage from either procedure, but the AR(1) intervals are smaller on average.
+
+## Interval score {.medium}
+
+Average over time for an holistic metric of interval performance:
+
+$$
+\mathrm{IS}_\alpha(l,u; y)
+=
+(u - l)
++
+\frac{2}{\alpha}\,(l - y)\,\mathbf{1}(y < l)
++
+\frac{2}{\alpha}\,(y - u)\,\mathbf{1}(y > u).
+$$
+
+Synthesizes both size and coverage, but in practice, if you want to understand *why* the score was good or bad, you have to crack it open and look at the size and coverage components separately anyway.
+
+# Evaluating density forecasts
+
+## Any ideas?
+
+```{r}
+#| echo: false
+
+curve(dnormm(x, my_p, my_m, my_s), from = -2, to = 2, n = 1000,
+      bty = "n", 
+     xaxt = "n",
+     yaxt = "n", 
+     xaxs = "i",
+     yaxs = "i",
+     ylab = "", 
+     xlab = "", 
+     xlim = c(-2, 2),
+     ylim = c(-0.1, 1.1), 
+     col = "blue",
+     lwd = 3)
+abline(h = 0, lwd = 3)
+points(mix.med, 0, pch = 19, cex = 2)
+polygon(x = c(L, U, U, L),
+        y = c(0, 0, 100, 100),
+        col = rgb(0, 0, 1, 0.1),
+        border = NA)
+text(-0.2, 0.9, expression(hat(I)["t+1 | t"]), cex = 3)
+text(1.3, 0.4, expression(hat(f)["t+1 | t"]), cex = 3)
+points(my_y, 0, pch = 19, cex = 3, col = "red")
+mtext(expression(hat(y)["t+1 | t"]), side = 1, at = mix.med, line = 2, cex = 3)
+mtext(expression(y["t+1"]), side = 1, at = my_y, line = 2, cex = 3, col = "red")
+```
+
+
+## Recap: probability integral transform (PIT)
+
+Take a random variable $Y\sim F$ and plug it into *its own* cdf to define a new random variable $U=F(Y)$:
+
+```{r}
+#| echo: false
+# widen left margin for labels
+par(mar=c(3,8,1,0))
+
+# empty plot
+plot(NA, xlim=c(-3,3), ylim=c(0,1), xlab="", ylab="", axes=FALSE)
+
+# solid horizontal segments at 0 and 1
+segments(-3, 0, 3, 0, lty=1)
+segments(-3, 1, 3, 1, lty=1)
+
+# "0" and "1" in the left-hand margin with mtext
+mtext("0", side=2, at=0, line=1, las=1, cex = 2)
+mtext("1", side=2, at=1, line=1, las=1, cex = 2)
+
+# cdf curve (normal), red
+curve(pnorm(x), from=-3, to=3, add=TRUE, lwd=4, col="red")
+
+# label the curve with text
+text(1.8, 0.8, "F", pos = 4, col="red", cex = 2)
+
+# pick a point Y0
+Y0 <- 0.5
+F0 <- pnorm(Y0)
+
+# dashed lines + solid arrowheads
+
+arrows(Y0, 0, Y0, F0, length=0.1, angle=20, code=2, col = "darkgrey", lwd = 3)
+
+
+arrows(Y0, F0, -3, F0, length=0.1, angle=20, code=2, col = "darkgrey", lwd = 3)
+points(Y0, F0, col = "red", pch = 19, cex = 2)
+
+# labels at the projection points
+mtext("Y", side = 1, at = Y0, line = 1, cex = 2)
+mtext(expression(U == F(Y)), side = 2, at = F0, line = 1, las = 1, cex = 2)
+
+```
+
+## Recap: probability integral transform (PIT) {.small}
+
+If you take a (continuous) random variable $Y\sim F$ and plug it into *its own* cdf to define a new random variable $U=F(Y)$, then the new thing has:
+
+. . .
+
+$$
+U\sim \text{Unif}(0\com 1).
+$$
+
+. . .
+
+Fix any $u\in(0\com 1)$. Then the cdf of the new random variable $U$ is:
+
+. . .
+
+$$
+P(U\leq u)=P(F(Y)\leq u)=P(Y\leq F^{-1}(u))=F(F^{-1}(u))=u.
+$$
+
+. . .
+
+That's the cdf of Unif(0, 1).
+
+## Don't believe me?
+
+```{r}
+x <- rnorm(10000)
+u <- pnorm(x)
+hist(u, breaks = "Scott", freq = FALSE)
+abline(h = 1, col = "red")
+```
+
+
+## What's PIT got to do with it? {.medium}
+
+Let $G_t$ be the "true" cdf that nature is drawing from to produce $y_t$. By the probability integral transform, we know that:
+
+. . .
+
+$$
+G_1(y_1)\com G_2(y_2)\com ...\com G_t(y_t)\com ...\sim\text{Unif}(0\com 1).
+$$
+
+. . .
+
+It would be *amazing* if our method produced exactly correct predictive distributions: $\hat{F}_{t|t-1}=G_t$. We're probably not so lucky, but if we're in the ballpark, then we should see:
+
+. . .
+
+$$
+\hat{F}_{1|0}(y_1)\com \hat{F}_{2|1}(y_2)\com ...\com \hat{F}_{t|t-1}(y_t)\com ...\sim\text{Unif}(0\com 1).
+$$
+
+. . .
+
+Let's check!
+
+## iid normal method on simulated data
+
+```{r}
+#| echo: false
+#| fig-asp: 0.6
+
+PIT <- mapply(function(y_t, df_t, mu_t, sigma_t) {
+                  if(any(is.na(c(y_t, df_t, mu_t, sigma_t)))) return(NA)
+                  plst(q = y_t, df = df_t, mu = mu_t, sigma = sigma_t)
+                },
+                y, 
+                pred_params_iid_sim[,"df"], 
+                pred_params_iid_sim[,"location"], 
+                pred_params_iid_sim[,"scale"])
+
+hist(PIT, breaks = "Scott", freq = FALSE, col = "lightblue", border = "white")
+abline(h = 1)
+```
+
+## Bayesian AR(1) on simulated data
+
+```{r}
+#| echo: false
+#| fig-asp: 0.6
+
+PIT <- mapply(function(y_t, df_t, mu_t, sigma_t) {
+                  if(any(is.na(c(y_t, df_t, mu_t, sigma_t)))) return(NA)
+                  plst(q = y_t, df = df_t, mu = mu_t, sigma = sigma_t)
+                },
+                y, 
+                pred_params_ar1_sim[,"df"], 
+                pred_params_ar1_sim[,"location"], 
+                pred_params_ar1_sim[,"scale"])
+
+hist(PIT, breaks = "Scott", freq = FALSE, col = "lightblue", border = "white")
+abline(h = 1)
+```
+
+. . .
+
+Remember: up to estimation error, this method *is* exactly correct by construction.
+
+## iid normal method on GDP growth
+
+```{r}
+#| echo: false
+#| fig-asp: 0.6
+
+PIT <- mapply(function(y_t, df_t, mu_t, sigma_t) {
+                  if(any(is.na(c(y_t, df_t, mu_t, sigma_t)))) return(NA)
+                  plst(q = y_t, df = df_t, mu = mu_t, sigma = sigma_t)
+                },
+                stonks, 
+                pred_params_iid_real[,"df"], 
+                pred_params_iid_real[,"location"], 
+                pred_params_iid_real[,"scale"])
+
+hist(PIT, breaks = "Scott", freq = FALSE, col = "lightblue", border = "white")
+abline(h = 1)
+```
+
+Clearly not uniform.
+
+## Bayesian AR(1) on GDP growth
+
+```{r}
+#| echo: false
+#| fig-asp: 0.6
+
+PIT <- mapply(function(y_t, df_t, mu_t, sigma_t) {
+                  if(any(is.na(c(y_t, df_t, mu_t, sigma_t)))) return(NA)
+                  plst(q = y_t, df = df_t, mu = mu_t, sigma = sigma_t)
+                },
+                stonks, 
+                pred_params_ar1_real[,"df"], 
+                pred_params_ar1_real[,"location"], 
+                pred_params_ar1_real[,"scale"])
+
+hist(PIT, breaks = "Scott", freq = FALSE, col = "lightblue", border = "white")
+abline(h = 1)
+```
+
+. . .
+
+What does it mean that these have a peak in the middle?
+
+## Diagnosing under/over-dispersion
+
+```{r}
+#| echo: false
+# Set up side-by-side plotting
+par(mfrow = c(1, 2))
+
+# Simulate data
+set.seed(123)
+n <- 5000
+
+# Histogram 1: peak around 0.5 (Beta symmetric, alpha=beta >1)
+x1 <- rbeta(n, shape1 = 5, shape2 = 5)
+hist(x1, breaks = 30, col = "skyblue", main = "Fcasts overdispersed",
+     xlab = "PITs", xlim = c(0,1), freq = FALSE)
+
+# Histogram 2: peaks near 0 and 1 (U-shaped, alpha=beta <1)
+x2 <- rbeta(n, shape1 = 0.5, shape2 = 0.5)
+hist(x2, breaks = 30, col = "salmon", main = "Fcasts underdispersed",
+     xlab = "PITs", xlim = c(0,1), freq = FALSE)
+
+```
+
+## What do the PIT values tell you?
+
+Where did the true $y$ fall under your predictive distribution?
+
+```{r}
+#| echo: false
+# Set up 2x3 panel layout and margins
+par(mfrow = c(2, 3), mar = c(3, 6, 2, 1))  # room on left for 0/1 labels
+
+x <- seq(-4, 4, length.out = 300)
+mu <- 0; sigma <- 1
+
+# points to illustrate PIT mapping
+y_values <- c(-1.7, 0, 1.7)  # left tail, center, right tail
+
+
+# Top row: CDFs
+for (i in 1:3) {
+  y0 <- y_values[i]
+  F0 <- pnorm(y0, mu, sigma)
+  
+  # empty plot for CDF
+  plot(NA, xlim=c(-4,4), ylim=c(0,1), axes=FALSE, xlab="", ylab="")
+  
+  # horizontal lines at 0 and 1
+  segments(-4, 0, 4, 0, lty=1)
+  segments(-4, 1, 4, 1, lty=1)
+  
+  # mtext for 0 and 1
+  mtext("0", side=2, at=0, line=1, las=1)
+  mtext("1", side=2, at=1, line=1, las=1)
+  
+  # CDF curve
+  curve(pnorm(x, mu, sigma), from=-4, to=4, add=TRUE, col="red", lwd=2)
+  
+  # grey arrows from y0 to curve and left to axis
+  segments(y0, 0, y0, F0, col="grey50", lwd=2)       # vertical up from x-axis
+  segments(y0, F0, -4, F0, col="grey50", lwd=2)      # horizontal to y-axis
+}
+  
+# Bottom row: PDFs
+for (i in 1:3) {
+  y0 <- y_values[i]
+  
+  # empty plot for PDF
+  plot(NA, xlim=c(-4,4), ylim=c(0, 0.45), axes=FALSE, xlab="", ylab="")
+  
+  # horizontal x-axis line
+  segments(-4, 0, 4, 0, lty=1)
+  
+  # PDF curve
+  curve(dnorm(x, mu, sigma), from=-4, to=4, add=TRUE, col="blue", lwd=2)
+  
+  # simplified vertical grey line (goes straight up)
+  segments(y0, 0, y0, 0.45, col="grey50", lwd=2)
+  
+  # label y on x-axis
+  mtext("y", side=1, at=y0, line=1)
+}
+
+```
+
+## What do the PIT values tell you? {.medium}
+
+::: incremental
+- If $y$ tends to surprise in the left tail, we'll get too many PITs near 0;
+- If $y$ tends to surprise in the right tail, we'll get too many PITs near 1;
+- If $y$ tends to surprise in the middle, we'll get too many PITs near 0.5;
+- If the forecast distributions tend to be overdispersed (too much mass in the tails), the histogram is hump-shaped;
+- If the forecast distributions tend to be underdispersed (not enough mass in the tails), the histogram is u-shaped.
+:::
+
+
+## Summary: calibration
+
+If your sequence of forecast distributions is *well-calibrated*, then the PITs should be approximately uniformly distributed:
+
+$$
+\hat{F}_{1|0}(y_1)\com \hat{F}_{2|1}(y_2)\com ...\com \hat{F}_{t|t-1}(y_t)\com ...\sim\text{Unif}(0\com 1).
+$$
+
+. . .
+
+Check it with a histogram, QQ-plot, goodness-of-fit test...
+
+. . .
+
+Deviations from uniformity provide useful diagnostic information.
+
+. . .
+
+::: callout-warning
+## This is necessary but not sufficient!
+
+Calibration alone is not enough to distinguish good/better/best forecasts.
+:::
+
+## Maximize sharpness subject to calibration
+
+::: incremental
+- You want a forecasting method to be *calibrated*;
+- If you have many methods to choose from, all of which appear calibrated, select the one that is the *sharpest*;
+- *Sharpness* refers to how concentrated the forecast distributions are. Among calibrated distributions, you want the one that is sharpest, most decisive, most concentrated;
+- Sharpness can be measured by your preferred measure of spread: variance, IQR, etc.
+:::
+
+## Sharpness for the simulated data
+
+Compare the scale parameters of the predictive distributions:
+
+```{r}
+#| echo: false
+
+par(mfrow = c(1, 2))
+
+hist(pred_params_iid_sim[,"scale"], breaks = "Scott", freq = FALSE,
+     main = "Classical predictive densities",
+     xlab = "Student's t scale parameter",
+     col = "lightblue", border = "white")
+
+hist(pred_params_ar1_sim[,"scale"], breaks = "Scott", freq = FALSE,
+     main = "Posterior predictive densities",
+     xlab = "Student's t scale parameter",
+     col = "lightblue", border = "white")
+
+```
+
+## Sharpness for the GDP growth
+
+```{r}
+#| echo: false
+
+par(mfrow = c(1, 2))
+
+hist(pred_params_iid_real[,"scale"], breaks = "Scott", freq = FALSE,
+     main = "Classical predictive densities",
+     xlab = "Student's t scale parameter",
+     col = "lightblue", border = "white",
+     xlim = c(0, max(na.omit(pred_params_iid_real[,"scale"]), na.omit(pred_params_ar1_real[,"scale"]))))
+
+hist(pred_params_ar1_real[,"scale"], breaks = "Scott", freq = FALSE,
+     main = "Posterior predictive densities",
+     xlab = "Student's t scale parameter",
+     col = "lightblue", border = "white",
+     xlim = c(0, max(na.omit(pred_params_iid_real[,"scale"]), na.omit(pred_params_ar1_real[,"scale"]))))
+
+```
+
+## Log predictive score {.medium}
+
+Evaluates if the forecast distribution placed high mass/density on the region where $y_t$ actually showed up: 
+
+$$
+\overline{\text{LPS}} = \frac{1}{T} \sum_{t=1}^{T} \ln \hat{f}_{t|t-1}(y_t).
+$$
+
+::: incremental
+- Bigger is better;
+- Simultaneously rewards *both* calibration and sharpness;
+- *Proper* scoring rule: encourages honest probabilistic predictions;
+- Local measure of quality. There are also global measures like the *continuous ranked probability score* (CRPS).
+:::
+
+## LPS rewards both calibration and sharpness
+
+```{r}
+#| echo: false
+par(mfrow = c(1, 3), mar = c(3, 1, 6, 1))  # top margin enlarged
+
+main_size = 2
+
+# common grid
+x <- seq(-6, 6, length.out = 400)
+y_obs <- 1   # generic realization
+dens_ylim <- c(0, 0.5)   # leave headroom for titles
+dens_xlim <- c(-5, 5)
+
+# panel 1: wide, off-center
+mu1 <- -1; sigma1 <- 1.6
+plot(x, dnorm(x, mu1, sigma1), type = "l", col = "blue", lwd = 2,
+     ylim = dens_ylim, xlim = dens_xlim, axes = FALSE, xlab = "",
+     main = "Calibration -\nSharpness -", cex.main = main_size)
+mtext("y", side = 1, at = y_obs, line = 1)
+segments(y_obs, 0, y_obs, dnorm(y_obs, mu1, sigma1), col = "red", lwd = 3)
+abline(h = 0, col = "grey")
+
+# panel 2: wide, centered
+mu2 <- 0.9; sigma2 <- 1.6
+plot(x, dnorm(x, mu2, sigma2), type = "l", col = "blue", lwd = 2,
+     ylim = dens_ylim, xlim = dens_xlim, axes = FALSE, xlab = "",
+     main = "Calibration +\nSharpness -", cex.main = main_size)
+mtext("y", side = 1, at = y_obs, line = 1)
+segments(y_obs, 0, y_obs, dnorm(y_obs, mu2, sigma2), col = "red", lwd = 3)
+abline(h = 0, col = "grey")
+
+# panel 3: narrow, centered
+mu3 <- 0.9; sigma3 <- 0.8
+plot(x, dnorm(x, mu3, sigma3), type = "l", col = "blue", lwd = 2,
+     ylim = dens_ylim, xlim = dens_xlim, axes = FALSE, xlab = "",
+     main = "Calibration +\nSharpness +", cex.main = main_size)
+mtext("y", side = 1, at = y_obs, line = 1)
+segments(y_obs, 0, y_obs, dnorm(y_obs, mu3, sigma3), col = "red", lwd = 3)
+abline(h = 0, col = "grey")
+
+
+```
+
+
+
+## For our examples {.medium}
+
+. . .
+
+Simulated data:
+
+
+```{r}
+average_log_score(y, pred_params_iid_sim)
+average_log_score(y, pred_params_ar1_sim)
+```
+
+. . .
+
+Real data:
+
+```{r}
+average_log_score(stonks, pred_params_iid_real)
+average_log_score(stonks, pred_params_ar1_real)
+```
+
+## Authors and papers to know
+
+- Gneiting & Raftery (2007): "[Strictly Proper Scoring Rules, Prediction, and Estimation](https://doi.org/10.1198/016214506000001437)," JASA;
+    - Hard to read, but packed with useful info;
+- Gneiting, Balabdaoui, & Raftery (2007): "[Probabilistic Forecasts, Calibration and Sharpness](https://doi.org/10.1111/j.1467-9868.2007.00587.x)," JRSSB;
+    - "We propose a diagnostic approach to the evaluation of predictive performance that is based on the paradigm of *maximizing the sharpness of the predictive distributions subject to calibration*." Bada bing.
+
+
+## Software to check out
+
+```{r}
+#| message: false
+library(scoringRules)
+```
+
+
+# BONUS: Bootstrap for time series
+
+## Bootstrapping for dependent data with iid errors {.small .scrollable}
+
+. . .
+
+1. Data come from an AR(1) with mean zero iid errors (may not be normal!):
+
+. . .
+
+$$
+y_t
+=
+\beta_0
++
+\beta_1
+y_{t-1}
++
+\varepsilon_t,
+\quad 
+\varepsilon_t
+\overset{\text{iid}}{\sim}F;
+$$
+
+. . .
+
+2. Use observed $y_{0:T}$ to compute OLS estimate $\hat{\Bbeta}_T$;
+
+. . .
+
+3. Estimate residuals and center them:
+
+$$
+\hat{\varepsilon}_t=y_t-\hat{\beta}_0-\hat{\beta}_1y_{t-1}\quad \to\quad e_t=\hat{\varepsilon}_t-\sum\limits_{j=1}^T\hat{\varepsilon}_j/T.
+$$
+
+. . .
+
+4. Construct alternative time series by resampling residuals:
+
+$$
+\begin{aligned}
+\tilde{y}_0&=y_0\\
+\tilde{y}_t&=\hat{\beta}_0+\hat{\beta}_1\tilde{y}_{t-1}+\tilde{e}_{t},&&\tilde{e}_{t}\overset{\text{iid}}{\sim} \hat{F}_T.
+\end{aligned}
+$$
+
+. . .
+
+Repeats the last step many times, and from then on it's bootstrap like normal.
+
+## Bootstrapping the residuals {.small .scrollable}
+
+Gird your loins:
+
+. . .
+
+$$
+\begin{matrix}
+\text{1. Original data} &&& y_{0:n} && \\
+&&& \downarrow && \\
+\text{2. OLS} &&& \hat{\Btheta}_{T} && \\
+&&& \downarrow && \\
+\text{3. Estimate (centered) residuals} &&& e_{1:T} && \\
+&\swarrow &\swarrow& \cdots &\searrow&\searrow \\
+\text{4. Resample residuals}&\tilde{e}_{1:T}^{(1)} &\tilde{e}_{1:T}^{(2)}& \cdots &\tilde{e}_{1:T}^{(k-1)}&\tilde{e}_{1:T}^{(k)} \\
+&\downarrow &\downarrow& \cdots &\downarrow&\downarrow \\
+\text{5. Bootstrap time series}&\tilde{y}_{0:T}^{(1)} &\tilde{y}_{0:T}^{(2)}& \cdots &\tilde{y}_{0:T}^{(k-1)}&\tilde{y}_{0:T}^{(k)} \\
+&\downarrow &\downarrow& \cdots &\downarrow&\downarrow \\
+\text{6. Bootstrap estimates}&\tilde{\Btheta}_{T}^{(1)} &\tilde{\Btheta}_{T}^{(2)}& \cdots &\tilde{\Btheta}_{T}^{(k-1)}&\tilde{\Btheta}_{T}^{(k)} \\
+&\downarrow &\downarrow& \cdots &\downarrow&\downarrow \\
+\text{7. Draw more residuals}&\tilde{e}_{T+1:T+h}^{(1)} &\tilde{e}_{T+1:T+h}^{(2)}& \cdots &\tilde{e}_{T+1:T+h}^{(k-1)}&\tilde{e}_{T+1:T+h}^{(k)} \\
+&\downarrow &\downarrow& \cdots &\downarrow&\downarrow \\
+\text{8. Simulate forecasts}&\tilde{y}_{T+1:T+h}^{(1)} &\tilde{y}_{T+1:T+h}^{(2)}& \cdots &\tilde{y}_{T+1:T+h}^{(k-1)}&\tilde{y}_{T+1:T+h}^{(k)} \\
+\end{matrix}
+$$
+
+. . .
+
+In other words, it's awful.
+
+## And that's just the tip of the iceberg
+
+::::: {.columns .v-center-container}
+::: {.column width="40%"}
+![](images/lahiri.png)
+:::
+
+::: {.column width="60%"}
+If you really want to know, 
+
+[Lahiri](https://doi.org/10.1007/978-1-4757-3803-2) is your man.
+:::
+:::::
+
+## Probabilistic forecasting via Monte Carlo {.small}
+
+Use the simulations $\tilde{y}_{t+h}^{(1:k)}=\left\{\tilde{y}_{t+h}^{(1)}\com \tilde{y}_{t+h}^{(2)}\com ...\com \tilde{y}_{t+h}^{(k)}\right\}$ to construct whatever forecast object you want:
+
+. . .
+
+$$
+\hat{y}_{t+h|t}=\frac{1}{k}\sum\limits_{j=1}^k\tilde{y}_{t+h}^{(j)}. \quad (\text{...or median})
+$$
+
+. . .
+
+Forecast interval:
+
+$$
+\hat{I}_{t+h|t} = \left[\hat{Q}_{\frac{\alpha}{2}}\left(\tilde{y}_{t+h}^{(1:k)}\right)\com \hat{Q}_{1-\frac{\alpha}{2}}\left(\tilde{y}_{t+h}^{(1:k)}\right)\right]. \quad (...\text{or hdi})
+$$
+
+. . .
+
+Forecast distribution:
+
+$$
+\hat{f}_{t+h|t}
+= 
+\text{histogram}\left(\tilde{y}_{t+h}^{(1:k)}\right). \quad (...\text{or kde})
+$$
 
 
