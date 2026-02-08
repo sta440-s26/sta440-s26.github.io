@@ -718,21 +718,14 @@
     "href": "slides/ar-forecast.html#but-wait",
     "title": "Probabilistic predictions",
     "section": "But wait!",
-    "text": "But wait!\nThe parameters aren’t known. They’re a noisy estimate computed from imperfect data. There is sampling uncertainty associated with \\(\\hat{\\Btheta}\\). Shouldn’t that extra source of uncertainty be propagated through to the predictive distribution?\n\nYou bet. But how? Can we just replace \\(z\\) quantiles with \\(t\\) quantiles?\n\n\nNot quite."
+    "text": "But wait!\n\nThe parameters aren’t known. They’re a noisy estimate computed from imperfect data;\nThere is sampling uncertainty associated with \\(\\hat{\\Btheta}\\). Shouldn’t that extra source of uncertainty be propagated through to the predictive distribution?\nYes, but how? Can we just plug in estimates and replace \\(z\\) quantiles with \\(t\\) quantiles?\nNot quite. That was fine for iid regression, but it all breaks under time series dependence."
   },
   {
-    "objectID": "slides/ar-forecast.html#the-hard-truth",
-    "href": "slides/ar-forecast.html#the-hard-truth",
+    "objectID": "slides/ar-forecast.html#bootstrap",
+    "href": "slides/ar-forecast.html#bootstrap",
     "title": "Probabilistic predictions",
-    "section": "The hard truth",
-    "text": "The hard truth\nJabber about bootstrap"
-  },
-  {
-    "objectID": "slides/ar-forecast.html#show-them-some-code-they-could-actually-use",
-    "href": "slides/ar-forecast.html#show-them-some-code-they-could-actually-use",
-    "title": "Probabilistic predictions",
-    "section": "Show them some code they could actually use",
-    "text": "Show them some code they could actually use"
+    "section": "Bootstrap!",
+    "text": "Bootstrap!\nTo produce prediction intervals that incorporate both future data uncertainty and parameter estimation uncertainty, you need to use the bootstrap. But again, it’s not the vanilla, iid bootstrap. It’s a bootstrap on the residuals, which are assumed iid in this model.\nThe details are in an appendix at the end of this deck."
   },
   {
     "objectID": "slides/ar-forecast.html#compare-intervals",
@@ -760,14 +753,14 @@
     "href": "slides/ar-forecast.html#conjugate-bayes-behaves-like-iid-regression",
     "title": "Probabilistic predictions",
     "section": "Conjugate Bayes behaves like iid regression",
-    "text": "Conjugate Bayes behaves like iid regression\nyou get student’s t for 1 step, which begets intervals and densities and points"
+    "text": "Conjugate Bayes behaves like iid regression\nA conjugate normal-inverse-gamma prior begets a conjugate posterior:\n\\[\n\\begin{aligned}\n\\sigma^2\\given y_{0:t}\n&\\sim\n\\text{IG}(a_t\\com b_t)\n\\\\\n\\Bbeta\\given \\sigma^2\\com y_{0:t}\n&\\sim\n\\text{N}_2(\\Bm_t\\com\\sigma^2\\BH^{-1}_t)\n\\\\\ny_{t+1}\\given\\Bbeta\\com \\sigma^2\\com y_{0:t}\n&\\sim \\N(\\Bx_{t+1}^\\tr\\Bbeta\\com\\sigma^2),\\quad \\Bx_{t+1}=\\begin{bmatrix}1 & y_{t}\\end{bmatrix}^\\tr.\n\\end{aligned}\n\\]\n\nThe one-step posterior predictive distribution is non-standard Student’s \\(t\\):\n\\[\n\\begin{aligned}\ny_{t+1}\\given y_{0:t}\n&\\sim\nt(\\nu_{t+1|t}\\com\\bar{y}_{t+1|t}\\com s_{t+1|t}^2)\n\\\\\n\\\\\n\\nu_{t+1|t}\n&=\n2a_t\n\\\\\n\\bar{y}_{t+1|t}\n&=\n\\Bx_{t+1}^\\tr\\Bm_t\n\\\\\ns_{t+1|t}^2\n&=\n\\frac{b_t}{a_t}\n(1+\\Bx_{t+1}^\\tr\\BH_t^{-1}\\Bx_{t+1})\n.\n\\end{aligned}\n\\]\nTo forecast farther out in time, you need to simulate."
   },
   {
     "objectID": "slides/ar-forecast.html#one-step-ahead-probabilistic-prediction",
     "href": "slides/ar-forecast.html#one-step-ahead-probabilistic-prediction",
     "title": "Probabilistic predictions",
     "section": "One-step-ahead probabilistic prediction",
-    "text": "One-step-ahead probabilistic prediction\n\nOur density forecast is:\n\\[\ny_{t+1}\\mid y_{0:t}\n\\sim\nt(\\nu_{t+1|t}\\com\\bar{y}_{t+1|t}\\com s_{t+1|t}^2).\n\\]\n\n\nThis gives a \\(100\\times(1-\\alpha)\\%\\) credible interval:\n\\[\n\\bar{y}_{t+1|t}\n\\pm\n\\underbrace{t_{\\nu_{t+1|t}}\n\\left(\n1-\\frac{\\alpha}{2}\n\\right)}_{\\text{quantile of }t(\\nu_{t+1|t}\\com 0\\com 1)}\ns_{t+1|t}\n.\n\\]\n\n\nAnd the moments are\n\\[\n\\begin{aligned}\nE(y_{t+1}\\mid y_{0:t})\n&=\n\\bar{y}_{t+1|t}\n,\n&&\n\\nu_{t+1|t}&gt;1\n\\\\\n\\text{var}(y_{t+1}\\mid y_{0:t})\n&=\n\\frac{\\nu_{t+1|t}}{\\nu_{t+1|t}-2}\ns_{t+1|t}^2\n,\n&&\n\\nu_{t+1|t}&gt;2.\n\\end{aligned}\n\\]"
+    "text": "One-step-ahead probabilistic prediction\n\nOur density forecast is:\n\\[\ny_{t+1}\\mid y_{0:t}\n\\sim\nt(\\nu_{t+1|t}\\com\\bar{y}_{t+1|t}\\com s_{t+1|t}^2).\n\\]\nThe moments are\n\\[\n\\begin{aligned}\nE(y_{t+1}\\mid y_{0:t})\n&=\n\\bar{y}_{t+1|t}\n,\n&&\n\\nu_{t+1|t}&gt;1\n\\\\\n\\text{var}(y_{t+1}\\mid y_{0:t})\n&=\n\\frac{\\nu_{t+1|t}}{\\nu_{t+1|t}-2}\ns_{t+1|t}^2\n,\n&&\n\\nu_{t+1|t}&gt;2.\n\\end{aligned}\n\\]\nUse quantiles to get prediction intervals."
   },
   {
     "objectID": "slides/ar-forecast.html#how-do-you-get-full-predictive-distributions",
@@ -1075,7 +1068,7 @@
     "href": "slides/ar-forecast.html#software-to-check-out",
     "title": "Probabilistic predictions",
     "section": "Software to check out",
-    "text": "Software to check out\n\nlibrary(scoringRules)"
+    "text": "Software to check out\n\nlibrary(scoringRules)\nlibrary(scoringutils)"
   },
   {
     "objectID": "slides/ar-forecast.html#bootstrapping-for-dependent-data-with-iid-errors",
@@ -1089,7 +1082,7 @@
     "href": "slides/ar-forecast.html#bootstrapping-the-residuals",
     "title": "Probabilistic predictions",
     "section": "Bootstrapping the residuals",
-    "text": "Bootstrapping the residuals\nGird your loins:\n\n\\[\n\\begin{matrix}\n\\text{1. Original data} &&& y_{0:n} && \\\\\n&&& \\downarrow && \\\\\n\\text{2. OLS} &&& \\hat{\\Btheta}_{T} && \\\\\n&&& \\downarrow && \\\\\n\\text{3. Estimate (centered) residuals} &&& e_{1:T} && \\\\\n&\\swarrow &\\swarrow& \\cdots &\\searrow&\\searrow \\\\\n\\text{4. Resample residuals}&\\tilde{e}_{1:T}^{(1)} &\\tilde{e}_{1:T}^{(2)}& \\cdots &\\tilde{e}_{1:T}^{(k-1)}&\\tilde{e}_{1:T}^{(k)} \\\\\n&\\downarrow &\\downarrow& \\cdots &\\downarrow&\\downarrow \\\\\n\\text{5. Bootstrap time series}&\\tilde{y}_{0:T}^{(1)} &\\tilde{y}_{0:T}^{(2)}& \\cdots &\\tilde{y}_{0:T}^{(k-1)}&\\tilde{y}_{0:T}^{(k)} \\\\\n&\\downarrow &\\downarrow& \\cdots &\\downarrow&\\downarrow \\\\\n\\text{6. Bootstrap estimates}&\\tilde{\\Btheta}_{T}^{(1)} &\\tilde{\\Btheta}_{T}^{(2)}& \\cdots &\\tilde{\\Btheta}_{T}^{(k-1)}&\\tilde{\\Btheta}_{T}^{(k)} \\\\\n&\\downarrow &\\downarrow& \\cdots &\\downarrow&\\downarrow \\\\\n\\text{7. Draw more residuals}&\\tilde{e}_{T+1:T+h}^{(1)} &\\tilde{e}_{T+1:T+h}^{(2)}& \\cdots &\\tilde{e}_{T+1:T+h}^{(k-1)}&\\tilde{e}_{T+1:T+h}^{(k)} \\\\\n&\\downarrow &\\downarrow& \\cdots &\\downarrow&\\downarrow \\\\\n\\text{8. Simulate forecasts}&\\tilde{y}_{T+1:T+h}^{(1)} &\\tilde{y}_{T+1:T+h}^{(2)}& \\cdots &\\tilde{y}_{T+1:T+h}^{(k-1)}&\\tilde{y}_{T+1:T+h}^{(k)} \\\\\n\\end{matrix}\n\\]\n\n\nIn other words, it’s awful."
+    "text": "Bootstrapping the residuals\nGird your loins:\n\n\\[\n\\begin{matrix}\n\\text{1. Original data} &&& y_{0:T} && \\\\\n&&& \\downarrow && \\\\\n\\text{2. OLS} &&& \\hat{\\Btheta}_{T} && \\\\\n&&& \\downarrow && \\\\\n\\text{3. Estimate (centered) residuals} &&& e_{1:T} && \\\\\n&\\swarrow &\\swarrow& \\cdots &\\searrow&\\searrow \\\\\n\\text{4. Resample residuals}&\\tilde{e}_{1:T}^{(1)} &\\tilde{e}_{1:T}^{(2)}& \\cdots &\\tilde{e}_{1:T}^{(k-1)}&\\tilde{e}_{1:T}^{(k)} \\\\\n&\\downarrow &\\downarrow& \\cdots &\\downarrow&\\downarrow \\\\\n\\text{5. Bootstrap time series}&\\tilde{y}_{0:T}^{(1)} &\\tilde{y}_{0:T}^{(2)}& \\cdots &\\tilde{y}_{0:T}^{(k-1)}&\\tilde{y}_{0:T}^{(k)} \\\\\n&\\downarrow &\\downarrow& \\cdots &\\downarrow&\\downarrow \\\\\n\\text{6. Bootstrap estimates}&\\tilde{\\Btheta}_{T}^{(1)} &\\tilde{\\Btheta}_{T}^{(2)}& \\cdots &\\tilde{\\Btheta}_{T}^{(k-1)}&\\tilde{\\Btheta}_{T}^{(k)} \\\\\n&\\downarrow &\\downarrow& \\cdots &\\downarrow&\\downarrow \\\\\n\\text{7. Draw more residuals}&\\tilde{e}_{T+1:T+h}^{(1)} &\\tilde{e}_{T+1:T+h}^{(2)}& \\cdots &\\tilde{e}_{T+1:T+h}^{(k-1)}&\\tilde{e}_{T+1:T+h}^{(k)} \\\\\n&\\downarrow &\\downarrow& \\cdots &\\downarrow&\\downarrow \\\\\n\\text{8. Simulate forecasts}&\\tilde{y}_{T+1:T+h}^{(1)} &\\tilde{y}_{T+1:T+h}^{(2)}& \\cdots &\\tilde{y}_{T+1:T+h}^{(k-1)}&\\tilde{y}_{T+1:T+h}^{(k)} \\\\\n\\end{matrix}\n\\]\n\n\nIn other words, it’s awful."
   },
   {
     "objectID": "slides/ar-forecast.html#and-thats-just-the-tip-of-the-iceberg",
@@ -1097,13 +1090,6 @@
     "title": "Probabilistic predictions",
     "section": "And that’s just the tip of the iceberg",
     "text": "And that’s just the tip of the iceberg\n\n\n\n\nIf you really want to know,\nLahiri is your man."
-  },
-  {
-    "objectID": "slides/ar-forecast.html#probabilistic-forecasting-via-monte-carlo-1",
-    "href": "slides/ar-forecast.html#probabilistic-forecasting-via-monte-carlo-1",
-    "title": "Probabilistic predictions",
-    "section": "Probabilistic forecasting via Monte Carlo",
-    "text": "Probabilistic forecasting via Monte Carlo\nUse the simulations \\(\\tilde{y}_{t+h}^{(1:k)}=\\left\\{\\tilde{y}_{t+h}^{(1)}\\com \\tilde{y}_{t+h}^{(2)}\\com ...\\com \\tilde{y}_{t+h}^{(k)}\\right\\}\\) to construct whatever forecast object you want:\n\n\\[\n\\hat{y}_{t+h|t}=\\frac{1}{k}\\sum\\limits_{j=1}^k\\tilde{y}_{t+h}^{(j)}. \\quad (\\text{...or median})\n\\]\n\n\nForecast interval:\n\\[\n\\hat{I}_{t+h|t} = \\left[\\hat{Q}_{\\frac{\\alpha}{2}}\\left(\\tilde{y}_{t+h}^{(1:k)}\\right)\\com \\hat{Q}_{1-\\frac{\\alpha}{2}}\\left(\\tilde{y}_{t+h}^{(1:k)}\\right)\\right]. \\quad (...\\text{or hdi})\n\\]\n\n\nForecast distribution:\n\\[\n\\hat{f}_{t+h|t}\n=\n\\text{histogram}\\left(\\tilde{y}_{t+h}^{(1:k)}\\right). \\quad (...\\text{or kde})\n\\]"
   },
   {
     "objectID": "syllabus/syllabus-assignments.html",

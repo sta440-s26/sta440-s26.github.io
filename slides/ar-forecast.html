@@ -660,16 +660,14 @@ z_{1-\frac{\alpha}{2}}^\star
 <span id="cb1-91"><a></a></span>
 <span id="cb1-92"><a></a>shinyApp(ui = ui, server = server)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section><section id="but-wait" class="slide level2"><h2>But wait!</h2>
-<p>The parameters <em>aren’t</em> known. They’re a noisy estimate computed from imperfect data. There is sampling uncertainty associated with <span class="math inline">\(\hat{\Btheta}\)</span>. Shouldn’t that extra source of uncertainty be propagated through to the predictive distribution?</p>
-<div class="fragment">
-<p>You bet. But how? Can we just replace <span class="math inline">\(z\)</span> quantiles with <span class="math inline">\(t\)</span> quantiles?</p>
-</div>
-<div class="fragment">
-<p>Not quite.</p>
-</div>
-</section><section id="the-hard-truth" class="slide level2"><h2>The hard truth</h2>
-<p>Jabber about bootstrap</p>
-</section><section id="show-them-some-code-they-could-actually-use" class="slide level2"><h2>Show them some code they could actually use</h2>
+<ul>
+<li class="fragment">The parameters <em>aren’t</em> known. They’re a noisy estimate computed from imperfect data;</li>
+<li class="fragment">There is sampling uncertainty associated with <span class="math inline">\(\hat{\Btheta}\)</span>. Shouldn’t that extra source of uncertainty be propagated through to the predictive distribution?</li>
+<li class="fragment">Yes, but how? Can we just plug in estimates and replace <span class="math inline">\(z\)</span> quantiles with <span class="math inline">\(t\)</span> quantiles?</li>
+<li class="fragment">Not quite. That was fine for iid regression, but it all breaks under time series dependence.</li>
+</ul></section><section id="bootstrap" class="slide level2"><h2>Bootstrap!</h2>
+<p>To produce prediction intervals that incorporate both future data uncertainty and parameter estimation uncertainty, you need to use <em>the bootstrap</em>. But again, it’s not the vanilla, iid bootstrap. It’s a bootstrap on the <em>residuals</em>, which are assumed iid in this model.</p>
+<p>The details are in an appendix at the end of this deck.</p>
 </section><section id="compare-intervals" class="slide level2 scrollable"><h2>Compare intervals</h2>
 <div class="sourceCode" id="cb2" data-engine="r"><pre class="sourceCode numberSource shinylive-r number-lines code-with-copy"><code class="sourceCode"><span id="cb2-1"><a></a>#| '!! shinylive warning !!': |</span>
 <span id="cb2-2"><a></a>#|   shinylive does not work in self-contained HTML documents.</span>
@@ -908,8 +906,48 @@ p(\boldsymbol{\theta}\,|\,y_{0:t})
 </div>
 </div>
 </div>
-</section><section id="conjugate-bayes-behaves-like-iid-regression" class="slide level2"><h2>Conjugate Bayes behaves like iid regression</h2>
-<p>you get student’s t for 1 step, which begets intervals and densities and points</p>
+</section><section id="conjugate-bayes-behaves-like-iid-regression" class="slide level2 small"><h2>Conjugate Bayes behaves like iid regression</h2>
+<p>A conjugate normal-inverse-gamma prior begets a conjugate posterior:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\sigma^2\given y_{0:t}
+&amp;\sim
+\text{IG}(a_t\com b_t)
+\\
+\Bbeta\given \sigma^2\com y_{0:t}
+&amp;\sim
+\text{N}_2(\Bm_t\com\sigma^2\BH^{-1}_t)
+\\
+y_{t+1}\given\Bbeta\com \sigma^2\com y_{0:t}
+&amp;\sim \N(\Bx_{t+1}^\tr\Bbeta\com\sigma^2),\quad \Bx_{t+1}=\begin{bmatrix}1 &amp; y_{t}\end{bmatrix}^\tr.
+\end{aligned}
+\]</span></p>
+<div class="fragment">
+<p>The one-step posterior predictive distribution is non-standard Student’s <span class="math inline">\(t\)</span>:</p>
+<p><span class="math display">\[
+\begin{aligned}
+y_{t+1}\given y_{0:t}
+&amp;\sim
+t(\nu_{t+1|t}\com\bar{y}_{t+1|t}\com s_{t+1|t}^2)
+\\
+\\
+\nu_{t+1|t}
+&amp;=
+2a_t
+\\
+\bar{y}_{t+1|t}
+&amp;=
+\Bx_{t+1}^\tr\Bm_t
+\\
+s_{t+1|t}^2
+&amp;=
+\frac{b_t}{a_t}
+(1+\Bx_{t+1}^\tr\BH_t^{-1}\Bx_{t+1})
+.
+\end{aligned}
+\]</span></p>
+<p>To forecast farther out in time, you need to simulate.</p>
+</div>
 </section><section id="one-step-ahead-probabilistic-prediction" class="slide level2 medium"><h2>One-step-ahead probabilistic prediction</h2>
 <div class="fragment">
 <p>Our density forecast is:</p>
@@ -918,22 +956,7 @@ y_{t+1}\mid y_{0:t}
 \sim
 t(\nu_{t+1|t}\com\bar{y}_{t+1|t}\com s_{t+1|t}^2).
 \]</span></p>
-</div>
-<div class="fragment">
-<p>This gives a <span class="math inline">\(100\times(1-\alpha)\%\)</span> credible interval:</p>
-<p><span class="math display">\[
-\bar{y}_{t+1|t}
-\pm
-\underbrace{t_{\nu_{t+1|t}}
-\left(
-1-\frac{\alpha}{2}
-\right)}_{\text{quantile of }t(\nu_{t+1|t}\com 0\com 1)}
-s_{t+1|t}
-.
-\]</span></p>
-</div>
-<div class="fragment">
-<p>And the moments are</p>
+<p>The moments are</p>
 <p><span class="math display">\[
 \begin{aligned}
 E(y_{t+1}\mid y_{0:t})
@@ -952,6 +975,7 @@ s_{t+1|t}^2
 \nu_{t+1|t}&gt;2.
 \end{aligned}
 \]</span></p>
+<p>Use quantiles to get prediction intervals.</p>
 </div>
 </section></section><section><section id="monte-carlo" class="title-slide slide level1 center"><h1>Monte Carlo</h1>
 
@@ -1630,7 +1654,8 @@ G_1(y_1)\com G_2(y_2)\com ...\com G_t(y_t)\com ...\sim\text{Unif}(0\com 1).
 </li>
 </ul></section><section id="software-to-check-out" class="slide level2"><h2>Software to check out</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a></a><span class="fu">library</span>(scoringRules)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a></a><span class="fu">library</span>(scoringRules)</span>
+<span id="cb46-2"><a></a><span class="fu">library</span>(scoringutils)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section></section><section><section id="bonus-bootstrap-for-time-series" class="title-slide slide level1 center"><h1>BONUS: Bootstrap for time series</h1>
 
@@ -1687,7 +1712,7 @@ y_{t-1}
 <div class="fragment">
 <p><span class="math display">\[
 \begin{matrix}
-\text{1. Original data} &amp;&amp;&amp; y_{0:n} &amp;&amp; \\
+\text{1. Original data} &amp;&amp;&amp; y_{0:T} &amp;&amp; \\
 &amp;&amp;&amp; \downarrow &amp;&amp; \\
 \text{2. OLS} &amp;&amp;&amp; \hat{\Btheta}_{T} &amp;&amp; \\
 &amp;&amp;&amp; \downarrow &amp;&amp; \\
@@ -1716,29 +1741,8 @@ y_{t-1}
 <p>If you really want to know,</p>
 <p><a href="https://doi.org/10.1007/978-1-4757-3803-2">Lahiri</a> is your man.</p>
 </div></div>
-</section><section id="probabilistic-forecasting-via-monte-carlo-1" class="slide level2 small"><h2>Probabilistic forecasting via Monte Carlo</h2>
-<p>Use the simulations <span class="math inline">\(\tilde{y}_{t+h}^{(1:k)}=\left\{\tilde{y}_{t+h}^{(1)}\com \tilde{y}_{t+h}^{(2)}\com ...\com \tilde{y}_{t+h}^{(k)}\right\}\)</span> to construct whatever forecast object you want:</p>
-<div class="fragment">
-<p><span class="math display">\[
-\hat{y}_{t+h|t}=\frac{1}{k}\sum\limits_{j=1}^k\tilde{y}_{t+h}^{(j)}. \quad (\text{...or median})
-\]</span></p>
-</div>
-<div class="fragment">
-<p>Forecast interval:</p>
-<p><span class="math display">\[
-\hat{I}_{t+h|t} = \left[\hat{Q}_{\frac{\alpha}{2}}\left(\tilde{y}_{t+h}^{(1:k)}\right)\com \hat{Q}_{1-\frac{\alpha}{2}}\left(\tilde{y}_{t+h}^{(1:k)}\right)\right]. \quad (...\text{or hdi})
-\]</span></p>
-</div>
-<div class="fragment">
-<p>Forecast distribution:</p>
-<p><span class="math display">\[
-\hat{f}_{t+h|t}
-=
-\text{histogram}\left(\tilde{y}_{t+h}^{(1:k)}\right). \quad (...\text{or kde})
-\]</span></p>
 
 
-</div>
 </section></section>
 </div>
   <div class="quarto-auto-generated-content" style="display: none;">
