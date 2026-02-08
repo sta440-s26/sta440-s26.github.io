@@ -15,7 +15,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.7.34">
 <meta name="author" content="Ed Iversen and John Zito">
-<title>STA 440 Spring 2026 – How do you compute probabilistic forecasts from the AR(1)?</title>
+<title>STA 440 Spring 2026 – Probabilistic predictions</title>
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -194,7 +194,8 @@
       margin-right: 0; 
     }
   </style>
-<meta property="og:title" content="How do you compute probabilistic forecasts from the AR(1)? – STA 440 Spring 2026">
+<meta property="og:title" content="Probabilistic predictions – STA 440 Spring 2026">
+<meta property="og:description" content="And how to evaluate them">
 <meta property="og:site_name" content="STA 440 Spring 2026">
 </head>
 <body class="quarto-light">
@@ -319,7 +320,8 @@ $$
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" class="quarto-title-block center"><h1 class="title">How do you compute probabilistic forecasts from the AR(1)?</h1>
+<section id="title-slide" class="quarto-title-block center"><h1 class="title">Probabilistic predictions</h1>
+  <p class="subtitle">And how to evaluate them</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -348,113 +350,25 @@ y_{t-1}
 +
 \varepsilon_t,
 \quad
-\varepsilon_t\iid\text{N}(0\com\sigma^2)
-\\
-y_0
-&amp;\sim
-\text{N}(\mu_0\com \initvar),
+\varepsilon_t\iid\text{N}(0\com\sigma^2).
 \end{aligned}
 \]</span></p>
-</div>
-<div class="fragment">
-<p>This implies a joint distribution governed by a finite set of static parameters <span class="math inline">\(\Btheta = \begin{bmatrix}\beta_0&amp;\beta_1&amp;\sigma^2\end{bmatrix}^\tr\)</span>:</p>
-</div>
-<div class="fragment">
+<p>This implies a joint distribution (it’s multivariate normal!) governed by a finite set of static parameters <span class="math inline">\(\Btheta = \begin{bmatrix}\beta_0&amp;\beta_1&amp;\sigma^2\end{bmatrix}^\tr\)</span>:</p>
 <p><span class="math display">\[
 \begin{aligned}
-p(y_{0:T}\given \Btheta)
+p(y_{1:T}\given y_0\com \Btheta)
 &amp;=
-p(y_0)
 \prod_{t=1}^T
 p(y_t\given y_{t-1}\com\Btheta).
 \end{aligned}
 \]</span></p>
+<p>Viewed as a function of <span class="math inline">\(\Btheta\)</span>, that’s a (conditional) <em>likelihood</em>!</p>
 </div>
-<div class="fragment">
-<p>Viewed as a function of <span class="math inline">\(\Btheta\)</span>, that’s a <em>likelihood</em>!</p>
-</div>
-</section><section id="the-ar1-joint-distribution" class="slide level2 medium"><h2>The AR(1) joint distribution</h2>
-<p>Joint distribution:</p>
-<p><span class="math display">\[
-\begin{bmatrix}
-y_0 &amp; y_1 &amp; \cdots &amp; y_T
-\end{bmatrix}^\tr
-\sim\text{N}_{T+1}\left(\Bmu\com \BSigma\right).
-\]</span></p>
-<div class="fragment">
-<p>Moments:</p>
-<p><span class="math display">\[
-\begin{aligned}
-E(y_t)
-&amp;=
-\beta_0\sum\limits_{i=0}^{t-1}\beta_1^i
-+
-\beta_1^t\mu_0
-\\
-\var(y_t)
-&amp;=
-\sigma^2
-\sum\limits_{i=0}^{t-1}\beta_1^{2i}+
-\beta_1^{2t}\initvar
-\\
-\cov(y_t\com y_s)
-&amp;=
-\begin{cases}
-\beta_1^{s-t}\var(y_t) &amp; t\leq s\\
-\beta_1^{t-s}\var(y_s) &amp; s &lt; t.
-\end{cases}
-.
-\end{aligned}
-\]</span></p>
-</div>
-</section><section id="the-special-case-when-beta_11" class="slide level2 small"><h2>The special case when <span class="math inline">\(|\beta_1|&lt;1\)</span>
-</h2>
-<p>The mean and variance are <em>time-invariant</em>, and the covariance structure is <em>shift-invariant</em>:</p>
-<div class="fragment">
-<p><span class="math display">\[
-\begin{aligned}
-E(y_t)
-&amp;=
-\frac{\beta_0}{1-\beta_1}
-\\
-\var(y_t)
-&amp;=
-\frac{\sigma^2}{1-\beta_1^2}
-\\
-\gamma(h)
-&amp;=
-\cov(y_{t+h}\com y_t)
-=
-\beta_1^{h}\frac{\sigma^2}{1-\beta_1^2}.
-\end{aligned}
-\]</span></p>
-</div>
-<div class="fragment">
-<p>The common marginal shared by all <span class="math inline">\(y_t\)</span> is called the <span style="color:blue;"><strong>stationary distribution</strong></span>:</p>
-</div>
-<div class="fragment">
-<p><span class="math display">\[
-y_t\sim\text{N}\left(\frac{\beta_0}{1-\beta_1}\com \frac{\sigma^2}{1-\beta_1^2}\right).
-\]</span></p>
-</div>
-<div class="fragment">
-<p>So “did: dependent but identically distributed.”</p>
-</div>
-</section><section id="likelihood-based-inference" class="slide level2 small"><h2>Likelihood-based inference</h2>
-<p>In practice it is easiest to work with the conditional likelihood:</p>
-<p><span class="math display">\[
-p(y_{1:T}\given  y_0\com \Btheta)
-=
-\prod_{t=1}^T
-p(y_t\given y_{t-1}\com\Btheta).
-\]</span></p>
-<div class="fragment">
+</section><section id="likelihood-based-inference" class="slide level2"><h2>Likelihood-based inference</h2>
 <p>Classical route:</p>
 <p><span class="math display">\[
 \hat{\Btheta}_T=\argmax{\Btheta}\,p(y_{1:T}\given y_0\com \Btheta).
 \]</span></p>
-</div>
-<div class="fragment">
 <p>Bayesian route:</p>
 <p><span class="math display">\[
 p(\Btheta\given y_{0:T})
@@ -462,12 +376,9 @@ p(\Btheta\given y_{0:T})
 \frac{p(y_{1:T}\given y_0\com \Btheta)p(\Btheta)}{p(y_{1:T}\given y_0)}
 .
 \]</span></p>
-</div>
-<div class="fragment">
-<p>Either way, everything you know about inference for iid regression goes through unmodified.</p>
-</div>
+<p>The raw calculations are similar to iid regression, but the inferential theory can be very different because the <span class="math inline">\(y_t\)</span> are now dependent.</p>
 </section><section id="maximum-likelihood" class="slide level2 medium"><h2>Maximum likelihood</h2>
-<p>It’s just ordinary least squares (OLS):</p>
+<p>It’s “just” ordinary least squares (OLS):</p>
 <div class="fragment">
 <p><span class="math display">\[
 \begin{aligned}
@@ -496,9 +407,6 @@ y_0 &amp; y_1 &amp; \cdots &amp; y_{T-1}
 ||\By_T-\BX_T\hat{\Bbeta}_T||_2^2 / T.
 \end{aligned}
 \]</span></p>
-</div>
-<div class="fragment">
-<p>Things can get weird, but we have asymptotic theory for this regardless whether or not things are stationary.</p>
 </div>
 </section><section id="conjugate-bayes" class="slide level2 small"><h2>Conjugate Bayes</h2>
 <p>Take a conjugate normal-inverse-gamma prior:</p>
@@ -558,12 +466,7 @@ b_0
 \end{aligned}
 \]</span></p>
 </div>
-<div class="fragment">
-<p>Make it recursive on Problem Set 1!</p>
-</div>
-</section></section><section><section id="probabilistic-forecasting" class="title-slide slide level1 center"><h1>Probabilistic forecasting</h1>
-
-</section><section id="a-classic-example" class="slide level2"><h2>A classic example</h2>
+</section><section id="lets-think-about-probabilistic-prediction" class="slide level2"><h2>Let’s think about probabilistic prediction</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure><p><img data-src="images/fan-charts.gif" class="quarto-figure quarto-figure-center" style="width:80.0%"></p>
 </figure>
@@ -614,200 +517,54 @@ b_0
 <li class="fragment">
 <p>What sources of uncertainty?</p>
 <ul>
-<li class="fragment">Basic data uncertainty;</li>
+<li class="fragment">Data uncertainty (data are realization of random process);</li>
 <li class="fragment">Parameter estimation uncertainty;</li>
-<li class="fragment">Hyperparameter uncertainty;</li>
+<li class="fragment">Hyperparameter tuning uncertainty;</li>
 <li class="fragment">Model uncertainty;</li>
-<li class="fragment">Uncertainty introduced by missing data.</li>
+<li class="fragment">Uncertainty introduced by missing data;</li>
 </ul>
 </li>
 <li class="fragment"><p>In the small world of the AR(1), mainly the first two for now.</p></li>
 </ul></section></section><section><section id="a-classical-approach" class="title-slide slide level1 center"><h1>A classical approach</h1>
 
 </section><section id="forecast-distribution" class="slide level2"><h2>Forecast distribution</h2>
-<p>Given the data we’ve seen, we want a distribution for the data we haven’t seen.</p>
-<div class="fragment">
-<p>In other words:</p>
+<ul>
+<li>
+<em>Given</em> the data <span class="math inline">\(y_{0:t}\)</span> we’ve seen, we want a full distribution for a future observation <span class="math inline">\(y_{t+h}\)</span> we haven’t seen yet;</li>
+<li>In other words, we want a <em>conditional</em> distribution for the future given the past;</li>
+<li>We will momentarily treat the point estimate <span class="math inline">\(\hat{\Btheta} = \begin{bmatrix}\hat{\beta}_0&amp;\hat{\beta}_1&amp;\widehat{\sigma^2}\end{bmatrix}^\tr\)</span> as if it were the fixed and known truth (newsflash: it isn’t!), and we will forecast using</li>
+</ul>
 <p><span class="math display">\[
-p(y_{t+1:t+H}\given y_{0:t})
+p(y_{t+h}\mid y_{0:t}\com \hat{\Btheta}).
 \]</span></p>
-</div>
-<div class="fragment">
-<p>Assume for now the parameters are fixed and known (red flag!).</p>
-</div>
-</section><section id="clumsy-but-true" class="slide level2 small"><h2>Clumsy, but true</h2>
-<div class="fragment">
-<p>We know</p>
+<p>So, what is that conditional distribution?</p>
+</section><section id="its-a-normal" class="slide level2 small"><h2>It’s a normal!</h2>
+<p>Writing down an AR(1) is “just” an alternative way of writing down a big multivariate normal across all time:</p>
 <p><span class="math display">\[
 \begin{bmatrix}
-\mathbf{y}_t \\
-\mathbf{y}_{t+H}
-\end{bmatrix}
-\sim
-\text{N}_{1+t+H}
-\left(
-\begin{bmatrix}
-\boldsymbol{\mu}_t \\
-\boldsymbol{\mu}_{t+H}
-\end{bmatrix}
-,\,
-\begin{bmatrix}
-\boldsymbol{\Sigma}_t &amp; \boldsymbol{\Sigma}_{t,t+H}\\
-\boldsymbol{\Sigma}_{t,t+H}^{\scriptscriptstyle\mathsf{T}} &amp; \boldsymbol{\Sigma}_{t+H}
-\end{bmatrix}
-\right),
+y_1 &amp; y_2 &amp; \cdots &amp; y_t &amp; y_{t+1} &amp; y_{t+2} &amp; \cdots &amp; y_{t+H}
+\end{bmatrix}^\tr\mid y_0\com \hat{\Btheta}
+\sim\text{N}_{T}\left(\Bmu(\hat{\Btheta})\com \BSigma(\hat{\Btheta})\right).
 \]</span></p>
-</div>
-<div class="fragment">
-<p>and so strictly speaking:</p>
+<p>All of the marginals and conditionals of the multivariate normal are normal, and so however far into the future you want to go, you get:</p>
 <p><span class="math display">\[
-\mathbf{y}_{t+H} \,|\,\mathbf{y}_t
-\sim
-\text{N}_H
-\left(
-\boldsymbol{\mu}_{t+H} + \boldsymbol{\Sigma}_{t,t+H}^{\scriptscriptstyle\mathsf{T}}\boldsymbol{\Sigma}_t^{-1}(\mathbf{y}_t-\boldsymbol{\mu}_t)
-,\,
-\boldsymbol{\Sigma}_{t+H} - \boldsymbol{\Sigma}_{t,t+H}^{\scriptscriptstyle\mathsf{T}}
-\boldsymbol{\Sigma}_t^{-1}
-\boldsymbol{\Sigma}_{t,t+H}
-\right).
+y_{t+h} \mid y_{0:t}\com \hat{\Btheta}\sim\N\left(\mu_{t+h|t}\com \sigma^2_{t+h|t}\right).
 \]</span></p>
-</div>
-<div class="fragment">
-<p>But let’s make this…useful.</p>
-</div>
-<div class="fragment">
-<p>(Also, ignore all this ridiculous notation)</p>
-</div>
-</section><section id="lets-give-it-some-thought" class="slide level2"><h2>Let’s give it some thought</h2>
-<div class="fragment">
-<p>First, the AR(1) is first order Markov, so</p>
-</div>
-<div class="fragment">
-<p><span class="math display">\[
-p(y_{t+1:t+H}\given y_{0:t})=p(y_{t+1:t+H}\given y_{t}).
-\]</span></p>
-</div>
-<div class="fragment">
-<p>The future data behaves just like the past, with a fixed initial condition:</p>
-</div>
-<div class="fragment">
-<p><span class="math display">\[
-\begin{aligned}
-y_{t+h}
-&amp;=
-\beta_0
-+
-\beta_1
-y_{t+h-1}
-+
-\varepsilon_{t+h},
-\quad
-\varepsilon_t\iid\text{N}(0\com\sigma^2)
-\\
-y_t
-&amp;\text{ fixed}.
-\end{aligned}
-\]</span></p>
-<p>So the conditional distribution has the same structure as the unconditional joint that we have already studied. Just starts in a different spot.</p>
-</div>
-</section><section id="forecast-distributions" class="slide level2"><h2>Forecast distributions</h2>
-<p><span class="math display">\[
-\begin{aligned}
-y_{t+h}\given y_{0:t}
-&amp;\sim\N\left(\mu_{t+h|t}\com \tau^2_{t+h|t}\right)
-\\
-\\
-\mu_{t+h|t}
-&amp;=
-\beta_0\sum\limits_{i=0}^{h-1}\beta_1^i
-+
-\beta_1^hy_t
-\\
-&amp;=
-\beta_0
-+
-\beta_1
-\mu_{t+h-1|t}
-&amp;&amp; \mu_{t|t}=y_t
-\\
-\tau^2_{t+h|t}
-&amp;=
-\sigma^2
-\sum\limits_{i=0}^{h-1}\beta_1^{2i}
-\\
-&amp;=
-\sigma^2
-+
-\beta_1^2
-\tau^2_{t+h-1|t}
-&amp;&amp;
-\tau^2_{t|t}=0.
-\end{aligned}
-\]</span></p>
+<p>Let the computer deal with the means and variances.</p>
 </section><section id="prediction-intervals" class="slide level2"><h2>Prediction intervals</h2>
-<p>Full distribution:</p>
+<p>The full predictive distribution is</p>
 <p><span class="math display">\[
-y_{t+h}\given y_{0:t}
-\sim\N\left(\mu_{t+h|t}\com \tau^2_{t+h|t}\right)
+y_{t+h} \mid y_{0:t}\com \hat{\Btheta}\sim\N\left(\mu_{t+h|t}\com \sigma^2_{t+h|t}\right),
 \]</span></p>
-<p>Prediction interval:</p>
+<p>The point prediction is <span class="math inline">\(\mu_{t+h|t}\)</span>, and the prediction interval has the usual form:</p>
 <p><span class="math display">\[
 \begin{aligned}
-\mu_{t+h-1|t}
-&amp;\pm
-z_{1-\frac{\alpha}{2}}
-\tau_{t+h|t}
-\\
-\beta_0\sum\limits_{i=0}^{h-1}\beta_1^i
-&amp;\pm
-z_{1-\frac{\alpha}{2}}
-\sqrt{\sigma^2
-\sum\limits_{i=0}^{h-1}\beta_1^{2i}}
-\end{aligned}
-\]</span></p>
-</section><section id="summary" class="slide level2 small"><h2>Summary</h2>
-<p>Distribution forecasts:</p>
-<p><span class="math display">\[
-\begin{aligned}
-y_{t+h}\given y_{0:t}
-&amp;\sim\N\left(\mu_{t+h|t}\com \tau^2_{t+h|t}\right)
-\\
-\\
 \mu_{t+h|t}
-&amp;=
-\beta_0\sum\limits_{i=0}^{h-1}\beta_1^i
-+
-\beta_1^hy_t
-\\
-&amp;=
-\beta_0
-+
-\beta_1
-\mu_{t+h-1|t}
-&amp;&amp; \mu_{t|t}=y_t
-\\
-\tau^2_{t+h|t}
-&amp;=
-\sigma^2
-\sum\limits_{i=0}^{h-1}\beta_1^{2i}
-\\
-&amp;=
-\sigma^2
-+
-\beta_1^2
-\tau^2_{t+h-1|t}
-&amp;&amp;
-\tau^2_{t|t}=0.
-\end{aligned}
-\]</span></p>
-<p>Prediction intervals:</p>
-<p><span class="math display">\[
-\mu_{t+h-1|t}
-\pm
-z_{1-\frac{\alpha}{2}}
-\tau_{t+h|t}
+&amp;\pm
+z_{1-\frac{\alpha}{2}}^\star
+\sigma_{t+h|t}
 .
+\end{aligned}
 \]</span></p>
 </section><section id="pics-or-it-didnt-happen" class="slide level2 scrollable"><h2>Pics or it didn’t happen</h2>
 <div class="sourceCode" id="cb1" data-engine="r"><pre class="sourceCode numberSource shinylive-r number-lines code-with-copy"><code class="sourceCode"><span id="cb1-1"><a></a>#| '!! shinylive warning !!': |</span>
@@ -843,7 +600,7 @@ z_{1-\frac{\alpha}{2}}
 <span id="cb1-31"><a></a>}</span>
 <span id="cb1-32"><a></a></span>
 <span id="cb1-33"><a></a>ui &lt;- fluidPage(</span>
-<span id="cb1-34"><a></a>  titlePanel("Forecast distribution of a Gaussian AR(1)"),</span>
+<span id="cb1-34"><a></a>  titlePanel("Forecast distribution of a Gaussian AR(1) with known parameters"),</span>
 <span id="cb1-35"><a></a>  sidebarLayout(</span>
 <span id="cb1-36"><a></a>    sidebarPanel(</span>
 <span id="cb1-37"><a></a>      sliderInput("b0", "β₀", min = -5, max = 5, value = 0, step = 0.1),</span>
@@ -872,12 +629,12 @@ z_{1-\frac{\alpha}{2}}
 <span id="cb1-60"><a></a>    range &lt;- 1:(T_obs + H)</span>
 <span id="cb1-61"><a></a>    </span>
 <span id="cb1-62"><a></a>    # plot window</span>
-<span id="cb1-63"><a></a>    plot(range, c(y_obs, rep(NA,H)), type="n",</span>
+<span id="cb1-63"><a></a>    plot(range, c(y_obs, rep(NA,H)), type = "n",</span>
 <span id="cb1-64"><a></a>         xlab = "t", ylab = expression(y[t]),</span>
-<span id="cb1-65"><a></a>         ylim = c(-20,20), bty="n")</span>
+<span id="cb1-65"><a></a>         ylim = c(-20,20), bty="n", main = "This is called a fan chart.")</span>
 <span id="cb1-66"><a></a>    </span>
 <span id="cb1-67"><a></a>    # grey forecast region</span>
-<span id="cb1-68"><a></a>    rect(T_obs+0.5, -20, T_obs+H+0.5, 20, col=rgb(0.8,0.8,0.8,0.5), border=NA)</span>
+<span id="cb1-68"><a></a>    rect(T_obs+0.5, -20, T_obs + H + 0.5, 20, col = rgb(0.8,0.8,0.8,0.5), border = NA)</span>
 <span id="cb1-69"><a></a>    </span>
 <span id="cb1-70"><a></a>    # observed data</span>
 <span id="cb1-71"><a></a>    lines(1:T_obs, y_obs, col="black", lwd=2)</span>
@@ -903,117 +660,16 @@ z_{1-\frac{\alpha}{2}}
 <span id="cb1-91"><a></a></span>
 <span id="cb1-92"><a></a>shinyApp(ui = ui, server = server)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section><section id="but-wait" class="slide level2"><h2>But wait!</h2>
-<p>The parameters are not known. They have to be estimated.</p>
+<p>The parameters <em>aren’t</em> known. They’re a noisy estimate computed from imperfect data. There is sampling uncertainty associated with <span class="math inline">\(\hat{\Btheta}\)</span>. Shouldn’t that extra source of uncertainty be propagated through to the predictive distribution?</p>
 <div class="fragment">
-<p><span class="math display">\[
-\mu_{t+h-1|t}
-\pm
-z_{1-\frac{\alpha}{2}}
-\tau_{t+h|t}
-.
-\]</span></p>
-</div>
-<div class="fragment">
-<p>Can we plug-in estimates and replace <span class="math inline">\(z\)</span> with <span class="math inline">\(t\)</span>?</p>
+<p>You bet. But how? Can we just replace <span class="math inline">\(z\)</span> quantiles with <span class="math inline">\(t\)</span> quantiles?</p>
 </div>
 <div class="fragment">
 <p>Not quite.</p>
 </div>
-</section><section id="bootstrapping-for-dependent-data-with-iid-errors" class="slide level2 small scrollable"><h2>Bootstrapping for dependent data with iid errors</h2>
-<div class="fragment">
-<ol type="1">
-<li>Data come from an AR(1) with mean zero iid errors (may not be normal!):</li>
-</ol>
-</div>
-<div class="fragment">
-<p><span class="math display">\[
-y_t
-=
-\beta_0
-+
-\beta_1
-y_{t-1}
-+
-\varepsilon_t,
-\quad
-\varepsilon_t
-\overset{\text{iid}}{\sim}F;
-\]</span></p>
-</div>
-<div class="fragment">
-<ol start="2" type="1">
-<li>Use observed <span class="math inline">\(y_{0:T}\)</span> to compute OLS estimate <span class="math inline">\(\hat{\Bbeta}_T\)</span>;</li>
-</ol>
-</div>
-<div class="fragment">
-<ol start="3" type="1">
-<li>Estimate residuals and center them:</li>
-</ol>
-<p><span class="math display">\[
-\hat{\varepsilon}_t=y_t-\hat{\beta}_0-\hat{\beta}_1y_{t-1}\quad \to\quad e_t=\hat{\varepsilon}_t-\sum\limits_{j=1}^T\hat{\varepsilon}_j/T.
-\]</span></p>
-</div>
-<div class="fragment">
-<ol start="4" type="1">
-<li>Construct alternative time series by resampling residuals:</li>
-</ol>
-<p><span class="math display">\[
-\begin{aligned}
-\tilde{y}_0&amp;=y_0\\
-\tilde{y}_t&amp;=\hat{\beta}_0+\hat{\beta}_1\tilde{y}_{t-1}+\tilde{e}_{t},&amp;&amp;\tilde{e}_{t}\overset{\text{iid}}{\sim} \hat{F}_T.
-\end{aligned}
-\]</span></p>
-</div>
-<div class="fragment">
-<p>Repeats the last step many times, and from then on it’s bootstrap like normal.</p>
-</div>
-</section><section id="bootstrapping-the-residuals" class="slide level2 small scrollable"><h2>Bootstrapping the residuals</h2>
-<p>Gird your loins:</p>
-<div class="fragment">
-<p><span class="math display">\[
-\begin{matrix}
-\text{1. Original data} &amp;&amp;&amp; y_{0:n} &amp;&amp; \\
-&amp;&amp;&amp; \downarrow &amp;&amp; \\
-\text{2. OLS} &amp;&amp;&amp; \hat{\Btheta}_{T} &amp;&amp; \\
-&amp;&amp;&amp; \downarrow &amp;&amp; \\
-\text{3. Estimate (centered) residuals} &amp;&amp;&amp; e_{1:T} &amp;&amp; \\
-&amp;\swarrow &amp;\swarrow&amp; \cdots &amp;\searrow&amp;\searrow \\
-\text{4. Resample residuals}&amp;\tilde{e}_{1:T}^{(1)} &amp;\tilde{e}_{1:T}^{(2)}&amp; \cdots &amp;\tilde{e}_{1:T}^{(k-1)}&amp;\tilde{e}_{1:T}^{(k)} \\
-&amp;\downarrow &amp;\downarrow&amp; \cdots &amp;\downarrow&amp;\downarrow \\
-\text{5. Bootstrap time series}&amp;\tilde{y}_{0:T}^{(1)} &amp;\tilde{y}_{0:T}^{(2)}&amp; \cdots &amp;\tilde{y}_{0:T}^{(k-1)}&amp;\tilde{y}_{0:T}^{(k)} \\
-&amp;\downarrow &amp;\downarrow&amp; \cdots &amp;\downarrow&amp;\downarrow \\
-\text{6. Bootstrap estimates}&amp;\tilde{\Btheta}_{T}^{(1)} &amp;\tilde{\Btheta}_{T}^{(2)}&amp; \cdots &amp;\tilde{\Btheta}_{T}^{(k-1)}&amp;\tilde{\Btheta}_{T}^{(k)} \\
-&amp;\downarrow &amp;\downarrow&amp; \cdots &amp;\downarrow&amp;\downarrow \\
-\text{7. Draw more residuals}&amp;\tilde{e}_{T+1:T+h}^{(1)} &amp;\tilde{e}_{T+1:T+h}^{(2)}&amp; \cdots &amp;\tilde{e}_{T+1:T+h}^{(k-1)}&amp;\tilde{e}_{T+1:T+h}^{(k)} \\
-&amp;\downarrow &amp;\downarrow&amp; \cdots &amp;\downarrow&amp;\downarrow \\
-\text{8. Simulate forecasts}&amp;\tilde{y}_{T+1:T+h}^{(1)} &amp;\tilde{y}_{T+1:T+h}^{(2)}&amp; \cdots &amp;\tilde{y}_{T+1:T+h}^{(k-1)}&amp;\tilde{y}_{T+1:T+h}^{(k)} \\
-\end{matrix}
-\]</span></p>
-</div>
-<div class="fragment">
-<p>In other words, it’s awful.</p>
-</div>
-</section><section id="probabilistic-forecasting-via-monte-carlo" class="slide level2 small"><h2>Probabilistic forecasting via Monte Carlo</h2>
-<p>Use the simulations <span class="math inline">\(\tilde{y}_{t+h}^{(1:k)}=\left\{\tilde{y}_{t+h}^{(1)}\com \tilde{y}_{t+h}^{(2)}\com ...\com \tilde{y}_{t+h}^{(k)}\right\}\)</span> to construct whatever forecast object you want:</p>
-<div class="fragment">
-<p><span class="math display">\[
-\hat{y}_{t+h|t}=\frac{1}{k}\sum\limits_{j=1}^k\tilde{y}_{t+h}^{(j)}. \quad (\text{...or median})
-\]</span></p>
-</div>
-<div class="fragment">
-<p>Forecast interval:</p>
-<p><span class="math display">\[
-\hat{I}_{t+h|t} = \left[\hat{Q}_{\frac{\alpha}{2}}\left(\tilde{y}_{t+h}^{(1:k)}\right)\com \hat{Q}_{1-\frac{\alpha}{2}}\left(\tilde{y}_{t+h}^{(1:k)}\right)\right]. \quad (...\text{or hdi})
-\]</span></p>
-</div>
-<div class="fragment">
-<p>Forecast distribution:</p>
-<p><span class="math display">\[
-\hat{f}_{t+h|t}
-=
-\text{histogram}\left(\tilde{y}_{t+h}^{(1:k)}\right). \quad (...\text{or kde})
-\]</span></p>
-</div>
+</section><section id="the-hard-truth" class="slide level2"><h2>The hard truth</h2>
+<p>Jabber about bootstrap</p>
+</section><section id="show-them-some-code-they-could-actually-use" class="slide level2"><h2>Show them some code they could actually use</h2>
 </section><section id="compare-intervals" class="slide level2 scrollable"><h2>Compare intervals</h2>
 <div class="sourceCode" id="cb2" data-engine="r"><pre class="sourceCode numberSource shinylive-r number-lines code-with-copy"><code class="sourceCode"><span id="cb2-1"><a></a>#| '!! shinylive warning !!': |</span>
 <span id="cb2-2"><a></a>#|   shinylive does not work in self-contained HTML documents.</span>
@@ -1194,43 +850,32 @@ y_{t-1}
 <span id="cb2-177"><a></a>}</span>
 <span id="cb2-178"><a></a></span>
 <span id="cb2-179"><a></a>shinyApp(ui, server)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section><section id="thats-just-the-tip-of-the-iceberg" class="slide level2"><h2>That’s just the tip of the iceberg</h2>
-<div class="columns v-center-container">
-<div class="column" style="width:40%;">
-<p><img data-src="images/lahiri.png"></p>
-</div><div class="column" style="width:60%;">
-<p>If you really want to know,</p>
-<p><a href="https://doi.org/10.1007/978-1-4757-3803-2">Lahiri</a> is your man.</p>
-</div></div>
 </section></section><section><section id="a-bayesian-approach" class="title-slide slide level1 center"><h1>A Bayesian approach</h1>
 
 </section><section id="posterior-predictive-distribution" class="slide level2 medium"><h2>Posterior predictive distribution</h2>
-<p>After computing the posterior</p>
+<p>After computing the posterior for parameters</p>
 <p><span class="math display">\[
-p(\Btheta\given y_{0:T})
+p(\Btheta\given y_{0:t})
 =
-\frac{p(y_{1:T}\given y_0\com \Btheta)p(\Btheta)}{p(y_{1:T}\given y_0)}
-,
+\frac{p(y_{1:t}\given y_0\com \Btheta)p(\Btheta)}{p(y_{1:t}\given y_0)},
 \]</span></p>
 <div class="fragment">
 <p>you base forecasts on the posterior predictive distribution:</p>
 <p><span class="math display">\[
-p(y_{T+1:T+H}\,|\,y_{1:T})
+p(y_{t+1}\,|\,y_{0:t})
 =
 \int
-p(y_{T+1:T+H}\,|\,y_{1:T},\,\boldsymbol{\theta})
-p(\boldsymbol{\theta}\,|\,y_{1:T})
+p(y_{t+1}\,|\,y_{0:t},\,\boldsymbol{\theta})
+p(\boldsymbol{\theta}\,|\,y_{0:t})
 \,\text{d}\boldsymbol{\theta}.
 \]</span></p>
 </div>
 <div class="fragment">
 <p>Immediately incorporates both data and parameter uncertainty by construction.</p>
 </div>
-<div class="fragment">
-<p>There’s…nothing else to say about this.</p>
-</div>
-</section><section id="probabilistic-prediction-is-a-natural-byproduct-of-a-bayesian-approach" class="slide level2"><h2>Probabilistic prediction is a natural byproduct of a Bayesian approach</h2>
+</section><section id="probabilistic-prediction-a-natural-byproduct-of-bayes" class="slide level2 medium"><h2>Probabilistic prediction: a natural byproduct of Bayes</h2>
 <p>It falls out basically for free:</p>
+<div class="fragment">
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1244,21 +889,91 @@ p(\boldsymbol{\theta}\,|\,y_{1:T})
 </div>
 </div>
 </div>
-<div class="fragment">
-<p>It’s a price I’m willing to pay, dude.</p>
 </div>
-</section><section id="in-general-just-simulate" class="slide level2"><h2>In general, just simulate</h2>
-<p>Simulate the posterior somehow (iid, MCMC, HMC, SMC, whatever), and then for each draw, simulate the model forward:</p>
+<div class="fragment">
+<p>“If one does not want to pay the Bayesian price of having to determine a prior…” 🙄</p>
+</div>
+<div class="fragment">
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong><a href="https://statmodeling.stat.columbia.edu/2012/02/07/philosophy-of-bayesian-statistics-my-reactions-to-hendry/">Andrew Gelman, coming in hot</a></strong></p>
+</div>
+<div class="callout-content">
+<p>“The anti-Bayesian is standing at the back window with a shotgun, scanning for priors coming over the hill, while a million assumptions just walk right into his house through the front door.”</p>
+</div>
+</div>
+</div>
+</div>
+</section><section id="conjugate-bayes-behaves-like-iid-regression" class="slide level2"><h2>Conjugate Bayes behaves like iid regression</h2>
+<p>you get student’s t for 1 step, which begets intervals and densities and points</p>
+</section><section id="one-step-ahead-probabilistic-prediction" class="slide level2 medium"><h2>One-step-ahead probabilistic prediction</h2>
+<div class="fragment">
+<p>Our density forecast is:</p>
+<p><span class="math display">\[
+y_{t+1}\mid y_{0:t}
+\sim
+t(\nu_{t+1|t}\com\bar{y}_{t+1|t}\com s_{t+1|t}^2).
+\]</span></p>
+</div>
+<div class="fragment">
+<p>This gives a <span class="math inline">\(100\times(1-\alpha)\%\)</span> credible interval:</p>
+<p><span class="math display">\[
+\bar{y}_{t+1|t}
+\pm
+\underbrace{t_{\nu_{t+1|t}}
+\left(
+1-\frac{\alpha}{2}
+\right)}_{\text{quantile of }t(\nu_{t+1|t}\com 0\com 1)}
+s_{t+1|t}
+.
+\]</span></p>
+</div>
+<div class="fragment">
+<p>And the moments are</p>
 <p><span class="math display">\[
 \begin{aligned}
-\Btheta^{(j)} &amp;\sim p(\boldsymbol{\theta}\,|\,y_{0:T})\\
-\tilde{y}^{(j)}_{T+1:T+H}
-&amp;\sim
-p(y_{T+1:T+H}\,|\,y_{0:T},\,\Btheta^{(j)}), &amp;&amp;j = 1\com 2\com ...\com k.
+E(y_{t+1}\mid y_{0:t})
+&amp;=
+\bar{y}_{t+1|t}
+,
+&amp;&amp;
+\nu_{t+1|t}&gt;1
+\\
+\text{var}(y_{t+1}\mid y_{0:t})
+&amp;=
+\frac{\nu_{t+1|t}}{\nu_{t+1|t}-2}
+s_{t+1|t}^2
+,
+&amp;&amp;
+\nu_{t+1|t}&gt;2.
 \end{aligned}
 \]</span></p>
-<p>The retained sample <span class="math inline">\(\tilde{y}^{(1:k)}_{T+1:T+H}\)</span> is drawn from the posterior predictive.</p>
-</section><section id="same-slide-as-before" class="slide level2 small"><h2>Same slide as before</h2>
+</div>
+</section></section><section><section id="monte-carlo" class="title-slide slide level1 center"><h1>Monte Carlo</h1>
+
+</section><section id="how-do-you-get-full-predictive-distributions" class="slide level2"><h2>How do you get full predictive distributions?</h2>
+<div class="fragment">
+<p>In general, use simulation:</p>
+<ul>
+<li class="fragment">Classical approach: bootstrapping;</li>
+<li class="fragment">Bayesian approach: posterior predictive simulation.</li>
+</ul>
+</div>
+<div class="fragment">
+<p>Either way, you get Monte Carlo draws from a forecast distribution:</p>
+<p><span class="math display">\[
+\tilde{y}_{t+h}^{(1)}\com \tilde{y}_{t+h}^{(2)}\com ...\com \tilde{y}_{t+h}^{(k)}
+\sim \hat{F}_{t+h|t}.
+\]</span></p>
+</div>
+<div class="fragment">
+<p>What do you do with them?</p>
+</div>
+</section><section id="probabilistic-forecasting-via-monte-carlo" class="slide level2 small"><h2>Probabilistic forecasting via Monte Carlo</h2>
 <p>Use the simulations <span class="math inline">\(\tilde{y}_{t+h}^{(1:k)}=\left\{\tilde{y}_{t+h}^{(1)}\com \tilde{y}_{t+h}^{(2)}\com ...\com \tilde{y}_{t+h}^{(k)}\right\}\)</span> to construct whatever forecast object you want:</p>
 <div class="fragment">
 <p><span class="math display">\[
@@ -1279,20 +994,68 @@ p(y_{T+1:T+H}\,|\,y_{0:T},\,\Btheta^{(j)}), &amp;&amp;j = 1\com 2\com ...\com k.
 \text{histogram}\left(\tilde{y}_{t+h}^{(1:k)}\right). \quad (...\text{or kde})
 \]</span></p>
 </div>
-</section><section id="one-step-ahead-in-the-conjugate-case" class="slide level2"><h2>One-step-ahead in the conjugate case</h2>
-<p>We want</p>
+</section></section><section><section id="evaluating-probabilistic-predictions" class="title-slide slide level1 center"><h1>Evaluating probabilistic predictions</h1>
+
+</section><section id="how-do-you-evaluate-the-forecasts" class="slide level2"><h2>How do you evaluate the forecasts?</h2>
+<p>You generate a sequence of one-step-ahead predictions:</p>
+<p><span class="math display">\[
+\begin{matrix}
+\hat{y}_{1|0} &amp; \hat{y}_{2|1} &amp; \hat{y}_{3|2} &amp; \hat{y}_{4|3} &amp; \hat{y}_{5|4} &amp; \cdots&amp;\hat{y}_{t|t-1} &amp; \cdots\\
+\hat{I}_{1|0} &amp; \hat{I}_{2|1} &amp; \hat{I}_{3|2} &amp; \hat{I}_{4|3} &amp; \hat{I}_{5|4} &amp; \cdots&amp;\hat{I}_{t|t-1} &amp; \cdots\\
+\hat{f}_{1|0} &amp; \hat{f}_{2|1} &amp; \hat{f}_{3|2} &amp; \hat{f}_{4|3} &amp; \hat{f}_{5|4} &amp; \cdots&amp;\hat{f}_{t|t-1} &amp; \cdots
+\end{matrix}
+\]</span></p>
+<div class="fragment">
+<p>But then the data you were trying to forecast eventually arrive:</p>
+<p><span class="math display">\[
+\begin{matrix}
+y_1 &amp; y_2 &amp; y_3 &amp; y_4 &amp; y_5 &amp; \cdots &amp;y_t &amp; \cdots
+\end{matrix}
+\]</span></p>
+<p>How do we <em>score</em> the forecasts and summarize?</p>
+</div>
+</section><section id="the-game" class="slide level2 medium"><h2>The game</h2>
+<p>We will illustrate by comparing the performance of two well-behaved methods:</p>
+<pre><code>A. classical predictive distribution from iid normal model;
+B. posterior predictive distribution from conjugate, Gaussian AR(1).</code></pre>
+<p>There will be two running examples:</p>
+<pre><code>1. Simulated data from AR(1)
+
+    - Method A (iid normal) is wrong by construction;
+    - Method B is right by construction;
+    
+2. Quarterly real GDP growth
+
+    - both methods are "wrong," but is one strictly preferred?</code></pre>
+<p>Our forecast metrics will tease all of that out.</p>
+</section><section id="method-a" class="slide level2 small scrollable"><h2>Method A</h2>
+<div class="fragment">
+<p>Assume</p>
+</div>
 <div class="fragment">
 <p><span class="math display">\[
-p(y_{t+1}\given y_{0:t})
-=
-\int
-\int
-p(y_{t+1}\given\Bbeta\com\sigma^2\com y_{0:t})p(\Bbeta\com\sigma^2\given y_{0:t})\,\dd\Bbeta\,\dd\sigma^2
-,
+y_1\com y_2\com ...\com y_n\com y_{n+1}\iid\N(\mu\com\sigma^2).
 \]</span></p>
 </div>
 <div class="fragment">
-<p>and we know that</p>
+<p>We know <span class="math inline">\(\bar{y}_n\sim\N(\mu\com \sigma^2/n)\)</span> independent of <span class="math inline">\(y_{n+1}\)</span>, and so:</p>
+<p><span class="math display">\[
+\frac{\bar{y}_n-y_{n+1}}{\sigma\sqrt{1+\frac{1}{n}}}\sim\N(0\com 1)
+\quad
+\implies
+\quad
+\frac{\bar{y}_n-y_{n+1}}{\hat{\sigma}\sqrt{1+\frac{1}{n}}}\sim t_{n-1}.
+\]</span></p>
+</div>
+<div class="fragment">
+<p>The (classical) predictive distribution for the next <span class="math inline">\(y_{n+1}\)</span> is:</p>
+<p><span class="math display">\[
+t\left(n-1\com \bar{y}_n\com \widehat{\sigma^2}\left(1+\frac{1}{n}\right)\right).
+\]</span></p>
+<p>This incorporates sampling uncertainty for the mean and variance, and the inherent uncertainty in new <span class="math inline">\(y_{n+1}\)</span>.</p>
+</div>
+</section><section id="method-b-you-know-the-drill" class="slide level2 small"><h2>Method B: you know the drill</h2>
+<p>A conjugate normal-inverse-gamma prior begets a conjugate posterior:</p>
 <p><span class="math display">\[
 \begin{aligned}
 \sigma^2\given y_{0:t}
@@ -1304,71 +1067,11 @@ p(y_{t+1}\given\Bbeta\com\sigma^2\com y_{0:t})p(\Bbeta\com\sigma^2\given y_{0:t}
 \text{N}_2(\Bm_t\com\sigma^2\BH^{-1}_t)
 \\
 y_{t+1}\given\Bbeta\com \sigma^2\com y_{0:t}
-&amp;\sim \N(\Bx_{t+1}^\tr\Bbeta\com\sigma^2).
-\end{aligned}
-\]</span></p>
-</div>
-<div class="fragment">
-<p>There is actually a closed-form solution.</p>
-</div>
-</section><section id="marginalize-out-bbeta" class="slide level2"><h2>Marginalize out <span class="math inline">\(\Bbeta\)</span>
-</h2>
-<p>We know that</p>
-<p><span class="math display">\[
-\begin{aligned}
-\Bbeta\given \sigma^2\com y_{0:t}
-&amp;\sim
-\text{N}_2(\Bm_t\com\sigma^2\BH^{-1}_t)
-\\
-y_{t+1}
-&amp;=
-\Bx_{t+1}^\tr\Bbeta
-+
-\varepsilon_{t+1}
-,
-&amp;&amp;
-\varepsilon_{t+1}\sim\N(0\com \sigma^2).
+&amp;\sim \N(\Bx_{t+1}^\tr\Bbeta\com\sigma^2),\quad \Bx_{t+1}=\begin{bmatrix}1 &amp; y_{t}\end{bmatrix}^\tr.
 \end{aligned}
 \]</span></p>
 <div class="fragment">
-<p>By affine transformation:</p>
-<p><span class="math display">\[
-\Bx_{t+1}^\tr\Bbeta
-\given \sigma^2\com y_{0:t}
-\sim
-\N(
-\Bx_{t+1}^\tr\Bm_t
-\com
-\sigma^2\Bx_{t+1}^\tr\BH_t^{-1}\Bx_{t+1}
-).
-\]</span></p>
-</div>
-<div class="fragment">
-<p>By linear combination of independent normals:</p>
-<p><span class="math display">\[
-\begin{aligned}
-y_{t+1}\given \sigma^2\com y_{0:t}
-&amp;\sim \N\left(\Bx_{t+1}^\tr\Bm_t\com\sigma^2(1+\Bx_{t+1}^\tr\BH_t^{-1}\Bx_{t+1})\right).
-\end{aligned}
-\]</span></p>
-</div>
-</section><section id="marginalize-out-sigma2" class="slide level2 small"><h2>Marginalize out <span class="math inline">\(\sigma^2\)</span>
-</h2>
-<p>We know that</p>
-<p><span class="math display">\[
-\begin{aligned}
-\sigma^2\given y_{0:t}
-&amp;\sim
-\text{IG}(a_t\com b_t)
-\\
-y_{t+1}\given \sigma^2\com y_{0:t}
-&amp;\sim \N\left(\Bx_{t+1}^\tr\Bm_t\com\sigma^2(1+\Bx_{t+1}^\tr\BH_t^{-1}\Bx_{t+1})\right).
-\end{aligned}
-\]</span></p>
-<div class="fragment">
-<p>Marginalizing <span class="math inline">\(\sigma^2\)</span> out of this hierarchy is essentially the <em>definition</em> of Student’s <span class="math inline">\(t\)</span>:</p>
-</div>
-<div class="fragment">
+<p>The one-step posterior predictive distribution is non-standard Student’s <span class="math inline">\(t\)</span>:</p>
 <p><span class="math display">\[
 \begin{aligned}
 y_{t+1}\given y_{0:t}
@@ -1392,70 +1095,647 @@ s_{t+1|t}^2
 \end{aligned}
 \]</span></p>
 </div>
-<div class="fragment">
-<p>So, Student’s <span class="math inline">\(t\)</span> with location-scale.</p>
+</section><section id="dataset-1-simulated" class="slide level2"><h2>Dataset 1: simulated</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure><p><img data-src="ar-forecast_files/figure-revealjs/unnamed-chunk-6-1.png" width="960"></p>
+</figure>
 </div>
-</section><section id="one-step-ahead-probabilistic-prediction" class="slide level2 medium"><h2>One-step-ahead probabilistic prediction</h2>
+</div>
+</div>
+</section><section id="forecast-distributions-from-iid-normal-model" class="slide level2"><h2>Forecast distributions from iid normal model</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure><p><img data-src="ar-forecast_files/figure-revealjs/unnamed-chunk-7-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="forecast-distributions-from-bayesian-ar1" class="slide level2"><h2>Forecast distributions from Bayesian AR(1)</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure><p><img data-src="ar-forecast_files/figure-revealjs/unnamed-chunk-8-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="dataset-2-us-quarterly-real-gdp-growth" class="slide level2 small"><h2>Dataset 2: US quarterly real GDP growth</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure><p><img data-src="ar-forecast_files/figure-revealjs/unnamed-chunk-9-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="forecast-distributions-from-iid-normal-model-1" class="slide level2"><h2>Forecast distributions from iid normal model</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure><p><img data-src="ar-forecast_files/figure-revealjs/unnamed-chunk-10-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="forecast-distributions-from-bayesian-ar1-1" class="slide level2"><h2>Forecast distributions from Bayesian AR(1)</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure><p><img data-src="ar-forecast_files/figure-revealjs/unnamed-chunk-11-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</section></section><section><section id="evaluating-point-forecasts" class="title-slide slide level1 center"><h1>Evaluating point forecasts</h1>
+
+</section><section id="any-ideas" class="slide level2"><h2>Any ideas?</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure><p><img data-src="ar-forecast_files/figure-revealjs/unnamed-chunk-12-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="point-prediction" class="slide level2"><h2>Point prediction</h2>
+<p>We want the point prediction that minimizes expected loss:</p>
 <div class="fragment">
-<p>Our density forecast is:</p>
 <p><span class="math display">\[
-y_{t+1}\given y_{0:t}
-\sim
-t(\nu_{t+1|t}\com\bar{y}_{t+1|t}\com s_{t+1|t}^2).
+\hat{y}_{t+1|t}
+\;=\;
+\argmin{\hat{y}\in\mathbb{R}}
+\; E\big[\, L\big(y_{t+1},\,\hat{y}\big) \,\big|\, y_{0:t} \big].
 \]</span></p>
 </div>
 <div class="fragment">
-<p>This gives a <span class="math inline">\(100\times(1-\alpha)\%\)</span> credible interval:</p>
+<p>The expectation is taken with respect to the “true” or “idealized” conditional distribution <span class="math inline">\(p(y_{t+1}\given y_{0:t})\)</span>, which we don’t know.</p>
+</div>
+<div class="fragment">
+<p>We approximate it with whatever forecast distribution we’ve generated.</p>
+</div>
+</section><section id="picking-a-loss-function" class="slide level2"><h2>Picking a loss function</h2>
+<div class="fragment">
+<p>We have nice results for some loss functions:</p>
+</div>
+<div class="fragment">
 <p><span class="math display">\[
-\bar{y}_{t+1|t}
-\pm
-\underbrace{t_{\nu_{t+1|t}}
-\left(
-1-\frac{\alpha}{2}
-\right)}_{\text{quantile of }t(\nu_{t+1|t}\com 0\com 1)}
-s_{t+1|t}
-.
+\begin{array}{rcl}
+L(y_{t+1},\hat{y}) = (y_{t+1} - \hat{y})^2
+&amp; \implies &amp;
+\hat{y}_{t+1|t} = E[\,y_{t+1}\mid y_{0:t}\,] \\[1.2em]
+L(y_{t+1},\hat{y}) = |y_{t+1} - \hat{y}|
+&amp; \implies &amp;
+\hat{y}_{t+1|t} = \operatorname{median}(y_{t+1}\mid y_{0:t}).
+\end{array}
 \]</span></p>
 </div>
 <div class="fragment">
-<p>And the moments are</p>
+<p>And there are many more where that came from.</p>
+</div>
+</section><section id="in-practice" class="slide level2 medium"><h2>In practice</h2>
+<p>Metrics for scoring the average quality of the point predictions over time:</p>
 <p><span class="math display">\[
 \begin{aligned}
-E(y_{t+1}\given y_{0:t})
+\text{MSFE}
 &amp;=
-\bar{y}_{t+1|t}
-,
-&amp;&amp;
-\nu_{t+1|t}&gt;1
+\frac{1}{T}
+\sum\limits_{t=1}^T
+(y_t-\hat{y}_{t|t-1})^2
 \\
-\text{var}(y_{t+1}\given y_{0:t})
+\text{MAFE}
 &amp;=
-\frac{\nu_{t+1|t}}{\nu_{t+1|t}-2}
-s_{t+1|t}^2
-,
-&amp;&amp;
-\nu_{t+1|t}&gt;2.
+\frac{1}{T}
+\sum\limits_{t=1}^T
+|y_t-\hat{y}_{t|t-1}|.
+\end{aligned}
+\]</span></p>
+<p>We want these to be small.</p>
+<div class="fragment">
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Make sure your loss function and your point prediction play nice</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>If you’re looking at MAFE, use forecast median;</li>
+<li>If you’re looking at MSFE, use the forecast mean.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</section><section id="our-simulated-data" class="slide level2 medium"><h2>Our simulated data</h2>
+<p>MSE of forecast mean:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="fu">mean</span>((y <span class="sc">-</span> pred_params_iid_sim[,<span class="st">"location"</span>])<span class="sc">^</span><span class="dv">2</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 162.4966</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="fu">mean</span>((y <span class="sc">-</span> pred_params_ar1_sim[,<span class="st">"location"</span>])<span class="sc">^</span><span class="dv">2</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4.162699</code></pre>
+</div>
+</div>
+<div class="fragment">
+<p>MAE of forecast median (same as mean for these methods):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="fu">mean</span>(<span class="fu">abs</span>(y <span class="sc">-</span> pred_params_iid_sim[,<span class="st">"location"</span>]), <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 10.03766</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a><span class="fu">mean</span>(<span class="fu">abs</span>(y <span class="sc">-</span> pred_params_ar1_sim[,<span class="st">"location"</span>]), <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.637622</code></pre>
+</div>
+</div>
+</div>
+</section><section id="our-real-data" class="slide level2 medium"><h2>Our real data</h2>
+<p>MSE of forecast mean:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a><span class="fu">mean</span>((stonks <span class="sc">-</span> pred_params_iid_real[,<span class="st">"location"</span>])<span class="sc">^</span><span class="dv">2</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 6.66254</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a><span class="fu">mean</span>((stonks <span class="sc">-</span> pred_params_ar1_real[,<span class="st">"location"</span>])<span class="sc">^</span><span class="dv">2</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.582788</code></pre>
+</div>
+</div>
+<div class="fragment">
+<p>MAE of forecast median (same as mean for these methods):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a><span class="fu">mean</span>(<span class="fu">abs</span>(stonks <span class="sc">-</span> pred_params_iid_real[,<span class="st">"location"</span>]), <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.861102</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a><span class="fu">mean</span>(<span class="fu">abs</span>(stonks <span class="sc">-</span> pred_params_ar1_real[,<span class="st">"location"</span>]), <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.054689</code></pre>
+</div>
+</div>
+</div>
+</section></section><section><section id="evaluating-interval-forecasts" class="title-slide slide level1 center"><h1>Evaluating interval forecasts</h1>
+
+</section><section id="any-ideas-1" class="slide level2"><h2>Any ideas?</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure><p><img data-src="ar-forecast_files/figure-revealjs/unnamed-chunk-17-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="interval-width-and-coverage" class="slide level2 medium"><h2>Interval width and coverage</h2>
+<ul>
+<li class="fragment">You want intervals that are small enough to be informative, but large enough to swallow the truth often, and there’s a trade-off.</li>
+<li class="fragment">
+<span class="math inline">\(\hat{I}=(-\infty\com \infty)\)</span> always has perfect coverage but teaches you nothing;</li>
+<li class="fragment">Look at average size and empirical coverage:</li>
+</ul>
+<div class="fragment">
+<p><span class="math display">\[
+\begin{aligned}
+\overline{\text{Size}}
+&amp;= \frac{1}{T} \sum_{t=1}^{T} \Big( \hat{I}_{t\mid t-1}^{\text{upper}} - \hat{I}_{t\mid t-1}^{\text{lower}} \Big), \\[0.8em]
+\overline{\text{Coverage}}
+&amp;= \frac{1}{T} \sum_{t=1}^{T} \mathbf{1}\Big( y_t \in \hat{I}_{t\mid t-1} \Big).
 \end{aligned}
 \]</span></p>
 </div>
-</section><section id="things-to-notice" class="slide level2 medium"><h2>Things to notice</h2>
+</section><section id="interval-performance-on-simulated-data" class="slide level2 medium"><h2>Interval performance on simulated data</h2>
 <div class="fragment">
-<p><span style="color:red;"><strong>Goal</strong></span>: generate probabilistic predictions incorporating many sources of uncertainty. In the small world of the AR(1), these are mainly uncertainty from parameter estimation and the inherent randomness of future observations.</p>
+<p>Size of 90% intervals:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a></a><span class="fu">mean</span>(PI_iid_sim[,<span class="dv">1</span>], <span class="at">na.rm =</span> <span class="cn">TRUE</span>)   </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 37.61362</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a></a><span class="fu">mean</span>(PI_ar1_sim[,<span class="dv">1</span>], <span class="at">na.rm =</span> <span class="cn">TRUE</span>)   </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 6.660308</code></pre>
+</div>
+</div>
 </div>
 <div class="fragment">
+<p>Coverage of 90% intervals:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a><span class="fu">mean</span>(PI_iid_sim[,<span class="dv">2</span>], <span class="at">na.rm =</span> <span class="cn">TRUE</span>)   </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.8537415</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a></a><span class="fu">mean</span>(PI_ar1_sim[,<span class="dv">2</span>], <span class="at">na.rm =</span> <span class="cn">TRUE</span>)   </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.8991798</code></pre>
+</div>
+</div>
+</div>
+</section><section id="interval-performance-on-gdp-growth" class="slide level2 medium"><h2>Interval performance on GDP growth</h2>
+<div class="fragment">
+<p>Size of 90% intervals:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a></a><span class="fu">mean</span>(PI_iid_real[,<span class="dv">1</span>], <span class="at">na.rm =</span> <span class="cn">TRUE</span>)   </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 9.922717</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a></a><span class="fu">mean</span>(PI_ar1_real[,<span class="dv">1</span>], <span class="at">na.rm =</span> <span class="cn">TRUE</span>)   </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5.451231</code></pre>
+</div>
+</div>
+</div>
+<div class="fragment">
+<p>Coverage of 90% intervals:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a></a><span class="fu">mean</span>(PI_iid_real[,<span class="dv">2</span>], <span class="at">na.rm =</span> <span class="cn">TRUE</span>)   </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.9320388</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a></a><span class="fu">mean</span>(PI_ar1_real[,<span class="dv">2</span>], <span class="at">na.rm =</span> <span class="cn">TRUE</span>)   </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.9387097</code></pre>
+</div>
+</div>
+</div>
+<div class="fragment">
+<p>In this case it turns out that you get the same (over-)coverage from either procedure, but the AR(1) intervals are smaller on average.</p>
+</div>
+</section><section id="interval-score" class="slide level2 medium"><h2>Interval score</h2>
+<p>Average over time for an holistic metric of interval performance:</p>
+<p><span class="math display">\[
+\mathrm{IS}_\alpha(l,u; y)
+=
+(u - l)
++
+\frac{2}{\alpha}\,(l - y)\,\mathbf{1}(y &lt; l)
++
+\frac{2}{\alpha}\,(y - u)\,\mathbf{1}(y &gt; u).
+\]</span></p>
+<p>Synthesizes both size and coverage, but in practice, if you want to understand <em>why</em> the score was good or bad, you have to crack it open and look at the size and coverage components separately anyway.</p>
+</section></section><section><section id="evaluating-density-forecasts" class="title-slide slide level1 center"><h1>Evaluating density forecasts</h1>
+
+</section><section id="any-ideas-2" class="slide level2"><h2>Any ideas?</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure><p><img data-src="ar-forecast_files/figure-revealjs/unnamed-chunk-24-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="recap-probability-integral-transform-pit" class="slide level2"><h2>Recap: probability integral transform (PIT)</h2>
+<p>Take a random variable <span class="math inline">\(Y\sim F\)</span> and plug it into <em>its own</em> cdf to define a new random variable <span class="math inline">\(U=F(Y)\)</span>:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure><p><img data-src="ar-forecast_files/figure-revealjs/unnamed-chunk-25-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="recap-probability-integral-transform-pit-1" class="slide level2 small"><h2>Recap: probability integral transform (PIT)</h2>
+<p>If you take a (continuous) random variable <span class="math inline">\(Y\sim F\)</span> and plug it into <em>its own</em> cdf to define a new random variable <span class="math inline">\(U=F(Y)\)</span>, then the new thing has:</p>
+<div class="fragment">
+<p><span class="math display">\[
+U\sim \text{Unif}(0\com 1).
+\]</span></p>
+</div>
+<div class="fragment">
+<p>Fix any <span class="math inline">\(u\in(0\com 1)\)</span>. Then the cdf of the new random variable <span class="math inline">\(U\)</span> is:</p>
+</div>
+<div class="fragment">
+<p><span class="math display">\[
+P(U\leq u)=P(F(Y)\leq u)=P(Y\leq F^{-1}(u))=F(F^{-1}(u))=u.
+\]</span></p>
+</div>
+<div class="fragment">
+<p>That’s the cdf of Unif(0, 1).</p>
+</div>
+</section><section id="dont-believe-me" class="slide level2"><h2>Don’t believe me?</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10000</span>)</span>
+<span id="cb37-2"><a></a>u <span class="ot">&lt;-</span> <span class="fu">pnorm</span>(x)</span>
+<span id="cb37-3"><a></a><span class="fu">hist</span>(u, <span class="at">breaks =</span> <span class="st">"Scott"</span>, <span class="at">freq =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb37-4"><a></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">1</span>, <span class="at">col =</span> <span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure><p><img data-src="ar-forecast_files/figure-revealjs/unnamed-chunk-26-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="whats-pit-got-to-do-with-it" class="slide level2 medium"><h2>What’s PIT got to do with it?</h2>
+<p>Let <span class="math inline">\(G_t\)</span> be the “true” cdf that nature is drawing from to produce <span class="math inline">\(y_t\)</span>. By the probability integral transform, we know that:</p>
+<div class="fragment">
+<p><span class="math display">\[
+G_1(y_1)\com G_2(y_2)\com ...\com G_t(y_t)\com ...\sim\text{Unif}(0\com 1).
+\]</span></p>
+</div>
+<div class="fragment">
+<p>It would be <em>amazing</em> if our method produced exactly correct predictive distributions: <span class="math inline">\(\hat{F}_{t|t-1}=G_t\)</span>. We’re probably not so lucky, but if we’re in the ballpark, then we should see:</p>
+</div>
+<div class="fragment">
+<p><span class="math display">\[
+\hat{F}_{1|0}(y_1)\com \hat{F}_{2|1}(y_2)\com ...\com \hat{F}_{t|t-1}(y_t)\com ...\sim\text{Unif}(0\com 1).
+\]</span></p>
+</div>
+<div class="fragment">
+<p>Let’s check!</p>
+</div>
+</section><section id="iid-normal-method-on-simulated-data" class="slide level2"><h2>iid normal method on simulated data</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure><p><img data-src="ar-forecast_files/figure-revealjs/unnamed-chunk-27-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="bayesian-ar1-on-simulated-data" class="slide level2"><h2>Bayesian AR(1) on simulated data</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure><p><img data-src="ar-forecast_files/figure-revealjs/unnamed-chunk-28-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="fragment">
+<p>Remember: up to estimation error, this method <em>is</em> exactly correct by construction.</p>
+</div>
+</section><section id="iid-normal-method-on-gdp-growth" class="slide level2"><h2>iid normal method on GDP growth</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure><p><img data-src="ar-forecast_files/figure-revealjs/unnamed-chunk-29-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Clearly not uniform.</p>
+</section><section id="bayesian-ar1-on-gdp-growth" class="slide level2"><h2>Bayesian AR(1) on GDP growth</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure><p><img data-src="ar-forecast_files/figure-revealjs/unnamed-chunk-30-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="fragment">
+<p>What does it mean that these have a peak in the middle?</p>
+</div>
+</section><section id="diagnosing-underover-dispersion" class="slide level2"><h2>Diagnosing under/over-dispersion</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure><p><img data-src="ar-forecast_files/figure-revealjs/unnamed-chunk-31-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="what-do-the-pit-values-tell-you" class="slide level2"><h2>What do the PIT values tell you?</h2>
+<p>Where did the true <span class="math inline">\(y\)</span> fall under your predictive distribution?</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure><p><img data-src="ar-forecast_files/figure-revealjs/unnamed-chunk-32-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="what-do-the-pit-values-tell-you-1" class="slide level2 medium"><h2>What do the PIT values tell you?</h2>
 <ul>
-<li>
-<strong>Classical approach</strong>: pretty unnatural. Can’t do anything analytically. Whole books have been written about how the bootstrapping ought to go;</li>
-</ul>
+<li class="fragment">If <span class="math inline">\(y\)</span> tends to surprise in the left tail, we’ll get too many PITs near 0;</li>
+<li class="fragment">If <span class="math inline">\(y\)</span> tends to surprise in the right tail, we’ll get too many PITs near 1;</li>
+<li class="fragment">If <span class="math inline">\(y\)</span> tends to surprise in the middle, we’ll get too many PITs near 0.5;</li>
+<li class="fragment">If the forecast distributions tend to be overdispersed (too much mass in the tails), the histogram is hump-shaped;</li>
+<li class="fragment">If the forecast distributions tend to be underdispersed (not enough mass in the tails), the histogram is u-shaped.</li>
+</ul></section><section id="summary-calibration" class="slide level2"><h2>Summary: calibration</h2>
+<p>If your sequence of forecast distributions is <em>well-calibrated</em>, then the PITs should be approximately uniformly distributed:</p>
+<p><span class="math display">\[
+\hat{F}_{1|0}(y_1)\com \hat{F}_{2|1}(y_2)\com ...\com \hat{F}_{t|t-1}(y_t)\com ...\sim\text{Unif}(0\com 1).
+\]</span></p>
+<div class="fragment">
+<p>Check it with a histogram, QQ-plot, goodness-of-fit test…</p>
 </div>
 <div class="fragment">
+<p>Deviations from uniformity provide useful diagnostic information.</p>
+</div>
+<div class="fragment">
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>This is necessary but not sufficient!</strong></p>
+</div>
+<div class="callout-content">
+<p>Calibration alone is not enough to distinguish good/better/best forecasts.</p>
+</div>
+</div>
+</div>
+</div>
+</section><section id="maximize-sharpness-subject-to-calibration" class="slide level2"><h2>Maximize sharpness subject to calibration</h2>
 <ul>
-<li>
-<strong>Bayesian approach</strong>: totally natural. Everything is probabilistic already. Posterior predictive simulation is conceptually straightforward. We can even do the math in a special case.</li>
-</ul>
+<li class="fragment">You want a forecasting method to be <em>calibrated</em>;</li>
+<li class="fragment">If you have many methods to choose from, all of which appear calibrated, select the one that is the <em>sharpest</em>;</li>
+<li class="fragment">
+<em>Sharpness</em> refers to how concentrated the forecast distributions are. Among calibrated distributions, you want the one that is sharpest, most decisive, most concentrated;</li>
+<li class="fragment">Sharpness can be measured by your preferred measure of spread: variance, IQR, etc.</li>
+</ul></section><section id="sharpness-for-the-simulated-data" class="slide level2"><h2>Sharpness for the simulated data</h2>
+<p>Compare the scale parameters of the predictive distributions:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure><p><img data-src="ar-forecast_files/figure-revealjs/unnamed-chunk-33-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="sharpness-for-the-gdp-growth" class="slide level2"><h2>Sharpness for the GDP growth</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure><p><img data-src="ar-forecast_files/figure-revealjs/unnamed-chunk-34-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="log-predictive-score" class="slide level2 medium"><h2>Log predictive score</h2>
+<p>Evaluates if the forecast distribution placed high mass/density on the region where <span class="math inline">\(y_t\)</span> actually showed up:</p>
+<p><span class="math display">\[
+\overline{\text{LPS}} = \frac{1}{T} \sum_{t=1}^{T} \ln \hat{f}_{t|t-1}(y_t).
+\]</span></p>
+<ul>
+<li class="fragment">Bigger is better;</li>
+<li class="fragment">Simultaneously rewards <em>both</em> calibration and sharpness;</li>
+<li class="fragment">
+<em>Proper</em> scoring rule: encourages honest probabilistic predictions;</li>
+<li class="fragment">Local measure of quality. There are also global measures like the <em>continuous ranked probability score</em> (CRPS).</li>
+</ul></section><section id="lps-rewards-both-calibration-and-sharpness" class="slide level2"><h2>LPS rewards both calibration and sharpness</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure><p><img data-src="ar-forecast_files/figure-revealjs/unnamed-chunk-35-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="for-our-examples" class="slide level2 medium"><h2>For our examples</h2>
+<div class="fragment">
+<p>Simulated data:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a></a><span class="fu">average_log_score</span>(y, pred_params_iid_sim)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -3.965963</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a></a><span class="fu">average_log_score</span>(y, pred_params_ar1_sim)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -2.132817</code></pre>
+</div>
+</div>
 </div>
 <div class="fragment">
-<p>But in fairness, the Bayes stuff leans hard into normality. The bootstrap stuff less so.</p>
+<p>Real data:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a></a><span class="fu">average_log_score</span>(stonks, pred_params_iid_real)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -2.373455</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a></a><span class="fu">average_log_score</span>(stonks, pred_params_ar1_real)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -1.886891</code></pre>
+</div>
+</div>
+</div>
+</section><section id="authors-and-papers-to-know" class="slide level2"><h2>Authors and papers to know</h2>
+<ul>
+<li>Gneiting &amp; Raftery (2007): “<a href="https://doi.org/10.1198/016214506000001437">Strictly Proper Scoring Rules, Prediction, and Estimation</a>,” JASA;
+<ul>
+<li>Hard to read, but packed with useful info;</li>
+</ul>
+</li>
+<li>Gneiting, Balabdaoui, &amp; Raftery (2007): “<a href="https://doi.org/10.1111/j.1467-9868.2007.00587.x">Probabilistic Forecasts, Calibration and Sharpness</a>,” JRSSB;
+<ul>
+<li>“We propose a diagnostic approach to the evaluation of predictive performance that is based on the paradigm of <em>maximizing the sharpness of the predictive distributions subject to calibration</em>.” Bada bing.</li>
+</ul>
+</li>
+</ul></section><section id="software-to-check-out" class="slide level2"><h2>Software to check out</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a></a><span class="fu">library</span>(scoringRules)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section></section><section><section id="bonus-bootstrap-for-time-series" class="title-slide slide level1 center"><h1>BONUS: Bootstrap for time series</h1>
+
+</section><section id="bootstrapping-for-dependent-data-with-iid-errors" class="slide level2 small scrollable"><h2>Bootstrapping for dependent data with iid errors</h2>
+<div class="fragment">
+<ol type="1">
+<li>Data come from an AR(1) with mean zero iid errors (may not be normal!):</li>
+</ol>
+</div>
+<div class="fragment">
+<p><span class="math display">\[
+y_t
+=
+\beta_0
++
+\beta_1
+y_{t-1}
++
+\varepsilon_t,
+\quad
+\varepsilon_t
+\overset{\text{iid}}{\sim}F;
+\]</span></p>
+</div>
+<div class="fragment">
+<ol start="2" type="1">
+<li>Use observed <span class="math inline">\(y_{0:T}\)</span> to compute OLS estimate <span class="math inline">\(\hat{\Bbeta}_T\)</span>;</li>
+</ol>
+</div>
+<div class="fragment">
+<ol start="3" type="1">
+<li>Estimate residuals and center them:</li>
+</ol>
+<p><span class="math display">\[
+\hat{\varepsilon}_t=y_t-\hat{\beta}_0-\hat{\beta}_1y_{t-1}\quad \to\quad e_t=\hat{\varepsilon}_t-\sum\limits_{j=1}^T\hat{\varepsilon}_j/T.
+\]</span></p>
+</div>
+<div class="fragment">
+<ol start="4" type="1">
+<li>Construct alternative time series by resampling residuals:</li>
+</ol>
+<p><span class="math display">\[
+\begin{aligned}
+\tilde{y}_0&amp;=y_0\\
+\tilde{y}_t&amp;=\hat{\beta}_0+\hat{\beta}_1\tilde{y}_{t-1}+\tilde{e}_{t},&amp;&amp;\tilde{e}_{t}\overset{\text{iid}}{\sim} \hat{F}_T.
+\end{aligned}
+\]</span></p>
+</div>
+<div class="fragment">
+<p>Repeats the last step many times, and from then on it’s bootstrap like normal.</p>
+</div>
+</section><section id="bootstrapping-the-residuals" class="slide level2 small scrollable"><h2>Bootstrapping the residuals</h2>
+<p>Gird your loins:</p>
+<div class="fragment">
+<p><span class="math display">\[
+\begin{matrix}
+\text{1. Original data} &amp;&amp;&amp; y_{0:n} &amp;&amp; \\
+&amp;&amp;&amp; \downarrow &amp;&amp; \\
+\text{2. OLS} &amp;&amp;&amp; \hat{\Btheta}_{T} &amp;&amp; \\
+&amp;&amp;&amp; \downarrow &amp;&amp; \\
+\text{3. Estimate (centered) residuals} &amp;&amp;&amp; e_{1:T} &amp;&amp; \\
+&amp;\swarrow &amp;\swarrow&amp; \cdots &amp;\searrow&amp;\searrow \\
+\text{4. Resample residuals}&amp;\tilde{e}_{1:T}^{(1)} &amp;\tilde{e}_{1:T}^{(2)}&amp; \cdots &amp;\tilde{e}_{1:T}^{(k-1)}&amp;\tilde{e}_{1:T}^{(k)} \\
+&amp;\downarrow &amp;\downarrow&amp; \cdots &amp;\downarrow&amp;\downarrow \\
+\text{5. Bootstrap time series}&amp;\tilde{y}_{0:T}^{(1)} &amp;\tilde{y}_{0:T}^{(2)}&amp; \cdots &amp;\tilde{y}_{0:T}^{(k-1)}&amp;\tilde{y}_{0:T}^{(k)} \\
+&amp;\downarrow &amp;\downarrow&amp; \cdots &amp;\downarrow&amp;\downarrow \\
+\text{6. Bootstrap estimates}&amp;\tilde{\Btheta}_{T}^{(1)} &amp;\tilde{\Btheta}_{T}^{(2)}&amp; \cdots &amp;\tilde{\Btheta}_{T}^{(k-1)}&amp;\tilde{\Btheta}_{T}^{(k)} \\
+&amp;\downarrow &amp;\downarrow&amp; \cdots &amp;\downarrow&amp;\downarrow \\
+\text{7. Draw more residuals}&amp;\tilde{e}_{T+1:T+h}^{(1)} &amp;\tilde{e}_{T+1:T+h}^{(2)}&amp; \cdots &amp;\tilde{e}_{T+1:T+h}^{(k-1)}&amp;\tilde{e}_{T+1:T+h}^{(k)} \\
+&amp;\downarrow &amp;\downarrow&amp; \cdots &amp;\downarrow&amp;\downarrow \\
+\text{8. Simulate forecasts}&amp;\tilde{y}_{T+1:T+h}^{(1)} &amp;\tilde{y}_{T+1:T+h}^{(2)}&amp; \cdots &amp;\tilde{y}_{T+1:T+h}^{(k-1)}&amp;\tilde{y}_{T+1:T+h}^{(k)} \\
+\end{matrix}
+\]</span></p>
+</div>
+<div class="fragment">
+<p>In other words, it’s awful.</p>
+</div>
+</section><section id="and-thats-just-the-tip-of-the-iceberg" class="slide level2"><h2>And that’s just the tip of the iceberg</h2>
+<div class="columns v-center-container">
+<div class="column" style="width:40%;">
+<p><img data-src="images/lahiri.png"></p>
+</div><div class="column" style="width:60%;">
+<p>If you really want to know,</p>
+<p><a href="https://doi.org/10.1007/978-1-4757-3803-2">Lahiri</a> is your man.</p>
+</div></div>
+</section><section id="probabilistic-forecasting-via-monte-carlo-1" class="slide level2 small"><h2>Probabilistic forecasting via Monte Carlo</h2>
+<p>Use the simulations <span class="math inline">\(\tilde{y}_{t+h}^{(1:k)}=\left\{\tilde{y}_{t+h}^{(1)}\com \tilde{y}_{t+h}^{(2)}\com ...\com \tilde{y}_{t+h}^{(k)}\right\}\)</span> to construct whatever forecast object you want:</p>
+<div class="fragment">
+<p><span class="math display">\[
+\hat{y}_{t+h|t}=\frac{1}{k}\sum\limits_{j=1}^k\tilde{y}_{t+h}^{(j)}. \quad (\text{...or median})
+\]</span></p>
+</div>
+<div class="fragment">
+<p>Forecast interval:</p>
+<p><span class="math display">\[
+\hat{I}_{t+h|t} = \left[\hat{Q}_{\frac{\alpha}{2}}\left(\tilde{y}_{t+h}^{(1:k)}\right)\com \hat{Q}_{1-\frac{\alpha}{2}}\left(\tilde{y}_{t+h}^{(1:k)}\right)\right]. \quad (...\text{or hdi})
+\]</span></p>
+</div>
+<div class="fragment">
+<p>Forecast distribution:</p>
+<p><span class="math display">\[
+\hat{f}_{t+h|t}
+=
+\text{histogram}\left(\tilde{y}_{t+h}^{(1:k)}\right). \quad (...\text{or kde})
+\]</span></p>
 
 
 </div>

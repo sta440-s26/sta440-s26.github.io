@@ -497,7 +497,7 @@ Ed Iversen and John Zito
 <div class="fragment">
 <p>A single variable gets a whole data frame with an upper triangular structure:</p>
 <ul>
-<li>row = what period are measuring?</li>
+<li>row = what period are we measuring?</li>
 <li>column = when were we measuring it?</li>
 </ul>
 </div>
@@ -616,7 +616,7 @@ Ed Iversen and John Zito
 <p>We just got an unexpected data release, but we know it will be revised. And in general, I’m sick of this crap where the numbers swing around for months after the fact and we don’t know where we stand. Can you develop a model that can predict where the measurement will settle after the revisions are done?</p>
 </blockquote>
 </section><section id="your-task" class="slide level2 medium"><h2>Your task</h2>
-<p><strong>Data</strong>: the full set of historical vintages for several macro variables.</p>
+<p><strong>Data</strong>: the full set of historical vintages for eight macro variables.</p>
 <p>Each team will be assigned a target variable. Then:</p>
 <ul>
 <li>Develop a model that can predict the final release of the variable using only information available at the time of the initial release;
@@ -1185,10 +1185,10 @@ f_X(x)=\frac{\Gamma \left(\frac{\nu + 1}{2}\right)}{\sqrt{\pi\nu}\, \Gamma\left(
 <p><span class="math display">\[
 f_Y(y)
 =
-\frac{1}{\sigma}f_X\left(\frac{y-\mu}{\sigma}\right)
+\frac{1}{\tau}f_X\left(\frac{y-\mu}{\tau}\right)
 =
-\frac{1}{\sigma}
-\frac{\Gamma{\left(\frac{\nu+1}{2}\right)}}{\sqrt{\pi\nu}\,\Gamma{\left(\frac{\nu}{2}\right)}} \left(1 + \frac{1}{\nu}\left(\frac{y-\mu}{\sigma}\right)^2\right)^{-(\nu + 1)/2}.
+\frac{1}{\tau}
+\frac{\Gamma{\left(\frac{\nu+1}{2}\right)}}{\sqrt{\pi\nu}\,\Gamma{\left(\frac{\nu}{2}\right)}} \left(1 + \frac{1}{\nu}\left(\frac{y-\mu}{\tau}\right)^2\right)^{-(\nu + 1)/2}.
 \]</span></p>
 <p>Be careful not to immediately interpret <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\tau^2\)</span> as <em>mean</em> and <em>variance</em>. Only if <span class="math inline">\(\nu&gt;1\)</span> is <span class="math inline">\(E(Y)=\mu\)</span>, and <span class="math inline">\(\tau^2\)</span> is only <em>proportional</em> to the variance if <span class="math inline">\(\nu&gt;2\)</span>.</p>
 </section><section id="whence-students-t" class="slide level2"><h2>Whence Student’s <span class="math inline">\(t\)</span>?</h2>

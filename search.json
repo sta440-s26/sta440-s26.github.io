@@ -144,7 +144,7 @@
     "href": "slides/case-study-2.html#what-are-these-data-like",
     "title": "Case Study 2",
     "section": "What are these data like?",
-    "text": "What are these data like?\nQuarterly GDP growth (year-over-year percent change):\n\n\n# A tibble: 244 × 10\n   DATE    v65Q4 v66Q1 v66Q2 v66Q3 v66Q4 v67Q1 v67Q2 v67Q3 v67Q4\n   &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n 1 1965:Q1  5.36  5.40  5.40  5.37  5.37  5.37  5.37  5.32  5.32\n 2 1965:Q2  4.43  4.79  4.79  5.14  5.14  5.14  5.14  5.38  5.38\n 3 1965:Q3  4.55  5.22  5.22  5.68  5.68  5.68  5.68  5.96  5.96\n 4 1965:Q4 NA     6.33  6.79  7.49  7.49  7.49  7.49  7.80  7.80\n 5 1966:Q1 NA    NA     6.04  6.70  6.70  6.70  6.70  7.30  7.30\n 6 1966:Q2 NA    NA    NA     5.99  5.87  5.87  5.87  6.49  6.49\n 7 1966:Q3 NA    NA    NA    NA     5.26  5.13  5.13  5.49  5.49\n 8 1966:Q4 NA    NA    NA    NA    NA     4.09  4.12  4.21  4.21\n 9 1967:Q1 NA    NA    NA    NA    NA    NA     2.61  2.37  2.37\n10 1967:Q2 NA    NA    NA    NA    NA    NA    NA     2.36  2.37\n# ℹ 234 more rows\n\n\n\nA single variable gets a whole data frame with an upper triangular structure:\n\nrow = what period are measuring?\ncolumn = when were we measuring it?"
+    "text": "What are these data like?\nQuarterly GDP growth (year-over-year percent change):\n\n\n# A tibble: 244 × 10\n   DATE    v65Q4 v66Q1 v66Q2 v66Q3 v66Q4 v67Q1 v67Q2 v67Q3 v67Q4\n   &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n 1 1965:Q1  5.36  5.40  5.40  5.37  5.37  5.37  5.37  5.32  5.32\n 2 1965:Q2  4.43  4.79  4.79  5.14  5.14  5.14  5.14  5.38  5.38\n 3 1965:Q3  4.55  5.22  5.22  5.68  5.68  5.68  5.68  5.96  5.96\n 4 1965:Q4 NA     6.33  6.79  7.49  7.49  7.49  7.49  7.80  7.80\n 5 1966:Q1 NA    NA     6.04  6.70  6.70  6.70  6.70  7.30  7.30\n 6 1966:Q2 NA    NA    NA     5.99  5.87  5.87  5.87  6.49  6.49\n 7 1966:Q3 NA    NA    NA    NA     5.26  5.13  5.13  5.49  5.49\n 8 1966:Q4 NA    NA    NA    NA    NA     4.09  4.12  4.21  4.21\n 9 1967:Q1 NA    NA    NA    NA    NA    NA     2.61  2.37  2.37\n10 1967:Q2 NA    NA    NA    NA    NA    NA    NA     2.36  2.37\n# ℹ 234 more rows\n\n\n\nA single variable gets a whole data frame with an upper triangular structure:\n\nrow = what period are we measuring?\ncolumn = when were we measuring it?"
   },
   {
     "objectID": "slides/case-study-2.html#what-are-these-data-like-1",
@@ -214,7 +214,7 @@
     "href": "slides/case-study-2.html#your-task",
     "title": "Case Study 2",
     "section": "Your task",
-    "text": "Your task\nData: the full set of historical vintages for several macro variables.\nEach team will be assigned a target variable. Then:\n\nDevelop a model that can predict the final release of the variable using only information available at the time of the initial release;\n\ntreat the vintage three years later as the final release;\nUse the other variables as predictors if you want;\nProduce a method with good historical performance averaged over time;\n\n\nYou must quantify uncertainty. Point predictions are not enough. You need to produce and evaluate full predictive distributions that incorporate as many sources of uncertainty as possible."
+    "text": "Your task\nData: the full set of historical vintages for eight macro variables.\nEach team will be assigned a target variable. Then:\n\nDevelop a model that can predict the final release of the variable using only information available at the time of the initial release;\n\ntreat the vintage three years later as the final release;\nUse the other variables as predictors if you want;\nProduce a method with good historical performance averaged over time;\n\n\nYou must quantify uncertainty. Point predictions are not enough. You need to produce and evaluate full predictive distributions that incorporate as many sources of uncertainty as possible."
   },
   {
     "objectID": "slides/case-study-2.html#your-task-1",
@@ -417,7 +417,7 @@
     "href": "slides/case-study-2.html#non-standard-students-t",
     "title": "Case Study 2",
     "section": "Non-standard Student’s \\(t\\)\n",
-    "text": "Non-standard Student’s \\(t\\)\n\nIf you define a location-scale transformation \\(Y=\\mu+\\tau X\\) for constants \\(\\mu\\in\\mathbb{R}\\) and \\(\\tau&gt;0\\), then the new random variable \\(Y\\sim t(\\nu,\\,\\mu,\\,\\tau^2)\\) has a non-standard Student’s \\(t\\)-distribution. By the change-of-variables formula, the new density is\n\\[\nf_Y(y)\n=\n\\frac{1}{\\sigma}f_X\\left(\\frac{y-\\mu}{\\sigma}\\right)\n=\n\\frac{1}{\\sigma}\n\\frac{\\Gamma{\\left(\\frac{\\nu+1}{2}\\right)}}{\\sqrt{\\pi\\nu}\\,\\Gamma{\\left(\\frac{\\nu}{2}\\right)}} \\left(1 + \\frac{1}{\\nu}\\left(\\frac{y-\\mu}{\\sigma}\\right)^2\\right)^{-(\\nu + 1)/2}.\n\\]\nBe careful not to immediately interpret \\(\\mu\\) and \\(\\tau^2\\) as mean and variance. Only if \\(\\nu&gt;1\\) is \\(E(Y)=\\mu\\), and \\(\\tau^2\\) is only proportional to the variance if \\(\\nu&gt;2\\)."
+    "text": "Non-standard Student’s \\(t\\)\n\nIf you define a location-scale transformation \\(Y=\\mu+\\tau X\\) for constants \\(\\mu\\in\\mathbb{R}\\) and \\(\\tau&gt;0\\), then the new random variable \\(Y\\sim t(\\nu,\\,\\mu,\\,\\tau^2)\\) has a non-standard Student’s \\(t\\)-distribution. By the change-of-variables formula, the new density is\n\\[\nf_Y(y)\n=\n\\frac{1}{\\tau}f_X\\left(\\frac{y-\\mu}{\\tau}\\right)\n=\n\\frac{1}{\\tau}\n\\frac{\\Gamma{\\left(\\frac{\\nu+1}{2}\\right)}}{\\sqrt{\\pi\\nu}\\,\\Gamma{\\left(\\frac{\\nu}{2}\\right)}} \\left(1 + \\frac{1}{\\nu}\\left(\\frac{y-\\mu}{\\tau}\\right)^2\\right)^{-(\\nu + 1)/2}.\n\\]\nBe careful not to immediately interpret \\(\\mu\\) and \\(\\tau^2\\) as mean and variance. Only if \\(\\nu&gt;1\\) is \\(E(Y)=\\mu\\), and \\(\\tau^2\\) is only proportional to the variance if \\(\\nu&gt;2\\)."
   },
   {
     "objectID": "slides/case-study-2.html#whence-students-t",
@@ -439,349 +439,6 @@
     "title": "Case Study 2",
     "section": "Gird your loins!",
     "text": "Gird your loins!\nNow let’s jerk it around until we recognize that it’s (non-standard) Student’s \\(t\\):\n\\[\n\\begin{aligned}\np(y)\n&=\n\\frac{b^a}{\\Gamma(a)\\sqrt{2\\pi v^2}}\n\\frac{\\Gamma\\left(a+\\frac{1}{2}\\right)}{\\left(b+\\frac{(y-m)^2}{2v^2}\\right)^{a+1/2}}\n\\\\\n&=\n\\frac{\\Gamma\\left(\\frac{2a+1}{2}\\right)}{\\Gamma\\left(\\frac{2a}{2}\\right)\\sqrt{\\pi 2 v^2}}\nb^a\n\\left(b+\\frac{(y-m)^2}{2v^2}\\right)^{-(a+1/2)}\n\\\\\n&=\n\\frac{\\Gamma\\left(\\frac{2a+1}{2}\\right)}{\\Gamma\\left(\\frac{2a}{2}\\right)\\sqrt{\\pi 2 \\frac{a}{a}v^2}}\nb^a\n\\left(b+\\frac{(y-m)^2}{2\\frac{a}{a}v^2}\\right)^{-(a+1/2)}\n\\\\\n&=\n\\frac{\\Gamma\\left(\\frac{2a+1}{2}\\right)}{\\Gamma\\left(\\frac{2a}{2}\\right)\\sqrt{\\pi 2 a}}\n\\frac{b^a}{\\sqrt{v^2/a}}\n\\left(b+\\frac{(y-m)^2}{2av^2/a}\\right)^{-(a+1/2)}\n\\\\\n&=\n\\frac{\\Gamma\\left(\\frac{2a+1}{2}\\right)}{\\Gamma\\left(\\frac{2a}{2}\\right)\\sqrt{\\pi 2 a}}\n\\frac{b^a}{\\sqrt{v^2/a}}\n\\left[b\\left(1+\\frac{(y-m)^2}{2abv^2/a}\\right)\\right]^{-(a+1/2)}\n\\\\\n&=\n\\frac{\\Gamma\\left(\\frac{2a+1}{2}\\right)}{\\Gamma\\left(\\frac{2a}{2}\\right)\\sqrt{\\pi 2 a}}\n\\frac{b^a}{\\sqrt{v^2/a}}\nb^{-(a+1/2)}\\left(1+\\frac{1}{2a}\\left(\\frac{y-m}{\\sqrt{bv^2/a}}\\right)^2\\right)^{-(a+1/2)}\n\\\\\n&=\n\\frac{\\Gamma\\left(\\frac{2a+1}{2}\\right)}{\\Gamma\\left(\\frac{2a}{2}\\right)\\sqrt{\\pi 2 a}}\n\\frac{b^a}{b^ab^{1/2}\\sqrt{v^2/a}}\n\\left(1+\\frac{1}{2a}\\left(\\frac{y-m}{\\sqrt{bv^2/a}}\\right)^2\\right)^{-(a+1/2)}\n\\\\\n&=\n\\frac{1}{\\sqrt{bv^2/a}}\n\\frac{\\Gamma\\left(\\frac{2a+1}{2}\\right)}{\\Gamma\\left(\\frac{2a}{2}\\right)\\sqrt{\\pi 2 a}}\n\\left(1+\\frac{1}{2a}\\left(\\frac{y-m}{\\sqrt{bv^2/a}}\\right)^2\\right)^{-(a+1/2)}\n\\\\\n&=\n\\frac{1}{\\sqrt{bv^2/a}}\n\\frac{\\Gamma\\left(\\frac{2a+1}{2}\\right)}{\\Gamma\\left(\\frac{2a}{2}\\right)\\sqrt{\\pi 2 a}}\n\\left(1+\\frac{1}{2a}\\left(\\frac{y-m}{\\sqrt{bv^2/a}}\\right)^2\\right)^{-(2a+1)/2)}.\n\\end{aligned}\n\\]\nIf you started with \\(X\\sim t_{2a}\\) and then defined \\(Y=m+\\sqrt{\\frac{b}{a}v^2}X\\), that’s the density you would get."
-  },
-  {
-    "objectID": "slides/ar-evaluate.html#point-forecast",
-    "href": "slides/ar-evaluate.html#point-forecast",
-    "title": "How do you evaluate probabilistic predictions?",
-    "section": "Point forecast",
-    "text": "Point forecast\nYour single-number best guess at tomorrow’s observation:"
-  },
-  {
-    "objectID": "slides/ar-evaluate.html#forecast-interval",
-    "href": "slides/ar-evaluate.html#forecast-interval",
-    "title": "How do you evaluate probabilistic predictions?",
-    "section": "Forecast interval",
-    "text": "Forecast interval\nA range of likely values for tomorrow’s observation:"
-  },
-  {
-    "objectID": "slides/ar-evaluate.html#forecast-density",
-    "href": "slides/ar-evaluate.html#forecast-density",
-    "title": "How do you evaluate probabilistic predictions?",
-    "section": "Forecast density",
-    "text": "Forecast density\nFull distribution capturing uncertainty about tomorrow:"
-  },
-  {
-    "objectID": "slides/ar-evaluate.html#and-then-tomorrow-finally-comes",
-    "href": "slides/ar-evaluate.html#and-then-tomorrow-finally-comes",
-    "title": "How do you evaluate probabilistic predictions?",
-    "section": "And then tomorrow finally comes",
-    "text": "And then tomorrow finally comes\nSo…how’d we do?"
-  },
-  {
-    "objectID": "slides/ar-evaluate.html#whats-the-point",
-    "href": "slides/ar-evaluate.html#whats-the-point",
-    "title": "How do you evaluate probabilistic predictions?",
-    "section": "What’s the point?",
-    "text": "What’s the point?\n\nWe want intervals and densities to communicate uncertainty about the forecast;\n\nWhat sources of uncertainty?\n\nBasic data uncertainty;\nParameter estimation uncertainty;\nHyperparameter uncertainty;\nModel uncertainty;\nUncertainty introduced by missing data.\n\n\nIn the small world of the AR(1), mainly the first two for now."
-  },
-  {
-    "objectID": "slides/ar-evaluate.html#how-do-you-get-full-predictive-distributions",
-    "href": "slides/ar-evaluate.html#how-do-you-get-full-predictive-distributions",
-    "title": "How do you evaluate probabilistic predictions?",
-    "section": "How do you get full predictive distributions?",
-    "text": "How do you get full predictive distributions?\n\nIn general, use simulation:\n\nClassical approach: bootstrapping;\nBayesian approach: posterior predictive simulation.\n\n\n\nEither way, you get Monte Carlo draws from a forecast distribution:\n\\[\n\\tilde{y}_{t+h}^{(1)}\\com \\tilde{y}_{t+h}^{(2)}\\com ...\\com \\tilde{y}_{t+h}^{(k)}\n\\sim \\hat{F}_{t+h|t}.\n\\]\n\n\nWhat do you do with them?"
-  },
-  {
-    "objectID": "slides/ar-evaluate.html#probabilistic-forecasting-via-monte-carlo",
-    "href": "slides/ar-evaluate.html#probabilistic-forecasting-via-monte-carlo",
-    "title": "How do you evaluate probabilistic predictions?",
-    "section": "Probabilistic forecasting via Monte Carlo",
-    "text": "Probabilistic forecasting via Monte Carlo\nUse the simulations \\(\\tilde{y}_{t+h}^{(1:k)}=\\left\\{\\tilde{y}_{t+h}^{(1)}\\com \\tilde{y}_{t+h}^{(2)}\\com ...\\com \\tilde{y}_{t+h}^{(k)}\\right\\}\\) to construct whatever forecast object you want:\n\n\\[\n\\hat{y}_{t+h|t}=\\frac{1}{k}\\sum\\limits_{j=1}^k\\tilde{y}_{t+h}^{(j)}. \\quad (\\text{...or median})\n\\]\n\n\nForecast interval:\n\\[\n\\hat{I}_{t+h|t} = \\left[\\hat{Q}_{\\frac{\\alpha}{2}}\\left(\\tilde{y}_{t+h}^{(1:k)}\\right)\\com \\hat{Q}_{1-\\frac{\\alpha}{2}}\\left(\\tilde{y}_{t+h}^{(1:k)}\\right)\\right]. \\quad (...\\text{or hdi})\n\\]\n\n\nForecast distribution:\n\\[\n\\hat{f}_{t+h|t}\n=\n\\text{histogram}\\left(\\tilde{y}_{t+h}^{(1:k)}\\right). \\quad (...\\text{or kde})\n\\]"
-  },
-  {
-    "objectID": "slides/ar-evaluate.html#well-behaved-case-iid-normal",
-    "href": "slides/ar-evaluate.html#well-behaved-case-iid-normal",
-    "title": "How do you evaluate probabilistic predictions?",
-    "section": "Well-behaved case: iid normal",
-    "text": "Well-behaved case: iid normal\n\nAssume\n\n\n\\[\ny_1\\com y_2\\com ...\\com y_n\\com y_{n+1}\\iid\\N(\\mu\\com\\sigma^2).\n\\]\n\n\nWe know\n\\[\n\\frac{\\bar{y}_{n}-y_{n+1}}{\\sigma\\sqrt{1+\\frac{1}{n}}}\\sim\\N(0\\com 1),\n\\]\n\n\nand so plugging in sample standard deviation \\(s_n\\) gives\n\\[\n\\frac{\\bar{y}_{n}-y_{n+1}}{s_n\\sqrt{1+\\frac{1}{n}}}\\sim t_{n-1}.\n\\]\n\n\nThe predictive distribution is non-standard Student’s \\(t\\):\n\\[\n\\hat{y}_{n+1}\\sim t\\left(n-1\\com \\bar{y}_n\\com s_n^2\\left(1+\\frac{1}{n}\\right)\\right).\n\\]"
-  },
-  {
-    "objectID": "slides/ar-evaluate.html#well-behaved-case-bayes-with-conjugate-prior",
-    "href": "slides/ar-evaluate.html#well-behaved-case-bayes-with-conjugate-prior",
-    "title": "How do you evaluate probabilistic predictions?",
-    "section": "Well-behaved case: Bayes with conjugate prior",
-    "text": "Well-behaved case: Bayes with conjugate prior\nA conjugate normal-inverse-gamma prior begets a conjugate posterior:\n\\[\n\\begin{aligned}\n\\sigma^2\\given y_{0:t}\n&\\sim\n\\text{IG}(a_t\\com b_t)\n\\\\\n\\Bbeta\\given \\sigma^2\\com y_{0:t}\n&\\sim\n\\text{N}_2(\\Bm_t\\com\\sigma^2\\BH^{-1}_t)\n\\\\\ny_{t+1}\\given\\Bbeta\\com \\sigma^2\\com y_{0:t}\n&\\sim \\N(\\Bx_{t+1}^\\tr\\Bbeta\\com\\sigma^2).\n\\end{aligned}\n\\]\n\nThe one-step posterior predictive distribution is non-standard Student’s \\(t\\):\n\\[\n\\begin{aligned}\ny_{t+1}\\given y_{0:t}\n&\\sim\nt(\\nu_{t+1|t}\\com\\bar{y}_{t+1|t}\\com s_{t+1|t}^2)\n\\\\\n\\\\\n\\nu_{t+1|t}\n&=\n2a_t\n\\\\\n\\bar{y}_{t+1|t}\n&=\n\\Bx_{t+1}^\\tr\\Bm_t\n\\\\\ns_{t+1|t}^2\n&=\n\\frac{b_t}{a_t}\n(1+\\Bx_{t+1}^\\tr\\BH_t^{-1}\\Bx_{t+1})\n.\n\\end{aligned}\n\\]"
-  },
-  {
-    "objectID": "slides/ar-evaluate.html#how-do-you-evaluate-the-forecasts",
-    "href": "slides/ar-evaluate.html#how-do-you-evaluate-the-forecasts",
-    "title": "How do you evaluate probabilistic predictions?",
-    "section": "How do you evaluate the forecasts?",
-    "text": "How do you evaluate the forecasts?\nYou generate a sequence of one-step-ahead predictions:\n\\[\n\\begin{matrix}\n\\hat{y}_{1|0} & \\hat{y}_{2|1} & \\hat{y}_{3|2} & \\hat{y}_{4|3} & \\hat{y}_{5|4} & \\cdots&\\hat{y}_{t|t-1} & \\cdots\\\\\n\\hat{I}_{1|0} & \\hat{I}_{2|1} & \\hat{I}_{3|2} & \\hat{I}_{4|3} & \\hat{I}_{5|4} & \\cdots&\\hat{I}_{t|t-1} & \\cdots\\\\\n\\hat{f}_{1|0} & \\hat{f}_{2|1} & \\hat{f}_{3|2} & \\hat{f}_{4|3} & \\hat{f}_{5|4} & \\cdots&\\hat{f}_{t|t-1} & \\cdots\n\\end{matrix}\n\\]\n\nBut then the data you were trying to forecast eventually arrive:\n\\[\n\\begin{matrix}\ny_1 & y_2 & y_3 & y_4 & y_5 & \\cdots &y_t & \\cdots\n\\end{matrix}\n\\]\nHow do we score the forecasts and summarize?"
-  },
-  {
-    "objectID": "slides/ar-evaluate.html#todays-agenda",
-    "href": "slides/ar-evaluate.html#todays-agenda",
-    "title": "How do you evaluate probabilistic predictions?",
-    "section": "Today’s agenda",
-    "text": "Today’s agenda\n\nWe will learn how to evaluate probabilistic predictions;\nWe will illustrate by comparing the performance of the two well-behaved methods:\n\nA. classical predictive distribution from iid normal model;\nB. posterior predictive distribution from Gaussian AR(1) with conjugate prior."
-  },
-  {
-    "objectID": "slides/ar-evaluate.html#there-will-be-two-running-examples",
-    "href": "slides/ar-evaluate.html#there-will-be-two-running-examples",
-    "title": "How do you evaluate probabilistic predictions?",
-    "section": "There will be two running examples",
-    "text": "There will be two running examples\n\n\nSimulated data from AR(1)\n\nMethod A (iid normal) is wrong by construction;\nMethod B is right by construction;\n\n\n\nApple’s daily stock price from 2000 - this week\n\nboth methods are “wrong,” but is one strictly preferred?\n\n\n\n\nOur forecast metrics will tease all of that out."
-  },
-  {
-    "objectID": "slides/ar-evaluate.html#dataset-1-simulated",
-    "href": "slides/ar-evaluate.html#dataset-1-simulated",
-    "title": "How do you evaluate probabilistic predictions?",
-    "section": "Dataset 1: simulated",
-    "text": "Dataset 1: simulated"
-  },
-  {
-    "objectID": "slides/ar-evaluate.html#forecast-distributions-from-iid-normal-model",
-    "href": "slides/ar-evaluate.html#forecast-distributions-from-iid-normal-model",
-    "title": "How do you evaluate probabilistic predictions?",
-    "section": "Forecast distributions from iid normal model",
-    "text": "Forecast distributions from iid normal model"
-  },
-  {
-    "objectID": "slides/ar-evaluate.html#forecast-distributions-from-bayesian-ar1",
-    "href": "slides/ar-evaluate.html#forecast-distributions-from-bayesian-ar1",
-    "title": "How do you evaluate probabilistic predictions?",
-    "section": "Forecast distributions from Bayesian AR(1)",
-    "text": "Forecast distributions from Bayesian AR(1)"
-  },
-  {
-    "objectID": "slides/ar-evaluate.html#dataset-2-apple-stock-price",
-    "href": "slides/ar-evaluate.html#dataset-2-apple-stock-price",
-    "title": "How do you evaluate probabilistic predictions?",
-    "section": "Dataset 2: Apple stock price",
-    "text": "Dataset 2: Apple stock price\n\nlibrary(quantmod)\ngetSymbols(\"AAPL\", from = \"2000-01-01\", to = \"2025-09-08\", src = \"yahoo\")\n\n[1] \"AAPL\""
-  },
-  {
-    "objectID": "slides/ar-evaluate.html#forecast-distributions-from-iid-normal-model-1",
-    "href": "slides/ar-evaluate.html#forecast-distributions-from-iid-normal-model-1",
-    "title": "How do you evaluate probabilistic predictions?",
-    "section": "Forecast distributions from iid normal model",
-    "text": "Forecast distributions from iid normal model"
-  },
-  {
-    "objectID": "slides/ar-evaluate.html#forecast-distributions-from-bayesian-ar1-1",
-    "href": "slides/ar-evaluate.html#forecast-distributions-from-bayesian-ar1-1",
-    "title": "How do you evaluate probabilistic predictions?",
-    "section": "Forecast distributions from Bayesian AR(1)",
-    "text": "Forecast distributions from Bayesian AR(1)"
-  },
-  {
-    "objectID": "slides/ar-evaluate.html#any-ideas",
-    "href": "slides/ar-evaluate.html#any-ideas",
-    "title": "How do you evaluate probabilistic predictions?",
-    "section": "Any ideas?",
-    "text": "Any ideas?"
-  },
-  {
-    "objectID": "slides/ar-evaluate.html#point-prediction",
-    "href": "slides/ar-evaluate.html#point-prediction",
-    "title": "How do you evaluate probabilistic predictions?",
-    "section": "Point prediction",
-    "text": "Point prediction\nWe want the point prediction that minimizes expected loss:\n\n\\[\n\\hat{y}_{t+1|t}\n\\;=\\;\n\\argmin{\\hat{y}\\in\\mathbb{R}}\n\\; E\\big[\\, L\\big(y_{t+1},\\,\\hat{y}\\big) \\,\\big|\\, y_{0:t} \\big].\n\\]\n\n\nThe expectation is taken with respect to the “true” or “idealized” conditional distribution \\(p(y_{t+1}\\given y_{0:t})\\), which we don’t know.\n\n\nWe approximate it with whatever forecast distribution we’ve generated."
-  },
-  {
-    "objectID": "slides/ar-evaluate.html#picking-a-loss-function",
-    "href": "slides/ar-evaluate.html#picking-a-loss-function",
-    "title": "How do you evaluate probabilistic predictions?",
-    "section": "Picking a loss function",
-    "text": "Picking a loss function\n\nWe have nice results for some loss functions:\n\n\n\\[\n\\begin{array}{rcl}\nL(y_{t+1},\\hat{y}) = (y_{t+1} - \\hat{y})^2\n& \\implies &\n\\hat{y}_{t+1|t} = E[\\,y_{t+1}\\mid y_{0:t}\\,] \\\\[1.2em]\nL(y_{t+1},\\hat{y}) = |y_{t+1} - \\hat{y}|\n& \\implies &\n\\hat{y}_{t+1|t} = \\operatorname{median}(y_{t+1}\\mid y_{0:t}).\n\\end{array}\n\\]\n\n\nAnd there are many more where that came from."
-  },
-  {
-    "objectID": "slides/ar-evaluate.html#in-practice",
-    "href": "slides/ar-evaluate.html#in-practice",
-    "title": "How do you evaluate probabilistic predictions?",
-    "section": "In practice",
-    "text": "In practice\nMetrics for scoring the average quality of the point predictions over time:\n\\[\n\\begin{aligned}\n\\text{MSFE}\n&=\n\\frac{1}{T}\n\\sum\\limits_{t=1}^T\n(y_t-\\hat{y}_{t|t-1})^2\n\\\\\n\\text{MAFE}\n&=\n\\frac{1}{T}\n\\sum\\limits_{t=1}^T\n|y_t-\\hat{y}_{t|t-1}|.\n\\end{aligned}\n\\]\nWe want these to be small.\n\n\n\n\n\n\n\nMake sure your loss function and your point prediction play nice\n\n\n\nIf you’re looking at MAFE, use forecast median;\nIf you’re looking at MSFE, use the forecast mean."
-  },
-  {
-    "objectID": "slides/ar-evaluate.html#our-simulated-data",
-    "href": "slides/ar-evaluate.html#our-simulated-data",
-    "title": "How do you evaluate probabilistic predictions?",
-    "section": "Our simulated data",
-    "text": "Our simulated data\nMSE of forecast mean:\n\nmean((y - pred_params_iid_sim[,\"location\"])^2, na.rm = TRUE)\n\n[1] 162.4966\n\nmean((y - pred_params_ar1_sim[,\"location\"])^2, na.rm = TRUE)\n\n[1] 4.162699\n\n\n\nMAE of forecast median (same as mean for these methods):\n\nmean(abs(y - pred_params_iid_sim[,\"location\"]), na.rm = TRUE)\n\n[1] 10.03766\n\nmean(abs(y - pred_params_ar1_sim[,\"location\"]), na.rm = TRUE)\n\n[1] 1.637622"
-  },
-  {
-    "objectID": "slides/ar-evaluate.html#our-real-data",
-    "href": "slides/ar-evaluate.html#our-real-data",
-    "title": "How do you evaluate probabilistic predictions?",
-    "section": "Our real data",
-    "text": "Our real data\nMSE of forecast mean:\n\nmean((stonks - pred_params_iid_real[,\"location\"])^2, na.rm = TRUE)\n\n[1] 4346.895\n\nmean((stonks - pred_params_ar1_real[,\"location\"])^2, na.rm = TRUE)\n\n[1] 2.111325\n\n\n\nMAE of forecast median (same as mean for these methods):\n\nmean(abs(stonks - pred_params_iid_real[,\"location\"]), na.rm = TRUE)\n\n[1] 37.60877\n\nmean(abs(stonks - pred_params_ar1_real[,\"location\"]), na.rm = TRUE)\n\n[1] 0.612237"
-  },
-  {
-    "objectID": "slides/ar-evaluate.html#any-ideas-1",
-    "href": "slides/ar-evaluate.html#any-ideas-1",
-    "title": "How do you evaluate probabilistic predictions?",
-    "section": "Any ideas?",
-    "text": "Any ideas?"
-  },
-  {
-    "objectID": "slides/ar-evaluate.html#interval-width-and-coverage",
-    "href": "slides/ar-evaluate.html#interval-width-and-coverage",
-    "title": "How do you evaluate probabilistic predictions?",
-    "section": "Interval width and coverage",
-    "text": "Interval width and coverage\n\nYou want intervals that are small enough to be informative, but large enough to swallow the truth often, and there’s a trade-off.\n\n\\(\\hat{I}=(-\\infty\\com \\infty)\\) has perfect coverage but teaches you nothing;\nLook at average size and empirical coverage:\n\n\n\\[\n\\begin{aligned}\n\\overline{\\text{Size}}\n&= \\frac{1}{T} \\sum_{t=1}^{T} \\Big( \\hat{I}_{t\\mid t-1}^{\\text{upper}} - \\hat{I}_{t\\mid t-1}^{\\text{lower}} \\Big), \\\\[0.8em]\n\\overline{\\text{Coverage}}\n&= \\frac{1}{T} \\sum_{t=1}^{T} \\mathbf{1}\\Big\\{ y_t \\in \\hat{I}_{t\\mid t-1} \\Big\\}.\n\\end{aligned}\n\\]"
-  },
-  {
-    "objectID": "slides/ar-evaluate.html#interval-performance-on-simulated-data",
-    "href": "slides/ar-evaluate.html#interval-performance-on-simulated-data",
-    "title": "How do you evaluate probabilistic predictions?",
-    "section": "Interval performance on simulated data",
-    "text": "Interval performance on simulated data\n\nSize of 90% intervals:\n\nmean(PI_iid_sim[,1], na.rm = TRUE)   \n\n[1] 37.61362\n\nmean(PI_ar1_sim[,1], na.rm = TRUE)   \n\n[1] 6.660308\n\n\n\n\nCoverage of 90% intervals:\n\nmean(PI_iid_sim[,2], na.rm = TRUE)   \n\n[1] 0.8537415\n\nmean(PI_ar1_sim[,2], na.rm = TRUE)   \n\n[1] 0.8991798"
-  },
-  {
-    "objectID": "slides/ar-evaluate.html#interval-performance-on-stock-price-data",
-    "href": "slides/ar-evaluate.html#interval-performance-on-stock-price-data",
-    "title": "How do you evaluate probabilistic predictions?",
-    "section": "Interval performance on stock price data",
-    "text": "Interval performance on stock price data\n\nSize of 90% intervals:\n\nmean(PI_iid_real[,1], na.rm = TRUE)   \n\n[1] 41.01969\n\nmean(PI_ar1_real[,1], na.rm = TRUE)   \n\n[1] 1.03624\n\n\n\n\nCoverage of 90% intervals:\n\nmean(PI_iid_real[,2], na.rm = TRUE)   \n\n[1] 0.2190211\n\nmean(PI_ar1_real[,2], na.rm = TRUE)   \n\n[1] 0.7071395"
-  },
-  {
-    "objectID": "slides/ar-evaluate.html#interval-score",
-    "href": "slides/ar-evaluate.html#interval-score",
-    "title": "How do you evaluate probabilistic predictions?",
-    "section": "Interval score",
-    "text": "Interval score\nAverage over time for an holistic metric of interval performance:\n\\[\n\\mathrm{IS}_\\alpha(l,u; y)\n=\n(u - l)\n+\n\\frac{2}{\\alpha}\\,(l - y)\\,\\mathbf{1}(y &lt; l)\n+\n\\frac{2}{\\alpha}\\,(y - u)\\,\\mathbf{1}(y &gt; u).\n\\]\nSynthesizes both size and coverage, but in practice, if you want to understand why the score was good or bad, you have to crack it open and look at the size and coverage components separately anyway."
-  },
-  {
-    "objectID": "slides/ar-evaluate.html#any-ideas-2",
-    "href": "slides/ar-evaluate.html#any-ideas-2",
-    "title": "How do you evaluate probabilistic predictions?",
-    "section": "Any ideas?",
-    "text": "Any ideas?"
-  },
-  {
-    "objectID": "slides/ar-evaluate.html#recap-probability-integral-transform-pit",
-    "href": "slides/ar-evaluate.html#recap-probability-integral-transform-pit",
-    "title": "How do you evaluate probabilistic predictions?",
-    "section": "Recap: probability integral transform (PIT)",
-    "text": "Recap: probability integral transform (PIT)"
-  },
-  {
-    "objectID": "slides/ar-evaluate.html#recap-probability-integral-transform-pit-1",
-    "href": "slides/ar-evaluate.html#recap-probability-integral-transform-pit-1",
-    "title": "How do you evaluate probabilistic predictions?",
-    "section": "Recap: probability integral transform (PIT)",
-    "text": "Recap: probability integral transform (PIT)\nLet \\(Y\\sim F\\) be continuous. If you define a new random variable \\(U=F(Y)\\) by plugging \\(Y\\) into its own cdf, then you get\n\n\\[\nU\\sim \\text{Unif}(0\\com 1).\n\\]\n\n\nFix \\(u\\in(0\\com 1)\\). Then\n\n\n\\[\nP(U\\leq u)=P(F(Y)\\leq u)=P(Y\\leq F^{-1}(u))=F(F^{-1}(u))=u.\n\\]\n\n\nThat’s the cdf of Unif(0, 1)."
-  },
-  {
-    "objectID": "slides/ar-evaluate.html#recap-probability-integral-transform-pit-2",
-    "href": "slides/ar-evaluate.html#recap-probability-integral-transform-pit-2",
-    "title": "How do you evaluate probabilistic predictions?",
-    "section": "Recap: probability integral transform (PIT)",
-    "text": "Recap: probability integral transform (PIT)\n\nx &lt;- rnorm(10000)\nu &lt;- pnorm(x)\nhist(u, breaks = \"Scott\", freq = FALSE)\nabline(h = 1, col = \"red\")"
-  },
-  {
-    "objectID": "slides/ar-evaluate.html#whats-pit-got-to-do-with-it",
-    "href": "slides/ar-evaluate.html#whats-pit-got-to-do-with-it",
-    "title": "How do you evaluate probabilistic predictions?",
-    "section": "What’s PIT got to do with it?",
-    "text": "What’s PIT got to do with it?\nLet \\(G_t\\) be the “true” cdf that nature is drawing from to produce \\(y_t\\). By the probability integral transform, we know that:\n\n\\[\nG_1(y_1)\\com G_2(y_2)\\com ...\\com G_t(y_t)\\com ...\\sim\\text{Unif}(0\\com 1).\n\\]\n\n\nIt would be ideal if \\(\\hat{F}_{t|t-1}=G_t\\). We’re probably not so lucky, but if we’re close, then we should see:\n\n\n\\[\n\\hat{F}_{1|0}(y_1)\\com \\hat{F}_{2|1}(y_2)\\com ...\\com \\hat{F}_{t|t-1}(y_t)\\com ...\\sim\\text{Unif}(0\\com 1).\n\\]\n\n\nLet’s check!"
-  },
-  {
-    "objectID": "slides/ar-evaluate.html#iid-normal-method-on-simulated-data",
-    "href": "slides/ar-evaluate.html#iid-normal-method-on-simulated-data",
-    "title": "How do you evaluate probabilistic predictions?",
-    "section": "iid normal method on simulated data",
-    "text": "iid normal method on simulated data"
-  },
-  {
-    "objectID": "slides/ar-evaluate.html#bayesian-ar1-on-simulated-data",
-    "href": "slides/ar-evaluate.html#bayesian-ar1-on-simulated-data",
-    "title": "How do you evaluate probabilistic predictions?",
-    "section": "Bayesian AR(1) on simulated data",
-    "text": "Bayesian AR(1) on simulated data"
-  },
-  {
-    "objectID": "slides/ar-evaluate.html#iid-normal-method-on-stock-price-data",
-    "href": "slides/ar-evaluate.html#iid-normal-method-on-stock-price-data",
-    "title": "How do you evaluate probabilistic predictions?",
-    "section": "iid normal method on stock price data",
-    "text": "iid normal method on stock price data\n\n\n\n\n\n\n\n\nWay too many surprises in the right tail (recall waterfall)."
-  },
-  {
-    "objectID": "slides/ar-evaluate.html#bayesian-ar1-on-stock-price-data",
-    "href": "slides/ar-evaluate.html#bayesian-ar1-on-stock-price-data",
-    "title": "How do you evaluate probabilistic predictions?",
-    "section": "Bayesian AR(1) on stock price data",
-    "text": "Bayesian AR(1) on stock price data"
-  },
-  {
-    "objectID": "slides/ar-evaluate.html#diagnosing-underover-dispersion",
-    "href": "slides/ar-evaluate.html#diagnosing-underover-dispersion",
-    "title": "How do you evaluate probabilistic predictions?",
-    "section": "Diagnosing under/over-dispersion",
-    "text": "Diagnosing under/over-dispersion"
-  },
-  {
-    "objectID": "slides/ar-evaluate.html#what-do-the-pit-values-tell-you",
-    "href": "slides/ar-evaluate.html#what-do-the-pit-values-tell-you",
-    "title": "How do you evaluate probabilistic predictions?",
-    "section": "What do the PIT values tell you?",
-    "text": "What do the PIT values tell you?"
-  },
-  {
-    "objectID": "slides/ar-evaluate.html#what-do-the-pit-values-tell-you-1",
-    "href": "slides/ar-evaluate.html#what-do-the-pit-values-tell-you-1",
-    "title": "How do you evaluate probabilistic predictions?",
-    "section": "What do the PIT values tell you?",
-    "text": "What do the PIT values tell you?\n\nIf \\(y\\) tends to surprise in the left tail, we’ll get too many PITs near 0;\nIf \\(y\\) tends to surprise in the right tail, we’ll get too many PITs near 1;\nIf \\(y\\) tends to surprise in the middle, we’ll get too many PITs near 0.5;\nIf the forecast distributions tend to be overdispersed (too much mass in the tails), the histogram is hump-shaped;\nIf the forecast distributions tend to be underdispersed (not enough mass in the tails), the histogram is u-shaped."
-  },
-  {
-    "objectID": "slides/ar-evaluate.html#summary-calibration",
-    "href": "slides/ar-evaluate.html#summary-calibration",
-    "title": "How do you evaluate probabilistic predictions?",
-    "section": "Summary: calibration",
-    "text": "Summary: calibration\nIf your sequence of forecast distributions is well-calibrated, then the PITs should be approximately uniformly distributed:\n\\[\n\\hat{F}_{1|0}(y_1)\\com \\hat{F}_{2|1}(y_2)\\com ...\\com \\hat{F}_{t|t-1}(y_t)\\com ...\\sim\\text{Unif}(0\\com 1).\n\\]\n\nCheck it with a histogram, QQ-plot, goodness-of-fit test…\n\n\nDeviations from uniformity provide useful diagnostic information.\n\n\n\n\n\n\n\n\nThis is necessary but not sufficient!\n\n\nCalibration alone is not enough to distinguish good/better/best forecasts."
-  },
-  {
-    "objectID": "slides/ar-evaluate.html#maximize-sharpness-subject-to-calibration",
-    "href": "slides/ar-evaluate.html#maximize-sharpness-subject-to-calibration",
-    "title": "How do you evaluate probabilistic predictions?",
-    "section": "Maximize sharpness subject to calibration",
-    "text": "Maximize sharpness subject to calibration\n\nYou want a forecasting method to be calibrated;\nIf you have many methods to choose from, all of which appear calibrated, select the one that is the sharpest;\n\nSharpness refers to how concentrated the forecast distributions are. Among calibrated distributions, you want the one that is sharpest, most decisive, most concentrated;\nSharpness can be measured by your preferred measure of spread: variance, IQR, etc."
-  },
-  {
-    "objectID": "slides/ar-evaluate.html#sharpness-for-the-simulated-data",
-    "href": "slides/ar-evaluate.html#sharpness-for-the-simulated-data",
-    "title": "How do you evaluate probabilistic predictions?",
-    "section": "Sharpness for the simulated data",
-    "text": "Sharpness for the simulated data\nCompare the scale parameters of the predictive distributions:"
-  },
-  {
-    "objectID": "slides/ar-evaluate.html#sharpness-for-the-stock-price-data",
-    "href": "slides/ar-evaluate.html#sharpness-for-the-stock-price-data",
-    "title": "How do you evaluate probabilistic predictions?",
-    "section": "Sharpness for the stock price data",
-    "text": "Sharpness for the stock price data"
-  },
-  {
-    "objectID": "slides/ar-evaluate.html#log-predictive-score",
-    "href": "slides/ar-evaluate.html#log-predictive-score",
-    "title": "How do you evaluate probabilistic predictions?",
-    "section": "Log predictive score",
-    "text": "Log predictive score\nEvaluates if the forecast distribution placed high mass/density on the region where \\(y_t\\) actually showed up:\n\\[\n\\overline{\\text{LPS}} = \\frac{1}{T} \\sum_{t=1}^{T} \\ln \\hat{f}_{t|t-1}(y_t).\n\\]\n\nBigger is better;\nRewards both calibration and sharpness;\n\nProper scoring rule: encourages honest probabilistic predictions;\nLocal measure of quality. We will see global measures like the continuous ranked probability score (CRPS) later."
-  },
-  {
-    "objectID": "slides/ar-evaluate.html#lps-rewards-both-calibration-and-sharpness",
-    "href": "slides/ar-evaluate.html#lps-rewards-both-calibration-and-sharpness",
-    "title": "How do you evaluate probabilistic predictions?",
-    "section": "LPS rewards both calibration and sharpness",
-    "text": "LPS rewards both calibration and sharpness"
-  },
-  {
-    "objectID": "slides/ar-evaluate.html#for-our-examples",
-    "href": "slides/ar-evaluate.html#for-our-examples",
-    "title": "How do you evaluate probabilistic predictions?",
-    "section": "For our examples",
-    "text": "For our examples\n\nSimulated data:\n\naverage_log_score(y, pred_params_iid_sim)\n\n[1] -3.965963\n\naverage_log_score(y, pred_params_ar1_sim)\n\n[1] -2.132817\n\n\n\n\nReal data:\n\naverage_log_score(stonks, pred_params_iid_real)\n\n[1] -5.609798\n\naverage_log_score(stonks, pred_params_ar1_real)\n\n[1] -1.79456"
-  },
-  {
-    "objectID": "slides/ar-evaluate.html#authors-and-papers-to-know",
-    "href": "slides/ar-evaluate.html#authors-and-papers-to-know",
-    "title": "How do you evaluate probabilistic predictions?",
-    "section": "Authors and papers to know",
-    "text": "Authors and papers to know\n\nGneiting & Raftery (2007): “Strictly Proper Scoring Rules, Prediction, and Estimation,” JASA;\n\nHard to read, but packed with useful info;\n\n\nGneiting, Balabdaoui, & Raftery (2007): “Probabilistic Forecasts, Calibration and Sharpness,” JRSSB;\n\n“We propose a diagnostic approach to the evaluation of predictive performance that is based on the paradigm of maximizing the sharpness of the predictive distributions subject to calibration.” Bada bing."
   },
   {
     "objectID": "slides/ar-intro.html#where-were-going",
@@ -961,240 +618,492 @@
   {
     "objectID": "slides/ar-forecast.html#the-simplest-non-trivial-time-series-model",
     "href": "slides/ar-forecast.html#the-simplest-non-trivial-time-series-model",
-    "title": "How do you compute probabilistic forecasts from the AR(1)?",
+    "title": "Probabilistic predictions",
     "section": "The simplest non-trivial time series model",
-    "text": "The simplest non-trivial time series model\nThe autoregression of order 1, or AR(1):\n\n\\[\n\\begin{aligned}\ny_t\n&=\n\\beta_0\n+\n\\beta_1\ny_{t-1}\n+\n\\varepsilon_t,\n\\quad\n\\varepsilon_t\\iid\\text{N}(0\\com\\sigma^2)\n\\\\\ny_0\n&\\sim\n\\text{N}(\\mu_0\\com \\initvar),\n\\end{aligned}\n\\]\n\n\nThis implies a joint distribution governed by a finite set of static parameters \\(\\Btheta = \\begin{bmatrix}\\beta_0&\\beta_1&\\sigma^2\\end{bmatrix}^\\tr\\):\n\n\n\\[\n\\begin{aligned}\np(y_{0:T}\\given \\Btheta)\n&=\np(y_0)\n\\prod_{t=1}^T\np(y_t\\given y_{t-1}\\com\\Btheta).\n\\end{aligned}\n\\]\n\n\nViewed as a function of \\(\\Btheta\\), that’s a likelihood!"
-  },
-  {
-    "objectID": "slides/ar-forecast.html#the-ar1-joint-distribution",
-    "href": "slides/ar-forecast.html#the-ar1-joint-distribution",
-    "title": "How do you compute probabilistic forecasts from the AR(1)?",
-    "section": "The AR(1) joint distribution",
-    "text": "The AR(1) joint distribution\nJoint distribution:\n\\[\n\\begin{bmatrix}\ny_0 & y_1 & \\cdots & y_T\n\\end{bmatrix}^\\tr\n\\sim\\text{N}_{T+1}\\left(\\Bmu\\com \\BSigma\\right).\n\\]\n\nMoments:\n\\[\n\\begin{aligned}\nE(y_t)\n&=\n\\beta_0\\sum\\limits_{i=0}^{t-1}\\beta_1^i\n+\n\\beta_1^t\\mu_0\n\\\\\n\\var(y_t)\n&=\n\\sigma^2\n\\sum\\limits_{i=0}^{t-1}\\beta_1^{2i}+\n\\beta_1^{2t}\\initvar\n\\\\\n\\cov(y_t\\com y_s)\n&=\n\\begin{cases}\n\\beta_1^{s-t}\\var(y_t) & t\\leq s\\\\\n\\beta_1^{t-s}\\var(y_s) & s &lt; t.\n\\end{cases}\n.\n\\end{aligned}\n\\]"
-  },
-  {
-    "objectID": "slides/ar-forecast.html#the-special-case-when-beta_11",
-    "href": "slides/ar-forecast.html#the-special-case-when-beta_11",
-    "title": "How do you compute probabilistic forecasts from the AR(1)?",
-    "section": "The special case when \\(|\\beta_1|<1\\)\n",
-    "text": "The special case when \\(|\\beta_1|&lt;1\\)\n\nThe mean and variance are time-invariant, and the covariance structure is shift-invariant:\n\n\\[\n\\begin{aligned}\nE(y_t)\n&=\n\\frac{\\beta_0}{1-\\beta_1}\n\\\\\n\\var(y_t)\n&=\n\\frac{\\sigma^2}{1-\\beta_1^2}\n\\\\\n\\gamma(h)\n&=\n\\cov(y_{t+h}\\com y_t)\n=\n\\beta_1^{h}\\frac{\\sigma^2}{1-\\beta_1^2}.\n\\end{aligned}\n\\]\n\n\nThe common marginal shared by all \\(y_t\\) is called the stationary distribution:\n\n\n\\[\ny_t\\sim\\text{N}\\left(\\frac{\\beta_0}{1-\\beta_1}\\com \\frac{\\sigma^2}{1-\\beta_1^2}\\right).\n\\]\n\n\nSo “did: dependent but identically distributed.”"
+    "text": "The simplest non-trivial time series model\nThe autoregression of order 1, or AR(1):\n\n\\[\n\\begin{aligned}\ny_t\n&=\n\\beta_0\n+\n\\beta_1\ny_{t-1}\n+\n\\varepsilon_t,\n\\quad\n\\varepsilon_t\\iid\\text{N}(0\\com\\sigma^2).\n\\end{aligned}\n\\]\nThis implies a joint distribution (it’s multivariate normal!) governed by a finite set of static parameters \\(\\Btheta = \\begin{bmatrix}\\beta_0&\\beta_1&\\sigma^2\\end{bmatrix}^\\tr\\):\n\\[\n\\begin{aligned}\np(y_{1:T}\\given y_0\\com \\Btheta)\n&=\n\\prod_{t=1}^T\np(y_t\\given y_{t-1}\\com\\Btheta).\n\\end{aligned}\n\\]\nViewed as a function of \\(\\Btheta\\), that’s a (conditional) likelihood!"
   },
   {
     "objectID": "slides/ar-forecast.html#likelihood-based-inference",
     "href": "slides/ar-forecast.html#likelihood-based-inference",
-    "title": "How do you compute probabilistic forecasts from the AR(1)?",
+    "title": "Probabilistic predictions",
     "section": "Likelihood-based inference",
-    "text": "Likelihood-based inference\nIn practice it is easiest to work with the conditional likelihood:\n\\[\np(y_{1:T}\\given  y_0\\com \\Btheta)\n=\n\\prod_{t=1}^T\np(y_t\\given y_{t-1}\\com\\Btheta).\n\\]\n\nClassical route:\n\\[\n\\hat{\\Btheta}_T=\\argmax{\\Btheta}\\,p(y_{1:T}\\given y_0\\com \\Btheta).\n\\]\n\n\nBayesian route:\n\\[\np(\\Btheta\\given y_{0:T})\n=\n\\frac{p(y_{1:T}\\given y_0\\com \\Btheta)p(\\Btheta)}{p(y_{1:T}\\given y_0)}\n.\n\\]\n\n\nEither way, everything you know about inference for iid regression goes through unmodified."
+    "text": "Likelihood-based inference\nClassical route:\n\\[\n\\hat{\\Btheta}_T=\\argmax{\\Btheta}\\,p(y_{1:T}\\given y_0\\com \\Btheta).\n\\]\nBayesian route:\n\\[\np(\\Btheta\\given y_{0:T})\n=\n\\frac{p(y_{1:T}\\given y_0\\com \\Btheta)p(\\Btheta)}{p(y_{1:T}\\given y_0)}\n.\n\\]\nThe raw calculations are similar to iid regression, but the inferential theory can be very different because the \\(y_t\\) are now dependent."
   },
   {
     "objectID": "slides/ar-forecast.html#maximum-likelihood",
     "href": "slides/ar-forecast.html#maximum-likelihood",
-    "title": "How do you compute probabilistic forecasts from the AR(1)?",
+    "title": "Probabilistic predictions",
     "section": "Maximum likelihood",
-    "text": "Maximum likelihood\nIt’s just ordinary least squares (OLS):\n\n\\[\n\\begin{aligned}\n\\By_T\n&=\n\\begin{bmatrix}y_1&y_2 & \\cdots & y_T\\end{bmatrix}^\\tr\n\\\\\n\\BX_T\n&=\n\\begin{bmatrix}\n1 & 1 & \\cdots & 1 \\\\\ny_0 & y_1 & \\cdots & y_{T-1}\n\\end{bmatrix}^\\tr\n\\\\\n\\Bbeta\n&=\n\\begin{bmatrix}\\beta_0&\\beta_1\\end{bmatrix}^\\tr\n\\\\\n\\\\\n\\hat{\\Bbeta}_T\n&=\n(\\BX_T^\\tr\\BX_T)^{-1}\\BX_T^\\tr\\By_T\n\\\\\n\\hat{\\sigma^2_T}\n&=\n||\\By_T-\\BX_T\\hat{\\Bbeta}_T||_2^2 / T.\n\\end{aligned}\n\\]\n\n\nThings can get weird, but we have asymptotic theory for this regardless whether or not things are stationary."
+    "text": "Maximum likelihood\nIt’s “just” ordinary least squares (OLS):\n\n\\[\n\\begin{aligned}\n\\By_T\n&=\n\\begin{bmatrix}y_1&y_2 & \\cdots & y_T\\end{bmatrix}^\\tr\n\\\\\n\\BX_T\n&=\n\\begin{bmatrix}\n1 & 1 & \\cdots & 1 \\\\\ny_0 & y_1 & \\cdots & y_{T-1}\n\\end{bmatrix}^\\tr\n\\\\\n\\Bbeta\n&=\n\\begin{bmatrix}\\beta_0&\\beta_1\\end{bmatrix}^\\tr\n\\\\\n\\\\\n\\hat{\\Bbeta}_T\n&=\n(\\BX_T^\\tr\\BX_T)^{-1}\\BX_T^\\tr\\By_T\n\\\\\n\\hat{\\sigma^2_T}\n&=\n||\\By_T-\\BX_T\\hat{\\Bbeta}_T||_2^2 / T.\n\\end{aligned}\n\\]"
   },
   {
     "objectID": "slides/ar-forecast.html#conjugate-bayes",
     "href": "slides/ar-forecast.html#conjugate-bayes",
-    "title": "How do you compute probabilistic forecasts from the AR(1)?",
+    "title": "Probabilistic predictions",
     "section": "Conjugate Bayes",
-    "text": "Conjugate Bayes\nTake a conjugate normal-inverse-gamma prior:\n\n\\[\n\\begin{aligned}\n\\sigma^2\n&\\sim\n\\text{IG}(a_0\\com b_0)\n\\\\\n\\Bbeta\\given \\sigma^2\n&\\sim\n\\text{N}_2(\\Bm_0\\com\\sigma^2\\BH^{-1}_0)\n\\\\\ny_t\n\\given\ny_{t-1}\n\\com\n\\Bbeta\\com\\sigma^2\n&\\sim \\text{N}\n\\left(\n\\Bx_t^\\tr\\Bbeta\\com\\sigma^2\n\\right), && \\Bx_t=\\begin{bmatrix}1 & y_{t-1}\\end{bmatrix}^\\tr.\n\\end{aligned}\n\\]\n\n\nThe posterior is available in closed-form:\n\\[\n\\begin{aligned}\n\\sigma^2\\given y_{0:T}\n&\\sim\n\\text{IG}(a_T\\com b_T)\n\\\\\n\\Bbeta\\given \\sigma^2\\com y_{0:T}\n&\\sim\n\\text{N}_2(\\Bm_T\\com\\sigma^2\\BH^{-1}_T)\n\\\\\n\\\\\n\\BH_T\n&=\n\\BX_T^\\tr\\BX_T+\\BH_0\n\\\\\n\\Bm_T\n&=\n\\BH_T^{-1}(\\BX_T^\\tr\\By_T+\\BH_0\\Bm_0)\n\\\\\na_T\n&=\na_0 + T/2\n\\\\\nb_T\n&=\nb_0\n+\n(\\By_T^\\tr\\By_T+\\Bm_0^\\tr\\BH_0\\Bm_0-\\Bm_T^\\tr\\BH_T\\Bm_T)/2.\n\\end{aligned}\n\\]\n\n\nMake it recursive on Problem Set 1!"
+    "text": "Conjugate Bayes\nTake a conjugate normal-inverse-gamma prior:\n\n\\[\n\\begin{aligned}\n\\sigma^2\n&\\sim\n\\text{IG}(a_0\\com b_0)\n\\\\\n\\Bbeta\\given \\sigma^2\n&\\sim\n\\text{N}_2(\\Bm_0\\com\\sigma^2\\BH^{-1}_0)\n\\\\\ny_t\n\\given\ny_{t-1}\n\\com\n\\Bbeta\\com\\sigma^2\n&\\sim \\text{N}\n\\left(\n\\Bx_t^\\tr\\Bbeta\\com\\sigma^2\n\\right), && \\Bx_t=\\begin{bmatrix}1 & y_{t-1}\\end{bmatrix}^\\tr.\n\\end{aligned}\n\\]\n\n\nThe posterior is available in closed-form:\n\\[\n\\begin{aligned}\n\\sigma^2\\given y_{0:T}\n&\\sim\n\\text{IG}(a_T\\com b_T)\n\\\\\n\\Bbeta\\given \\sigma^2\\com y_{0:T}\n&\\sim\n\\text{N}_2(\\Bm_T\\com\\sigma^2\\BH^{-1}_T)\n\\\\\n\\\\\n\\BH_T\n&=\n\\BX_T^\\tr\\BX_T+\\BH_0\n\\\\\n\\Bm_T\n&=\n\\BH_T^{-1}(\\BX_T^\\tr\\By_T+\\BH_0\\Bm_0)\n\\\\\na_T\n&=\na_0 + T/2\n\\\\\nb_T\n&=\nb_0\n+\n(\\By_T^\\tr\\By_T+\\Bm_0^\\tr\\BH_0\\Bm_0-\\Bm_T^\\tr\\BH_T\\Bm_T)/2.\n\\end{aligned}\n\\]"
   },
   {
-    "objectID": "slides/ar-forecast.html#a-classic-example",
-    "href": "slides/ar-forecast.html#a-classic-example",
-    "title": "How do you compute probabilistic forecasts from the AR(1)?",
-    "section": "A classic example",
-    "text": "A classic example"
+    "objectID": "slides/ar-forecast.html#lets-think-about-probabilistic-prediction",
+    "href": "slides/ar-forecast.html#lets-think-about-probabilistic-prediction",
+    "title": "Probabilistic predictions",
+    "section": "Let’s think about probabilistic prediction",
+    "text": "Let’s think about probabilistic prediction"
   },
   {
     "objectID": "slides/ar-forecast.html#point-forecast",
     "href": "slides/ar-forecast.html#point-forecast",
-    "title": "How do you compute probabilistic forecasts from the AR(1)?",
+    "title": "Probabilistic predictions",
     "section": "Point forecast",
     "text": "Point forecast\nYour single-number best guess at tomorrow’s observation:"
   },
   {
     "objectID": "slides/ar-forecast.html#forecast-interval",
     "href": "slides/ar-forecast.html#forecast-interval",
-    "title": "How do you compute probabilistic forecasts from the AR(1)?",
+    "title": "Probabilistic predictions",
     "section": "Forecast interval",
     "text": "Forecast interval\nA range of likely values for tomorrow’s observation:"
   },
   {
     "objectID": "slides/ar-forecast.html#forecast-density",
     "href": "slides/ar-forecast.html#forecast-density",
-    "title": "How do you compute probabilistic forecasts from the AR(1)?",
+    "title": "Probabilistic predictions",
     "section": "Forecast density",
     "text": "Forecast density\nFull distribution capturing uncertainty about tomorrow:"
   },
   {
     "objectID": "slides/ar-forecast.html#and-then-tomorrow-finally-comes",
     "href": "slides/ar-forecast.html#and-then-tomorrow-finally-comes",
-    "title": "How do you compute probabilistic forecasts from the AR(1)?",
+    "title": "Probabilistic predictions",
     "section": "And then tomorrow finally comes",
     "text": "And then tomorrow finally comes\nSo…how’d we do?"
   },
   {
     "objectID": "slides/ar-forecast.html#whats-the-point",
     "href": "slides/ar-forecast.html#whats-the-point",
-    "title": "How do you compute probabilistic forecasts from the AR(1)?",
+    "title": "Probabilistic predictions",
     "section": "What’s the point?",
-    "text": "What’s the point?\n\nWe want intervals and densities to communicate uncertainty about the forecast;\n\nWhat sources of uncertainty?\n\nBasic data uncertainty;\nParameter estimation uncertainty;\nHyperparameter uncertainty;\nModel uncertainty;\nUncertainty introduced by missing data.\n\n\nIn the small world of the AR(1), mainly the first two for now."
+    "text": "What’s the point?\n\nWe want intervals and densities to communicate uncertainty about the forecast;\n\nWhat sources of uncertainty?\n\nData uncertainty (data are realization of random process);\nParameter estimation uncertainty;\nHyperparameter tuning uncertainty;\nModel uncertainty;\nUncertainty introduced by missing data;\n\n\nIn the small world of the AR(1), mainly the first two for now."
   },
   {
     "objectID": "slides/ar-forecast.html#forecast-distribution",
     "href": "slides/ar-forecast.html#forecast-distribution",
-    "title": "How do you compute probabilistic forecasts from the AR(1)?",
+    "title": "Probabilistic predictions",
     "section": "Forecast distribution",
-    "text": "Forecast distribution\nGiven the data we’ve seen, we want a distribution for the data we haven’t seen.\n\nIn other words:\n\\[\np(y_{t+1:t+H}\\given y_{0:t})\n\\]\n\n\nAssume for now the parameters are fixed and known (red flag!)."
+    "text": "Forecast distribution\n\n\nGiven the data \\(y_{0:t}\\) we’ve seen, we want a full distribution for a future observation \\(y_{t+h}\\) we haven’t seen yet;\nIn other words, we want a conditional distribution for the future given the past;\nWe will momentarily treat the point estimate \\(\\hat{\\Btheta} = \\begin{bmatrix}\\hat{\\beta}_0&\\hat{\\beta}_1&\\widehat{\\sigma^2}\\end{bmatrix}^\\tr\\) as if it were the fixed and known truth (newsflash: it isn’t!), and we will forecast using\n\n\\[\np(y_{t+h}\\mid y_{0:t}\\com \\hat{\\Btheta}).\n\\]\nSo, what is that conditional distribution?"
   },
   {
-    "objectID": "slides/ar-forecast.html#clumsy-but-true",
-    "href": "slides/ar-forecast.html#clumsy-but-true",
-    "title": "How do you compute probabilistic forecasts from the AR(1)?",
-    "section": "Clumsy, but true",
-    "text": "Clumsy, but true\n\nWe know\n\\[\n\\begin{bmatrix}\n\\mathbf{y}_t \\\\\n\\mathbf{y}_{t+H}\n\\end{bmatrix}\n\\sim\n\\text{N}_{1+t+H}\n\\left(\n\\begin{bmatrix}\n\\boldsymbol{\\mu}_t \\\\\n\\boldsymbol{\\mu}_{t+H}\n\\end{bmatrix}\n,\\,\n\\begin{bmatrix}\n\\boldsymbol{\\Sigma}_t & \\boldsymbol{\\Sigma}_{t,t+H}\\\\\n\\boldsymbol{\\Sigma}_{t,t+H}^{\\scriptscriptstyle\\mathsf{T}} & \\boldsymbol{\\Sigma}_{t+H}\n\\end{bmatrix}\n\\right),\n\\]\n\n\nand so strictly speaking:\n\\[\n\\mathbf{y}_{t+H} \\,|\\,\\mathbf{y}_t\n\\sim\n\\text{N}_H\n\\left(\n\\boldsymbol{\\mu}_{t+H} + \\boldsymbol{\\Sigma}_{t,t+H}^{\\scriptscriptstyle\\mathsf{T}}\\boldsymbol{\\Sigma}_t^{-1}(\\mathbf{y}_t-\\boldsymbol{\\mu}_t)\n,\\,\n\\boldsymbol{\\Sigma}_{t+H} - \\boldsymbol{\\Sigma}_{t,t+H}^{\\scriptscriptstyle\\mathsf{T}}\n\\boldsymbol{\\Sigma}_t^{-1}\n\\boldsymbol{\\Sigma}_{t,t+H}\n\\right).\n\\]\n\n\nBut let’s make this…useful.\n\n\n(Also, ignore all this ridiculous notation)"
-  },
-  {
-    "objectID": "slides/ar-forecast.html#lets-give-it-some-thought",
-    "href": "slides/ar-forecast.html#lets-give-it-some-thought",
-    "title": "How do you compute probabilistic forecasts from the AR(1)?",
-    "section": "Let’s give it some thought",
-    "text": "Let’s give it some thought\n\nFirst, the AR(1) is first order Markov, so\n\n\n\\[\np(y_{t+1:t+H}\\given y_{0:t})=p(y_{t+1:t+H}\\given y_{t}).\n\\]\n\n\nThe future data behaves just like the past, with a fixed initial condition:\n\n\n\\[\n\\begin{aligned}\ny_{t+h}\n&=\n\\beta_0\n+\n\\beta_1\ny_{t+h-1}\n+\n\\varepsilon_{t+h},\n\\quad\n\\varepsilon_t\\iid\\text{N}(0\\com\\sigma^2)\n\\\\\ny_t\n&\\text{ fixed}.\n\\end{aligned}\n\\]\nSo the conditional distribution has the same structure as the unconditional joint that we have already studied. Just starts in a different spot."
-  },
-  {
-    "objectID": "slides/ar-forecast.html#forecast-distributions",
-    "href": "slides/ar-forecast.html#forecast-distributions",
-    "title": "How do you compute probabilistic forecasts from the AR(1)?",
-    "section": "Forecast distributions",
-    "text": "Forecast distributions\n\\[\n\\begin{aligned}\ny_{t+h}\\given y_{0:t}\n&\\sim\\N\\left(\\mu_{t+h|t}\\com \\tau^2_{t+h|t}\\right)\n\\\\\n\\\\\n\\mu_{t+h|t}\n&=\n\\beta_0\\sum\\limits_{i=0}^{h-1}\\beta_1^i\n+\n\\beta_1^hy_t\n\\\\\n&=\n\\beta_0\n+\n\\beta_1\n\\mu_{t+h-1|t}\n&& \\mu_{t|t}=y_t\n\\\\\n\\tau^2_{t+h|t}\n&=\n\\sigma^2\n\\sum\\limits_{i=0}^{h-1}\\beta_1^{2i}\n\\\\\n&=\n\\sigma^2\n+\n\\beta_1^2\n\\tau^2_{t+h-1|t}\n&&\n\\tau^2_{t|t}=0.\n\\end{aligned}\n\\]"
+    "objectID": "slides/ar-forecast.html#its-a-normal",
+    "href": "slides/ar-forecast.html#its-a-normal",
+    "title": "Probabilistic predictions",
+    "section": "It’s a normal!",
+    "text": "It’s a normal!\nWriting down an AR(1) is “just” an alternative way of writing down a big multivariate normal across all time:\n\\[\n\\begin{bmatrix}\ny_1 & y_2 & \\cdots & y_t & y_{t+1} & y_{t+2} & \\cdots & y_{t+H}\n\\end{bmatrix}^\\tr\\mid y_0\\com \\hat{\\Btheta}\n\\sim\\text{N}_{T}\\left(\\Bmu(\\hat{\\Btheta})\\com \\BSigma(\\hat{\\Btheta})\\right).\n\\]\nAll of the marginals and conditionals of the multivariate normal are normal, and so however far into the future you want to go, you get:\n\\[\ny_{t+h} \\mid y_{0:t}\\com \\hat{\\Btheta}\\sim\\N\\left(\\mu_{t+h|t}\\com \\sigma^2_{t+h|t}\\right).\n\\]\nLet the computer deal with the means and variances."
   },
   {
     "objectID": "slides/ar-forecast.html#prediction-intervals",
     "href": "slides/ar-forecast.html#prediction-intervals",
-    "title": "How do you compute probabilistic forecasts from the AR(1)?",
+    "title": "Probabilistic predictions",
     "section": "Prediction intervals",
-    "text": "Prediction intervals\nFull distribution:\n\\[\ny_{t+h}\\given y_{0:t}\n\\sim\\N\\left(\\mu_{t+h|t}\\com \\tau^2_{t+h|t}\\right)\n\\]\nPrediction interval:\n\\[\n\\begin{aligned}\n\\mu_{t+h-1|t}\n&\\pm\nz_{1-\\frac{\\alpha}{2}}\n\\tau_{t+h|t}\n\\\\\n\\beta_0\\sum\\limits_{i=0}^{h-1}\\beta_1^i\n&\\pm\nz_{1-\\frac{\\alpha}{2}}\n\\sqrt{\\sigma^2\n\\sum\\limits_{i=0}^{h-1}\\beta_1^{2i}}\n\\end{aligned}\n\\]"
-  },
-  {
-    "objectID": "slides/ar-forecast.html#summary",
-    "href": "slides/ar-forecast.html#summary",
-    "title": "How do you compute probabilistic forecasts from the AR(1)?",
-    "section": "Summary",
-    "text": "Summary\nDistribution forecasts:\n\\[\n\\begin{aligned}\ny_{t+h}\\given y_{0:t}\n&\\sim\\N\\left(\\mu_{t+h|t}\\com \\tau^2_{t+h|t}\\right)\n\\\\\n\\\\\n\\mu_{t+h|t}\n&=\n\\beta_0\\sum\\limits_{i=0}^{h-1}\\beta_1^i\n+\n\\beta_1^hy_t\n\\\\\n&=\n\\beta_0\n+\n\\beta_1\n\\mu_{t+h-1|t}\n&& \\mu_{t|t}=y_t\n\\\\\n\\tau^2_{t+h|t}\n&=\n\\sigma^2\n\\sum\\limits_{i=0}^{h-1}\\beta_1^{2i}\n\\\\\n&=\n\\sigma^2\n+\n\\beta_1^2\n\\tau^2_{t+h-1|t}\n&&\n\\tau^2_{t|t}=0.\n\\end{aligned}\n\\]\nPrediction intervals:\n\\[\n\\mu_{t+h-1|t}\n\\pm\nz_{1-\\frac{\\alpha}{2}}\n\\tau_{t+h|t}\n.\n\\]"
+    "text": "Prediction intervals\nThe full predictive distribution is\n\\[\ny_{t+h} \\mid y_{0:t}\\com \\hat{\\Btheta}\\sim\\N\\left(\\mu_{t+h|t}\\com \\sigma^2_{t+h|t}\\right),\n\\]\nThe point prediction is \\(\\mu_{t+h|t}\\), and the prediction interval has the usual form:\n\\[\n\\begin{aligned}\n\\mu_{t+h|t}\n&\\pm\nz_{1-\\frac{\\alpha}{2}}^\\star\n\\sigma_{t+h|t}\n.\n\\end{aligned}\n\\]"
   },
   {
     "objectID": "slides/ar-forecast.html#pics-or-it-didnt-happen",
     "href": "slides/ar-forecast.html#pics-or-it-didnt-happen",
-    "title": "How do you compute probabilistic forecasts from the AR(1)?",
+    "title": "Probabilistic predictions",
     "section": "Pics or it didn’t happen",
-    "text": "Pics or it didn’t happen\n#| '!! shinylive warning !!': |\n#|   shinylive does not work in self-contained HTML documents.\n#|   Please set `embed-resources: false` in your metadata.\n#| standalone: true\n#| viewerHeight: 700\nlibrary(shiny)\n\nsimulate_ar_1 &lt;- function(T, b0, b1, s, y0){\n  y &lt;- numeric(T)\n  y[1] &lt;- y0\n  for(t in 2:T){\n    y[t] &lt;- b0 + b1 * y[t - 1] + rnorm(1, 0, s)\n  }\n  return(y)\n}\n\nar_1_mean &lt;- function(h, b0, b1, yT){\n  if(h == 0){\n    return(yT)\n  } else {\n    return(b0 * sum(b1 ^ (0:(h-1))) + yT * (b1^h)) \n  }\n}\n\nar_1_var &lt;- function(h, b1, s){\n  if(h == 0){\n    return(0)\n  } else {\n    return((s^2) * sum(b1 ^ (2*(0:(h-1)))))\n  }\n}\n\nui &lt;- fluidPage(\n  titlePanel(\"Forecast distribution of a Gaussian AR(1)\"),\n  sidebarLayout(\n    sidebarPanel(\n      sliderInput(\"b0\", \"β₀\", min = -5, max = 5, value = 0, step = 0.1),\n      sliderInput(\"b1\", \"β₁\", min = -2, max = 2, value = 0, step = 0.1),\n      sliderInput(\"s\", \"σ\", min = 0, max = 2, value = 1, step = 0.1)\n    ),\n    mainPanel(\n      plotOutput(\"distPlot\", height = \"600px\")\n    )\n  )\n)\n\nserver &lt;- function(input, output) {\n  \n  # fixed observed data\n  set.seed(123)\n  y_obs &lt;- simulate_ar_1(10, 0, 0, 1, 0)\n  \n  output$distPlot &lt;- renderPlot({\n    b0 &lt;- input$b0\n    b1 &lt;- input$b1\n    s &lt;- input$s\n    \n    T_obs &lt;- length(y_obs)\n    H &lt;- 20  # forecast horizon\n    range &lt;- 1:(T_obs + H)\n    \n    # plot window\n    plot(range, c(y_obs, rep(NA,H)), type=\"n\",\n         xlab = \"t\", ylab = expression(y[t]),\n         ylim = c(-20,20), bty=\"n\")\n    \n    # grey forecast region\n    rect(T_obs+0.5, -20, T_obs+H+0.5, 20, col=rgb(0.8,0.8,0.8,0.5), border=NA)\n    \n    # observed data\n    lines(1:T_obs, y_obs, col=\"black\", lwd=2)\n    \n    # forecast distribution intervals\n    alpha = c(0.01, seq(0.1,0.9,0.1))\n    middle &lt;- sapply(0:H, ar_1_mean, b0, b1, y_obs[T_obs])\n    sds &lt;- sqrt(sapply(0:H, ar_1_var, b1, s))\n    f_range &lt;- T_obs:(T_obs+H)\n    \n    for(a in alpha){\n      U = qnorm(1 - a/2, mean = middle, sd = sds)\n      L = qnorm(a/2, mean = middle, sd = sds)\n      polygon(c(f_range, rev(f_range)),\n              c(U, rev(L)),\n              col = rgb(1,0,0,0.15), border=NA)\n    }\n    \n    # add mean forecast line\n    lines(f_range, middle, col=\"red\", lwd=2, lty=2)\n  })\n}\n\nshinyApp(ui = ui, server = server)"
+    "text": "Pics or it didn’t happen\n#| '!! shinylive warning !!': |\n#|   shinylive does not work in self-contained HTML documents.\n#|   Please set `embed-resources: false` in your metadata.\n#| standalone: true\n#| viewerHeight: 700\nlibrary(shiny)\n\nsimulate_ar_1 &lt;- function(T, b0, b1, s, y0){\n  y &lt;- numeric(T)\n  y[1] &lt;- y0\n  for(t in 2:T){\n    y[t] &lt;- b0 + b1 * y[t - 1] + rnorm(1, 0, s)\n  }\n  return(y)\n}\n\nar_1_mean &lt;- function(h, b0, b1, yT){\n  if(h == 0){\n    return(yT)\n  } else {\n    return(b0 * sum(b1 ^ (0:(h-1))) + yT * (b1^h)) \n  }\n}\n\nar_1_var &lt;- function(h, b1, s){\n  if(h == 0){\n    return(0)\n  } else {\n    return((s^2) * sum(b1 ^ (2*(0:(h-1)))))\n  }\n}\n\nui &lt;- fluidPage(\n  titlePanel(\"Forecast distribution of a Gaussian AR(1) with known parameters\"),\n  sidebarLayout(\n    sidebarPanel(\n      sliderInput(\"b0\", \"β₀\", min = -5, max = 5, value = 0, step = 0.1),\n      sliderInput(\"b1\", \"β₁\", min = -2, max = 2, value = 0, step = 0.1),\n      sliderInput(\"s\", \"σ\", min = 0, max = 2, value = 1, step = 0.1)\n    ),\n    mainPanel(\n      plotOutput(\"distPlot\", height = \"600px\")\n    )\n  )\n)\n\nserver &lt;- function(input, output) {\n  \n  # fixed observed data\n  set.seed(123)\n  y_obs &lt;- simulate_ar_1(10, 0, 0, 1, 0)\n  \n  output$distPlot &lt;- renderPlot({\n    b0 &lt;- input$b0\n    b1 &lt;- input$b1\n    s &lt;- input$s\n    \n    T_obs &lt;- length(y_obs)\n    H &lt;- 20  # forecast horizon\n    range &lt;- 1:(T_obs + H)\n    \n    # plot window\n    plot(range, c(y_obs, rep(NA,H)), type = \"n\",\n         xlab = \"t\", ylab = expression(y[t]),\n         ylim = c(-20,20), bty=\"n\", main = \"This is called a fan chart.\")\n    \n    # grey forecast region\n    rect(T_obs+0.5, -20, T_obs + H + 0.5, 20, col = rgb(0.8,0.8,0.8,0.5), border = NA)\n    \n    # observed data\n    lines(1:T_obs, y_obs, col=\"black\", lwd=2)\n    \n    # forecast distribution intervals\n    alpha = c(0.01, seq(0.1,0.9,0.1))\n    middle &lt;- sapply(0:H, ar_1_mean, b0, b1, y_obs[T_obs])\n    sds &lt;- sqrt(sapply(0:H, ar_1_var, b1, s))\n    f_range &lt;- T_obs:(T_obs+H)\n    \n    for(a in alpha){\n      U = qnorm(1 - a/2, mean = middle, sd = sds)\n      L = qnorm(a/2, mean = middle, sd = sds)\n      polygon(c(f_range, rev(f_range)),\n              c(U, rev(L)),\n              col = rgb(1,0,0,0.15), border=NA)\n    }\n    \n    # add mean forecast line\n    lines(f_range, middle, col=\"red\", lwd=2, lty=2)\n  })\n}\n\nshinyApp(ui = ui, server = server)"
   },
   {
     "objectID": "slides/ar-forecast.html#but-wait",
     "href": "slides/ar-forecast.html#but-wait",
-    "title": "How do you compute probabilistic forecasts from the AR(1)?",
+    "title": "Probabilistic predictions",
     "section": "But wait!",
-    "text": "But wait!\nThe parameters are not known. They have to be estimated.\n\n\\[\n\\mu_{t+h-1|t}\n\\pm\nz_{1-\\frac{\\alpha}{2}}\n\\tau_{t+h|t}\n.\n\\]\n\n\nCan we plug-in estimates and replace \\(z\\) with \\(t\\)?\n\n\nNot quite."
+    "text": "But wait!\nThe parameters aren’t known. They’re a noisy estimate computed from imperfect data. There is sampling uncertainty associated with \\(\\hat{\\Btheta}\\). Shouldn’t that extra source of uncertainty be propagated through to the predictive distribution?\n\nYou bet. But how? Can we just replace \\(z\\) quantiles with \\(t\\) quantiles?\n\n\nNot quite."
+  },
+  {
+    "objectID": "slides/ar-forecast.html#the-hard-truth",
+    "href": "slides/ar-forecast.html#the-hard-truth",
+    "title": "Probabilistic predictions",
+    "section": "The hard truth",
+    "text": "The hard truth\nJabber about bootstrap"
+  },
+  {
+    "objectID": "slides/ar-forecast.html#show-them-some-code-they-could-actually-use",
+    "href": "slides/ar-forecast.html#show-them-some-code-they-could-actually-use",
+    "title": "Probabilistic predictions",
+    "section": "Show them some code they could actually use",
+    "text": "Show them some code they could actually use"
+  },
+  {
+    "objectID": "slides/ar-forecast.html#compare-intervals",
+    "href": "slides/ar-forecast.html#compare-intervals",
+    "title": "Probabilistic predictions",
+    "section": "Compare intervals",
+    "text": "Compare intervals\n#| '!! shinylive warning !!': |\n#|   shinylive does not work in self-contained HTML documents.\n#|   Please set `embed-resources: false` in your metadata.\n#| standalone: true\n#| viewerHeight: 700\nlibrary(shiny)\n\nui &lt;- fluidPage(\n  titlePanel(\"AR(1) Forecast: Plug-in vs Residual Bootstrap\"),\n  \n  sidebarLayout(\n    sidebarPanel(\n      sliderInput(\"true_b0\", \"True β₀:\", min = -1, max = 1, value = 0.5, step = 0.1),\n      sliderInput(\"true_b1\", \"True β₁:\", min = -0.95, max = 0.95, value = 0.7, step = 0.05),\n      sliderInput(\"true_sigma\", \"True σ:\", min = 0.1, max = 2, value = 1, step = 0.1),\n      sliderInput(\"n_obs\", \"Sample size:\", min = 40, max = 500, value = 100, step = 10),\n      actionButton(\"rerun\", \"Re-run simulation\"),\n      checkboxInput(\"show_red\", \"Show plug-in fan (red)\", TRUE),\n      checkboxInput(\"show_blue\", \"Show bootstrap fan (blue)\", TRUE)\n    ),\n    \n    mainPanel(\n      plotOutput(\"fanPlot\", height = \"600px\")\n    )\n  )\n)\n\nserver &lt;- function(input, output, session) {\n  \n  simulate_ar_1 &lt;- function(T, b0, b1, s, y1 = 0){\n    y &lt;- numeric(T)\n    y[1] &lt;- y1\n    for(t in 2:T){\n      y[t] &lt;- b0 + b1 * y[t-1] + rnorm(1, 0, s)\n    }\n    return(y)\n  }\n  \n  ar_1_mean_h &lt;- function(h, b0, b1, yT){\n    if(h == 0) return(yT)\n    b0 * sum(b1^(0:(h-1))) + yT * (b1^h)\n  }\n  \n  ar_1_var_h &lt;- function(h, b1, sigma){\n    if(h == 0) return(0)\n    sigma^2 * sum(b1^(2*(0:(h-1))))\n  }\n  \n  sim_data &lt;- reactiveVal(NULL)\n  \n  observeEvent(input$rerun, {\n    set.seed(123)  # keep deterministic for reproducibility\n    n_obs &lt;- input$n_obs\n    H &lt;- 20\n    B &lt;- 7500\n    \n    y_obs &lt;- simulate_ar_1(n_obs, input$true_b0, input$true_b1, input$true_sigma, y1 = 0)\n    \n    # OLS fit\n    Y &lt;- y_obs[2:n_obs]\n    X &lt;- cbind(1, y_obs[1:(n_obs-1)])\n    ols_fit &lt;- lm(Y ~ X - 1)\n    coef_hat &lt;- coef(ols_fit)\n    b0_hat &lt;- coef_hat[1]\n    b1_hat &lt;- coef_hat[2]\n    resid_hat &lt;- resid(ols_fit)\n    sigma_hat &lt;- sqrt(sum(resid_hat^2) / (length(resid_hat) - 1))\n    \n    h_seq &lt;- 0:H\n    plug_mean &lt;- sapply(h_seq, ar_1_mean_h, b0 = b0_hat, b1 = b1_hat, yT = y_obs[n_obs])\n    plug_sd   &lt;- sqrt(sapply(h_seq, ar_1_var_h, b1 = b1_hat, sigma = sigma_hat))\n    \n    # bootstrap\n    bootstrap_forecasts &lt;- matrix(NA, nrow = B, ncol = H + 1)\n    resid_centered &lt;- resid_hat - mean(resid_hat)\n    \n    for(b in 1:B){\n      e_star &lt;- sample(resid_centered, size = n_obs - 1, replace = TRUE)\n      y_star &lt;- numeric(n_obs)\n      y_star[1] &lt;- y_obs[1]\n      for(t in 2:n_obs){\n        y_star[t] &lt;- b0_hat + b1_hat * y_star[t-1] + e_star[t-1]\n      }\n      Ys &lt;- y_star[2:n_obs]\n      Xs &lt;- cbind(1, y_star[1:(n_obs-1)])\n      fit_star &lt;- lm(Ys ~ Xs - 1)\n      coef_star &lt;- coef(fit_star)\n      b0_star &lt;- coef_star[1]\n      b1_star &lt;- coef_star[2]\n      resid_star &lt;- resid(fit_star)\n      resid_star_centered &lt;- resid_star - mean(resid_star)\n      \n      y_fut &lt;- numeric(H + 1)\n      y_fut[1] &lt;- y_obs[n_obs]\n      future_shocks &lt;- sample(resid_star_centered, size = H, replace = TRUE)\n      for(h in 1:H){\n        y_fut[h + 1] &lt;- b0_star + b1_star * y_fut[h] + future_shocks[h]\n      }\n      bootstrap_forecasts[b, ] &lt;- y_fut\n    }\n    \n    boot_mean &lt;- colMeans(bootstrap_forecasts)\n    \n    sim_data(list(\n      y_obs = y_obs,\n      plug_mean = plug_mean,\n      plug_sd = plug_sd,\n      bootstrap_forecasts = bootstrap_forecasts,\n      boot_mean = boot_mean,\n      H = H\n    ))\n  }, ignoreNULL = FALSE)\n  \n  output$fanPlot &lt;- renderPlot({\n    dat &lt;- sim_data()\n    if(is.null(dat)) return(NULL)\n    \n    y_obs &lt;- dat$y_obs\n    plug_mean &lt;- dat$plug_mean\n    plug_sd &lt;- dat$plug_sd\n    bootstrap_forecasts &lt;- dat$bootstrap_forecasts\n    boot_mean &lt;- dat$boot_mean\n    H &lt;- dat$H\n    \n    n_obs &lt;- length(y_obs)\n    \n    # Window: last 20 obs and 20 forecasts\n    obs_window &lt;- (n_obs-19):n_obs\n    f_range &lt;- (n_obs):(n_obs + H)\n    plot_range &lt;- c((n_obs-19):(n_obs+H))\n    \n    y_min &lt;- min(c(y_obs[obs_window], plug_mean - 4 * plug_sd, bootstrap_forecasts))\n    y_max &lt;- max(c(y_obs[obs_window], plug_mean + 4 * plug_sd, bootstrap_forecasts))\n    \n    plot(plot_range, rep(NA, length(plot_range)), type = \"n\",\n         xlab = \"t\", ylab = expression(y[t]),\n         ylim = c(y_min, y_max), bty = \"n\",\n         main = \"AR(1) forecast: plug-in (red) vs residual-bootstrap (blue)\")\n    \n    rect(n_obs + 0.5, y_min, n_obs + H + 0.5, y_max,\n         col = rgb(0.85,0.85,0.85,0.5), border = NA)\n    \n    lines(obs_window, y_obs[obs_window], col = \"black\", lwd = 2)\n    \n    # bootstrap fan\n    if(input$show_blue){\n      prob_levels &lt;- c(0.001, 0.005, 0.01, seq(0.02, 0.48, by = 0.02))\n      lower_probs &lt;- prob_levels\n      upper_probs &lt;- 1 - prob_levels\n      boot_fan_lower &lt;- apply(bootstrap_forecasts, 2, quantile, probs = lower_probs)\n      boot_fan_upper &lt;- apply(bootstrap_forecasts, 2, quantile, probs = upper_probs)\n      for(i in seq_len(nrow(boot_fan_lower))){\n        polygon(c(f_range, rev(f_range)),\n                c(boot_fan_upper[i, ], rev(boot_fan_lower[i, ])),\n                col = rgb(0,0,1,0.08), border = NA)\n      }\n      lines(f_range, apply(bootstrap_forecasts, 2, median),\n            col = rgb(0,0,1,0.8), lty = 2, lwd = 1.5)\n      lines(f_range, boot_mean, col = rgb(0,0,1,0.9), lty = 1, lwd = 1)\n    }\n    \n    # plug-in fan\n    if(input$show_red){\n      alpha_vec &lt;- c(0.01, seq(0.1,0.9,by=0.1))\n      for(a in rev(alpha_vec)){\n        U &lt;- qnorm(1 - a/2, mean = plug_mean, sd = plug_sd)\n        L &lt;- qnorm(a/2, mean = plug_mean, sd = plug_sd)\n        polygon(c(f_range, rev(f_range)),\n                c(U, rev(L)),\n                col = rgb(1, 0, 0, 0.15), border = NA)\n      }\n      lines(f_range, plug_mean, col = \"red\", lty = 2, lwd = 2)\n    }\n    \n    abline(v = n_obs + 0.5, lty = 3)\n  })\n}\n\nshinyApp(ui, server)"
+  },
+  {
+    "objectID": "slides/ar-forecast.html#posterior-predictive-distribution",
+    "href": "slides/ar-forecast.html#posterior-predictive-distribution",
+    "title": "Probabilistic predictions",
+    "section": "Posterior predictive distribution",
+    "text": "Posterior predictive distribution\nAfter computing the posterior for parameters\n\\[\np(\\Btheta\\given y_{0:t})\n=\n\\frac{p(y_{1:t}\\given y_0\\com \\Btheta)p(\\Btheta)}{p(y_{1:t}\\given y_0)},\n\\]\n\nyou base forecasts on the posterior predictive distribution:\n\\[\np(y_{t+1}\\,|\\,y_{0:t})\n=\n\\int\np(y_{t+1}\\,|\\,y_{0:t},\\,\\boldsymbol{\\theta})\np(\\boldsymbol{\\theta}\\,|\\,y_{0:t})\n\\,\\text{d}\\boldsymbol{\\theta}.\n\\]\n\n\nImmediately incorporates both data and parameter uncertainty by construction."
+  },
+  {
+    "objectID": "slides/ar-forecast.html#probabilistic-prediction-a-natural-byproduct-of-bayes",
+    "href": "slides/ar-forecast.html#probabilistic-prediction-a-natural-byproduct-of-bayes",
+    "title": "Probabilistic predictions",
+    "section": "Probabilistic prediction: a natural byproduct of Bayes",
+    "text": "Probabilistic prediction: a natural byproduct of Bayes\nIt falls out basically for free:\n\n\n\n\n\n\n\nBjørnstad, Jan (1990): “Predictive likelihood: a review,” Statistical Science\n\n\n“Prediction of the value of an unobserved or future random variable is a fundamental problem in statistics. From a Bayesian point of view, it is solved in a straightforward manner by finding the posterior predictive density of the unobserved random variable given the data. If one does not want to pay the Bayesian price of having to determine a prior, no unifying basis for prediction has existed until recently.”\n\n\n\n\n\n“If one does not want to pay the Bayesian price of having to determine a prior…” 🙄\n\n\n\n\n\n\n\n\nAndrew Gelman, coming in hot\n\n\n“The anti-Bayesian is standing at the back window with a shotgun, scanning for priors coming over the hill, while a million assumptions just walk right into his house through the front door.”"
+  },
+  {
+    "objectID": "slides/ar-forecast.html#conjugate-bayes-behaves-like-iid-regression",
+    "href": "slides/ar-forecast.html#conjugate-bayes-behaves-like-iid-regression",
+    "title": "Probabilistic predictions",
+    "section": "Conjugate Bayes behaves like iid regression",
+    "text": "Conjugate Bayes behaves like iid regression\nyou get student’s t for 1 step, which begets intervals and densities and points"
+  },
+  {
+    "objectID": "slides/ar-forecast.html#one-step-ahead-probabilistic-prediction",
+    "href": "slides/ar-forecast.html#one-step-ahead-probabilistic-prediction",
+    "title": "Probabilistic predictions",
+    "section": "One-step-ahead probabilistic prediction",
+    "text": "One-step-ahead probabilistic prediction\n\nOur density forecast is:\n\\[\ny_{t+1}\\mid y_{0:t}\n\\sim\nt(\\nu_{t+1|t}\\com\\bar{y}_{t+1|t}\\com s_{t+1|t}^2).\n\\]\n\n\nThis gives a \\(100\\times(1-\\alpha)\\%\\) credible interval:\n\\[\n\\bar{y}_{t+1|t}\n\\pm\n\\underbrace{t_{\\nu_{t+1|t}}\n\\left(\n1-\\frac{\\alpha}{2}\n\\right)}_{\\text{quantile of }t(\\nu_{t+1|t}\\com 0\\com 1)}\ns_{t+1|t}\n.\n\\]\n\n\nAnd the moments are\n\\[\n\\begin{aligned}\nE(y_{t+1}\\mid y_{0:t})\n&=\n\\bar{y}_{t+1|t}\n,\n&&\n\\nu_{t+1|t}&gt;1\n\\\\\n\\text{var}(y_{t+1}\\mid y_{0:t})\n&=\n\\frac{\\nu_{t+1|t}}{\\nu_{t+1|t}-2}\ns_{t+1|t}^2\n,\n&&\n\\nu_{t+1|t}&gt;2.\n\\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "slides/ar-forecast.html#how-do-you-get-full-predictive-distributions",
+    "href": "slides/ar-forecast.html#how-do-you-get-full-predictive-distributions",
+    "title": "Probabilistic predictions",
+    "section": "How do you get full predictive distributions?",
+    "text": "How do you get full predictive distributions?\n\nIn general, use simulation:\n\nClassical approach: bootstrapping;\nBayesian approach: posterior predictive simulation.\n\n\n\nEither way, you get Monte Carlo draws from a forecast distribution:\n\\[\n\\tilde{y}_{t+h}^{(1)}\\com \\tilde{y}_{t+h}^{(2)}\\com ...\\com \\tilde{y}_{t+h}^{(k)}\n\\sim \\hat{F}_{t+h|t}.\n\\]\n\n\nWhat do you do with them?"
+  },
+  {
+    "objectID": "slides/ar-forecast.html#probabilistic-forecasting-via-monte-carlo",
+    "href": "slides/ar-forecast.html#probabilistic-forecasting-via-monte-carlo",
+    "title": "Probabilistic predictions",
+    "section": "Probabilistic forecasting via Monte Carlo",
+    "text": "Probabilistic forecasting via Monte Carlo\nUse the simulations \\(\\tilde{y}_{t+h}^{(1:k)}=\\left\\{\\tilde{y}_{t+h}^{(1)}\\com \\tilde{y}_{t+h}^{(2)}\\com ...\\com \\tilde{y}_{t+h}^{(k)}\\right\\}\\) to construct whatever forecast object you want:\n\n\\[\n\\hat{y}_{t+h|t}=\\frac{1}{k}\\sum\\limits_{j=1}^k\\tilde{y}_{t+h}^{(j)}. \\quad (\\text{...or median})\n\\]\n\n\nForecast interval:\n\\[\n\\hat{I}_{t+h|t} = \\left[\\hat{Q}_{\\frac{\\alpha}{2}}\\left(\\tilde{y}_{t+h}^{(1:k)}\\right)\\com \\hat{Q}_{1-\\frac{\\alpha}{2}}\\left(\\tilde{y}_{t+h}^{(1:k)}\\right)\\right]. \\quad (...\\text{or hdi})\n\\]\n\n\nForecast distribution:\n\\[\n\\hat{f}_{t+h|t}\n=\n\\text{histogram}\\left(\\tilde{y}_{t+h}^{(1:k)}\\right). \\quad (...\\text{or kde})\n\\]"
+  },
+  {
+    "objectID": "slides/ar-forecast.html#how-do-you-evaluate-the-forecasts",
+    "href": "slides/ar-forecast.html#how-do-you-evaluate-the-forecasts",
+    "title": "Probabilistic predictions",
+    "section": "How do you evaluate the forecasts?",
+    "text": "How do you evaluate the forecasts?\nYou generate a sequence of one-step-ahead predictions:\n\\[\n\\begin{matrix}\n\\hat{y}_{1|0} & \\hat{y}_{2|1} & \\hat{y}_{3|2} & \\hat{y}_{4|3} & \\hat{y}_{5|4} & \\cdots&\\hat{y}_{t|t-1} & \\cdots\\\\\n\\hat{I}_{1|0} & \\hat{I}_{2|1} & \\hat{I}_{3|2} & \\hat{I}_{4|3} & \\hat{I}_{5|4} & \\cdots&\\hat{I}_{t|t-1} & \\cdots\\\\\n\\hat{f}_{1|0} & \\hat{f}_{2|1} & \\hat{f}_{3|2} & \\hat{f}_{4|3} & \\hat{f}_{5|4} & \\cdots&\\hat{f}_{t|t-1} & \\cdots\n\\end{matrix}\n\\]\n\nBut then the data you were trying to forecast eventually arrive:\n\\[\n\\begin{matrix}\ny_1 & y_2 & y_3 & y_4 & y_5 & \\cdots &y_t & \\cdots\n\\end{matrix}\n\\]\nHow do we score the forecasts and summarize?"
+  },
+  {
+    "objectID": "slides/ar-forecast.html#the-game",
+    "href": "slides/ar-forecast.html#the-game",
+    "title": "Probabilistic predictions",
+    "section": "The game",
+    "text": "The game\nWe will illustrate by comparing the performance of two well-behaved methods:\nA. classical predictive distribution from iid normal model;\nB. posterior predictive distribution from conjugate, Gaussian AR(1).\nThere will be two running examples:\n1. Simulated data from AR(1)\n\n    - Method A (iid normal) is wrong by construction;\n    - Method B is right by construction;\n    \n2. Quarterly real GDP growth\n\n    - both methods are \"wrong,\" but is one strictly preferred?\nOur forecast metrics will tease all of that out."
+  },
+  {
+    "objectID": "slides/ar-forecast.html#method-a",
+    "href": "slides/ar-forecast.html#method-a",
+    "title": "Probabilistic predictions",
+    "section": "Method A",
+    "text": "Method A\n\nAssume\n\n\n\\[\ny_1\\com y_2\\com ...\\com y_n\\com y_{n+1}\\iid\\N(\\mu\\com\\sigma^2).\n\\]\n\n\nWe know \\(\\bar{y}_n\\sim\\N(\\mu\\com \\sigma^2/n)\\) independent of \\(y_{n+1}\\), and so:\n\\[\n\\frac{\\bar{y}_n-y_{n+1}}{\\sigma\\sqrt{1+\\frac{1}{n}}}\\sim\\N(0\\com 1)\n\\quad\n\\implies\n\\quad\n\\frac{\\bar{y}_n-y_{n+1}}{\\hat{\\sigma}\\sqrt{1+\\frac{1}{n}}}\\sim t_{n-1}.\n\\]\n\n\nThe (classical) predictive distribution for the next \\(y_{n+1}\\) is:\n\\[\nt\\left(n-1\\com \\bar{y}_n\\com \\widehat{\\sigma^2}\\left(1+\\frac{1}{n}\\right)\\right).\n\\]\nThis incorporates sampling uncertainty for the mean and variance, and the inherent uncertainty in new \\(y_{n+1}\\)."
+  },
+  {
+    "objectID": "slides/ar-forecast.html#method-b-you-know-the-drill",
+    "href": "slides/ar-forecast.html#method-b-you-know-the-drill",
+    "title": "Probabilistic predictions",
+    "section": "Method B: you know the drill",
+    "text": "Method B: you know the drill\nA conjugate normal-inverse-gamma prior begets a conjugate posterior:\n\\[\n\\begin{aligned}\n\\sigma^2\\given y_{0:t}\n&\\sim\n\\text{IG}(a_t\\com b_t)\n\\\\\n\\Bbeta\\given \\sigma^2\\com y_{0:t}\n&\\sim\n\\text{N}_2(\\Bm_t\\com\\sigma^2\\BH^{-1}_t)\n\\\\\ny_{t+1}\\given\\Bbeta\\com \\sigma^2\\com y_{0:t}\n&\\sim \\N(\\Bx_{t+1}^\\tr\\Bbeta\\com\\sigma^2),\\quad \\Bx_{t+1}=\\begin{bmatrix}1 & y_{t}\\end{bmatrix}^\\tr.\n\\end{aligned}\n\\]\n\nThe one-step posterior predictive distribution is non-standard Student’s \\(t\\):\n\\[\n\\begin{aligned}\ny_{t+1}\\given y_{0:t}\n&\\sim\nt(\\nu_{t+1|t}\\com\\bar{y}_{t+1|t}\\com s_{t+1|t}^2)\n\\\\\n\\\\\n\\nu_{t+1|t}\n&=\n2a_t\n\\\\\n\\bar{y}_{t+1|t}\n&=\n\\Bx_{t+1}^\\tr\\Bm_t\n\\\\\ns_{t+1|t}^2\n&=\n\\frac{b_t}{a_t}\n(1+\\Bx_{t+1}^\\tr\\BH_t^{-1}\\Bx_{t+1})\n.\n\\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "slides/ar-forecast.html#dataset-1-simulated",
+    "href": "slides/ar-forecast.html#dataset-1-simulated",
+    "title": "Probabilistic predictions",
+    "section": "Dataset 1: simulated",
+    "text": "Dataset 1: simulated"
+  },
+  {
+    "objectID": "slides/ar-forecast.html#forecast-distributions-from-iid-normal-model",
+    "href": "slides/ar-forecast.html#forecast-distributions-from-iid-normal-model",
+    "title": "Probabilistic predictions",
+    "section": "Forecast distributions from iid normal model",
+    "text": "Forecast distributions from iid normal model"
+  },
+  {
+    "objectID": "slides/ar-forecast.html#forecast-distributions-from-bayesian-ar1",
+    "href": "slides/ar-forecast.html#forecast-distributions-from-bayesian-ar1",
+    "title": "Probabilistic predictions",
+    "section": "Forecast distributions from Bayesian AR(1)",
+    "text": "Forecast distributions from Bayesian AR(1)"
+  },
+  {
+    "objectID": "slides/ar-forecast.html#dataset-2-us-quarterly-real-gdp-growth",
+    "href": "slides/ar-forecast.html#dataset-2-us-quarterly-real-gdp-growth",
+    "title": "Probabilistic predictions",
+    "section": "Dataset 2: US quarterly real GDP growth",
+    "text": "Dataset 2: US quarterly real GDP growth"
+  },
+  {
+    "objectID": "slides/ar-forecast.html#forecast-distributions-from-iid-normal-model-1",
+    "href": "slides/ar-forecast.html#forecast-distributions-from-iid-normal-model-1",
+    "title": "Probabilistic predictions",
+    "section": "Forecast distributions from iid normal model",
+    "text": "Forecast distributions from iid normal model"
+  },
+  {
+    "objectID": "slides/ar-forecast.html#forecast-distributions-from-bayesian-ar1-1",
+    "href": "slides/ar-forecast.html#forecast-distributions-from-bayesian-ar1-1",
+    "title": "Probabilistic predictions",
+    "section": "Forecast distributions from Bayesian AR(1)",
+    "text": "Forecast distributions from Bayesian AR(1)"
+  },
+  {
+    "objectID": "slides/ar-forecast.html#any-ideas",
+    "href": "slides/ar-forecast.html#any-ideas",
+    "title": "Probabilistic predictions",
+    "section": "Any ideas?",
+    "text": "Any ideas?"
+  },
+  {
+    "objectID": "slides/ar-forecast.html#point-prediction",
+    "href": "slides/ar-forecast.html#point-prediction",
+    "title": "Probabilistic predictions",
+    "section": "Point prediction",
+    "text": "Point prediction\nWe want the point prediction that minimizes expected loss:\n\n\\[\n\\hat{y}_{t+1|t}\n\\;=\\;\n\\argmin{\\hat{y}\\in\\mathbb{R}}\n\\; E\\big[\\, L\\big(y_{t+1},\\,\\hat{y}\\big) \\,\\big|\\, y_{0:t} \\big].\n\\]\n\n\nThe expectation is taken with respect to the “true” or “idealized” conditional distribution \\(p(y_{t+1}\\given y_{0:t})\\), which we don’t know.\n\n\nWe approximate it with whatever forecast distribution we’ve generated."
+  },
+  {
+    "objectID": "slides/ar-forecast.html#picking-a-loss-function",
+    "href": "slides/ar-forecast.html#picking-a-loss-function",
+    "title": "Probabilistic predictions",
+    "section": "Picking a loss function",
+    "text": "Picking a loss function\n\nWe have nice results for some loss functions:\n\n\n\\[\n\\begin{array}{rcl}\nL(y_{t+1},\\hat{y}) = (y_{t+1} - \\hat{y})^2\n& \\implies &\n\\hat{y}_{t+1|t} = E[\\,y_{t+1}\\mid y_{0:t}\\,] \\\\[1.2em]\nL(y_{t+1},\\hat{y}) = |y_{t+1} - \\hat{y}|\n& \\implies &\n\\hat{y}_{t+1|t} = \\operatorname{median}(y_{t+1}\\mid y_{0:t}).\n\\end{array}\n\\]\n\n\nAnd there are many more where that came from."
+  },
+  {
+    "objectID": "slides/ar-forecast.html#in-practice",
+    "href": "slides/ar-forecast.html#in-practice",
+    "title": "Probabilistic predictions",
+    "section": "In practice",
+    "text": "In practice\nMetrics for scoring the average quality of the point predictions over time:\n\\[\n\\begin{aligned}\n\\text{MSFE}\n&=\n\\frac{1}{T}\n\\sum\\limits_{t=1}^T\n(y_t-\\hat{y}_{t|t-1})^2\n\\\\\n\\text{MAFE}\n&=\n\\frac{1}{T}\n\\sum\\limits_{t=1}^T\n|y_t-\\hat{y}_{t|t-1}|.\n\\end{aligned}\n\\]\nWe want these to be small.\n\n\n\n\n\n\n\nMake sure your loss function and your point prediction play nice\n\n\n\nIf you’re looking at MAFE, use forecast median;\nIf you’re looking at MSFE, use the forecast mean."
+  },
+  {
+    "objectID": "slides/ar-forecast.html#our-simulated-data",
+    "href": "slides/ar-forecast.html#our-simulated-data",
+    "title": "Probabilistic predictions",
+    "section": "Our simulated data",
+    "text": "Our simulated data\nMSE of forecast mean:\n\nmean((y - pred_params_iid_sim[,\"location\"])^2, na.rm = TRUE)\n\n[1] 162.4966\n\nmean((y - pred_params_ar1_sim[,\"location\"])^2, na.rm = TRUE)\n\n[1] 4.162699\n\n\n\nMAE of forecast median (same as mean for these methods):\n\nmean(abs(y - pred_params_iid_sim[,\"location\"]), na.rm = TRUE)\n\n[1] 10.03766\n\nmean(abs(y - pred_params_ar1_sim[,\"location\"]), na.rm = TRUE)\n\n[1] 1.637622"
+  },
+  {
+    "objectID": "slides/ar-forecast.html#our-real-data",
+    "href": "slides/ar-forecast.html#our-real-data",
+    "title": "Probabilistic predictions",
+    "section": "Our real data",
+    "text": "Our real data\nMSE of forecast mean:\n\nmean((stonks - pred_params_iid_real[,\"location\"])^2, na.rm = TRUE)\n\n[1] 6.66254\n\nmean((stonks - pred_params_ar1_real[,\"location\"])^2, na.rm = TRUE)\n\n[1] 2.582788\n\n\n\nMAE of forecast median (same as mean for these methods):\n\nmean(abs(stonks - pred_params_iid_real[,\"location\"]), na.rm = TRUE)\n\n[1] 1.861102\n\nmean(abs(stonks - pred_params_ar1_real[,\"location\"]), na.rm = TRUE)\n\n[1] 1.054689"
+  },
+  {
+    "objectID": "slides/ar-forecast.html#any-ideas-1",
+    "href": "slides/ar-forecast.html#any-ideas-1",
+    "title": "Probabilistic predictions",
+    "section": "Any ideas?",
+    "text": "Any ideas?"
+  },
+  {
+    "objectID": "slides/ar-forecast.html#interval-width-and-coverage",
+    "href": "slides/ar-forecast.html#interval-width-and-coverage",
+    "title": "Probabilistic predictions",
+    "section": "Interval width and coverage",
+    "text": "Interval width and coverage\n\nYou want intervals that are small enough to be informative, but large enough to swallow the truth often, and there’s a trade-off.\n\n\\(\\hat{I}=(-\\infty\\com \\infty)\\) always has perfect coverage but teaches you nothing;\nLook at average size and empirical coverage:\n\n\n\\[\n\\begin{aligned}\n\\overline{\\text{Size}}\n&= \\frac{1}{T} \\sum_{t=1}^{T} \\Big( \\hat{I}_{t\\mid t-1}^{\\text{upper}} - \\hat{I}_{t\\mid t-1}^{\\text{lower}} \\Big), \\\\[0.8em]\n\\overline{\\text{Coverage}}\n&= \\frac{1}{T} \\sum_{t=1}^{T} \\mathbf{1}\\Big( y_t \\in \\hat{I}_{t\\mid t-1} \\Big).\n\\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "slides/ar-forecast.html#interval-performance-on-simulated-data",
+    "href": "slides/ar-forecast.html#interval-performance-on-simulated-data",
+    "title": "Probabilistic predictions",
+    "section": "Interval performance on simulated data",
+    "text": "Interval performance on simulated data\n\nSize of 90% intervals:\n\nmean(PI_iid_sim[,1], na.rm = TRUE)   \n\n[1] 37.61362\n\nmean(PI_ar1_sim[,1], na.rm = TRUE)   \n\n[1] 6.660308\n\n\n\n\nCoverage of 90% intervals:\n\nmean(PI_iid_sim[,2], na.rm = TRUE)   \n\n[1] 0.8537415\n\nmean(PI_ar1_sim[,2], na.rm = TRUE)   \n\n[1] 0.8991798"
+  },
+  {
+    "objectID": "slides/ar-forecast.html#interval-performance-on-gdp-growth",
+    "href": "slides/ar-forecast.html#interval-performance-on-gdp-growth",
+    "title": "Probabilistic predictions",
+    "section": "Interval performance on GDP growth",
+    "text": "Interval performance on GDP growth\n\nSize of 90% intervals:\n\nmean(PI_iid_real[,1], na.rm = TRUE)   \n\n[1] 9.922717\n\nmean(PI_ar1_real[,1], na.rm = TRUE)   \n\n[1] 5.451231\n\n\n\n\nCoverage of 90% intervals:\n\nmean(PI_iid_real[,2], na.rm = TRUE)   \n\n[1] 0.9320388\n\nmean(PI_ar1_real[,2], na.rm = TRUE)   \n\n[1] 0.9387097\n\n\n\n\nIn this case it turns out that you get the same (over-)coverage from either procedure, but the AR(1) intervals are smaller on average."
+  },
+  {
+    "objectID": "slides/ar-forecast.html#interval-score",
+    "href": "slides/ar-forecast.html#interval-score",
+    "title": "Probabilistic predictions",
+    "section": "Interval score",
+    "text": "Interval score\nAverage over time for an holistic metric of interval performance:\n\\[\n\\mathrm{IS}_\\alpha(l,u; y)\n=\n(u - l)\n+\n\\frac{2}{\\alpha}\\,(l - y)\\,\\mathbf{1}(y &lt; l)\n+\n\\frac{2}{\\alpha}\\,(y - u)\\,\\mathbf{1}(y &gt; u).\n\\]\nSynthesizes both size and coverage, but in practice, if you want to understand why the score was good or bad, you have to crack it open and look at the size and coverage components separately anyway."
+  },
+  {
+    "objectID": "slides/ar-forecast.html#any-ideas-2",
+    "href": "slides/ar-forecast.html#any-ideas-2",
+    "title": "Probabilistic predictions",
+    "section": "Any ideas?",
+    "text": "Any ideas?"
+  },
+  {
+    "objectID": "slides/ar-forecast.html#recap-probability-integral-transform-pit",
+    "href": "slides/ar-forecast.html#recap-probability-integral-transform-pit",
+    "title": "Probabilistic predictions",
+    "section": "Recap: probability integral transform (PIT)",
+    "text": "Recap: probability integral transform (PIT)\nTake a random variable \\(Y\\sim F\\) and plug it into its own cdf to define a new random variable \\(U=F(Y)\\):"
+  },
+  {
+    "objectID": "slides/ar-forecast.html#recap-probability-integral-transform-pit-1",
+    "href": "slides/ar-forecast.html#recap-probability-integral-transform-pit-1",
+    "title": "Probabilistic predictions",
+    "section": "Recap: probability integral transform (PIT)",
+    "text": "Recap: probability integral transform (PIT)\nIf you take a (continuous) random variable \\(Y\\sim F\\) and plug it into its own cdf to define a new random variable \\(U=F(Y)\\), then the new thing has:\n\n\\[\nU\\sim \\text{Unif}(0\\com 1).\n\\]\n\n\nFix any \\(u\\in(0\\com 1)\\). Then the cdf of the new random variable \\(U\\) is:\n\n\n\\[\nP(U\\leq u)=P(F(Y)\\leq u)=P(Y\\leq F^{-1}(u))=F(F^{-1}(u))=u.\n\\]\n\n\nThat’s the cdf of Unif(0, 1)."
+  },
+  {
+    "objectID": "slides/ar-forecast.html#dont-believe-me",
+    "href": "slides/ar-forecast.html#dont-believe-me",
+    "title": "Probabilistic predictions",
+    "section": "Don’t believe me?",
+    "text": "Don’t believe me?\n\nx &lt;- rnorm(10000)\nu &lt;- pnorm(x)\nhist(u, breaks = \"Scott\", freq = FALSE)\nabline(h = 1, col = \"red\")"
+  },
+  {
+    "objectID": "slides/ar-forecast.html#whats-pit-got-to-do-with-it",
+    "href": "slides/ar-forecast.html#whats-pit-got-to-do-with-it",
+    "title": "Probabilistic predictions",
+    "section": "What’s PIT got to do with it?",
+    "text": "What’s PIT got to do with it?\nLet \\(G_t\\) be the “true” cdf that nature is drawing from to produce \\(y_t\\). By the probability integral transform, we know that:\n\n\\[\nG_1(y_1)\\com G_2(y_2)\\com ...\\com G_t(y_t)\\com ...\\sim\\text{Unif}(0\\com 1).\n\\]\n\n\nIt would be amazing if our method produced exactly correct predictive distributions: \\(\\hat{F}_{t|t-1}=G_t\\). We’re probably not so lucky, but if we’re in the ballpark, then we should see:\n\n\n\\[\n\\hat{F}_{1|0}(y_1)\\com \\hat{F}_{2|1}(y_2)\\com ...\\com \\hat{F}_{t|t-1}(y_t)\\com ...\\sim\\text{Unif}(0\\com 1).\n\\]\n\n\nLet’s check!"
+  },
+  {
+    "objectID": "slides/ar-forecast.html#iid-normal-method-on-simulated-data",
+    "href": "slides/ar-forecast.html#iid-normal-method-on-simulated-data",
+    "title": "Probabilistic predictions",
+    "section": "iid normal method on simulated data",
+    "text": "iid normal method on simulated data"
+  },
+  {
+    "objectID": "slides/ar-forecast.html#bayesian-ar1-on-simulated-data",
+    "href": "slides/ar-forecast.html#bayesian-ar1-on-simulated-data",
+    "title": "Probabilistic predictions",
+    "section": "Bayesian AR(1) on simulated data",
+    "text": "Bayesian AR(1) on simulated data\n\n\n\n\n\n\n\n\n\nRemember: up to estimation error, this method is exactly correct by construction."
+  },
+  {
+    "objectID": "slides/ar-forecast.html#iid-normal-method-on-gdp-growth",
+    "href": "slides/ar-forecast.html#iid-normal-method-on-gdp-growth",
+    "title": "Probabilistic predictions",
+    "section": "iid normal method on GDP growth",
+    "text": "iid normal method on GDP growth\n\n\n\n\n\n\n\n\nClearly not uniform."
+  },
+  {
+    "objectID": "slides/ar-forecast.html#bayesian-ar1-on-gdp-growth",
+    "href": "slides/ar-forecast.html#bayesian-ar1-on-gdp-growth",
+    "title": "Probabilistic predictions",
+    "section": "Bayesian AR(1) on GDP growth",
+    "text": "Bayesian AR(1) on GDP growth\n\n\n\n\n\n\n\n\n\nWhat does it mean that these have a peak in the middle?"
+  },
+  {
+    "objectID": "slides/ar-forecast.html#diagnosing-underover-dispersion",
+    "href": "slides/ar-forecast.html#diagnosing-underover-dispersion",
+    "title": "Probabilistic predictions",
+    "section": "Diagnosing under/over-dispersion",
+    "text": "Diagnosing under/over-dispersion"
+  },
+  {
+    "objectID": "slides/ar-forecast.html#what-do-the-pit-values-tell-you",
+    "href": "slides/ar-forecast.html#what-do-the-pit-values-tell-you",
+    "title": "Probabilistic predictions",
+    "section": "What do the PIT values tell you?",
+    "text": "What do the PIT values tell you?\nWhere did the true \\(y\\) fall under your predictive distribution?"
+  },
+  {
+    "objectID": "slides/ar-forecast.html#what-do-the-pit-values-tell-you-1",
+    "href": "slides/ar-forecast.html#what-do-the-pit-values-tell-you-1",
+    "title": "Probabilistic predictions",
+    "section": "What do the PIT values tell you?",
+    "text": "What do the PIT values tell you?\n\nIf \\(y\\) tends to surprise in the left tail, we’ll get too many PITs near 0;\nIf \\(y\\) tends to surprise in the right tail, we’ll get too many PITs near 1;\nIf \\(y\\) tends to surprise in the middle, we’ll get too many PITs near 0.5;\nIf the forecast distributions tend to be overdispersed (too much mass in the tails), the histogram is hump-shaped;\nIf the forecast distributions tend to be underdispersed (not enough mass in the tails), the histogram is u-shaped."
+  },
+  {
+    "objectID": "slides/ar-forecast.html#summary-calibration",
+    "href": "slides/ar-forecast.html#summary-calibration",
+    "title": "Probabilistic predictions",
+    "section": "Summary: calibration",
+    "text": "Summary: calibration\nIf your sequence of forecast distributions is well-calibrated, then the PITs should be approximately uniformly distributed:\n\\[\n\\hat{F}_{1|0}(y_1)\\com \\hat{F}_{2|1}(y_2)\\com ...\\com \\hat{F}_{t|t-1}(y_t)\\com ...\\sim\\text{Unif}(0\\com 1).\n\\]\n\nCheck it with a histogram, QQ-plot, goodness-of-fit test…\n\n\nDeviations from uniformity provide useful diagnostic information.\n\n\n\n\n\n\n\n\nThis is necessary but not sufficient!\n\n\nCalibration alone is not enough to distinguish good/better/best forecasts."
+  },
+  {
+    "objectID": "slides/ar-forecast.html#maximize-sharpness-subject-to-calibration",
+    "href": "slides/ar-forecast.html#maximize-sharpness-subject-to-calibration",
+    "title": "Probabilistic predictions",
+    "section": "Maximize sharpness subject to calibration",
+    "text": "Maximize sharpness subject to calibration\n\nYou want a forecasting method to be calibrated;\nIf you have many methods to choose from, all of which appear calibrated, select the one that is the sharpest;\n\nSharpness refers to how concentrated the forecast distributions are. Among calibrated distributions, you want the one that is sharpest, most decisive, most concentrated;\nSharpness can be measured by your preferred measure of spread: variance, IQR, etc."
+  },
+  {
+    "objectID": "slides/ar-forecast.html#sharpness-for-the-simulated-data",
+    "href": "slides/ar-forecast.html#sharpness-for-the-simulated-data",
+    "title": "Probabilistic predictions",
+    "section": "Sharpness for the simulated data",
+    "text": "Sharpness for the simulated data\nCompare the scale parameters of the predictive distributions:"
+  },
+  {
+    "objectID": "slides/ar-forecast.html#sharpness-for-the-gdp-growth",
+    "href": "slides/ar-forecast.html#sharpness-for-the-gdp-growth",
+    "title": "Probabilistic predictions",
+    "section": "Sharpness for the GDP growth",
+    "text": "Sharpness for the GDP growth"
+  },
+  {
+    "objectID": "slides/ar-forecast.html#log-predictive-score",
+    "href": "slides/ar-forecast.html#log-predictive-score",
+    "title": "Probabilistic predictions",
+    "section": "Log predictive score",
+    "text": "Log predictive score\nEvaluates if the forecast distribution placed high mass/density on the region where \\(y_t\\) actually showed up:\n\\[\n\\overline{\\text{LPS}} = \\frac{1}{T} \\sum_{t=1}^{T} \\ln \\hat{f}_{t|t-1}(y_t).\n\\]\n\nBigger is better;\nSimultaneously rewards both calibration and sharpness;\n\nProper scoring rule: encourages honest probabilistic predictions;\nLocal measure of quality. There are also global measures like the continuous ranked probability score (CRPS)."
+  },
+  {
+    "objectID": "slides/ar-forecast.html#lps-rewards-both-calibration-and-sharpness",
+    "href": "slides/ar-forecast.html#lps-rewards-both-calibration-and-sharpness",
+    "title": "Probabilistic predictions",
+    "section": "LPS rewards both calibration and sharpness",
+    "text": "LPS rewards both calibration and sharpness"
+  },
+  {
+    "objectID": "slides/ar-forecast.html#for-our-examples",
+    "href": "slides/ar-forecast.html#for-our-examples",
+    "title": "Probabilistic predictions",
+    "section": "For our examples",
+    "text": "For our examples\n\nSimulated data:\n\naverage_log_score(y, pred_params_iid_sim)\n\n[1] -3.965963\n\naverage_log_score(y, pred_params_ar1_sim)\n\n[1] -2.132817\n\n\n\n\nReal data:\n\naverage_log_score(stonks, pred_params_iid_real)\n\n[1] -2.373455\n\naverage_log_score(stonks, pred_params_ar1_real)\n\n[1] -1.886891"
+  },
+  {
+    "objectID": "slides/ar-forecast.html#authors-and-papers-to-know",
+    "href": "slides/ar-forecast.html#authors-and-papers-to-know",
+    "title": "Probabilistic predictions",
+    "section": "Authors and papers to know",
+    "text": "Authors and papers to know\n\nGneiting & Raftery (2007): “Strictly Proper Scoring Rules, Prediction, and Estimation,” JASA;\n\nHard to read, but packed with useful info;\n\n\nGneiting, Balabdaoui, & Raftery (2007): “Probabilistic Forecasts, Calibration and Sharpness,” JRSSB;\n\n“We propose a diagnostic approach to the evaluation of predictive performance that is based on the paradigm of maximizing the sharpness of the predictive distributions subject to calibration.” Bada bing."
+  },
+  {
+    "objectID": "slides/ar-forecast.html#software-to-check-out",
+    "href": "slides/ar-forecast.html#software-to-check-out",
+    "title": "Probabilistic predictions",
+    "section": "Software to check out",
+    "text": "Software to check out\n\nlibrary(scoringRules)"
   },
   {
     "objectID": "slides/ar-forecast.html#bootstrapping-for-dependent-data-with-iid-errors",
     "href": "slides/ar-forecast.html#bootstrapping-for-dependent-data-with-iid-errors",
-    "title": "How do you compute probabilistic forecasts from the AR(1)?",
+    "title": "Probabilistic predictions",
     "section": "Bootstrapping for dependent data with iid errors",
     "text": "Bootstrapping for dependent data with iid errors\n\n\nData come from an AR(1) with mean zero iid errors (may not be normal!):\n\n\n\n\\[\ny_t\n=\n\\beta_0\n+\n\\beta_1\ny_{t-1}\n+\n\\varepsilon_t,\n\\quad\n\\varepsilon_t\n\\overset{\\text{iid}}{\\sim}F;\n\\]\n\n\n\nUse observed \\(y_{0:T}\\) to compute OLS estimate \\(\\hat{\\Bbeta}_T\\);\n\n\n\n\nEstimate residuals and center them:\n\n\\[\n\\hat{\\varepsilon}_t=y_t-\\hat{\\beta}_0-\\hat{\\beta}_1y_{t-1}\\quad \\to\\quad e_t=\\hat{\\varepsilon}_t-\\sum\\limits_{j=1}^T\\hat{\\varepsilon}_j/T.\n\\]\n\n\n\nConstruct alternative time series by resampling residuals:\n\n\\[\n\\begin{aligned}\n\\tilde{y}_0&=y_0\\\\\n\\tilde{y}_t&=\\hat{\\beta}_0+\\hat{\\beta}_1\\tilde{y}_{t-1}+\\tilde{e}_{t},&&\\tilde{e}_{t}\\overset{\\text{iid}}{\\sim} \\hat{F}_T.\n\\end{aligned}\n\\]\n\n\nRepeats the last step many times, and from then on it’s bootstrap like normal."
   },
   {
     "objectID": "slides/ar-forecast.html#bootstrapping-the-residuals",
     "href": "slides/ar-forecast.html#bootstrapping-the-residuals",
-    "title": "How do you compute probabilistic forecasts from the AR(1)?",
+    "title": "Probabilistic predictions",
     "section": "Bootstrapping the residuals",
     "text": "Bootstrapping the residuals\nGird your loins:\n\n\\[\n\\begin{matrix}\n\\text{1. Original data} &&& y_{0:n} && \\\\\n&&& \\downarrow && \\\\\n\\text{2. OLS} &&& \\hat{\\Btheta}_{T} && \\\\\n&&& \\downarrow && \\\\\n\\text{3. Estimate (centered) residuals} &&& e_{1:T} && \\\\\n&\\swarrow &\\swarrow& \\cdots &\\searrow&\\searrow \\\\\n\\text{4. Resample residuals}&\\tilde{e}_{1:T}^{(1)} &\\tilde{e}_{1:T}^{(2)}& \\cdots &\\tilde{e}_{1:T}^{(k-1)}&\\tilde{e}_{1:T}^{(k)} \\\\\n&\\downarrow &\\downarrow& \\cdots &\\downarrow&\\downarrow \\\\\n\\text{5. Bootstrap time series}&\\tilde{y}_{0:T}^{(1)} &\\tilde{y}_{0:T}^{(2)}& \\cdots &\\tilde{y}_{0:T}^{(k-1)}&\\tilde{y}_{0:T}^{(k)} \\\\\n&\\downarrow &\\downarrow& \\cdots &\\downarrow&\\downarrow \\\\\n\\text{6. Bootstrap estimates}&\\tilde{\\Btheta}_{T}^{(1)} &\\tilde{\\Btheta}_{T}^{(2)}& \\cdots &\\tilde{\\Btheta}_{T}^{(k-1)}&\\tilde{\\Btheta}_{T}^{(k)} \\\\\n&\\downarrow &\\downarrow& \\cdots &\\downarrow&\\downarrow \\\\\n\\text{7. Draw more residuals}&\\tilde{e}_{T+1:T+h}^{(1)} &\\tilde{e}_{T+1:T+h}^{(2)}& \\cdots &\\tilde{e}_{T+1:T+h}^{(k-1)}&\\tilde{e}_{T+1:T+h}^{(k)} \\\\\n&\\downarrow &\\downarrow& \\cdots &\\downarrow&\\downarrow \\\\\n\\text{8. Simulate forecasts}&\\tilde{y}_{T+1:T+h}^{(1)} &\\tilde{y}_{T+1:T+h}^{(2)}& \\cdots &\\tilde{y}_{T+1:T+h}^{(k-1)}&\\tilde{y}_{T+1:T+h}^{(k)} \\\\\n\\end{matrix}\n\\]\n\n\nIn other words, it’s awful."
   },
   {
-    "objectID": "slides/ar-forecast.html#probabilistic-forecasting-via-monte-carlo",
-    "href": "slides/ar-forecast.html#probabilistic-forecasting-via-monte-carlo",
-    "title": "How do you compute probabilistic forecasts from the AR(1)?",
+    "objectID": "slides/ar-forecast.html#and-thats-just-the-tip-of-the-iceberg",
+    "href": "slides/ar-forecast.html#and-thats-just-the-tip-of-the-iceberg",
+    "title": "Probabilistic predictions",
+    "section": "And that’s just the tip of the iceberg",
+    "text": "And that’s just the tip of the iceberg\n\n\n\n\nIf you really want to know,\nLahiri is your man."
+  },
+  {
+    "objectID": "slides/ar-forecast.html#probabilistic-forecasting-via-monte-carlo-1",
+    "href": "slides/ar-forecast.html#probabilistic-forecasting-via-monte-carlo-1",
+    "title": "Probabilistic predictions",
     "section": "Probabilistic forecasting via Monte Carlo",
     "text": "Probabilistic forecasting via Monte Carlo\nUse the simulations \\(\\tilde{y}_{t+h}^{(1:k)}=\\left\\{\\tilde{y}_{t+h}^{(1)}\\com \\tilde{y}_{t+h}^{(2)}\\com ...\\com \\tilde{y}_{t+h}^{(k)}\\right\\}\\) to construct whatever forecast object you want:\n\n\\[\n\\hat{y}_{t+h|t}=\\frac{1}{k}\\sum\\limits_{j=1}^k\\tilde{y}_{t+h}^{(j)}. \\quad (\\text{...or median})\n\\]\n\n\nForecast interval:\n\\[\n\\hat{I}_{t+h|t} = \\left[\\hat{Q}_{\\frac{\\alpha}{2}}\\left(\\tilde{y}_{t+h}^{(1:k)}\\right)\\com \\hat{Q}_{1-\\frac{\\alpha}{2}}\\left(\\tilde{y}_{t+h}^{(1:k)}\\right)\\right]. \\quad (...\\text{or hdi})\n\\]\n\n\nForecast distribution:\n\\[\n\\hat{f}_{t+h|t}\n=\n\\text{histogram}\\left(\\tilde{y}_{t+h}^{(1:k)}\\right). \\quad (...\\text{or kde})\n\\]"
-  },
-  {
-    "objectID": "slides/ar-forecast.html#compare-intervals",
-    "href": "slides/ar-forecast.html#compare-intervals",
-    "title": "How do you compute probabilistic forecasts from the AR(1)?",
-    "section": "Compare intervals",
-    "text": "Compare intervals\n#| '!! shinylive warning !!': |\n#|   shinylive does not work in self-contained HTML documents.\n#|   Please set `embed-resources: false` in your metadata.\n#| standalone: true\n#| viewerHeight: 700\nlibrary(shiny)\n\nui &lt;- fluidPage(\n  titlePanel(\"AR(1) Forecast: Plug-in vs Residual Bootstrap\"),\n  \n  sidebarLayout(\n    sidebarPanel(\n      sliderInput(\"true_b0\", \"True β₀:\", min = -1, max = 1, value = 0.5, step = 0.1),\n      sliderInput(\"true_b1\", \"True β₁:\", min = -0.95, max = 0.95, value = 0.7, step = 0.05),\n      sliderInput(\"true_sigma\", \"True σ:\", min = 0.1, max = 2, value = 1, step = 0.1),\n      sliderInput(\"n_obs\", \"Sample size:\", min = 40, max = 500, value = 100, step = 10),\n      actionButton(\"rerun\", \"Re-run simulation\"),\n      checkboxInput(\"show_red\", \"Show plug-in fan (red)\", TRUE),\n      checkboxInput(\"show_blue\", \"Show bootstrap fan (blue)\", TRUE)\n    ),\n    \n    mainPanel(\n      plotOutput(\"fanPlot\", height = \"600px\")\n    )\n  )\n)\n\nserver &lt;- function(input, output, session) {\n  \n  simulate_ar_1 &lt;- function(T, b0, b1, s, y1 = 0){\n    y &lt;- numeric(T)\n    y[1] &lt;- y1\n    for(t in 2:T){\n      y[t] &lt;- b0 + b1 * y[t-1] + rnorm(1, 0, s)\n    }\n    return(y)\n  }\n  \n  ar_1_mean_h &lt;- function(h, b0, b1, yT){\n    if(h == 0) return(yT)\n    b0 * sum(b1^(0:(h-1))) + yT * (b1^h)\n  }\n  \n  ar_1_var_h &lt;- function(h, b1, sigma){\n    if(h == 0) return(0)\n    sigma^2 * sum(b1^(2*(0:(h-1))))\n  }\n  \n  sim_data &lt;- reactiveVal(NULL)\n  \n  observeEvent(input$rerun, {\n    set.seed(123)  # keep deterministic for reproducibility\n    n_obs &lt;- input$n_obs\n    H &lt;- 20\n    B &lt;- 7500\n    \n    y_obs &lt;- simulate_ar_1(n_obs, input$true_b0, input$true_b1, input$true_sigma, y1 = 0)\n    \n    # OLS fit\n    Y &lt;- y_obs[2:n_obs]\n    X &lt;- cbind(1, y_obs[1:(n_obs-1)])\n    ols_fit &lt;- lm(Y ~ X - 1)\n    coef_hat &lt;- coef(ols_fit)\n    b0_hat &lt;- coef_hat[1]\n    b1_hat &lt;- coef_hat[2]\n    resid_hat &lt;- resid(ols_fit)\n    sigma_hat &lt;- sqrt(sum(resid_hat^2) / (length(resid_hat) - 1))\n    \n    h_seq &lt;- 0:H\n    plug_mean &lt;- sapply(h_seq, ar_1_mean_h, b0 = b0_hat, b1 = b1_hat, yT = y_obs[n_obs])\n    plug_sd   &lt;- sqrt(sapply(h_seq, ar_1_var_h, b1 = b1_hat, sigma = sigma_hat))\n    \n    # bootstrap\n    bootstrap_forecasts &lt;- matrix(NA, nrow = B, ncol = H + 1)\n    resid_centered &lt;- resid_hat - mean(resid_hat)\n    \n    for(b in 1:B){\n      e_star &lt;- sample(resid_centered, size = n_obs - 1, replace = TRUE)\n      y_star &lt;- numeric(n_obs)\n      y_star[1] &lt;- y_obs[1]\n      for(t in 2:n_obs){\n        y_star[t] &lt;- b0_hat + b1_hat * y_star[t-1] + e_star[t-1]\n      }\n      Ys &lt;- y_star[2:n_obs]\n      Xs &lt;- cbind(1, y_star[1:(n_obs-1)])\n      fit_star &lt;- lm(Ys ~ Xs - 1)\n      coef_star &lt;- coef(fit_star)\n      b0_star &lt;- coef_star[1]\n      b1_star &lt;- coef_star[2]\n      resid_star &lt;- resid(fit_star)\n      resid_star_centered &lt;- resid_star - mean(resid_star)\n      \n      y_fut &lt;- numeric(H + 1)\n      y_fut[1] &lt;- y_obs[n_obs]\n      future_shocks &lt;- sample(resid_star_centered, size = H, replace = TRUE)\n      for(h in 1:H){\n        y_fut[h + 1] &lt;- b0_star + b1_star * y_fut[h] + future_shocks[h]\n      }\n      bootstrap_forecasts[b, ] &lt;- y_fut\n    }\n    \n    boot_mean &lt;- colMeans(bootstrap_forecasts)\n    \n    sim_data(list(\n      y_obs = y_obs,\n      plug_mean = plug_mean,\n      plug_sd = plug_sd,\n      bootstrap_forecasts = bootstrap_forecasts,\n      boot_mean = boot_mean,\n      H = H\n    ))\n  }, ignoreNULL = FALSE)\n  \n  output$fanPlot &lt;- renderPlot({\n    dat &lt;- sim_data()\n    if(is.null(dat)) return(NULL)\n    \n    y_obs &lt;- dat$y_obs\n    plug_mean &lt;- dat$plug_mean\n    plug_sd &lt;- dat$plug_sd\n    bootstrap_forecasts &lt;- dat$bootstrap_forecasts\n    boot_mean &lt;- dat$boot_mean\n    H &lt;- dat$H\n    \n    n_obs &lt;- length(y_obs)\n    \n    # Window: last 20 obs and 20 forecasts\n    obs_window &lt;- (n_obs-19):n_obs\n    f_range &lt;- (n_obs):(n_obs + H)\n    plot_range &lt;- c((n_obs-19):(n_obs+H))\n    \n    y_min &lt;- min(c(y_obs[obs_window], plug_mean - 4 * plug_sd, bootstrap_forecasts))\n    y_max &lt;- max(c(y_obs[obs_window], plug_mean + 4 * plug_sd, bootstrap_forecasts))\n    \n    plot(plot_range, rep(NA, length(plot_range)), type = \"n\",\n         xlab = \"t\", ylab = expression(y[t]),\n         ylim = c(y_min, y_max), bty = \"n\",\n         main = \"AR(1) forecast: plug-in (red) vs residual-bootstrap (blue)\")\n    \n    rect(n_obs + 0.5, y_min, n_obs + H + 0.5, y_max,\n         col = rgb(0.85,0.85,0.85,0.5), border = NA)\n    \n    lines(obs_window, y_obs[obs_window], col = \"black\", lwd = 2)\n    \n    # bootstrap fan\n    if(input$show_blue){\n      prob_levels &lt;- c(0.001, 0.005, 0.01, seq(0.02, 0.48, by = 0.02))\n      lower_probs &lt;- prob_levels\n      upper_probs &lt;- 1 - prob_levels\n      boot_fan_lower &lt;- apply(bootstrap_forecasts, 2, quantile, probs = lower_probs)\n      boot_fan_upper &lt;- apply(bootstrap_forecasts, 2, quantile, probs = upper_probs)\n      for(i in seq_len(nrow(boot_fan_lower))){\n        polygon(c(f_range, rev(f_range)),\n                c(boot_fan_upper[i, ], rev(boot_fan_lower[i, ])),\n                col = rgb(0,0,1,0.08), border = NA)\n      }\n      lines(f_range, apply(bootstrap_forecasts, 2, median),\n            col = rgb(0,0,1,0.8), lty = 2, lwd = 1.5)\n      lines(f_range, boot_mean, col = rgb(0,0,1,0.9), lty = 1, lwd = 1)\n    }\n    \n    # plug-in fan\n    if(input$show_red){\n      alpha_vec &lt;- c(0.01, seq(0.1,0.9,by=0.1))\n      for(a in rev(alpha_vec)){\n        U &lt;- qnorm(1 - a/2, mean = plug_mean, sd = plug_sd)\n        L &lt;- qnorm(a/2, mean = plug_mean, sd = plug_sd)\n        polygon(c(f_range, rev(f_range)),\n                c(U, rev(L)),\n                col = rgb(1, 0, 0, 0.15), border = NA)\n      }\n      lines(f_range, plug_mean, col = \"red\", lty = 2, lwd = 2)\n    }\n    \n    abline(v = n_obs + 0.5, lty = 3)\n  })\n}\n\nshinyApp(ui, server)"
-  },
-  {
-    "objectID": "slides/ar-forecast.html#thats-just-the-tip-of-the-iceberg",
-    "href": "slides/ar-forecast.html#thats-just-the-tip-of-the-iceberg",
-    "title": "How do you compute probabilistic forecasts from the AR(1)?",
-    "section": "That’s just the tip of the iceberg",
-    "text": "That’s just the tip of the iceberg\n\n\n\n\nIf you really want to know,\nLahiri is your man."
-  },
-  {
-    "objectID": "slides/ar-forecast.html#posterior-predictive-distribution",
-    "href": "slides/ar-forecast.html#posterior-predictive-distribution",
-    "title": "How do you compute probabilistic forecasts from the AR(1)?",
-    "section": "Posterior predictive distribution",
-    "text": "Posterior predictive distribution\nAfter computing the posterior\n\\[\np(\\Btheta\\given y_{0:T})\n=\n\\frac{p(y_{1:T}\\given y_0\\com \\Btheta)p(\\Btheta)}{p(y_{1:T}\\given y_0)}\n,\n\\]\n\nyou base forecasts on the posterior predictive distribution:\n\\[\np(y_{T+1:T+H}\\,|\\,y_{1:T})\n=\n\\int\np(y_{T+1:T+H}\\,|\\,y_{1:T},\\,\\boldsymbol{\\theta})\np(\\boldsymbol{\\theta}\\,|\\,y_{1:T})\n\\,\\text{d}\\boldsymbol{\\theta}.\n\\]\n\n\nImmediately incorporates both data and parameter uncertainty by construction.\n\n\nThere’s…nothing else to say about this."
-  },
-  {
-    "objectID": "slides/ar-forecast.html#probabilistic-prediction-is-a-natural-byproduct-of-a-bayesian-approach",
-    "href": "slides/ar-forecast.html#probabilistic-prediction-is-a-natural-byproduct-of-a-bayesian-approach",
-    "title": "How do you compute probabilistic forecasts from the AR(1)?",
-    "section": "Probabilistic prediction is a natural byproduct of a Bayesian approach",
-    "text": "Probabilistic prediction is a natural byproduct of a Bayesian approach\nIt falls out basically for free:\n\n\n\n\n\n\nBjørnstad, Jan (1990): “Predictive likelihood: a review,” Statistical Science\n\n\n“Prediction of the value of an unobserved or future random variable is a fundamental problem in statistics. From a Bayesian point of view, it is solved in a straightforward manner by finding the posterior predictive density of the unobserved random variable given the data. If one does not want to pay the Bayesian price of having to determine a prior, no unifying basis for prediction has existed until recently.”\n\n\n\n\nIt’s a price I’m willing to pay, dude."
-  },
-  {
-    "objectID": "slides/ar-forecast.html#in-general-just-simulate",
-    "href": "slides/ar-forecast.html#in-general-just-simulate",
-    "title": "How do you compute probabilistic forecasts from the AR(1)?",
-    "section": "In general, just simulate",
-    "text": "In general, just simulate\nSimulate the posterior somehow (iid, MCMC, HMC, SMC, whatever), and then for each draw, simulate the model forward:\n\\[\n\\begin{aligned}\n\\Btheta^{(j)} &\\sim p(\\boldsymbol{\\theta}\\,|\\,y_{0:T})\\\\\n\\tilde{y}^{(j)}_{T+1:T+H}\n&\\sim\np(y_{T+1:T+H}\\,|\\,y_{0:T},\\,\\Btheta^{(j)}), &&j = 1\\com 2\\com ...\\com k.\n\\end{aligned}\n\\]\nThe retained sample \\(\\tilde{y}^{(1:k)}_{T+1:T+H}\\) is drawn from the posterior predictive."
-  },
-  {
-    "objectID": "slides/ar-forecast.html#same-slide-as-before",
-    "href": "slides/ar-forecast.html#same-slide-as-before",
-    "title": "How do you compute probabilistic forecasts from the AR(1)?",
-    "section": "Same slide as before",
-    "text": "Same slide as before\nUse the simulations \\(\\tilde{y}_{t+h}^{(1:k)}=\\left\\{\\tilde{y}_{t+h}^{(1)}\\com \\tilde{y}_{t+h}^{(2)}\\com ...\\com \\tilde{y}_{t+h}^{(k)}\\right\\}\\) to construct whatever forecast object you want:\n\n\\[\n\\hat{y}_{t+h|t}=\\frac{1}{k}\\sum\\limits_{j=1}^k\\tilde{y}_{t+h}^{(j)}. \\quad (\\text{...or median})\n\\]\n\n\nForecast interval:\n\\[\n\\hat{I}_{t+h|t} = \\left[\\hat{Q}_{\\frac{\\alpha}{2}}\\left(\\tilde{y}_{t+h}^{(1:k)}\\right)\\com \\hat{Q}_{1-\\frac{\\alpha}{2}}\\left(\\tilde{y}_{t+h}^{(1:k)}\\right)\\right]. \\quad (...\\text{or hdi})\n\\]\n\n\nForecast distribution:\n\\[\n\\hat{f}_{t+h|t}\n=\n\\text{histogram}\\left(\\tilde{y}_{t+h}^{(1:k)}\\right). \\quad (...\\text{or kde})\n\\]"
-  },
-  {
-    "objectID": "slides/ar-forecast.html#one-step-ahead-in-the-conjugate-case",
-    "href": "slides/ar-forecast.html#one-step-ahead-in-the-conjugate-case",
-    "title": "How do you compute probabilistic forecasts from the AR(1)?",
-    "section": "One-step-ahead in the conjugate case",
-    "text": "One-step-ahead in the conjugate case\nWe want\n\n\\[\np(y_{t+1}\\given y_{0:t})\n=\n\\int\n\\int\np(y_{t+1}\\given\\Bbeta\\com\\sigma^2\\com y_{0:t})p(\\Bbeta\\com\\sigma^2\\given y_{0:t})\\,\\dd\\Bbeta\\,\\dd\\sigma^2\n,\n\\]\n\n\nand we know that\n\\[\n\\begin{aligned}\n\\sigma^2\\given y_{0:t}\n&\\sim\n\\text{IG}(a_t\\com b_t)\n\\\\\n\\Bbeta\\given \\sigma^2\\com y_{0:t}\n&\\sim\n\\text{N}_2(\\Bm_t\\com\\sigma^2\\BH^{-1}_t)\n\\\\\ny_{t+1}\\given\\Bbeta\\com \\sigma^2\\com y_{0:t}\n&\\sim \\N(\\Bx_{t+1}^\\tr\\Bbeta\\com\\sigma^2).\n\\end{aligned}\n\\]\n\n\nThere is actually a closed-form solution."
-  },
-  {
-    "objectID": "slides/ar-forecast.html#marginalize-out-bbeta",
-    "href": "slides/ar-forecast.html#marginalize-out-bbeta",
-    "title": "How do you compute probabilistic forecasts from the AR(1)?",
-    "section": "Marginalize out \\(\\Bbeta\\)\n",
-    "text": "Marginalize out \\(\\Bbeta\\)\n\nWe know that\n\\[\n\\begin{aligned}\n\\Bbeta\\given \\sigma^2\\com y_{0:t}\n&\\sim\n\\text{N}_2(\\Bm_t\\com\\sigma^2\\BH^{-1}_t)\n\\\\\ny_{t+1}\n&=\n\\Bx_{t+1}^\\tr\\Bbeta\n+\n\\varepsilon_{t+1}\n,\n&&\n\\varepsilon_{t+1}\\sim\\N(0\\com \\sigma^2).\n\\end{aligned}\n\\]\n\nBy affine transformation:\n\\[\n\\Bx_{t+1}^\\tr\\Bbeta\n\\given \\sigma^2\\com y_{0:t}\n\\sim\n\\N(\n\\Bx_{t+1}^\\tr\\Bm_t\n\\com\n\\sigma^2\\Bx_{t+1}^\\tr\\BH_t^{-1}\\Bx_{t+1}\n).\n\\]\n\n\nBy linear combination of independent normals:\n\\[\n\\begin{aligned}\ny_{t+1}\\given \\sigma^2\\com y_{0:t}\n&\\sim \\N\\left(\\Bx_{t+1}^\\tr\\Bm_t\\com\\sigma^2(1+\\Bx_{t+1}^\\tr\\BH_t^{-1}\\Bx_{t+1})\\right).\n\\end{aligned}\n\\]"
-  },
-  {
-    "objectID": "slides/ar-forecast.html#marginalize-out-sigma2",
-    "href": "slides/ar-forecast.html#marginalize-out-sigma2",
-    "title": "How do you compute probabilistic forecasts from the AR(1)?",
-    "section": "Marginalize out \\(\\sigma^2\\)\n",
-    "text": "Marginalize out \\(\\sigma^2\\)\n\nWe know that\n\\[\n\\begin{aligned}\n\\sigma^2\\given y_{0:t}\n&\\sim\n\\text{IG}(a_t\\com b_t)\n\\\\\ny_{t+1}\\given \\sigma^2\\com y_{0:t}\n&\\sim \\N\\left(\\Bx_{t+1}^\\tr\\Bm_t\\com\\sigma^2(1+\\Bx_{t+1}^\\tr\\BH_t^{-1}\\Bx_{t+1})\\right).\n\\end{aligned}\n\\]\n\nMarginalizing \\(\\sigma^2\\) out of this hierarchy is essentially the definition of Student’s \\(t\\):\n\n\n\\[\n\\begin{aligned}\ny_{t+1}\\given y_{0:t}\n&\\sim\nt(\\nu_{t+1|t}\\com\\bar{y}_{t+1|t}\\com s_{t+1|t}^2)\n\\\\\n\\\\\n\\nu_{t+1|t}\n&=\n2a_t\n\\\\\n\\bar{y}_{t+1|t}\n&=\n\\Bx_{t+1}^\\tr\\Bm_t\n\\\\\ns_{t+1|t}^2\n&=\n\\frac{b_t}{a_t}\n(1+\\Bx_{t+1}^\\tr\\BH_t^{-1}\\Bx_{t+1})\n.\n\\end{aligned}\n\\]\n\n\nSo, Student’s \\(t\\) with location-scale."
-  },
-  {
-    "objectID": "slides/ar-forecast.html#one-step-ahead-probabilistic-prediction",
-    "href": "slides/ar-forecast.html#one-step-ahead-probabilistic-prediction",
-    "title": "How do you compute probabilistic forecasts from the AR(1)?",
-    "section": "One-step-ahead probabilistic prediction",
-    "text": "One-step-ahead probabilistic prediction\n\nOur density forecast is:\n\\[\ny_{t+1}\\given y_{0:t}\n\\sim\nt(\\nu_{t+1|t}\\com\\bar{y}_{t+1|t}\\com s_{t+1|t}^2).\n\\]\n\n\nThis gives a \\(100\\times(1-\\alpha)\\%\\) credible interval:\n\\[\n\\bar{y}_{t+1|t}\n\\pm\n\\underbrace{t_{\\nu_{t+1|t}}\n\\left(\n1-\\frac{\\alpha}{2}\n\\right)}_{\\text{quantile of }t(\\nu_{t+1|t}\\com 0\\com 1)}\ns_{t+1|t}\n.\n\\]\n\n\nAnd the moments are\n\\[\n\\begin{aligned}\nE(y_{t+1}\\given y_{0:t})\n&=\n\\bar{y}_{t+1|t}\n,\n&&\n\\nu_{t+1|t}&gt;1\n\\\\\n\\text{var}(y_{t+1}\\given y_{0:t})\n&=\n\\frac{\\nu_{t+1|t}}{\\nu_{t+1|t}-2}\ns_{t+1|t}^2\n,\n&&\n\\nu_{t+1|t}&gt;2.\n\\end{aligned}\n\\]"
-  },
-  {
-    "objectID": "slides/ar-forecast.html#things-to-notice",
-    "href": "slides/ar-forecast.html#things-to-notice",
-    "title": "How do you compute probabilistic forecasts from the AR(1)?",
-    "section": "Things to notice",
-    "text": "Things to notice\n\nGoal: generate probabilistic predictions incorporating many sources of uncertainty. In the small world of the AR(1), these are mainly uncertainty from parameter estimation and the inherent randomness of future observations.\n\n\n\n\nClassical approach: pretty unnatural. Can’t do anything analytically. Whole books have been written about how the bootstrapping ought to go;\n\n\n\n\n\nBayesian approach: totally natural. Everything is probabilistic already. Posterior predictive simulation is conceptually straightforward. We can even do the math in a special case.\n\n\n\nBut in fairness, the Bayes stuff leans hard into normality. The bootstrap stuff less so."
   },
   {
     "objectID": "syllabus/syllabus-assignments.html",
