@@ -2129,6 +2129,7 @@ average_log_score(stonks, pred_params_ar1_real)
 ```{r}
 #| message: false
 library(scoringRules)
+library(scoringutils)
 ```
 
 
@@ -2191,7 +2192,7 @@ Gird your loins:
 
 $$
 \begin{matrix}
-\text{1. Original data} &&& y_{0:n} && \\
+\text{1. Original data} &&& y_{0:T} && \\
 &&& \downarrow && \\
 \text{2. OLS} &&& \hat{\Btheta}_{T} && \\
 &&& \downarrow && \\
