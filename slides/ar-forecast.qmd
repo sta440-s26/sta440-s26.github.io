@@ -473,23 +473,18 @@ shinyApp(ui = ui, server = server)
 
 ## But wait!
 
-The parameters *aren't* known. They're a noisy estimate computed from imperfect data. There is sampling uncertainty associated with $\hat{\Btheta}$. Shouldn't that extra source of uncertainty be propagated through to the predictive distribution?
+::: incremental 
+- The parameters *aren't* known. They're a noisy estimate computed from imperfect data;
+- There is sampling uncertainty associated with $\hat{\Btheta}$. Shouldn't that extra source of uncertainty be propagated through to the predictive distribution?
+- Yes, but how? Can we just plug in estimates and replace $z$ quantiles with $t$ quantiles?
+- Not quite. That was fine for iid regression, but it all breaks under time series dependence.
+:::
 
-. . .
+## Bootstrap!
 
-You bet. But how? Can we just replace $z$ quantiles with $t$ quantiles?
+To produce prediction intervals that incorporate both future data uncertainty and parameter estimation uncertainty, you need to use *the bootstrap*. But again, it's not the vanilla, iid bootstrap. It's a bootstrap on the *residuals*, which are assumed iid in this model. 
 
-
-. . .
-
-Not quite.
-
-## The hard truth
-
-Jabber about bootstrap
-
-## Show them some code they could actually use
-
+The details are in an appendix at the end of this deck.
 
 ## Compare intervals {.scrollable}
 
@@ -727,12 +722,53 @@ It falls out basically for free:
 "The anti-Bayesian is standing at the back window with a shotgun, scanning for priors coming over the hill, while a million assumptions just walk right into his house through the front door."
 :::
 
-## Conjugate Bayes behaves like iid regression
+## Conjugate Bayes behaves like iid regression {.small}
 
-you get student's t for 1 step, which begets intervals and densities and points
+A conjugate normal-inverse-gamma prior begets a conjugate posterior:
 
+$$
+\begin{aligned}
+\sigma^2\given y_{0:t}
+&\sim
+\text{IG}(a_t\com b_t)
+\\
+\Bbeta\given \sigma^2\com y_{0:t}
+&\sim 
+\text{N}_2(\Bm_t\com\sigma^2\BH^{-1}_t)
+\\
+y_{t+1}\given\Bbeta\com \sigma^2\com y_{0:t}
+&\sim \N(\Bx_{t+1}^\tr\Bbeta\com\sigma^2),\quad \Bx_{t+1}=\begin{bmatrix}1 & y_{t}\end{bmatrix}^\tr.
+\end{aligned}
+$$
 
+. . .
 
+The one-step posterior predictive distribution is non-standard Student's $t$:
+
+$$
+\begin{aligned}
+y_{t+1}\given y_{0:t}
+&\sim
+t(\nu_{t+1|t}\com\bar{y}_{t+1|t}\com s_{t+1|t}^2)
+\\
+\\
+\nu_{t+1|t}
+&=
+2a_t
+\\
+\bar{y}_{t+1|t}
+&=
+\Bx_{t+1}^\tr\Bm_t
+\\
+s_{t+1|t}^2
+&=
+\frac{b_t}{a_t}
+(1+\Bx_{t+1}^\tr\BH_t^{-1}\Bx_{t+1})
+.
+\end{aligned}
+$$
+
+To forecast farther out in time, you need to simulate. 
 
 ## One-step-ahead probabilistic prediction {.medium}
 
@@ -746,24 +782,7 @@ y_{t+1}\mid y_{0:t}
 t(\nu_{t+1|t}\com\bar{y}_{t+1|t}\com s_{t+1|t}^2).
 $$
 
-. . .
-
-This gives a $100\times(1-\alpha)\%$ credible interval:
-
-$$
-\bar{y}_{t+1|t}
-\pm
-\underbrace{t_{\nu_{t+1|t}}
-\left(
-1-\frac{\alpha}{2}
-\right)}_{\text{quantile of }t(\nu_{t+1|t}\com 0\com 1)}
-s_{t+1|t}
-.
-$$
-
-. . .
-
-And the moments are 
+The moments are 
 
 $$
 \begin{aligned}
@@ -783,6 +802,8 @@ s_{t+1|t}^2
 \nu_{t+1|t}>2.
 \end{aligned}
 $$
+
+Use quantiles to get prediction intervals.
 
 # Monte Carlo
 
@@ -2227,33 +2248,3 @@ If you really want to know,
 [Lahiri](https://doi.org/10.1007/978-1-4757-3803-2) is your man.
 :::
 :::::
-
-## Probabilistic forecasting via Monte Carlo {.small}
-
-Use the simulations $\tilde{y}_{t+h}^{(1:k)}=\left\{\tilde{y}_{t+h}^{(1)}\com \tilde{y}_{t+h}^{(2)}\com ...\com \tilde{y}_{t+h}^{(k)}\right\}$ to construct whatever forecast object you want:
-
-. . .
-
-$$
-\hat{y}_{t+h|t}=\frac{1}{k}\sum\limits_{j=1}^k\tilde{y}_{t+h}^{(j)}. \quad (\text{...or median})
-$$
-
-. . .
-
-Forecast interval:
-
-$$
-\hat{I}_{t+h|t} = \left[\hat{Q}_{\frac{\alpha}{2}}\left(\tilde{y}_{t+h}^{(1:k)}\right)\com \hat{Q}_{1-\frac{\alpha}{2}}\left(\tilde{y}_{t+h}^{(1:k)}\right)\right]. \quad (...\text{or hdi})
-$$
-
-. . .
-
-Forecast distribution:
-
-$$
-\hat{f}_{t+h|t}
-= 
-\text{histogram}\left(\tilde{y}_{t+h}^{(1:k)}\right). \quad (...\text{or kde})
-$$
-
-
