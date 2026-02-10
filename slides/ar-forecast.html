@@ -1128,7 +1128,7 @@ s_{t+1|t}^2
 </div>
 </div>
 </div>
-</section><section id="forecast-distributions-from-iid-normal-model" class="slide level2"><h2>Forecast distributions from iid normal model</h2>
+</section><section id="forecast-distributions-from-iid-normal" class="slide level2"><h2>Forecast distributions from iid normal</h2>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -1155,7 +1155,7 @@ s_{t+1|t}^2
 </div>
 </div>
 </div>
-</section><section id="forecast-distributions-from-iid-normal-model-1" class="slide level2"><h2>Forecast distributions from iid normal model</h2>
+</section><section id="forecast-distributions-from-iid-normal-1" class="slide level2"><h2>Forecast distributions from iid normal</h2>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -1283,11 +1283,11 @@ L(y_{t+1},\hat{y}) = |y_{t+1} - \hat{y}|
 </section><section id="our-real-data" class="slide level2 medium"><h2>Our real data</h2>
 <p>MSE of forecast mean:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a><span class="fu">mean</span>((stonks <span class="sc">-</span> pred_params_iid_real[,<span class="st">"location"</span>])<span class="sc">^</span><span class="dv">2</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a><span class="fu">mean</span>((rgdp <span class="sc">-</span> pred_params_iid_real[,<span class="st">"location"</span>])<span class="sc">^</span><span class="dv">2</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 6.66254</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a><span class="fu">mean</span>((stonks <span class="sc">-</span> pred_params_ar1_real[,<span class="st">"location"</span>])<span class="sc">^</span><span class="dv">2</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a><span class="fu">mean</span>((rgdp <span class="sc">-</span> pred_params_ar1_real[,<span class="st">"location"</span>])<span class="sc">^</span><span class="dv">2</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2.582788</code></pre>
 </div>
@@ -1295,11 +1295,11 @@ L(y_{t+1},\hat{y}) = |y_{t+1} - \hat{y}|
 <div class="fragment">
 <p>MAE of forecast median (same as mean for these methods):</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a><span class="fu">mean</span>(<span class="fu">abs</span>(stonks <span class="sc">-</span> pred_params_iid_real[,<span class="st">"location"</span>]), <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a><span class="fu">mean</span>(<span class="fu">abs</span>(rgdp <span class="sc">-</span> pred_params_iid_real[,<span class="st">"location"</span>]), <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1.861102</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a><span class="fu">mean</span>(<span class="fu">abs</span>(stonks <span class="sc">-</span> pred_params_ar1_real[,<span class="st">"location"</span>]), <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a></a><span class="fu">mean</span>(<span class="fu">abs</span>(rgdp <span class="sc">-</span> pred_params_ar1_real[,<span class="st">"location"</span>]), <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1.054689</code></pre>
 </div>
@@ -1472,7 +1472,7 @@ G_1(y_1)\com G_2(y_2)\com ...\com G_t(y_t)\com ...\sim\text{Unif}(0\com 1).
 <div class="fragment">
 <p>Let’s check!</p>
 </div>
-</section><section id="iid-normal-method-on-simulated-data" class="slide level2"><h2>iid normal method on simulated data</h2>
+</section><section id="iid-normal-method-on-simulated-data" class="slide level2 small"><h2>iid normal method on simulated data</h2>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -1481,7 +1481,7 @@ G_1(y_1)\com G_2(y_2)\com ...\com G_t(y_t)\com ...\sim\text{Unif}(0\com 1).
 </div>
 </div>
 </div>
-</section><section id="bayesian-ar1-on-simulated-data" class="slide level2"><h2>Bayesian AR(1) on simulated data</h2>
+</section><section id="bayesian-ar1-on-simulated-data" class="slide level2 small"><h2>Bayesian AR(1) on simulated data</h2>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -1493,7 +1493,7 @@ G_1(y_1)\com G_2(y_2)\com ...\com G_t(y_t)\com ...\sim\text{Unif}(0\com 1).
 <div class="fragment">
 <p>Remember: up to estimation error, this method <em>is</em> exactly correct by construction.</p>
 </div>
-</section><section id="iid-normal-method-on-gdp-growth" class="slide level2"><h2>iid normal method on GDP growth</h2>
+</section><section id="iid-normal-method-on-gdp-growth" class="slide level2 small"><h2>iid normal method on GDP growth</h2>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -1503,7 +1503,7 @@ G_1(y_1)\com G_2(y_2)\com ...\com G_t(y_t)\com ...\sim\text{Unif}(0\com 1).
 </div>
 </div>
 <p>Clearly not uniform.</p>
-</section><section id="bayesian-ar1-on-gdp-growth" class="slide level2"><h2>Bayesian AR(1) on GDP growth</h2>
+</section><section id="bayesian-ar1-on-gdp-growth" class="slide level2 small"><h2>Bayesian AR(1) on GDP growth</h2>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -1630,11 +1630,11 @@ G_1(y_1)\com G_2(y_2)\com ...\com G_t(y_t)\com ...\sim\text{Unif}(0\com 1).
 <div class="fragment">
 <p>Real data:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a></a><span class="fu">average_log_score</span>(stonks, pred_params_iid_real)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a></a><span class="fu">average_log_score</span>(rgdp, pred_params_iid_real)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] -2.373455</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a></a><span class="fu">average_log_score</span>(stonks, pred_params_ar1_real)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a></a><span class="fu">average_log_score</span>(rgdp, pred_params_ar1_real)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] -1.886891</code></pre>
 </div>

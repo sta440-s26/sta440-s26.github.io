@@ -812,11 +812,11 @@
     "text": "Dataset 1: simulated"
   },
   {
-    "objectID": "slides/ar-forecast.html#forecast-distributions-from-iid-normal-model",
-    "href": "slides/ar-forecast.html#forecast-distributions-from-iid-normal-model",
+    "objectID": "slides/ar-forecast.html#forecast-distributions-from-iid-normal",
+    "href": "slides/ar-forecast.html#forecast-distributions-from-iid-normal",
     "title": "Probabilistic predictions",
-    "section": "Forecast distributions from iid normal model",
-    "text": "Forecast distributions from iid normal model"
+    "section": "Forecast distributions from iid normal",
+    "text": "Forecast distributions from iid normal"
   },
   {
     "objectID": "slides/ar-forecast.html#forecast-distributions-from-bayesian-ar1",
@@ -833,11 +833,11 @@
     "text": "Dataset 2: US quarterly real GDP growth"
   },
   {
-    "objectID": "slides/ar-forecast.html#forecast-distributions-from-iid-normal-model-1",
-    "href": "slides/ar-forecast.html#forecast-distributions-from-iid-normal-model-1",
+    "objectID": "slides/ar-forecast.html#forecast-distributions-from-iid-normal-1",
+    "href": "slides/ar-forecast.html#forecast-distributions-from-iid-normal-1",
     "title": "Probabilistic predictions",
-    "section": "Forecast distributions from iid normal model",
-    "text": "Forecast distributions from iid normal model"
+    "section": "Forecast distributions from iid normal",
+    "text": "Forecast distributions from iid normal"
   },
   {
     "objectID": "slides/ar-forecast.html#forecast-distributions-from-bayesian-ar1-1",
@@ -886,7 +886,7 @@
     "href": "slides/ar-forecast.html#our-real-data",
     "title": "Probabilistic predictions",
     "section": "Our real data",
-    "text": "Our real data\nMSE of forecast mean:\n\nmean((stonks - pred_params_iid_real[,\"location\"])^2, na.rm = TRUE)\n\n[1] 6.66254\n\nmean((stonks - pred_params_ar1_real[,\"location\"])^2, na.rm = TRUE)\n\n[1] 2.582788\n\n\n\nMAE of forecast median (same as mean for these methods):\n\nmean(abs(stonks - pred_params_iid_real[,\"location\"]), na.rm = TRUE)\n\n[1] 1.861102\n\nmean(abs(stonks - pred_params_ar1_real[,\"location\"]), na.rm = TRUE)\n\n[1] 1.054689"
+    "text": "Our real data\nMSE of forecast mean:\n\nmean((rgdp - pred_params_iid_real[,\"location\"])^2, na.rm = TRUE)\n\n[1] 6.66254\n\nmean((rgdp - pred_params_ar1_real[,\"location\"])^2, na.rm = TRUE)\n\n[1] 2.582788\n\n\n\nMAE of forecast median (same as mean for these methods):\n\nmean(abs(rgdp - pred_params_iid_real[,\"location\"]), na.rm = TRUE)\n\n[1] 1.861102\n\nmean(abs(rgdp - pred_params_ar1_real[,\"location\"]), na.rm = TRUE)\n\n[1] 1.054689"
   },
   {
     "objectID": "slides/ar-forecast.html#any-ideas-1",
@@ -1054,7 +1054,7 @@
     "href": "slides/ar-forecast.html#for-our-examples",
     "title": "Probabilistic predictions",
     "section": "For our examples",
-    "text": "For our examples\n\nSimulated data:\n\naverage_log_score(y, pred_params_iid_sim)\n\n[1] -3.965963\n\naverage_log_score(y, pred_params_ar1_sim)\n\n[1] -2.132817\n\n\n\n\nReal data:\n\naverage_log_score(stonks, pred_params_iid_real)\n\n[1] -2.373455\n\naverage_log_score(stonks, pred_params_ar1_real)\n\n[1] -1.886891"
+    "text": "For our examples\n\nSimulated data:\n\naverage_log_score(y, pred_params_iid_sim)\n\n[1] -3.965963\n\naverage_log_score(y, pred_params_ar1_sim)\n\n[1] -2.132817\n\n\n\n\nReal data:\n\naverage_log_score(rgdp, pred_params_iid_real)\n\n[1] -2.373455\n\naverage_log_score(rgdp, pred_params_ar1_real)\n\n[1] -1.886891"
   },
   {
     "objectID": "slides/ar-forecast.html#authors-and-papers-to-know",
