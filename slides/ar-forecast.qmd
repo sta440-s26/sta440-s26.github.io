@@ -1312,8 +1312,8 @@ timespan <- rgdp_growth$quarter[!is.na(rgdp_growth$v26Q1)]
 plot(timespan, output, type = "l", bty = "n", xlab = "Quarter", ylab = "YoY % Change")
 grid()
 
-stonks <- output
-Tlen <- length(stonks)
+rgdp <- output
+Tlen <- length(rgdp)
 
 pred_params_ar1_real <- matrix(NA, nrow = Tlen, ncol = 3,
                               dimnames = list(NULL, c("df", "location", "scale")))
@@ -1337,10 +1337,10 @@ b <- 1
 
 for (t in 2:Tlen) {
   
-  y_past <- stonks[1:(t-1)]
+  y_past <- rgdp[1:(t-1)]
   n <- length(y_past)
   
-  x_t <- matrix(c(1, stonks[t-1]), nrow = p)
+  x_t <- matrix(c(1, rgdp[t-1]), nrow = p)
   
   df <- 2 * a
   loc <- as.numeric(t(x_t) %*% m)
@@ -1348,7 +1348,7 @@ for (t in 2:Tlen) {
   
   pred_params_ar1_real[t, ] <- c(df, loc, scale)
   
-  res <- nig_update(stonks[t], x_t, a, b, m, V)
+  res <- nig_update(rgdp[t], x_t, a, b, m, V)
   a <- res$a; b <- res$b; m <- res$m; V <- res$V
   
   if (n >= 2) {
@@ -1521,8 +1521,8 @@ mean(abs(y - pred_params_ar1_sim[,"location"]), na.rm = TRUE)
 MSE of forecast mean:
 
 ```{r}
-mean((stonks - pred_params_iid_real[,"location"])^2, na.rm = TRUE)
-mean((stonks - pred_params_ar1_real[,"location"])^2, na.rm = TRUE)
+mean((rgdp - pred_params_iid_real[,"location"])^2, na.rm = TRUE)
+mean((rgdp - pred_params_ar1_real[,"location"])^2, na.rm = TRUE)
 ```
 
 
@@ -1531,8 +1531,8 @@ mean((stonks - pred_params_ar1_real[,"location"])^2, na.rm = TRUE)
 MAE of forecast median (same as mean for these methods):
 
 ```{r}
-mean(abs(stonks - pred_params_iid_real[,"location"]), na.rm = TRUE)
-mean(abs(stonks - pred_params_ar1_real[,"location"]), na.rm = TRUE)
+mean(abs(rgdp - pred_params_iid_real[,"location"]), na.rm = TRUE)
+mean(abs(rgdp - pred_params_ar1_real[,"location"]), na.rm = TRUE)
 ```
 
 # Evaluating interval forecasts
@@ -1621,9 +1621,9 @@ mean(PI_ar1_sim[,2], na.rm = TRUE)
 
 ```{r}
 #| echo: false
-PI_iid_real <- compute_PI_coverage(stonks, pred_params_iid_real, alpha = 0.10)
+PI_iid_real <- compute_PI_coverage(rgdp, pred_params_iid_real, alpha = 0.10)
 
-PI_ar1_real <- compute_PI_coverage(stonks, pred_params_ar1_real, alpha = 0.10)
+PI_ar1_real <- compute_PI_coverage(rgdp, pred_params_ar1_real, alpha = 0.10)
 
 ```
 
@@ -1852,7 +1852,7 @@ PIT <- mapply(function(y_t, df_t, mu_t, sigma_t) {
                   if(any(is.na(c(y_t, df_t, mu_t, sigma_t)))) return(NA)
                   plst(q = y_t, df = df_t, mu = mu_t, sigma = sigma_t)
                 },
-                stonks, 
+                rgdp, 
                 pred_params_iid_real[,"df"], 
                 pred_params_iid_real[,"location"], 
                 pred_params_iid_real[,"scale"])
@@ -1873,7 +1873,7 @@ PIT <- mapply(function(y_t, df_t, mu_t, sigma_t) {
                   if(any(is.na(c(y_t, df_t, mu_t, sigma_t)))) return(NA)
                   plst(q = y_t, df = df_t, mu = mu_t, sigma = sigma_t)
                 },
-                stonks, 
+                rgdp, 
                 pred_params_ar1_real[,"df"], 
                 pred_params_ar1_real[,"location"], 
                 pred_params_ar1_real[,"scale"])
@@ -2135,8 +2135,8 @@ average_log_score(y, pred_params_ar1_sim)
 Real data:
 
 ```{r}
-average_log_score(stonks, pred_params_iid_real)
-average_log_score(stonks, pred_params_ar1_real)
+average_log_score(rgdp, pred_params_iid_real)
+average_log_score(rgdp, pred_params_ar1_real)
 ```
 
 ## Authors and papers to know
