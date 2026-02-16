@@ -1,0 +1,802 @@
+---
+title: "More time series models"
+format: revealjs
+auto-stretch: false
+filters:
+  - shinylive
+---
+
+
+# Recap
+
+## Time series models {.small}
+
+- A [**time series**]{style="color:blue;"} is a set of measurements collected over time;
+
+- We model these data as a sequence of [**dependent**]{style="color:blue;"} random variables:
+
+$$
+\mathbf{y}_{0:T} = \{\mathbf{y}_0,\,\mathbf{y}_1,\,\mathbf{y}_2,\,...,\,\mathbf{y}_T\}.
+$$
+
+- A [**time series model**]{style="color:blue;"} is "just" their joint probability distribution:
+
+$$
+p(\mathbf{y}_{0:T}) = p(\mathbf{y}_0)\prod_{t=1}^Tp(\mathbf{y}_t\,|\,\mathbf{y}_{0:t-1}).
+$$
+
+
+## The autoregression of order $p$  {.small}
+
+$$
+\begin{aligned}
+y_t
+&=
+\beta_0
++
+\beta_1
+y_{t-1}
++
+\beta_2
+y_{t-2}
++
+\cdots 
++
+\beta_p
+y_{t-p}
++
+\varepsilon_t,
+\quad
+\varepsilon_t\iid\text{N}(0\com\sigma^2).
+\end{aligned}
+$$
+
+. . .
+
+This implies a joint distribution written marginal-conditional style:
+
+$$
+\begin{aligned}
+p(y_{1:T}\mid y_0\com y_{-1}\com ...\com y_{1-p})
+&=
+\prod_{t=1}^Tp(y_t\mid y_{1-p:t-1})\\
+\\
+&=
+\prod_{t=1}^Tp(y_t\mid y_{t-p:t-1}).
+\end{aligned}
+$$
+
+. . .
+
+The joint distribution is just a big ol' multivariate normal with a structured mean and covariance that depend on the parameters.
+
+
+
+## Estimation 
+
+Similar to iid regression:
+
+- Classical approach: MLE = OLS;
+- Bayesian approach: normal-inverse-gamma conjugate prior.
+
+But the inferential theory is very different!
+
+## Probabilistic prediction
+
+To generate interval and density predictions $h$-steps-ahead:
+
+- Classical approach: bootstrap;
+- Bayesian approach: posterior predictive simulation.
+
+These incorporate data and parameter estimation uncertainty.
+
+## Hyperparameter tuning
+
+The lag order $p$ is a hyperparameter that must be selected:
+
+- eyeball ACF plots;
+- optimize canned criteria like AIC or BIC;
+- time series cross validation.
+
+# The moving average model 
+
+## Why?
+
+We have seen this so far:
+
+$$
+y_t
+=
+\beta_0
++
+\sum\limits_{l=1}^p\beta_ly_{t-l}
++
+\underbrace{
+u_t
+}_{\text{iid}}
+.
+$$
+
+What if there is time series dependence in the error term as well?
+
+. . .
+
+What kind?
+
+## Autoregressive moving average (ARMA) {.medium}
+
+ARMA($p$, $q$):
+
+$$
+y_t
+=
+\beta_0
++
+\underbrace{\sum\limits_{l=1}^p\beta_ly_{t-l}}_{\text{autoregressive}}
++
+\underbrace{\sum_{i=1}^q\theta_i\varepsilon_{t-i}}_{\text{moving average}}
++
+\varepsilon_t,
+\quad
+\varepsilon_t
+\iid
+\N(0\com \sigma^2)
+.
+$$
+
+. . .
+
+Flexible class of models that can capture pretty generic *linear* dependencies.
+
+::: incremental
+- $p=q=0$ gives the iid model;
+- $q=0$ gives the pure AR($p$) we've already seen;
+- $p=0$ gives the pure MA($q$), which is seldom used on its own.
+:::
+
+
+## What is the joint distribution?
+
+It's normal! The mean and covariance depend on the AR and MA parameters and the error variance:
+
+$$
+\begin{bmatrix}
+y_1 & y_2 & \cdots & y_T
+\end{bmatrix}^\tr
+\sim\N_T\left(\Bmu\com \BSigma\right).
+$$
+
+Don't worry about the details, but there are theorems that say the ARMA model is flexible enough to capture *any* stable, linear time series dependence if $p$ and $q$ are sufficiently large.
+
+## Graphical structure
+
+On the board!
+
+
+## Autocovariance 
+
+- The moving average piece is always stable;
+- If the AR piece is stable as well, then we have a shift-invariant autocovariance function 
+
+$$
+\gamma(h)=\cov(y_{t+h}\com y_{t}).
+$$
+
+- The formulas aren't pretty, but a computer can handle it easily;
+- We know an AR(1) is stable if $|\beta_1|<1$. For the general AR(p), it's complicated.
+
+## ACF of the ARMA {.scrollable .small}
+
+```{shinylive-r}
+#| standalone: true
+#| viewerHeight: 700
+
+library(shiny)
+
+plot_arma_acf <- function(ar = numeric(), ma = numeric(), lag.max = 10){
+  y_vals <- ARMAacf(ar = ar, ma = ma, lag.max = lag.max)
+  plot(0:lag.max, y_vals, pch = 19, ylim = c(-1, 1),
+       xlab = "h", ylab = expression(rho~"(h)"))
+  segments(0:lag.max, 0, 0:lag.max, y_vals)
+  abline(h = 0, col = "lightgrey")
+}
+
+# Define UI for application that draws a histogram
+ui <- fluidPage(
+  
+  # Application title
+  titlePanel("Theoretical autocorrelation of a stationary ARMA(2, 2)"),
+  
+  # Sidebar with a slider input for number of bins 
+  sidebarLayout(
+    sidebarPanel(
+      sliderInput("b1",
+                  "β₁",
+                  min = -2,
+                  max = 2,
+                  value = 0,
+                  step = 0.05),
+      sliderInput("b2",
+                  "β₂",
+                  min = -2,
+                  max = 2,
+                  value = 0,
+                  step = 0.05),
+      sliderInput("th1",
+                  "θ₁",
+                  min = -0.99,
+                  max = 0.99,
+                  value = 0,
+                  step = 0.01),
+      sliderInput("th2",
+                  "θ₁",
+                  min = -0.99,
+                  max = 0.99,
+                  value = 0,
+                  step = 0.01),
+      sliderInput("H",
+                  "H",
+                  min = 0,
+                  max = 50,
+                  step = 1,
+                  value = 20)
+    ),
+    
+    # Show a plot of the generated distribution
+    mainPanel(
+            plotOutput("acf", height = "400px"),
+      plotOutput("stationarityPlot", height = "400px"),
+      verbatimTextOutput("stationarity")
+    )
+  )
+)
+
+# Define server logic required to draw a histogram
+server <- function(input, output) {
+  
+  output$acf <- renderPlot({
+    b1 <- input$b1
+    b2 <- input$b2
+    th1 <- input$th1
+    th2 <- input$th2
+    H <- input$H
+    
+    plot_arma_acf(ar = c(b1, b2), ma = c(th1, th2), lag.max = H)
+
+  })
+  
+    output$stationarityPlot <- renderPlot({
+    b1 <- input$b1
+    b2 <- input$b2
+    
+    # triangle vertices
+    tri_x <- c(2, -2, 0)
+    tri_y <- c(-1, -1, 1)
+    par(mar = c(4, 4, 0.1, 4))
+    plot(tri_x, tri_y, type = "n",
+         xlab = expression(beta[1]),
+         ylab = expression(beta[2]),
+         xlim = c(-2.1, 2.1),
+         ylim = c(-1.1, 1.1),
+         xaxt = "n", yaxt = "n", bty = "n")
+    axis(1, at = c(-2, 0, 2), pos = 0)
+    axis(2, at = c(-1, 0, 1), pos = 0)
+    
+    polygon(tri_x, tri_y, col = rgb(0, 0, 1, 0.2), border = "blue", lwd = 2)
+    points(b1, b2, pch = 19, col = "red", cex = 1.5)
+  })
+}
+
+# Run the application 
+shinyApp(ui = ui, server = server)
+```
+
+## Estimation 
+
+It's a mess:
+
+- The maximum likelihood problem for ARMA must be solved numerically;
+- There is no conjugate prior, and MCMC is a bit of a nightmare here.
+
+Base `R` ships with some basic tools.
+
+## Simulate an ARMA {.small}
+
+```{r}
+set.seed(8675309)
+
+T <- 200
+y <- arima.sim(
+  n = T,
+  model = list(ar = 0.6, ma = -0.4)
+)
+```
+
+## Fit an ARMA numerically {.small}
+
+```{r}
+my_arma_fit <- arima(y, order = c(1, 0, 1))
+
+my_arma_fit
+```
+
+Not far from the true values we provided. It's tougher mathematically than iid regression, but we have asymptotic statistical theory for ARMA models (even when they're not stable!).
+
+## Predict {.small}
+
+```{r}
+h <- 5
+fc <- predict(my_arma_fit, n.ahead = h)
+
+fc$pred # point prediction
+
+fc$se # predictive standard error
+```
+
+# State space models
+
+## State space models (SSMs) {.small}
+
+State space models are a meta-family of models that nest as special cases most time series models you will encounter in practice. SSMs are...
+
+::: incremental
+- time series models;
+- graphical models;
+- latent variable models;
+- hierarchical models;
+- Bayesian models.
+:::
+
+. . .
+
+This makes them really rich and interesting! Anything you know about those separate areas of statistics helps with studying SSMs.
+
+## The main idea {.medium}
+
+::: incremental
+- State space models are first and foremost *latent variable* models;
+
+- They treat the observed time series $\By_t$ as a noisy or corrupted version of an unobserved (or *latent*) time series $\Bs_t$;
+
+- The goal of inference is to use what we observed ($\By_t$) to learn about what we didn't observe ($\Bs_t$);
+
+- The is usually done from a Bayesian point of view, so *learning* means accessing $p(\Bs_{1:T}\mid \By_{1:T})$;
+
+- There are usually unobserved parameters $\Btheta$ floating around that we also have to deal with.
+:::
+
+## Example: signal-in-noise {.small}
+
+::::: columns
+::: {.column width="40%"}
+
+The $y_t$ we got to see is a corrupted version of some smooth underlying trend or signal $s_t$ that we wish to extract:
+
+$$
+y_t=s_t+\varepsilon_t,\quad \varepsilon_t\indep\N(0\com \sigma^2).
+$$
+:::
+
+::: {.column width="60%"}
+```{r}
+#| echo: false
+
+set.seed(123)
+T <- 100
+
+# Simulate data with chosen true variance
+y <- sin((1:T) / 4) + rnorm(T, sd = 1)
+
+plot(1:T, y, type = "l", lwd = 2, xlab = "t", ylab = expression(y[t]),
+         main = "Signal-in-noise", col = "black")
+curve(sin(x/4), from = 1, to = T, n = 2000, col = "red", add = TRUE, lwd = 2)
+```
+:::
+
+::::
+
+
+
+## Example: stochastic volatility {.small}
+
+
+::::: columns
+::: {.column width="40%"}
+
+The variance of $y_t$ is changing over time:
+
+$$
+y_t=\mu+\varepsilon_t,\quad \varepsilon_t\indep\N(0\com \sigma_t^2).
+$$
+:::
+
+::: {.column width="60%"}
+```{r}
+#| echo: false
+
+set.seed(123)
+
+# --- Parameters ---
+T  <- 500          # length of series
+sigma_h <- 0.5    # volatility of log-variance random walk
+h0 <- -1           # starting log variance
+
+# --- 1. Simulate log-variance random walk ---
+h <- numeric(T)
+h[1] <- h0
+
+for (t in 2:T) {
+  h[t] <- h[t-1] + rnorm(1, mean = 0, sd = sigma_h)
+}
+
+# Convert to variance and sd
+sigma2 <- exp(h)
+sigma  <- sqrt(sigma2)
+
+# --- 2. Simulate observations conditional on variances ---
+y <- rnorm(T, mean = 0, sd = sigma)
+
+# --- 3. Plot the simulated time series ---
+plot(
+  y, type = "l",
+  main = "Stochastic volatility",
+  ylab = expression(y[t]),
+  xlab = "Time"
+)
+
+```
+:::
+
+::::
+
+## Example: regime-switching {.small}
+
+::::: columns
+::: {.column width="40%"}
+
+The distribution of $y_t$ is abruptly switching between a discrete set of options:
+
+$$
+y_t
+\sim
+\begin{cases}
+\N(\mu_1\com \sigma^2_1) & \text{if }s_t=1
+\\
+\N(\mu_2\com \sigma^2_2) & \text{if }s_t=2
+\end{cases}
+$$
+:::
+
+::: {.column width="60%"}
+```{r}
+#| echo: false
+
+set.seed(123)
+
+T <- 500
+
+# --- Very persistent transition matrix ---
+P <- matrix(c(
+  0.98, 0.02,
+  0.02, 0.98
+), nrow = 2, byrow = TRUE)
+
+# Make regimes visually very different
+mu    <- c(-1.5, 4)
+sigma <- c(0.6, 2.2)
+
+# --- 1. Simulate hidden states ---
+S <- numeric(T)
+S[1] <- 1   # start in regime 1 for clarity
+
+for (t in 2:T) {
+  S[t] <- sample(1:2, 1, prob = P[S[t-1], ])
+}
+
+# --- 2. Simulate observations ---
+y <- numeric(T)
+for (t in 1:T) {
+  y[t] <- rnorm(1, mean = mu[S[t]], sd = sigma[S[t]])
+}
+
+# --- 3. Plot series ---
+plot(
+  y, type = "l",
+  main = "Regime-switching",
+  xlab = "Time",
+  ylab = expression(y[t])
+)
+
+```
+:::
+
+::::
+
+## Example: time-varying parameter regression
+
+A time-varying linear relationship between response $y_t$ and predictors $\Bx_t$:
+
+$$
+y_t=\Bx_t^\tr\Bbeta_t+\varepsilon_t.
+$$
+
+## Zoom out
+
+All of those examples have the same basic structure:
+
+> An observed time series $y_t$ depends on an unobserved time series.
+
+Also! All of those models are *non-stationary*, which we should regard as the rule rather than the exception in time series.
+
+
+## Generic structure {.small}
+
+Basic ingredients of all SSMs:
+
+$$
+\begin{aligned}
+    \By_t&\sim p(\By_t\given \Bs_t\com \Btheta) && \text{(measurement distribution)}\\
+    \Bs_t&\sim p(\Bs_t\given \Bs_{t-1}\com \Btheta) && \text{(state transition distribution)}\\
+    \Bs_0&\sim p(\Bs_0\given \Btheta) && \text{(initial condition)}\\
+    \Btheta&\sim p(\Btheta). && \text{(prior)}
+\end{aligned}
+$$
+
+Graphical structure:
+
+
+$$
+    \begin{matrix}
+\Bs_0 & \rightarrow & \Bs_1 & \rightarrow & \Bs_2 & \rightarrow & \cdots & \rightarrow & \Bs_t & \rightarrow & \cdots \\
+ & & \downarrow & & \downarrow & & & & \downarrow & & \\
+  & & \mathbf{y}_1 & & \mathbf{y}_2 & & & & \mathbf{y}_t & &
+\end{matrix}
+$$
+
+So the $\mathbf{y}_t$ are *conditionally independent*. But this can be relaxed.
+
+
+## Dynamic linear model {.medium}
+
+$$
+\begin{aligned}
+\By_t
+&=
+\BF\Bs_t
++
+\Bepsilon_t,
+&&
+\Bepsilon_t\iid\N_n(\Bzero\com \BV)
+\\
+\Bs_t
+&=
+\BG\Bs_{t-1}
++
+\Beta_t,
+&&
+\Beta_t\iid\N_p(\Bzero\com \BW)
+\\
+& &&\\
+\Bs_0&\sim\N_p(\bar{\Bs}_{0|0}\com \BP_0).
+\end{aligned}
+$$
+
+- Special cases: ARMA models, TVP regression, local-level model, etc;
+- The dynamics are governed by *system matrices* $\BF$, $\BV$, $\BG$, and $\BW$ which often depend on a lower-dimensional set of parameters $\Btheta$ that must be estimated.
+
+
+
+
+## Local-level model
+
+The simplest non-trivial special case:
+
+$$
+\begin{aligned}
+y_t
+&=
+s_t
++
+\varepsilon_t,
+&&
+\varepsilon_t\iid\N(0\com v)
+\\
+s_t
+&=
+s_{t-1}
++
+\eta_t,
+&&
+\eta_t\iid\N(0\com w)
+\end{aligned}
+$$
+
+- The classic "signal plus noise" model;
+- We set $\BF=\BG=1$, and the static parameters $\Btheta=(v\com w)$ control the smoothness and corruption of the signal.
+
+
+## Filtering versus smoothing
+
+Treat $\Btheta=(v\com w)$ as fixed for now. There are two kinds of signal extraction: 
+
+- $p(s_t\mid y_{1:t}\com \Btheta)$: "one-sided" estimates of the trend given all data up to the present. This is called *filtering*;
+- $p(s_t\mid y_{1:T}\com \Btheta)$: "two-sided", *retrospective* estimates of the trend given all data past and present. This is called *smoothing*.
+
+It's all posterior inference for the latent variable. The only difference is when the estimate is computed and what data we are conditioning on.
+
+
+
+## Demo (switch to the app!) {.medium}
+
+Can we extract the smooth trend from data like these?
+
+::::: columns
+::: {.column width="40%"}
+
+$$
+y_t\indep\N\left(\sin\left(\frac{t}{4}\right)\com \sigma^2\right).
+$$
+:::
+
+::: {.column width="60%"}
+```{r}
+#| echo: false
+
+set.seed(123)
+T <- 100
+
+# Simulate data with chosen true variance
+y <- sin((1:T) / 4) + rnorm(T, sd = 1)
+
+plot(1:T, y, type = "l", lwd = 2, xlab = "t", ylab = expression(y[t]),
+         main = "", col = "black")
+curve(sin(x/4), from = 1, to = T, n = 2000, col = "red", add = TRUE, lwd = 2)
+```
+:::
+
+::::
+
+Yes! But the parameters $\Btheta=(v\com w)$ have a big influence.
+
+
+## The `dlm` package
+
+::::: columns
+::: {.column width="40%"}
+
+![](images/dlm-book.png)
+
+:::
+
+::: {.column width="60%"}
+
+- Created by Duke stats PhD alum Giovanni Petris;
+- Free textbook PDF through Duke library;
+- Accompanying software is well-documented:
+
+```{r}
+#| message: false
+library(dlm)
+```
+
+:::
+
+::::
+
+## Maximum likelihood {.medium}
+
+When it comes to estimating $v$ and $w$, $s_{1:T}$ are nuisance parameters that can be fully integrated out using the *Kalman filter*:
+
+$$
+p(y_{1:T}\mid v\com w) = \int p(y_{1:T}\mid v\com w\com s_{1:T})\,\dd s_{1:T}.
+$$
+
+This is just a funky multivariate normal! Then we can compute maximum (marginal!) likelihood estimates using numerical optimization:
+
+$$
+(\hat{v}\com \hat{w})
+=
+\underset{v\com w}{\arg\max}\,p(y_{1:T}\mid v\com w).
+$$
+
+
+## Example {.small}
+
+Fake data:
+
+```{r}
+set.seed(8675309)
+y <- sin((1:T) / 4) + rnorm(T, sd = 1)
+```
+
+MLE in the `dlm` packages:
+
+```{r}
+# how do the parameters (log-variances) determine the model (local-level)
+my_model <- function(x) return(dlmModPoly(order = 1, dV = exp(x[1]), dW = exp(x[2])))
+
+# just passes to the optim function
+estimate <- dlmMLE(y = y, parm = c(1, 1), build = my_model)
+
+exp(estimate$par) 
+```
+
+
+## Bayesian inference 
+
+Put *conditionally conjugate* priors on the unknown parameters:
+
+$$
+\begin{aligned}
+y_t
+&=
+s_t + \varepsilon_t,
+&&\varepsilon_t\iid\N(0\com v)
+\\
+s_t &=s_{t-1}+\eta_t,
+&&\eta_t\iid\N(0\com w)
+\\
+v&\sim\text{IG}(a_v\com b_v)
+\\
+w&\sim\text{IG}(a_w\com b_w)
+.
+\end{aligned}
+$$
+
+The full posterior $p(s_{1:T}\com v\com w\mid y_{1:T})$ is intractable, but we can approximate it with a Gibbs sampler.
+
+## Gibbs sampler
+
+To approximate $p(s_{1:T}\com v\com w\mid y_{1:T})$, cycle through simulating the full conditionals:
+
+- $p(v \mid w\com s_{1:T}\com y_{1:T})$: this is inverse gamma;
+- $p(w \mid v\com s_{1:T}\com y_{1:T})$: this is inverse gamma;
+- $p(s_{1:T} \mid v\com w \com y_{1:T})$: this is multivariate normal.
+
+The first two steps are very similar to STA 360/402. The last step is the *Kalman smoother*.
+
+
+## Example {.scrollable .medium}
+
+Run the Gibbs sampler:
+
+```{r}
+#| eval: false
+set.seed(525600)
+posterior_draws <- dlmGibbsDIG(
+  y,
+  dlmModPoly(1),
+  shape.y = 1, rate.y = 1, 
+  shape.theta = 1, rate.theta = 1, 
+  n.sample = 5000,
+  progressBar = FALSE
+)
+```
+
+. . .
+
+Gives you 5,000 draws of $\{v\com w\com s_{1:T}\}$:
+
+```{r}
+#| eval: false
+posterior_draws$dV # draws of v
+
+posterior_draws$dW # draws of w
+
+posterior_draws$theta # draws of the states
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
