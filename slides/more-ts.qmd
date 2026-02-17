@@ -11,6 +11,17 @@ filters:
 
 ## Time series models {.small}
 
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+library(tidyverse)
+library(KFAS)
+library(dlm)
+library(fable)
+```
+
 - A [**time series**]{style="color:blue;"} is a set of measurements collected over time;
 
 - We model these data as a sequence of [**dependent**]{style="color:blue;"} random variables:
@@ -180,11 +191,15 @@ Then:
 
 $$
 \begin{matrix}
-  \cdots & \to & y_1 & \to & y_2 & \to & y_3 & \to & y_4 & \to &\cdots \\
-   & \nearrow & \uparrow & \nearrow & \uparrow & \nearrow & \uparrow & \nearrow & \uparrow &  &  \\
+  y_0 & \to & y_1 & \to & y_2 & \to & y_3 & \to & y_4 & \to &\cdots \\
+   & \nearrow & \uparrow & \nearrow & \uparrow & \nearrow & \uparrow & \nearrow & \uparrow & \nearrow &  \\
   \varepsilon_0 &  & \varepsilon_1 &  & \varepsilon_2 &  & \varepsilon_3 &  & \varepsilon_4 &  & \\
 \end{matrix}
 $$
+
+## ARMA(2, 2) distribution
+
+APP
 
 
 ## Autocovariance 
@@ -314,19 +329,22 @@ It's a mess:
 
 Base `R` ships with some basic tools.
 
-## Simulate an ARMA {.small}
+## Simulate an ARMA {.small .scrollable}
+
+This is a function in base:
 
 ```{r}
 set.seed(8675309)
 
 T <- 200
-y <- arima.sim(
-  n = T,
-  model = list(ar = 0.6, ma = -0.4)
-)
+y <- arima.sim(n = T, model = list(ar = 0.99, ma = -0.4), sd = sqrt(2))
+
+plot(y)
 ```
 
 ## Fit an ARMA numerically {.small}
+
+This is a function in base:
 
 ```{r}
 my_arma_fit <- arima(y, order = c(1, 0, 1))
@@ -338,14 +356,75 @@ Not far from the true values we provided. It's tougher mathematically than iid r
 
 ## Predict {.small}
 
+This is a function in base:
+
 ```{r}
-h <- 5
-fc <- predict(my_arma_fit, n.ahead = h)
+H <- 30
+fc <- predict(my_arma_fit, n.ahead = H)
 
-fc$pred # point prediction
+head(fc$pred) # point prediction
 
-fc$se # predictive standard error
+head(fc$se) # predictive standard error
 ```
+
+## Fan chart by-hand
+
+```{r}
+plot(y, xlim = c(0, T + H))
+lines(fc$pred, col = "red")
+lines(fc$pred + 1.96 * fc$se, col = "red")
+lines(fc$pred - 1.96 * fc$se, col = "red")
+```
+
+## The hyndmanverse
+
+::::: columns
+::: {.column width="40%"}
+
+![](images/hyndman.png)
+
+:::
+
+::: {.column width="60%"}
+
+- Textbook is free online;
+- Very popular is some quarters;
+- Accompanying software is inspired by the tidyverse and very well-documented:
+
+```{r}
+#| message: false
+library(tsibble)
+library(fable)
+```
+
+:::
+
+::::
+
+## Only includes data uncertainty (no bootstrap!) {.small}
+
+
+```{r}
+my_data = tsibble(period = 1:T, y = y, index = period)  
+
+my_data |>
+  model(my_model = ARIMA(y ~ 1 + pdq(1, 0, 1))) |>
+  forecast(h = 30) |>
+  autoplot(my_data)
+```
+
+
+## Data and parameter estimation uncertainty {.small}
+
+Not much difference in this case 
+
+```{r}
+my_data |>
+  model(my_model = ARIMA(y ~ 1 + pdq(1, 0, 1))) |>
+  forecast(h = 30, bootstrap = TRUE, times = 5000) |>
+  autoplot(my_data)
+```
+
 
 # State space models
 
@@ -387,7 +466,7 @@ This makes them really rich and interesting! Anything you know about those separ
 The $y_t$ we got to see is a corrupted version of some smooth underlying trend or signal $s_t$ that we wish to extract:
 
 $$
-y_t=s_t+\varepsilon_t,\quad \varepsilon_t\indep\N(0\com \sigma^2).
+y_t=s_t+\varepsilon_t,\quad \varepsilon_t\iid\N(0\com \sigma^2).
 $$
 :::
 
@@ -640,7 +719,7 @@ It's all posterior inference for the latent variable. The only difference is whe
 
 
 
-## Demo (switch to the app!) {.medium}
+## Demo  {.medium}
 
 Can we extract the smooth trend from data like these?
 
@@ -669,6 +748,8 @@ curve(sin(x/4), from = 1, to = T, n = 2000, col = "red", add = TRUE, lwd = 2)
 :::
 
 ::::
+
+. . .
 
 Yes! But the parameters $\Btheta=(v\com w)$ have a big influence.
 
@@ -736,6 +817,58 @@ exp(estimate$par)
 ```
 
 
+## Empirical Bayes estimate of the trend
+
+This is $E[s_{1:T}\mid y_{1:T}\com\hat{\Btheta}]$:
+
+```{r}
+#| echo: false
+    set.seed(123)
+    T <- 100
+    
+    # Simulate data with chosen true variance
+    y <- sin((1:T) / 4) + rnorm(T, sd = sqrt(1))
+    
+    my_model <- function(x) return(dlmModPoly(order = 1, dV = exp(x[1]), dW = exp(x[2])))
+    estimate <- dlmMLE(y = y, parm = c(1, 1), build = my_model)
+    
+    
+    # Build model matrices
+    Zt <- matrix(1)
+    Tt <- matrix(1)
+    Rt <- matrix(1)
+    Qt <- matrix(exp(estimate$par[2]))
+    Ht <- matrix(exp(estimate$par[1]))
+    a1 <- matrix(0)
+    P1 <- matrix(1)
+    
+    # Define model
+    model <- SSModel(y ~ -1 + 
+                       SSMcustom(Z = Zt,
+                                 T = Tt,
+                                 R = Rt,
+                                 Q = Qt,
+                                 a1 = a1,
+                                 P1 = P1),
+                     H = Ht)
+    
+    # Kalman filter and smoother
+    ffbs <- KFS(model)
+    
+    # Plot results
+    plot(1:T, y, type = "l", lwd = 2, xlab = "Time", ylab = "Value",
+         main = "Kalman Filter and Smoother", col = "black")
+    
+    lines(1:T, c(ffbs$alphahat), col = "blue", lwd = 2)
+    
+    legend("topright", legend = c("Observed", "Smoothed"),
+           col = c("black", "blue"),
+           lty = 1, lwd = 2, bty = "n")
+
+```
+
+
+
 ## Bayesian inference 
 
 Put *conditionally conjugate* priors on the unknown parameters:
@@ -799,11 +932,6 @@ posterior_draws$dW # draws of w
 
 posterior_draws$theta # draws of the states
 ```
-
-
-
-
-
 
 
 
