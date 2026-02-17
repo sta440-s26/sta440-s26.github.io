@@ -197,11 +197,6 @@ $$
 \end{matrix}
 $$
 
-## ARMA(2, 2) distribution
-
-APP
-
-
 ## Autocovariance 
 
 - The moving average piece is always stable;
@@ -258,7 +253,7 @@ ui <- fluidPage(
                   value = 0,
                   step = 0.01),
       sliderInput("th2",
-                  "θ₁",
+                  "θ₂",
                   min = -0.99,
                   max = 0.99,
                   value = 0,
@@ -631,7 +626,7 @@ $$
     \By_t&\sim p(\By_t\given \Bs_t\com \Btheta) && \text{(measurement distribution)}\\
     \Bs_t&\sim p(\Bs_t\given \Bs_{t-1}\com \Btheta) && \text{(state transition distribution)}\\
     \Bs_0&\sim p(\Bs_0\given \Btheta) && \text{(initial condition)}\\
-    \Btheta&\sim p(\Btheta). && \text{(prior)}
+    \Btheta&\sim p(\Btheta). && \text{(parameter prior)}
 \end{aligned}
 $$
 
@@ -647,6 +642,39 @@ $$
 $$
 
 So the $\mathbf{y}_t$ are *conditionally independent*. But this can be relaxed.
+
+## Generic goal {.small}
+
+Bayesian inference!
+
+$$
+\begin{aligned}
+p(\By_{1:T}\mid \Bs_{1:T}\com\Btheta)
+&=
+\prod_{t=1}^T
+p(\By_t\mid \Bs_t\com\Btheta)
+&&
+\text{(likelihood)}
+\\
+\\
+p(\Bs_{0:T}\mid\Btheta)
+&=
+p(\Bs_0\mid\Btheta)
+\prod_{t=1}^T
+p(\Bs_t\mid\Bs_{1-t}\com\Btheta)
+&&
+\text{(state prior)}
+\\
+\\
+p(\Bs_{0:T}\com\Btheta\mid\By_{1:T})
+&\propto
+p(\By_{1:T}\mid \Bs_{1:T}\com\Btheta)p(\Bs_{0:T}\mid\Btheta)p(\Btheta)
+&&
+\text{(posterior)}
+\end{aligned}
+$$
+
+We estimate the trend with a posterior mean like $E(\Bs_{1:T}\mid\By_{1:T})$ or $E(\Bs_{1:T}\mid\By_{1:T}\com\hat{\Btheta})$.
 
 
 ## Dynamic linear model {.medium}
@@ -783,7 +811,7 @@ library(dlm)
 When it comes to estimating $v$ and $w$, $s_{1:T}$ are nuisance parameters that can be fully integrated out using the *Kalman filter*:
 
 $$
-p(y_{1:T}\mid v\com w) = \int p(y_{1:T}\mid v\com w\com s_{1:T})\,\dd s_{1:T}.
+p(y_{1:T}\mid v\com w) = \int p(y_{1:T}\com s_{1:T}\mid v\com w)\,\dd s_{1:T}.
 $$
 
 This is just a funky multivariate normal! Then we can compute maximum (marginal!) likelihood estimates using numerical optimization:
@@ -817,7 +845,7 @@ exp(estimate$par)
 ```
 
 
-## Empirical Bayes estimate of the trend
+## Empirical Bayes estimate of the trend {.medium}
 
 This is $E[s_{1:T}\mid y_{1:T}\com\hat{\Btheta}]$:
 
@@ -857,7 +885,7 @@ This is $E[s_{1:T}\mid y_{1:T}\com\hat{\Btheta}]$:
     
     # Plot results
     plot(1:T, y, type = "l", lwd = 2, xlab = "Time", ylab = "Value",
-         main = "Kalman Filter and Smoother", col = "black")
+         main = "", col = "black")
     
     lines(1:T, c(ffbs$alphahat), col = "blue", lwd = 2)
     
