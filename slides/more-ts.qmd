@@ -170,7 +170,21 @@ Don't worry about the details, but there are theorems that say the ARMA model is
 
 ## Graphical structure
 
-On the board!
+Consider the ARMA(1, 1):
+
+$$
+y_t=\beta_0+\beta_1y_{t-1}+\theta_1\varepsilon_{t-1}+\varepsilon_t, \quad \varepsilon_t\iid\N(0\com \sigma^2).
+$$
+
+Then:
+
+$$
+\begin{matrix}
+  \cdots & \to & y_1 & \to & y_2 & \to & y_3 & \to & y_4 & \to &\cdots \\
+   & \nearrow & \uparrow & \nearrow & \uparrow & \nearrow & \uparrow & \nearrow & \uparrow &  &  \\
+  \varepsilon_0 &  & \varepsilon_1 &  & \varepsilon_2 &  & \varepsilon_3 &  & \varepsilon_4 &  & \\
+\end{matrix}
+$$
 
 
 ## Autocovariance 
