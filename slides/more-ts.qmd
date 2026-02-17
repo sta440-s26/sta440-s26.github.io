@@ -1,5 +1,5 @@
 ---
-title: "More time series models"
+title: "Time series potpourri"
 format: revealjs
 auto-stretch: false
 filters:
