@@ -443,231 +443,273 @@
   {
     "objectID": "slides/more-ts.html#time-series-models",
     "href": "slides/more-ts.html#time-series-models",
-    "title": "More time series models",
+    "title": "Time series potpourri",
     "section": "Time series models",
     "text": "Time series models\n\nA time series is a set of measurements collected over time;\nWe model these data as a sequence of dependent random variables:\n\n\\[\n\\mathbf{y}_{0:T} = \\{\\mathbf{y}_0,\\,\\mathbf{y}_1,\\,\\mathbf{y}_2,\\,...,\\,\\mathbf{y}_T\\}.\n\\]\n\nA time series model is “just” their joint probability distribution:\n\n\\[\np(\\mathbf{y}_{0:T}) = p(\\mathbf{y}_0)\\prod_{t=1}^Tp(\\mathbf{y}_t\\,|\\,\\mathbf{y}_{0:t-1}).\n\\]"
   },
   {
     "objectID": "slides/more-ts.html#the-autoregression-of-order-p",
     "href": "slides/more-ts.html#the-autoregression-of-order-p",
-    "title": "More time series models",
+    "title": "Time series potpourri",
     "section": "The autoregression of order \\(p\\)\n",
     "text": "The autoregression of order \\(p\\)\n\n\\[\n\\begin{aligned}\ny_t\n&=\n\\beta_0\n+\n\\beta_1\ny_{t-1}\n+\n\\beta_2\ny_{t-2}\n+\n\\cdots\n+\n\\beta_p\ny_{t-p}\n+\n\\varepsilon_t,\n\\quad\n\\varepsilon_t\\iid\\text{N}(0\\com\\sigma^2).\n\\end{aligned}\n\\]\n\nThis implies a joint distribution written marginal-conditional style:\n\\[\n\\begin{aligned}\np(y_{1:T}\\mid y_0\\com y_{-1}\\com ...\\com y_{1-p})\n&=\n\\prod_{t=1}^Tp(y_t\\mid y_{1-p:t-1})\\\\\n\\\\\n&=\n\\prod_{t=1}^Tp(y_t\\mid y_{t-p:t-1}).\n\\end{aligned}\n\\]\n\n\nThe joint distribution is just a big ol’ multivariate normal with a structured mean and covariance that depend on the parameters."
   },
   {
     "objectID": "slides/more-ts.html#estimation",
     "href": "slides/more-ts.html#estimation",
-    "title": "More time series models",
+    "title": "Time series potpourri",
     "section": "Estimation",
     "text": "Estimation\nSimilar to iid regression:\n\nClassical approach: MLE = OLS;\nBayesian approach: normal-inverse-gamma conjugate prior.\n\nBut the inferential theory is very different!"
   },
   {
     "objectID": "slides/more-ts.html#probabilistic-prediction",
     "href": "slides/more-ts.html#probabilistic-prediction",
-    "title": "More time series models",
+    "title": "Time series potpourri",
     "section": "Probabilistic prediction",
     "text": "Probabilistic prediction\nTo generate interval and density predictions \\(h\\)-steps-ahead:\n\nClassical approach: bootstrap;\nBayesian approach: posterior predictive simulation.\n\nThese incorporate data and parameter estimation uncertainty."
   },
   {
     "objectID": "slides/more-ts.html#hyperparameter-tuning",
     "href": "slides/more-ts.html#hyperparameter-tuning",
-    "title": "More time series models",
+    "title": "Time series potpourri",
     "section": "Hyperparameter tuning",
     "text": "Hyperparameter tuning\nThe lag order \\(p\\) is a hyperparameter that must be selected:\n\neyeball ACF plots;\noptimize canned criteria like AIC or BIC;\ntime series cross validation."
   },
   {
     "objectID": "slides/more-ts.html#why",
     "href": "slides/more-ts.html#why",
-    "title": "More time series models",
+    "title": "Time series potpourri",
     "section": "Why?",
     "text": "Why?\nWe have seen this so far:\n\\[\ny_t\n=\n\\beta_0\n+\n\\sum\\limits_{l=1}^p\\beta_ly_{t-l}\n+\n\\underbrace{\nu_t\n}_{\\text{iid}}\n.\n\\]\nWhat if there is time series dependence in the error term as well?\n\nWhat kind?"
   },
   {
     "objectID": "slides/more-ts.html#autoregressive-moving-average-arma",
     "href": "slides/more-ts.html#autoregressive-moving-average-arma",
-    "title": "More time series models",
+    "title": "Time series potpourri",
     "section": "Autoregressive moving average (ARMA)",
     "text": "Autoregressive moving average (ARMA)\nARMA(\\(p\\), \\(q\\)):\n\\[\ny_t\n=\n\\beta_0\n+\n\\underbrace{\\sum\\limits_{l=1}^p\\beta_ly_{t-l}}_{\\text{autoregressive}}\n+\n\\underbrace{\\sum_{i=1}^q\\theta_i\\varepsilon_{t-i}}_{\\text{moving average}}\n+\n\\varepsilon_t,\n\\quad\n\\varepsilon_t\n\\iid\n\\N(0\\com \\sigma^2)\n.\n\\]\n\nFlexible class of models that can capture pretty generic linear dependencies.\n\n\n\\(p=q=0\\) gives the iid model;\n\n\\(q=0\\) gives the pure AR(\\(p\\)) we’ve already seen;\n\n\\(p=0\\) gives the pure MA(\\(q\\)), which is seldom used on its own."
   },
   {
     "objectID": "slides/more-ts.html#what-is-the-joint-distribution",
     "href": "slides/more-ts.html#what-is-the-joint-distribution",
-    "title": "More time series models",
+    "title": "Time series potpourri",
     "section": "What is the joint distribution?",
     "text": "What is the joint distribution?\nIt’s normal! The mean and covariance depend on the AR and MA parameters and the error variance:\n\\[\n\\begin{bmatrix}\ny_1 & y_2 & \\cdots & y_T\n\\end{bmatrix}^\\tr\n\\sim\\N_T\\left(\\Bmu\\com \\BSigma\\right).\n\\]\nDon’t worry about the details, but there are theorems that say the ARMA model is flexible enough to capture any stable, linear time series dependence if \\(p\\) and \\(q\\) are sufficiently large."
   },
   {
     "objectID": "slides/more-ts.html#graphical-structure",
     "href": "slides/more-ts.html#graphical-structure",
-    "title": "More time series models",
+    "title": "Time series potpourri",
     "section": "Graphical structure",
-    "text": "Graphical structure\nOn the board!"
+    "text": "Graphical structure\nConsider the ARMA(1, 1):\n\\[\ny_t=\\beta_0+\\beta_1y_{t-1}+\\theta_1\\varepsilon_{t-1}+\\varepsilon_t, \\quad \\varepsilon_t\\iid\\N(0\\com \\sigma^2).\n\\]\nThen:\n\\[\n\\begin{matrix}\n  y_0 & \\to & y_1 & \\to & y_2 & \\to & y_3 & \\to & y_4 & \\to &\\cdots \\\\\n   & \\nearrow & \\uparrow & \\nearrow & \\uparrow & \\nearrow & \\uparrow & \\nearrow & \\uparrow & \\nearrow &  \\\\\n  \\varepsilon_0 &  & \\varepsilon_1 &  & \\varepsilon_2 &  & \\varepsilon_3 &  & \\varepsilon_4 &  & \\\\\n\\end{matrix}\n\\]"
+  },
+  {
+    "objectID": "slides/more-ts.html#arma2-2-distribution",
+    "href": "slides/more-ts.html#arma2-2-distribution",
+    "title": "Time series potpourri",
+    "section": "ARMA(2, 2) distribution",
+    "text": "ARMA(2, 2) distribution\nAPP"
   },
   {
     "objectID": "slides/more-ts.html#autocovariance",
     "href": "slides/more-ts.html#autocovariance",
-    "title": "More time series models",
+    "title": "Time series potpourri",
     "section": "Autocovariance",
     "text": "Autocovariance\n\nThe moving average piece is always stable;\nIf the AR piece is stable as well, then we have a shift-invariant autocovariance function\n\n\\[\n\\gamma(h)=\\cov(y_{t+h}\\com y_{t}).\n\\]\n\nThe formulas aren’t pretty, but a computer can handle it easily;\nWe know an AR(1) is stable if \\(|\\beta_1|&lt;1\\). For the general AR(p), it’s complicated."
   },
   {
     "objectID": "slides/more-ts.html#acf-of-the-arma",
     "href": "slides/more-ts.html#acf-of-the-arma",
-    "title": "More time series models",
+    "title": "Time series potpourri",
     "section": "ACF of the ARMA",
     "text": "ACF of the ARMA\n#| '!! shinylive warning !!': |\n#|   shinylive does not work in self-contained HTML documents.\n#|   Please set `embed-resources: false` in your metadata.\n#| standalone: true\n#| viewerHeight: 700\n\nlibrary(shiny)\n\nplot_arma_acf &lt;- function(ar = numeric(), ma = numeric(), lag.max = 10){\n  y_vals &lt;- ARMAacf(ar = ar, ma = ma, lag.max = lag.max)\n  plot(0:lag.max, y_vals, pch = 19, ylim = c(-1, 1),\n       xlab = \"h\", ylab = expression(rho~\"(h)\"))\n  segments(0:lag.max, 0, 0:lag.max, y_vals)\n  abline(h = 0, col = \"lightgrey\")\n}\n\n# Define UI for application that draws a histogram\nui &lt;- fluidPage(\n  \n  # Application title\n  titlePanel(\"Theoretical autocorrelation of a stationary ARMA(2, 2)\"),\n  \n  # Sidebar with a slider input for number of bins \n  sidebarLayout(\n    sidebarPanel(\n      sliderInput(\"b1\",\n                  \"β₁\",\n                  min = -2,\n                  max = 2,\n                  value = 0,\n                  step = 0.05),\n      sliderInput(\"b2\",\n                  \"β₂\",\n                  min = -2,\n                  max = 2,\n                  value = 0,\n                  step = 0.05),\n      sliderInput(\"th1\",\n                  \"θ₁\",\n                  min = -0.99,\n                  max = 0.99,\n                  value = 0,\n                  step = 0.01),\n      sliderInput(\"th2\",\n                  \"θ₁\",\n                  min = -0.99,\n                  max = 0.99,\n                  value = 0,\n                  step = 0.01),\n      sliderInput(\"H\",\n                  \"H\",\n                  min = 0,\n                  max = 50,\n                  step = 1,\n                  value = 20)\n    ),\n    \n    # Show a plot of the generated distribution\n    mainPanel(\n            plotOutput(\"acf\", height = \"400px\"),\n      plotOutput(\"stationarityPlot\", height = \"400px\"),\n      verbatimTextOutput(\"stationarity\")\n    )\n  )\n)\n\n# Define server logic required to draw a histogram\nserver &lt;- function(input, output) {\n  \n  output$acf &lt;- renderPlot({\n    b1 &lt;- input$b1\n    b2 &lt;- input$b2\n    th1 &lt;- input$th1\n    th2 &lt;- input$th2\n    H &lt;- input$H\n    \n    plot_arma_acf(ar = c(b1, b2), ma = c(th1, th2), lag.max = H)\n\n  })\n  \n    output$stationarityPlot &lt;- renderPlot({\n    b1 &lt;- input$b1\n    b2 &lt;- input$b2\n    \n    # triangle vertices\n    tri_x &lt;- c(2, -2, 0)\n    tri_y &lt;- c(-1, -1, 1)\n    par(mar = c(4, 4, 0.1, 4))\n    plot(tri_x, tri_y, type = \"n\",\n         xlab = expression(beta[1]),\n         ylab = expression(beta[2]),\n         xlim = c(-2.1, 2.1),\n         ylim = c(-1.1, 1.1),\n         xaxt = \"n\", yaxt = \"n\", bty = \"n\")\n    axis(1, at = c(-2, 0, 2), pos = 0)\n    axis(2, at = c(-1, 0, 1), pos = 0)\n    \n    polygon(tri_x, tri_y, col = rgb(0, 0, 1, 0.2), border = \"blue\", lwd = 2)\n    points(b1, b2, pch = 19, col = \"red\", cex = 1.5)\n  })\n}\n\n# Run the application \nshinyApp(ui = ui, server = server)"
   },
   {
     "objectID": "slides/more-ts.html#estimation-1",
     "href": "slides/more-ts.html#estimation-1",
-    "title": "More time series models",
+    "title": "Time series potpourri",
     "section": "Estimation",
     "text": "Estimation\nIt’s a mess:\n\nThe maximum likelihood problem for ARMA must be solved numerically;\nThere is no conjugate prior, and MCMC is a bit of a nightmare here.\n\nBase R ships with some basic tools."
   },
   {
     "objectID": "slides/more-ts.html#simulate-an-arma",
     "href": "slides/more-ts.html#simulate-an-arma",
-    "title": "More time series models",
+    "title": "Time series potpourri",
     "section": "Simulate an ARMA",
-    "text": "Simulate an ARMA\n\nset.seed(8675309)\n\nT &lt;- 200\ny &lt;- arima.sim(\n  n = T,\n  model = list(ar = 0.6, ma = -0.4)\n)"
+    "text": "Simulate an ARMA\nThis is a function in base:\n\nset.seed(8675309)\n\nT &lt;- 200\ny &lt;- arima.sim(n = T, model = list(ar = 0.99, ma = -0.4), sd = sqrt(2))\n\nplot(y)"
   },
   {
     "objectID": "slides/more-ts.html#fit-an-arma-numerically",
     "href": "slides/more-ts.html#fit-an-arma-numerically",
-    "title": "More time series models",
+    "title": "Time series potpourri",
     "section": "Fit an ARMA numerically",
-    "text": "Fit an ARMA numerically\n\nmy_arma_fit &lt;- arima(y, order = c(1, 0, 1))\n\nmy_arma_fit\n\n\nCall:\narima(x = y, order = c(1, 0, 1))\n\nCoefficients:\n         ar1      ma1  intercept\n      0.5859  -0.3685    -0.0134\ns.e.  0.1905   0.2175     0.1033\n\nsigma^2 estimated as 0.9245:  log likelihood = -275.98,  aic = 559.95\n\n\nNot far from the true values we provided. It’s tougher mathematically than iid regression, but we have asymptotic statistical theory for ARMA models (even when they’re not stable!)."
+    "text": "Fit an ARMA numerically\nThis is a function in base:\n\nmy_arma_fit &lt;- arima(y, order = c(1, 0, 1))\n\nmy_arma_fit\n\n\nCall:\narima(x = y, order = c(1, 0, 1))\n\nCoefficients:\n         ar1      ma1  intercept\n      0.9871  -0.4307    -2.2742\ns.e.  0.0089   0.0595     3.4451\n\nsigma^2 estimated as 2.131:  log likelihood = -360.85,  aic = 729.69\n\n\nNot far from the true values we provided. It’s tougher mathematically than iid regression, but we have asymptotic statistical theory for ARMA models (even when they’re not stable!)."
   },
   {
     "objectID": "slides/more-ts.html#predict",
     "href": "slides/more-ts.html#predict",
-    "title": "More time series models",
+    "title": "Time series potpourri",
     "section": "Predict",
-    "text": "Predict\n\nh &lt;- 5\nfc &lt;- predict(my_arma_fit, n.ahead = h)\n\nfc$pred # point prediction\n\nTime Series:\nStart = 201 \nEnd = 205 \nFrequency = 1 \n[1]  0.0527746562  0.0253647936  0.0093055721 -0.0001033987 -0.0056160401\n\nfc$se # predictive standard error\n\nTime Series:\nStart = 201 \nEnd = 205 \nFrequency = 1 \n[1] 0.9615008 0.9839658 0.9915600 0.9941535 0.9950422"
+    "text": "Predict\nThis is a function in base:\n\nH &lt;- 30\nfc &lt;- predict(my_arma_fit, n.ahead = H)\n\nhead(fc$pred) # point prediction\n\nTime Series:\nStart = 201 \nEnd = 206 \nFrequency = 1 \n[1] -1.000734 -1.017113 -1.033281 -1.049241 -1.064996 -1.080549\n\nhead(fc$se) # predictive standard error\n\nTime Series:\nStart = 201 \nEnd = 206 \nFrequency = 1 \n[1] 1.459916 1.670697 1.853169 2.015144 2.161334 2.294846"
+  },
+  {
+    "objectID": "slides/more-ts.html#fan-chart-by-hand",
+    "href": "slides/more-ts.html#fan-chart-by-hand",
+    "title": "Time series potpourri",
+    "section": "Fan chart by-hand",
+    "text": "Fan chart by-hand\n\nplot(y, xlim = c(0, T + H))\nlines(fc$pred, col = \"red\")\nlines(fc$pred + 1.96 * fc$se, col = \"red\")\nlines(fc$pred - 1.96 * fc$se, col = \"red\")"
+  },
+  {
+    "objectID": "slides/more-ts.html#the-hyndmanverse",
+    "href": "slides/more-ts.html#the-hyndmanverse",
+    "title": "Time series potpourri",
+    "section": "The hyndmanverse",
+    "text": "The hyndmanverse\n\n\n\n\n\nTextbook is free online;\nVery popular is some quarters;\nAccompanying software is inspired by the tidyverse and very well-documented:\n\n\nlibrary(tsibble)\nlibrary(fable)"
+  },
+  {
+    "objectID": "slides/more-ts.html#only-includes-data-uncertainty-no-bootstrap",
+    "href": "slides/more-ts.html#only-includes-data-uncertainty-no-bootstrap",
+    "title": "Time series potpourri",
+    "section": "Only includes data uncertainty (no bootstrap!)",
+    "text": "Only includes data uncertainty (no bootstrap!)\n\nmy_data = tsibble(period = 1:T, y = y, index = period)  \n\nmy_data |&gt;\n  model(my_model = ARIMA(y ~ 1 + pdq(1, 0, 1))) |&gt;\n  forecast(h = 30) |&gt;\n  autoplot(my_data)"
+  },
+  {
+    "objectID": "slides/more-ts.html#data-and-parameter-estimation-uncertainty",
+    "href": "slides/more-ts.html#data-and-parameter-estimation-uncertainty",
+    "title": "Time series potpourri",
+    "section": "Data and parameter estimation uncertainty",
+    "text": "Data and parameter estimation uncertainty\nNot much difference in this case\n\nmy_data |&gt;\n  model(my_model = ARIMA(y ~ 1 + pdq(1, 0, 1))) |&gt;\n  forecast(h = 30, bootstrap = TRUE, times = 5000) |&gt;\n  autoplot(my_data)"
   },
   {
     "objectID": "slides/more-ts.html#state-space-models-ssms",
     "href": "slides/more-ts.html#state-space-models-ssms",
-    "title": "More time series models",
+    "title": "Time series potpourri",
     "section": "State space models (SSMs)",
     "text": "State space models (SSMs)\nState space models are a meta-family of models that nest as special cases most time series models you will encounter in practice. SSMs are…\n\ntime series models;\ngraphical models;\nlatent variable models;\nhierarchical models;\nBayesian models.\n\n\nThis makes them really rich and interesting! Anything you know about those separate areas of statistics helps with studying SSMs."
   },
   {
     "objectID": "slides/more-ts.html#the-main-idea",
     "href": "slides/more-ts.html#the-main-idea",
-    "title": "More time series models",
+    "title": "Time series potpourri",
     "section": "The main idea",
     "text": "The main idea\n\nState space models are first and foremost latent variable models;\nThey treat the observed time series \\(\\By_t\\) as a noisy or corrupted version of an unobserved (or latent) time series \\(\\Bs_t\\);\nThe goal of inference is to use what we observed (\\(\\By_t\\)) to learn about what we didn’t observe (\\(\\Bs_t\\));\nThe is usually done from a Bayesian point of view, so learning means accessing \\(p(\\Bs_{1:T}\\mid \\By_{1:T})\\);\nThere are usually unobserved parameters \\(\\Btheta\\) floating around that we also have to deal with."
   },
   {
     "objectID": "slides/more-ts.html#example-signal-in-noise",
     "href": "slides/more-ts.html#example-signal-in-noise",
-    "title": "More time series models",
+    "title": "Time series potpourri",
     "section": "Example: signal-in-noise",
-    "text": "Example: signal-in-noise\n\n\nThe \\(y_t\\) we got to see is a corrupted version of some smooth underlying trend or signal \\(s_t\\) that we wish to extract:\n\\[\ny_t=s_t+\\varepsilon_t,\\quad \\varepsilon_t\\indep\\N(0\\com \\sigma^2).\n\\]"
+    "text": "Example: signal-in-noise\n\n\nThe \\(y_t\\) we got to see is a corrupted version of some smooth underlying trend or signal \\(s_t\\) that we wish to extract:\n\\[\ny_t=s_t+\\varepsilon_t,\\quad \\varepsilon_t\\iid\\N(0\\com \\sigma^2).\n\\]"
   },
   {
     "objectID": "slides/more-ts.html#example-stochastic-volatility",
     "href": "slides/more-ts.html#example-stochastic-volatility",
-    "title": "More time series models",
+    "title": "Time series potpourri",
     "section": "Example: stochastic volatility",
     "text": "Example: stochastic volatility\n\n\nThe variance of \\(y_t\\) is changing over time:\n\\[\ny_t=\\mu+\\varepsilon_t,\\quad \\varepsilon_t\\indep\\N(0\\com \\sigma_t^2).\n\\]"
   },
   {
     "objectID": "slides/more-ts.html#example-regime-switching",
     "href": "slides/more-ts.html#example-regime-switching",
-    "title": "More time series models",
+    "title": "Time series potpourri",
     "section": "Example: regime-switching",
     "text": "Example: regime-switching\n\n\nThe distribution of \\(y_t\\) is abruptly switching between a discrete set of options:\n\\[\ny_t\n\\sim\n\\begin{cases}\n\\N(\\mu_1\\com \\sigma^2_1) & \\text{if }s_t=1\n\\\\\n\\N(\\mu_2\\com \\sigma^2_2) & \\text{if }s_t=2\n\\end{cases}\n\\]"
   },
   {
     "objectID": "slides/more-ts.html#example-time-varying-parameter-regression",
     "href": "slides/more-ts.html#example-time-varying-parameter-regression",
-    "title": "More time series models",
+    "title": "Time series potpourri",
     "section": "Example: time-varying parameter regression",
     "text": "Example: time-varying parameter regression\nA time-varying linear relationship between response \\(y_t\\) and predictors \\(\\Bx_t\\):\n\\[\ny_t=\\Bx_t^\\tr\\Bbeta_t+\\varepsilon_t.\n\\]"
   },
   {
     "objectID": "slides/more-ts.html#zoom-out",
     "href": "slides/more-ts.html#zoom-out",
-    "title": "More time series models",
+    "title": "Time series potpourri",
     "section": "Zoom out",
     "text": "Zoom out\nAll of those examples have the same basic structure:\n\nAn observed time series \\(y_t\\) depends on an unobserved time series.\n\nAlso! All of those models are non-stationary, which we should regard as the rule rather than the exception in time series."
   },
   {
     "objectID": "slides/more-ts.html#generic-structure",
     "href": "slides/more-ts.html#generic-structure",
-    "title": "More time series models",
+    "title": "Time series potpourri",
     "section": "Generic structure",
     "text": "Generic structure\nBasic ingredients of all SSMs:\n\\[\n\\begin{aligned}\n    \\By_t&\\sim p(\\By_t\\given \\Bs_t\\com \\Btheta) && \\text{(measurement distribution)}\\\\\n    \\Bs_t&\\sim p(\\Bs_t\\given \\Bs_{t-1}\\com \\Btheta) && \\text{(state transition distribution)}\\\\\n    \\Bs_0&\\sim p(\\Bs_0\\given \\Btheta) && \\text{(initial condition)}\\\\\n    \\Btheta&\\sim p(\\Btheta). && \\text{(prior)}\n\\end{aligned}\n\\]\nGraphical structure:\n\\[\n    \\begin{matrix}\n\\Bs_0 & \\rightarrow & \\Bs_1 & \\rightarrow & \\Bs_2 & \\rightarrow & \\cdots & \\rightarrow & \\Bs_t & \\rightarrow & \\cdots \\\\\n& & \\downarrow & & \\downarrow & & & & \\downarrow & & \\\\\n  & & \\mathbf{y}_1 & & \\mathbf{y}_2 & & & & \\mathbf{y}_t & &\n\\end{matrix}\n\\]\nSo the \\(\\mathbf{y}_t\\) are conditionally independent. But this can be relaxed."
   },
   {
     "objectID": "slides/more-ts.html#dynamic-linear-model",
     "href": "slides/more-ts.html#dynamic-linear-model",
-    "title": "More time series models",
+    "title": "Time series potpourri",
     "section": "Dynamic linear model",
     "text": "Dynamic linear model\n\\[\n\\begin{aligned}\n\\By_t\n&=\n\\BF\\Bs_t\n+\n\\Bepsilon_t,\n&&\n\\Bepsilon_t\\iid\\N_n(\\Bzero\\com \\BV)\n\\\\\n\\Bs_t\n&=\n\\BG\\Bs_{t-1}\n+\n\\Beta_t,\n&&\n\\Beta_t\\iid\\N_p(\\Bzero\\com \\BW)\n\\\\\n& &&\\\\\n\\Bs_0&\\sim\\N_p(\\bar{\\Bs}_{0|0}\\com \\BP_0).\n\\end{aligned}\n\\]\n\nSpecial cases: ARMA models, TVP regression, local-level model, etc;\nThe dynamics are governed by system matrices \\(\\BF\\), \\(\\BV\\), \\(\\BG\\), and \\(\\BW\\) which often depend on a lower-dimensional set of parameters \\(\\Btheta\\) that must be estimated."
   },
   {
     "objectID": "slides/more-ts.html#local-level-model",
     "href": "slides/more-ts.html#local-level-model",
-    "title": "More time series models",
+    "title": "Time series potpourri",
     "section": "Local-level model",
     "text": "Local-level model\nThe simplest non-trivial special case:\n\\[\n\\begin{aligned}\ny_t\n&=\ns_t\n+\n\\varepsilon_t,\n&&\n\\varepsilon_t\\iid\\N(0\\com v)\n\\\\\ns_t\n&=\ns_{t-1}\n+\n\\eta_t,\n&&\n\\eta_t\\iid\\N(0\\com w)\n\\end{aligned}\n\\]\n\nThe classic “signal plus noise” model;\nWe set \\(\\BF=\\BG=1\\), and the static parameters \\(\\Btheta=(v\\com w)\\) control the smoothness and corruption of the signal."
   },
   {
     "objectID": "slides/more-ts.html#filtering-versus-smoothing",
     "href": "slides/more-ts.html#filtering-versus-smoothing",
-    "title": "More time series models",
+    "title": "Time series potpourri",
     "section": "Filtering versus smoothing",
     "text": "Filtering versus smoothing\nTreat \\(\\Btheta=(v\\com w)\\) as fixed for now. There are two kinds of signal extraction:\n\n\n\\(p(s_t\\mid y_{1:t}\\com \\Btheta)\\): “one-sided” estimates of the trend given all data up to the present. This is called filtering;\n\n\\(p(s_t\\mid y_{1:T}\\com \\Btheta)\\): “two-sided”, retrospective estimates of the trend given all data past and present. This is called smoothing.\n\nIt’s all posterior inference for the latent variable. The only difference is when the estimate is computed and what data we are conditioning on."
   },
   {
-    "objectID": "slides/more-ts.html#demo-switch-to-the-app",
-    "href": "slides/more-ts.html#demo-switch-to-the-app",
-    "title": "More time series models",
-    "section": "Demo (switch to the app!)",
-    "text": "Demo (switch to the app!)\nCan we extract the smooth trend from data like these?\n\n\n\\[\ny_t\\indep\\N\\left(\\sin\\left(\\frac{t}{4}\\right)\\com \\sigma^2\\right).\n\\]\n\n\n\n\n\n\n\n\n\n\nYes! But the parameters \\(\\Btheta=(v\\com w)\\) have a big influence."
+    "objectID": "slides/more-ts.html#demo",
+    "href": "slides/more-ts.html#demo",
+    "title": "Time series potpourri",
+    "section": "Demo",
+    "text": "Demo\nCan we extract the smooth trend from data like these?\n\n\n\\[\ny_t\\indep\\N\\left(\\sin\\left(\\frac{t}{4}\\right)\\com \\sigma^2\\right).\n\\]\n\n\n\n\n\n\n\n\n\n\n\nYes! But the parameters \\(\\Btheta=(v\\com w)\\) have a big influence."
   },
   {
     "objectID": "slides/more-ts.html#the-dlm-package",
     "href": "slides/more-ts.html#the-dlm-package",
-    "title": "More time series models",
+    "title": "Time series potpourri",
     "section": "The dlm package",
     "text": "The dlm package\n\n\n\n\n\nCreated by Duke stats PhD alum Giovanni Petris;\nFree textbook PDF through Duke library;\nAccompanying software is well-documented:\n\n\nlibrary(dlm)"
   },
   {
     "objectID": "slides/more-ts.html#maximum-likelihood",
     "href": "slides/more-ts.html#maximum-likelihood",
-    "title": "More time series models",
+    "title": "Time series potpourri",
     "section": "Maximum likelihood",
     "text": "Maximum likelihood\nWhen it comes to estimating \\(v\\) and \\(w\\), \\(s_{1:T}\\) are nuisance parameters that can be fully integrated out using the Kalman filter:\n\\[\np(y_{1:T}\\mid v\\com w) = \\int p(y_{1:T}\\mid v\\com w\\com s_{1:T})\\,\\dd s_{1:T}.\n\\]\nThis is just a funky multivariate normal! Then we can compute maximum (marginal!) likelihood estimates using numerical optimization:\n\\[\n(\\hat{v}\\com \\hat{w})\n=\n\\underset{v\\com w}{\\arg\\max}\\,p(y_{1:T}\\mid v\\com w).\n\\]"
   },
   {
     "objectID": "slides/more-ts.html#example",
     "href": "slides/more-ts.html#example",
-    "title": "More time series models",
+    "title": "Time series potpourri",
     "section": "Example",
     "text": "Example\nFake data:\n\nset.seed(8675309)\ny &lt;- sin((1:T) / 4) + rnorm(T, sd = 1)\n\nMLE in the dlm packages:\n\n# how do the parameters (log-variances) determine the model (local-level)\nmy_model &lt;- function(x) return(dlmModPoly(order = 1, dV = exp(x[1]), dW = exp(x[2])))\n\n# just passes to the optim function\nestimate &lt;- dlmMLE(y = y, parm = c(1, 1), build = my_model)\n\nexp(estimate$par) \n\n[1] 0.7460911 0.2590706"
   },
   {
+    "objectID": "slides/more-ts.html#empirical-bayes-estimate-of-the-trend",
+    "href": "slides/more-ts.html#empirical-bayes-estimate-of-the-trend",
+    "title": "Time series potpourri",
+    "section": "Empirical Bayes estimate of the trend",
+    "text": "Empirical Bayes estimate of the trend\nThis is \\(E[s_{1:T}\\mid y_{1:T}\\com\\hat{\\Btheta}]\\):"
+  },
+  {
     "objectID": "slides/more-ts.html#bayesian-inference",
     "href": "slides/more-ts.html#bayesian-inference",
-    "title": "More time series models",
+    "title": "Time series potpourri",
     "section": "Bayesian inference",
     "text": "Bayesian inference\nPut conditionally conjugate priors on the unknown parameters:\n\\[\n\\begin{aligned}\ny_t\n&=\ns_t + \\varepsilon_t,\n&&\\varepsilon_t\\iid\\N(0\\com v)\n\\\\\ns_t &=s_{t-1}+\\eta_t,\n&&\\eta_t\\iid\\N(0\\com w)\n\\\\\nv&\\sim\\text{IG}(a_v\\com b_v)\n\\\\\nw&\\sim\\text{IG}(a_w\\com b_w)\n.\n\\end{aligned}\n\\]\nThe full posterior \\(p(s_{1:T}\\com v\\com w\\mid y_{1:T})\\) is intractable, but we can approximate it with a Gibbs sampler."
   },
   {
     "objectID": "slides/more-ts.html#gibbs-sampler",
     "href": "slides/more-ts.html#gibbs-sampler",
-    "title": "More time series models",
+    "title": "Time series potpourri",
     "section": "Gibbs sampler",
     "text": "Gibbs sampler\nTo approximate \\(p(s_{1:T}\\com v\\com w\\mid y_{1:T})\\), cycle through simulating the full conditionals:\n\n\n\\(p(v \\mid w\\com s_{1:T}\\com y_{1:T})\\): this is inverse gamma;\n\n\\(p(w \\mid v\\com s_{1:T}\\com y_{1:T})\\): this is inverse gamma;\n\n\\(p(s_{1:T} \\mid v\\com w \\com y_{1:T})\\): this is multivariate normal.\n\nThe first two steps are very similar to STA 360/402. The last step is the Kalman smoother."
   },
   {
     "objectID": "slides/more-ts.html#example-1",
     "href": "slides/more-ts.html#example-1",
-    "title": "More time series models",
+    "title": "Time series potpourri",
     "section": "Example",
     "text": "Example\nRun the Gibbs sampler:\n\nset.seed(525600)\nposterior_draws &lt;- dlmGibbsDIG(\n  y,\n  dlmModPoly(1),\n  shape.y = 1, rate.y = 1, \n  shape.theta = 1, rate.theta = 1, \n  n.sample = 5000,\n  progressBar = FALSE\n)\n\n\nGives you 5,000 draws of \\(\\{v\\com w\\com s_{1:T}\\}\\):\n\nposterior_draws$dV # draws of v\n\nposterior_draws$dW # draws of w\n\nposterior_draws$theta # draws of the states"
   },

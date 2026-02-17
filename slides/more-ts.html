@@ -15,7 +15,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.7.34">
 <meta name="author" content="Ed Iversen and John Zito">
-<title>STA 440 Spring 2026 – More time series models</title>
+<title>STA 440 Spring 2026 – Time series potpourri</title>
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -194,7 +194,7 @@
       margin-right: 0; 
     }
   </style>
-<meta property="og:title" content="More time series models – STA 440 Spring 2026">
+<meta property="og:title" content="Time series potpourri – STA 440 Spring 2026">
 <meta property="og:site_name" content="STA 440 Spring 2026">
 </head>
 <body class="quarto-light">
@@ -319,7 +319,7 @@ $$
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" class="quarto-title-block center"><h1 class="title">More time series models</h1>
+<section id="title-slide" class="quarto-title-block center"><h1 class="title">Time series potpourri</h1>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -467,7 +467,20 @@ y_1 &amp; y_2 &amp; \cdots &amp; y_T
 \]</span></p>
 <p>Don’t worry about the details, but there are theorems that say the ARMA model is flexible enough to capture <em>any</em> stable, linear time series dependence if <span class="math inline">\(p\)</span> and <span class="math inline">\(q\)</span> are sufficiently large.</p>
 </section><section id="graphical-structure" class="slide level2"><h2>Graphical structure</h2>
-<p>On the board!</p>
+<p>Consider the ARMA(1, 1):</p>
+<p><span class="math display">\[
+y_t=\beta_0+\beta_1y_{t-1}+\theta_1\varepsilon_{t-1}+\varepsilon_t, \quad \varepsilon_t\iid\N(0\com \sigma^2).
+\]</span></p>
+<p>Then:</p>
+<p><span class="math display">\[
+\begin{matrix}
+  y_0 &amp; \to &amp; y_1 &amp; \to &amp; y_2 &amp; \to &amp; y_3 &amp; \to &amp; y_4 &amp; \to &amp;\cdots \\
+   &amp; \nearrow &amp; \uparrow &amp; \nearrow &amp; \uparrow &amp; \nearrow &amp; \uparrow &amp; \nearrow &amp; \uparrow &amp; \nearrow &amp;  \\
+  \varepsilon_0 &amp;  &amp; \varepsilon_1 &amp;  &amp; \varepsilon_2 &amp;  &amp; \varepsilon_3 &amp;  &amp; \varepsilon_4 &amp;  &amp; \\
+\end{matrix}
+\]</span></p>
+</section><section id="arma2-2-distribution" class="slide level2"><h2>ARMA(2, 2) distribution</h2>
+<p>APP</p>
 </section><section id="autocovariance" class="slide level2"><h2>Autocovariance</h2>
 <ul>
 <li>The moving average piece is always stable;</li>
@@ -591,17 +604,24 @@ y_1 &amp; y_2 &amp; \cdots &amp; y_T
 <li>There is no conjugate prior, and MCMC is a bit of a nightmare here.</li>
 </ul>
 <p>Base <code>R</code> ships with some basic tools.</p>
-</section><section id="simulate-an-arma" class="slide level2 small"><h2>Simulate an ARMA</h2>
+</section><section id="simulate-an-arma" class="slide level2 small scrollable"><h2>Simulate an ARMA</h2>
+<p>This is a function in base:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="fu">set.seed</span>(<span class="dv">8675309</span>)</span>
 <span id="cb2-2"><a></a></span>
 <span id="cb2-3"><a></a>T <span class="ot">&lt;-</span> <span class="dv">200</span></span>
-<span id="cb2-4"><a></a>y <span class="ot">&lt;-</span> <span class="fu">arima.sim</span>(</span>
-<span id="cb2-5"><a></a>  <span class="at">n =</span> T,</span>
-<span id="cb2-6"><a></a>  <span class="at">model =</span> <span class="fu">list</span>(<span class="at">ar =</span> <span class="fl">0.6</span>, <span class="at">ma =</span> <span class="sc">-</span><span class="fl">0.4</span>)</span>
-<span id="cb2-7"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-4"><a></a>y <span class="ot">&lt;-</span> <span class="fu">arima.sim</span>(<span class="at">n =</span> T, <span class="at">model =</span> <span class="fu">list</span>(<span class="at">ar =</span> <span class="fl">0.99</span>, <span class="at">ma =</span> <span class="sc">-</span><span class="fl">0.4</span>), <span class="at">sd =</span> <span class="fu">sqrt</span>(<span class="dv">2</span>))</span>
+<span id="cb2-5"><a></a></span>
+<span id="cb2-6"><a></a><span class="fu">plot</span>(y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure><p><img data-src="more-ts_files/figure-revealjs/unnamed-chunk-2-1.png" width="960"></p>
+</figure>
+</div>
+</div>
 </div>
 </section><section id="fit-an-arma-numerically" class="slide level2 small"><h2>Fit an ARMA numerically</h2>
+<p>This is a function in base:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>my_arma_fit <span class="ot">&lt;-</span> <span class="fu">arima</span>(y, <span class="at">order =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>))</span>
 <span id="cb3-2"><a></a></span>
@@ -613,33 +633,91 @@ arima(x = y, order = c(1, 0, 1))
 
 Coefficients:
          ar1      ma1  intercept
-      0.5859  -0.3685    -0.0134
-s.e.  0.1905   0.2175     0.1033
+      0.9871  -0.4307    -2.2742
+s.e.  0.0089   0.0595     3.4451
 
-sigma^2 estimated as 0.9245:  log likelihood = -275.98,  aic = 559.95</code></pre>
+sigma^2 estimated as 2.131:  log likelihood = -360.85,  aic = 729.69</code></pre>
 </div>
 </div>
 <p>Not far from the true values we provided. It’s tougher mathematically than iid regression, but we have asymptotic statistical theory for ARMA models (even when they’re not stable!).</p>
 </section><section id="predict" class="slide level2 small"><h2>Predict</h2>
+<p>This is a function in base:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>h <span class="ot">&lt;-</span> <span class="dv">5</span></span>
-<span id="cb5-2"><a></a>fc <span class="ot">&lt;-</span> <span class="fu">predict</span>(my_arma_fit, <span class="at">n.ahead =</span> h)</span>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>H <span class="ot">&lt;-</span> <span class="dv">30</span></span>
+<span id="cb5-2"><a></a>fc <span class="ot">&lt;-</span> <span class="fu">predict</span>(my_arma_fit, <span class="at">n.ahead =</span> H)</span>
 <span id="cb5-3"><a></a></span>
-<span id="cb5-4"><a></a>fc<span class="sc">$</span>pred <span class="co"># point prediction</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-4"><a></a><span class="fu">head</span>(fc<span class="sc">$</span>pred) <span class="co"># point prediction</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Time Series:
 Start = 201 
-End = 205 
+End = 206 
 Frequency = 1 
-[1]  0.0527746562  0.0253647936  0.0093055721 -0.0001033987 -0.0056160401</code></pre>
+[1] -1.000734 -1.017113 -1.033281 -1.049241 -1.064996 -1.080549</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>fc<span class="sc">$</span>se <span class="co"># predictive standard error</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="fu">head</span>(fc<span class="sc">$</span>se) <span class="co"># predictive standard error</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Time Series:
 Start = 201 
-End = 205 
+End = 206 
 Frequency = 1 
-[1] 0.9615008 0.9839658 0.9915600 0.9941535 0.9950422</code></pre>
+[1] 1.459916 1.670697 1.853169 2.015144 2.161334 2.294846</code></pre>
+</div>
+</div>
+</section><section id="fan-chart-by-hand" class="slide level2"><h2>Fan chart by-hand</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="fu">plot</span>(y, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, T <span class="sc">+</span> H))</span>
+<span id="cb9-2"><a></a><span class="fu">lines</span>(fc<span class="sc">$</span>pred, <span class="at">col =</span> <span class="st">"red"</span>)</span>
+<span id="cb9-3"><a></a><span class="fu">lines</span>(fc<span class="sc">$</span>pred <span class="sc">+</span> <span class="fl">1.96</span> <span class="sc">*</span> fc<span class="sc">$</span>se, <span class="at">col =</span> <span class="st">"red"</span>)</span>
+<span id="cb9-4"><a></a><span class="fu">lines</span>(fc<span class="sc">$</span>pred <span class="sc">-</span> <span class="fl">1.96</span> <span class="sc">*</span> fc<span class="sc">$</span>se, <span class="at">col =</span> <span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure><p><img data-src="more-ts_files/figure-revealjs/unnamed-chunk-5-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="the-hyndmanverse" class="slide level2"><h2>The hyndmanverse</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<p><img data-src="images/hyndman.png"></p>
+</div><div class="column" style="width:60%;">
+<ul>
+<li>Textbook is free online;</li>
+<li>Very popular is some quarters;</li>
+<li>Accompanying software is inspired by the tidyverse and very well-documented:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a><span class="fu">library</span>(tsibble)</span>
+<span id="cb10-2"><a></a><span class="fu">library</span>(fable)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div></div>
+</section><section id="only-includes-data-uncertainty-no-bootstrap" class="slide level2 small"><h2>Only includes data uncertainty (no bootstrap!)</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a>my_data <span class="ot">=</span> <span class="fu">tsibble</span>(<span class="at">period =</span> <span class="dv">1</span><span class="sc">:</span>T, <span class="at">y =</span> y, <span class="at">index =</span> period)  </span>
+<span id="cb11-2"><a></a></span>
+<span id="cb11-3"><a></a>my_data <span class="sc">|&gt;</span></span>
+<span id="cb11-4"><a></a>  <span class="fu">model</span>(<span class="at">my_model =</span> <span class="fu">ARIMA</span>(y <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> <span class="fu">pdq</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>))) <span class="sc">|&gt;</span></span>
+<span id="cb11-5"><a></a>  <span class="fu">forecast</span>(<span class="at">h =</span> <span class="dv">30</span>) <span class="sc">|&gt;</span></span>
+<span id="cb11-6"><a></a>  <span class="fu">autoplot</span>(my_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure><p><img data-src="more-ts_files/figure-revealjs/unnamed-chunk-7-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="data-and-parameter-estimation-uncertainty" class="slide level2 small"><h2>Data and parameter estimation uncertainty</h2>
+<p>Not much difference in this case</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a>my_data <span class="sc">|&gt;</span></span>
+<span id="cb12-2"><a></a>  <span class="fu">model</span>(<span class="at">my_model =</span> <span class="fu">ARIMA</span>(y <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> <span class="fu">pdq</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>))) <span class="sc">|&gt;</span></span>
+<span id="cb12-3"><a></a>  <span class="fu">forecast</span>(<span class="at">h =</span> <span class="dv">30</span>, <span class="at">bootstrap =</span> <span class="cn">TRUE</span>, <span class="at">times =</span> <span class="dv">5000</span>) <span class="sc">|&gt;</span></span>
+<span id="cb12-4"><a></a>  <span class="fu">autoplot</span>(my_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure><p><img data-src="more-ts_files/figure-revealjs/unnamed-chunk-8-1.png" width="960"></p>
+</figure>
+</div>
 </div>
 </div>
 </section></section><section><section id="state-space-models" class="title-slide slide level1 center"><h1>State space models</h1>
@@ -668,13 +746,13 @@ Frequency = 1
 <div class="column" style="width:40%;">
 <p>The <span class="math inline">\(y_t\)</span> we got to see is a corrupted version of some smooth underlying trend or signal <span class="math inline">\(s_t\)</span> that we wish to extract:</p>
 <p><span class="math display">\[
-y_t=s_t+\varepsilon_t,\quad \varepsilon_t\indep\N(0\com \sigma^2).
+y_t=s_t+\varepsilon_t,\quad \varepsilon_t\iid\N(0\com \sigma^2).
 \]</span></p>
 </div><div class="column" style="width:60%;">
 <div class="cell">
 <div class="cell-output-display">
 <div>
-<figure><p><img data-src="more-ts_files/figure-revealjs/unnamed-chunk-4-1.png" width="960"></p>
+<figure><p><img data-src="more-ts_files/figure-revealjs/unnamed-chunk-9-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -691,7 +769,7 @@ y_t=\mu+\varepsilon_t,\quad \varepsilon_t\indep\N(0\com \sigma_t^2).
 <div class="cell">
 <div class="cell-output-display">
 <div>
-<figure><p><img data-src="more-ts_files/figure-revealjs/unnamed-chunk-5-1.png" width="960"></p>
+<figure><p><img data-src="more-ts_files/figure-revealjs/unnamed-chunk-10-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -714,7 +792,7 @@ y_t
 <div class="cell">
 <div class="cell-output-display">
 <div>
-<figure><p><img data-src="more-ts_files/figure-revealjs/unnamed-chunk-6-1.png" width="960"></p>
+<figure><p><img data-src="more-ts_files/figure-revealjs/unnamed-chunk-11-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -809,7 +887,7 @@ s_{t-1}
 <span class="math inline">\(p(s_t\mid y_{1:T}\com \Btheta)\)</span>: “two-sided”, <em>retrospective</em> estimates of the trend given all data past and present. This is called <em>smoothing</em>.</li>
 </ul>
 <p>It’s all posterior inference for the latent variable. The only difference is when the estimate is computed and what data we are conditioning on.</p>
-</section><section id="demo-switch-to-the-app" class="slide level2 medium"><h2>Demo (switch to the app!)</h2>
+</section><section id="demo" class="slide level2 medium"><h2>Demo</h2>
 <p>Can we extract the smooth trend from data like these?</p>
 <div class="columns">
 <div class="column" style="width:40%;">
@@ -820,13 +898,15 @@ y_t\indep\N\left(\sin\left(\frac{t}{4}\right)\com \sigma^2\right).
 <div class="cell">
 <div class="cell-output-display">
 <div>
-<figure><p><img data-src="more-ts_files/figure-revealjs/unnamed-chunk-7-1.png" width="960"></p>
+<figure><p><img data-src="more-ts_files/figure-revealjs/unnamed-chunk-12-1.png" width="960"></p>
 </figure>
 </div>
 </div>
 </div>
 </div></div>
+<div class="fragment">
 <p>Yes! But the parameters <span class="math inline">\(\Btheta=(v\com w)\)</span> have a big influence.</p>
+</div>
 </section><section id="the-dlm-package" class="slide level2"><h2>The <code>dlm</code> package</h2>
 <div class="columns">
 <div class="column" style="width:40%;">
@@ -838,7 +918,7 @@ y_t\indep\N\left(\sin\left(\frac{t}{4}\right)\com \sigma^2\right).
 <li>Accompanying software is well-documented:</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="fu">library</span>(dlm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a><span class="fu">library</span>(dlm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div></div>
 </section><section id="maximum-likelihood" class="slide level2 medium"><h2>Maximum likelihood</h2>
@@ -855,20 +935,30 @@ p(y_{1:T}\mid v\com w) = \int p(y_{1:T}\mid v\com w\com s_{1:T})\,\dd s_{1:T}.
 </section><section id="example" class="slide level2 small"><h2>Example</h2>
 <p>Fake data:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a><span class="fu">set.seed</span>(<span class="dv">8675309</span>)</span>
-<span id="cb10-2"><a></a>y <span class="ot">&lt;-</span> <span class="fu">sin</span>((<span class="dv">1</span><span class="sc">:</span>T) <span class="sc">/</span> <span class="dv">4</span>) <span class="sc">+</span> <span class="fu">rnorm</span>(T, <span class="at">sd =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a><span class="fu">set.seed</span>(<span class="dv">8675309</span>)</span>
+<span id="cb14-2"><a></a>y <span class="ot">&lt;-</span> <span class="fu">sin</span>((<span class="dv">1</span><span class="sc">:</span>T) <span class="sc">/</span> <span class="dv">4</span>) <span class="sc">+</span> <span class="fu">rnorm</span>(T, <span class="at">sd =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>MLE in the <code>dlm</code> packages:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a><span class="co"># how do the parameters (log-variances) determine the model (local-level)</span></span>
-<span id="cb11-2"><a></a>my_model <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="fu">return</span>(<span class="fu">dlmModPoly</span>(<span class="at">order =</span> <span class="dv">1</span>, <span class="at">dV =</span> <span class="fu">exp</span>(x[<span class="dv">1</span>]), <span class="at">dW =</span> <span class="fu">exp</span>(x[<span class="dv">2</span>])))</span>
-<span id="cb11-3"><a></a></span>
-<span id="cb11-4"><a></a><span class="co"># just passes to the optim function</span></span>
-<span id="cb11-5"><a></a>estimate <span class="ot">&lt;-</span> <span class="fu">dlmMLE</span>(<span class="at">y =</span> y, <span class="at">parm =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>), <span class="at">build =</span> my_model)</span>
-<span id="cb11-6"><a></a></span>
-<span id="cb11-7"><a></a><span class="fu">exp</span>(estimate<span class="sc">$</span>par) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a><span class="co"># how do the parameters (log-variances) determine the model (local-level)</span></span>
+<span id="cb15-2"><a></a>my_model <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="fu">return</span>(<span class="fu">dlmModPoly</span>(<span class="at">order =</span> <span class="dv">1</span>, <span class="at">dV =</span> <span class="fu">exp</span>(x[<span class="dv">1</span>]), <span class="at">dW =</span> <span class="fu">exp</span>(x[<span class="dv">2</span>])))</span>
+<span id="cb15-3"><a></a></span>
+<span id="cb15-4"><a></a><span class="co"># just passes to the optim function</span></span>
+<span id="cb15-5"><a></a>estimate <span class="ot">&lt;-</span> <span class="fu">dlmMLE</span>(<span class="at">y =</span> y, <span class="at">parm =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>), <span class="at">build =</span> my_model)</span>
+<span id="cb15-6"><a></a></span>
+<span id="cb15-7"><a></a><span class="fu">exp</span>(estimate<span class="sc">$</span>par) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.7460911 0.2590706</code></pre>
+</div>
+</div>
+</section><section id="empirical-bayes-estimate-of-the-trend" class="slide level2"><h2>Empirical Bayes estimate of the trend</h2>
+<p>This is <span class="math inline">\(E[s_{1:T}\mid y_{1:T}\com\hat{\Btheta}]\)</span>:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure><p><img data-src="more-ts_files/figure-revealjs/unnamed-chunk-16-1.png" width="960"></p>
+</figure>
+</div>
 </div>
 </div>
 </section><section id="bayesian-inference" class="slide level2"><h2>Bayesian inference</h2>
@@ -904,24 +994,24 @@ w&amp;\sim\text{IG}(a_w\com b_w)
 </section><section id="example-1" class="slide level2 scrollable medium"><h2>Example</h2>
 <p>Run the Gibbs sampler:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a><span class="fu">set.seed</span>(<span class="dv">525600</span>)</span>
-<span id="cb13-2"><a></a>posterior_draws <span class="ot">&lt;-</span> <span class="fu">dlmGibbsDIG</span>(</span>
-<span id="cb13-3"><a></a>  y,</span>
-<span id="cb13-4"><a></a>  <span class="fu">dlmModPoly</span>(<span class="dv">1</span>),</span>
-<span id="cb13-5"><a></a>  <span class="at">shape.y =</span> <span class="dv">1</span>, <span class="at">rate.y =</span> <span class="dv">1</span>, </span>
-<span id="cb13-6"><a></a>  <span class="at">shape.theta =</span> <span class="dv">1</span>, <span class="at">rate.theta =</span> <span class="dv">1</span>, </span>
-<span id="cb13-7"><a></a>  <span class="at">n.sample =</span> <span class="dv">5000</span>,</span>
-<span id="cb13-8"><a></a>  <span class="at">progressBar =</span> <span class="cn">FALSE</span></span>
-<span id="cb13-9"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a><span class="fu">set.seed</span>(<span class="dv">525600</span>)</span>
+<span id="cb17-2"><a></a>posterior_draws <span class="ot">&lt;-</span> <span class="fu">dlmGibbsDIG</span>(</span>
+<span id="cb17-3"><a></a>  y,</span>
+<span id="cb17-4"><a></a>  <span class="fu">dlmModPoly</span>(<span class="dv">1</span>),</span>
+<span id="cb17-5"><a></a>  <span class="at">shape.y =</span> <span class="dv">1</span>, <span class="at">rate.y =</span> <span class="dv">1</span>, </span>
+<span id="cb17-6"><a></a>  <span class="at">shape.theta =</span> <span class="dv">1</span>, <span class="at">rate.theta =</span> <span class="dv">1</span>, </span>
+<span id="cb17-7"><a></a>  <span class="at">n.sample =</span> <span class="dv">5000</span>,</span>
+<span id="cb17-8"><a></a>  <span class="at">progressBar =</span> <span class="cn">FALSE</span></span>
+<span id="cb17-9"><a></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="fragment">
 <p>Gives you 5,000 draws of <span class="math inline">\(\{v\com w\com s_{1:T}\}\)</span>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a>posterior_draws<span class="sc">$</span>dV <span class="co"># draws of v</span></span>
-<span id="cb14-2"><a></a></span>
-<span id="cb14-3"><a></a>posterior_draws<span class="sc">$</span>dW <span class="co"># draws of w</span></span>
-<span id="cb14-4"><a></a></span>
-<span id="cb14-5"><a></a>posterior_draws<span class="sc">$</span>theta <span class="co"># draws of the states</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a>posterior_draws<span class="sc">$</span>dV <span class="co"># draws of v</span></span>
+<span id="cb18-2"><a></a></span>
+<span id="cb18-3"><a></a>posterior_draws<span class="sc">$</span>dW <span class="co"># draws of w</span></span>
+<span id="cb18-4"><a></a></span>
+<span id="cb18-5"><a></a>posterior_draws<span class="sc">$</span>theta <span class="co"># draws of the states</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
