@@ -362,7 +362,7 @@ head(fc$pred) # point prediction
 head(fc$se) # predictive standard error
 ```
 
-## Fan chart by-hand
+## Poor man's fan chart
 
 ```{r}
 plot(y, xlim = c(0, T + H))
@@ -411,7 +411,7 @@ my_data |>
 
 ## Data and parameter estimation uncertainty {.small}
 
-Not much difference in this case 
+Not much difference because everything is cooked up nice here:
 
 ```{r}
 my_data |>
