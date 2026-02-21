@@ -479,8 +479,6 @@ y_t=\beta_0+\beta_1y_{t-1}+\theta_1\varepsilon_{t-1}+\varepsilon_t, \quad \varep
   \varepsilon_0 &amp;  &amp; \varepsilon_1 &amp;  &amp; \varepsilon_2 &amp;  &amp; \varepsilon_3 &amp;  &amp; \varepsilon_4 &amp;  &amp; \\
 \end{matrix}
 \]</span></p>
-</section><section id="arma2-2-distribution" class="slide level2"><h2>ARMA(2, 2) distribution</h2>
-<p>APP</p>
 </section><section id="autocovariance" class="slide level2"><h2>Autocovariance</h2>
 <ul>
 <li>The moving average piece is always stable;</li>
@@ -537,7 +535,7 @@ y_t=\beta_0+\beta_1y_{t-1}+\theta_1\varepsilon_{t-1}+\varepsilon_t, \quad \varep
 <span id="cb1-42"><a></a>                  value = 0,</span>
 <span id="cb1-43"><a></a>                  step = 0.01),</span>
 <span id="cb1-44"><a></a>      sliderInput("th2",</span>
-<span id="cb1-45"><a></a>                  "θ₁",</span>
+<span id="cb1-45"><a></a>                  "θ₂",</span>
 <span id="cb1-46"><a></a>                  min = -0.99,</span>
 <span id="cb1-47"><a></a>                  max = 0.99,</span>
 <span id="cb1-48"><a></a>                  value = 0,</span>
@@ -663,7 +661,7 @@ Frequency = 1
 [1] 1.459916 1.670697 1.853169 2.015144 2.161334 2.294846</code></pre>
 </div>
 </div>
-</section><section id="fan-chart-by-hand" class="slide level2"><h2>Fan chart by-hand</h2>
+</section><section id="poor-mans-fan-chart" class="slide level2"><h2>Poor man’s fan chart</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="fu">plot</span>(y, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, T <span class="sc">+</span> H))</span>
 <span id="cb9-2"><a></a><span class="fu">lines</span>(fc<span class="sc">$</span>pred, <span class="at">col =</span> <span class="st">"red"</span>)</span>
@@ -707,7 +705,7 @@ Frequency = 1
 </div>
 </div>
 </section><section id="data-and-parameter-estimation-uncertainty" class="slide level2 small"><h2>Data and parameter estimation uncertainty</h2>
-<p>Not much difference in this case</p>
+<p>Not much difference because everything is cooked up nice here:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a>my_data <span class="sc">|&gt;</span></span>
 <span id="cb12-2"><a></a>  <span class="fu">model</span>(<span class="at">my_model =</span> <span class="fu">ARIMA</span>(y <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> <span class="fu">pdq</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>))) <span class="sc">|&gt;</span></span>
@@ -816,7 +814,7 @@ y_t=\Bx_t^\tr\Bbeta_t+\varepsilon_t.
     \By_t&amp;\sim p(\By_t\given \Bs_t\com \Btheta) &amp;&amp; \text{(measurement distribution)}\\
     \Bs_t&amp;\sim p(\Bs_t\given \Bs_{t-1}\com \Btheta) &amp;&amp; \text{(state transition distribution)}\\
     \Bs_0&amp;\sim p(\Bs_0\given \Btheta) &amp;&amp; \text{(initial condition)}\\
-    \Btheta&amp;\sim p(\Btheta). &amp;&amp; \text{(prior)}
+    \Btheta&amp;\sim p(\Btheta). &amp;&amp; \text{(parameter prior)}
 \end{aligned}
 \]</span></p>
 <p>Graphical structure:</p>
@@ -828,6 +826,35 @@ y_t=\Bx_t^\tr\Bbeta_t+\varepsilon_t.
 \end{matrix}
 \]</span></p>
 <p>So the <span class="math inline">\(\mathbf{y}_t\)</span> are <em>conditionally independent</em>. But this can be relaxed.</p>
+</section><section id="generic-goal" class="slide level2 small"><h2>Generic goal</h2>
+<p>Bayesian inference!</p>
+<p><span class="math display">\[
+\begin{aligned}
+p(\By_{1:T}\mid \Bs_{1:T}\com\Btheta)
+&amp;=
+\prod_{t=1}^T
+p(\By_t\mid \Bs_t\com\Btheta)
+&amp;&amp;
+\text{(likelihood)}
+\\
+\\
+p(\Bs_{0:T}\mid\Btheta)
+&amp;=
+p(\Bs_0\mid\Btheta)
+\prod_{t=1}^T
+p(\Bs_t\mid\Bs_{1-t}\com\Btheta)
+&amp;&amp;
+\text{(state prior)}
+\\
+\\
+p(\Bs_{0:T}\com\Btheta\mid\By_{1:T})
+&amp;\propto
+p(\By_{1:T}\mid \Bs_{1:T}\com\Btheta)p(\Bs_{0:T}\mid\Btheta)p(\Btheta)
+&amp;&amp;
+\text{(posterior)}
+\end{aligned}
+\]</span></p>
+<p>We estimate the trend with a posterior mean like <span class="math inline">\(E(\Bs_{1:T}\mid\By_{1:T})\)</span> or <span class="math inline">\(E(\Bs_{1:T}\mid\By_{1:T}\com\hat{\Btheta})\)</span>.</p>
 </section><section id="dynamic-linear-model" class="slide level2 medium"><h2>Dynamic linear model</h2>
 <p><span class="math display">\[
 \begin{aligned}
@@ -924,7 +951,7 @@ y_t\indep\N\left(\sin\left(\frac{t}{4}\right)\com \sigma^2\right).
 </section><section id="maximum-likelihood" class="slide level2 medium"><h2>Maximum likelihood</h2>
 <p>When it comes to estimating <span class="math inline">\(v\)</span> and <span class="math inline">\(w\)</span>, <span class="math inline">\(s_{1:T}\)</span> are nuisance parameters that can be fully integrated out using the <em>Kalman filter</em>:</p>
 <p><span class="math display">\[
-p(y_{1:T}\mid v\com w) = \int p(y_{1:T}\mid v\com w\com s_{1:T})\,\dd s_{1:T}.
+p(y_{1:T}\mid v\com w) = \int p(y_{1:T}\com s_{1:T}\mid v\com w)\,\dd s_{1:T}.
 \]</span></p>
 <p>This is just a funky multivariate normal! Then we can compute maximum (marginal!) likelihood estimates using numerical optimization:</p>
 <p><span class="math display">\[
@@ -951,7 +978,7 @@ p(y_{1:T}\mid v\com w) = \int p(y_{1:T}\mid v\com w\com s_{1:T})\,\dd s_{1:T}.
 <pre><code>[1] 0.7460911 0.2590706</code></pre>
 </div>
 </div>
-</section><section id="empirical-bayes-estimate-of-the-trend" class="slide level2"><h2>Empirical Bayes estimate of the trend</h2>
+</section><section id="empirical-bayes-estimate-of-the-trend" class="slide level2 medium"><h2>Empirical Bayes estimate of the trend</h2>
 <p>This is <span class="math inline">\(E[s_{1:T}\mid y_{1:T}\com\hat{\Btheta}]\)</span>:</p>
 <div class="cell">
 <div class="cell-output-display">

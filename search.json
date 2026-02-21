@@ -504,13 +504,6 @@
     "text": "Graphical structure\nConsider the ARMA(1, 1):\n\\[\ny_t=\\beta_0+\\beta_1y_{t-1}+\\theta_1\\varepsilon_{t-1}+\\varepsilon_t, \\quad \\varepsilon_t\\iid\\N(0\\com \\sigma^2).\n\\]\nThen:\n\\[\n\\begin{matrix}\n  y_0 & \\to & y_1 & \\to & y_2 & \\to & y_3 & \\to & y_4 & \\to &\\cdots \\\\\n   & \\nearrow & \\uparrow & \\nearrow & \\uparrow & \\nearrow & \\uparrow & \\nearrow & \\uparrow & \\nearrow &  \\\\\n  \\varepsilon_0 &  & \\varepsilon_1 &  & \\varepsilon_2 &  & \\varepsilon_3 &  & \\varepsilon_4 &  & \\\\\n\\end{matrix}\n\\]"
   },
   {
-    "objectID": "slides/more-ts.html#arma2-2-distribution",
-    "href": "slides/more-ts.html#arma2-2-distribution",
-    "title": "Time series potpourri",
-    "section": "ARMA(2, 2) distribution",
-    "text": "ARMA(2, 2) distribution\nAPP"
-  },
-  {
     "objectID": "slides/more-ts.html#autocovariance",
     "href": "slides/more-ts.html#autocovariance",
     "title": "Time series potpourri",
@@ -522,7 +515,7 @@
     "href": "slides/more-ts.html#acf-of-the-arma",
     "title": "Time series potpourri",
     "section": "ACF of the ARMA",
-    "text": "ACF of the ARMA\n#| '!! shinylive warning !!': |\n#|   shinylive does not work in self-contained HTML documents.\n#|   Please set `embed-resources: false` in your metadata.\n#| standalone: true\n#| viewerHeight: 700\n\nlibrary(shiny)\n\nplot_arma_acf &lt;- function(ar = numeric(), ma = numeric(), lag.max = 10){\n  y_vals &lt;- ARMAacf(ar = ar, ma = ma, lag.max = lag.max)\n  plot(0:lag.max, y_vals, pch = 19, ylim = c(-1, 1),\n       xlab = \"h\", ylab = expression(rho~\"(h)\"))\n  segments(0:lag.max, 0, 0:lag.max, y_vals)\n  abline(h = 0, col = \"lightgrey\")\n}\n\n# Define UI for application that draws a histogram\nui &lt;- fluidPage(\n  \n  # Application title\n  titlePanel(\"Theoretical autocorrelation of a stationary ARMA(2, 2)\"),\n  \n  # Sidebar with a slider input for number of bins \n  sidebarLayout(\n    sidebarPanel(\n      sliderInput(\"b1\",\n                  \"β₁\",\n                  min = -2,\n                  max = 2,\n                  value = 0,\n                  step = 0.05),\n      sliderInput(\"b2\",\n                  \"β₂\",\n                  min = -2,\n                  max = 2,\n                  value = 0,\n                  step = 0.05),\n      sliderInput(\"th1\",\n                  \"θ₁\",\n                  min = -0.99,\n                  max = 0.99,\n                  value = 0,\n                  step = 0.01),\n      sliderInput(\"th2\",\n                  \"θ₁\",\n                  min = -0.99,\n                  max = 0.99,\n                  value = 0,\n                  step = 0.01),\n      sliderInput(\"H\",\n                  \"H\",\n                  min = 0,\n                  max = 50,\n                  step = 1,\n                  value = 20)\n    ),\n    \n    # Show a plot of the generated distribution\n    mainPanel(\n            plotOutput(\"acf\", height = \"400px\"),\n      plotOutput(\"stationarityPlot\", height = \"400px\"),\n      verbatimTextOutput(\"stationarity\")\n    )\n  )\n)\n\n# Define server logic required to draw a histogram\nserver &lt;- function(input, output) {\n  \n  output$acf &lt;- renderPlot({\n    b1 &lt;- input$b1\n    b2 &lt;- input$b2\n    th1 &lt;- input$th1\n    th2 &lt;- input$th2\n    H &lt;- input$H\n    \n    plot_arma_acf(ar = c(b1, b2), ma = c(th1, th2), lag.max = H)\n\n  })\n  \n    output$stationarityPlot &lt;- renderPlot({\n    b1 &lt;- input$b1\n    b2 &lt;- input$b2\n    \n    # triangle vertices\n    tri_x &lt;- c(2, -2, 0)\n    tri_y &lt;- c(-1, -1, 1)\n    par(mar = c(4, 4, 0.1, 4))\n    plot(tri_x, tri_y, type = \"n\",\n         xlab = expression(beta[1]),\n         ylab = expression(beta[2]),\n         xlim = c(-2.1, 2.1),\n         ylim = c(-1.1, 1.1),\n         xaxt = \"n\", yaxt = \"n\", bty = \"n\")\n    axis(1, at = c(-2, 0, 2), pos = 0)\n    axis(2, at = c(-1, 0, 1), pos = 0)\n    \n    polygon(tri_x, tri_y, col = rgb(0, 0, 1, 0.2), border = \"blue\", lwd = 2)\n    points(b1, b2, pch = 19, col = \"red\", cex = 1.5)\n  })\n}\n\n# Run the application \nshinyApp(ui = ui, server = server)"
+    "text": "ACF of the ARMA\n#| '!! shinylive warning !!': |\n#|   shinylive does not work in self-contained HTML documents.\n#|   Please set `embed-resources: false` in your metadata.\n#| standalone: true\n#| viewerHeight: 700\n\nlibrary(shiny)\n\nplot_arma_acf &lt;- function(ar = numeric(), ma = numeric(), lag.max = 10){\n  y_vals &lt;- ARMAacf(ar = ar, ma = ma, lag.max = lag.max)\n  plot(0:lag.max, y_vals, pch = 19, ylim = c(-1, 1),\n       xlab = \"h\", ylab = expression(rho~\"(h)\"))\n  segments(0:lag.max, 0, 0:lag.max, y_vals)\n  abline(h = 0, col = \"lightgrey\")\n}\n\n# Define UI for application that draws a histogram\nui &lt;- fluidPage(\n  \n  # Application title\n  titlePanel(\"Theoretical autocorrelation of a stationary ARMA(2, 2)\"),\n  \n  # Sidebar with a slider input for number of bins \n  sidebarLayout(\n    sidebarPanel(\n      sliderInput(\"b1\",\n                  \"β₁\",\n                  min = -2,\n                  max = 2,\n                  value = 0,\n                  step = 0.05),\n      sliderInput(\"b2\",\n                  \"β₂\",\n                  min = -2,\n                  max = 2,\n                  value = 0,\n                  step = 0.05),\n      sliderInput(\"th1\",\n                  \"θ₁\",\n                  min = -0.99,\n                  max = 0.99,\n                  value = 0,\n                  step = 0.01),\n      sliderInput(\"th2\",\n                  \"θ₂\",\n                  min = -0.99,\n                  max = 0.99,\n                  value = 0,\n                  step = 0.01),\n      sliderInput(\"H\",\n                  \"H\",\n                  min = 0,\n                  max = 50,\n                  step = 1,\n                  value = 20)\n    ),\n    \n    # Show a plot of the generated distribution\n    mainPanel(\n            plotOutput(\"acf\", height = \"400px\"),\n      plotOutput(\"stationarityPlot\", height = \"400px\"),\n      verbatimTextOutput(\"stationarity\")\n    )\n  )\n)\n\n# Define server logic required to draw a histogram\nserver &lt;- function(input, output) {\n  \n  output$acf &lt;- renderPlot({\n    b1 &lt;- input$b1\n    b2 &lt;- input$b2\n    th1 &lt;- input$th1\n    th2 &lt;- input$th2\n    H &lt;- input$H\n    \n    plot_arma_acf(ar = c(b1, b2), ma = c(th1, th2), lag.max = H)\n\n  })\n  \n    output$stationarityPlot &lt;- renderPlot({\n    b1 &lt;- input$b1\n    b2 &lt;- input$b2\n    \n    # triangle vertices\n    tri_x &lt;- c(2, -2, 0)\n    tri_y &lt;- c(-1, -1, 1)\n    par(mar = c(4, 4, 0.1, 4))\n    plot(tri_x, tri_y, type = \"n\",\n         xlab = expression(beta[1]),\n         ylab = expression(beta[2]),\n         xlim = c(-2.1, 2.1),\n         ylim = c(-1.1, 1.1),\n         xaxt = \"n\", yaxt = \"n\", bty = \"n\")\n    axis(1, at = c(-2, 0, 2), pos = 0)\n    axis(2, at = c(-1, 0, 1), pos = 0)\n    \n    polygon(tri_x, tri_y, col = rgb(0, 0, 1, 0.2), border = \"blue\", lwd = 2)\n    points(b1, b2, pch = 19, col = \"red\", cex = 1.5)\n  })\n}\n\n# Run the application \nshinyApp(ui = ui, server = server)"
   },
   {
     "objectID": "slides/more-ts.html#estimation-1",
@@ -553,11 +546,11 @@
     "text": "Predict\nThis is a function in base:\n\nH &lt;- 30\nfc &lt;- predict(my_arma_fit, n.ahead = H)\n\nhead(fc$pred) # point prediction\n\nTime Series:\nStart = 201 \nEnd = 206 \nFrequency = 1 \n[1] -1.000734 -1.017113 -1.033281 -1.049241 -1.064996 -1.080549\n\nhead(fc$se) # predictive standard error\n\nTime Series:\nStart = 201 \nEnd = 206 \nFrequency = 1 \n[1] 1.459916 1.670697 1.853169 2.015144 2.161334 2.294846"
   },
   {
-    "objectID": "slides/more-ts.html#fan-chart-by-hand",
-    "href": "slides/more-ts.html#fan-chart-by-hand",
+    "objectID": "slides/more-ts.html#poor-mans-fan-chart",
+    "href": "slides/more-ts.html#poor-mans-fan-chart",
     "title": "Time series potpourri",
-    "section": "Fan chart by-hand",
-    "text": "Fan chart by-hand\n\nplot(y, xlim = c(0, T + H))\nlines(fc$pred, col = \"red\")\nlines(fc$pred + 1.96 * fc$se, col = \"red\")\nlines(fc$pred - 1.96 * fc$se, col = \"red\")"
+    "section": "Poor man’s fan chart",
+    "text": "Poor man’s fan chart\n\nplot(y, xlim = c(0, T + H))\nlines(fc$pred, col = \"red\")\nlines(fc$pred + 1.96 * fc$se, col = \"red\")\nlines(fc$pred - 1.96 * fc$se, col = \"red\")"
   },
   {
     "objectID": "slides/more-ts.html#the-hyndmanverse",
@@ -578,7 +571,7 @@
     "href": "slides/more-ts.html#data-and-parameter-estimation-uncertainty",
     "title": "Time series potpourri",
     "section": "Data and parameter estimation uncertainty",
-    "text": "Data and parameter estimation uncertainty\nNot much difference in this case\n\nmy_data |&gt;\n  model(my_model = ARIMA(y ~ 1 + pdq(1, 0, 1))) |&gt;\n  forecast(h = 30, bootstrap = TRUE, times = 5000) |&gt;\n  autoplot(my_data)"
+    "text": "Data and parameter estimation uncertainty\nNot much difference because everything is cooked up nice here:\n\nmy_data |&gt;\n  model(my_model = ARIMA(y ~ 1 + pdq(1, 0, 1))) |&gt;\n  forecast(h = 30, bootstrap = TRUE, times = 5000) |&gt;\n  autoplot(my_data)"
   },
   {
     "objectID": "slides/more-ts.html#state-space-models-ssms",
@@ -634,7 +627,14 @@
     "href": "slides/more-ts.html#generic-structure",
     "title": "Time series potpourri",
     "section": "Generic structure",
-    "text": "Generic structure\nBasic ingredients of all SSMs:\n\\[\n\\begin{aligned}\n    \\By_t&\\sim p(\\By_t\\given \\Bs_t\\com \\Btheta) && \\text{(measurement distribution)}\\\\\n    \\Bs_t&\\sim p(\\Bs_t\\given \\Bs_{t-1}\\com \\Btheta) && \\text{(state transition distribution)}\\\\\n    \\Bs_0&\\sim p(\\Bs_0\\given \\Btheta) && \\text{(initial condition)}\\\\\n    \\Btheta&\\sim p(\\Btheta). && \\text{(prior)}\n\\end{aligned}\n\\]\nGraphical structure:\n\\[\n    \\begin{matrix}\n\\Bs_0 & \\rightarrow & \\Bs_1 & \\rightarrow & \\Bs_2 & \\rightarrow & \\cdots & \\rightarrow & \\Bs_t & \\rightarrow & \\cdots \\\\\n& & \\downarrow & & \\downarrow & & & & \\downarrow & & \\\\\n  & & \\mathbf{y}_1 & & \\mathbf{y}_2 & & & & \\mathbf{y}_t & &\n\\end{matrix}\n\\]\nSo the \\(\\mathbf{y}_t\\) are conditionally independent. But this can be relaxed."
+    "text": "Generic structure\nBasic ingredients of all SSMs:\n\\[\n\\begin{aligned}\n    \\By_t&\\sim p(\\By_t\\given \\Bs_t\\com \\Btheta) && \\text{(measurement distribution)}\\\\\n    \\Bs_t&\\sim p(\\Bs_t\\given \\Bs_{t-1}\\com \\Btheta) && \\text{(state transition distribution)}\\\\\n    \\Bs_0&\\sim p(\\Bs_0\\given \\Btheta) && \\text{(initial condition)}\\\\\n    \\Btheta&\\sim p(\\Btheta). && \\text{(parameter prior)}\n\\end{aligned}\n\\]\nGraphical structure:\n\\[\n    \\begin{matrix}\n\\Bs_0 & \\rightarrow & \\Bs_1 & \\rightarrow & \\Bs_2 & \\rightarrow & \\cdots & \\rightarrow & \\Bs_t & \\rightarrow & \\cdots \\\\\n& & \\downarrow & & \\downarrow & & & & \\downarrow & & \\\\\n  & & \\mathbf{y}_1 & & \\mathbf{y}_2 & & & & \\mathbf{y}_t & &\n\\end{matrix}\n\\]\nSo the \\(\\mathbf{y}_t\\) are conditionally independent. But this can be relaxed."
+  },
+  {
+    "objectID": "slides/more-ts.html#generic-goal",
+    "href": "slides/more-ts.html#generic-goal",
+    "title": "Time series potpourri",
+    "section": "Generic goal",
+    "text": "Generic goal\nBayesian inference!\n\\[\n\\begin{aligned}\np(\\By_{1:T}\\mid \\Bs_{1:T}\\com\\Btheta)\n&=\n\\prod_{t=1}^T\np(\\By_t\\mid \\Bs_t\\com\\Btheta)\n&&\n\\text{(likelihood)}\n\\\\\n\\\\\np(\\Bs_{0:T}\\mid\\Btheta)\n&=\np(\\Bs_0\\mid\\Btheta)\n\\prod_{t=1}^T\np(\\Bs_t\\mid\\Bs_{1-t}\\com\\Btheta)\n&&\n\\text{(state prior)}\n\\\\\n\\\\\np(\\Bs_{0:T}\\com\\Btheta\\mid\\By_{1:T})\n&\\propto\np(\\By_{1:T}\\mid \\Bs_{1:T}\\com\\Btheta)p(\\Bs_{0:T}\\mid\\Btheta)p(\\Btheta)\n&&\n\\text{(posterior)}\n\\end{aligned}\n\\]\nWe estimate the trend with a posterior mean like \\(E(\\Bs_{1:T}\\mid\\By_{1:T})\\) or \\(E(\\Bs_{1:T}\\mid\\By_{1:T}\\com\\hat{\\Btheta})\\)."
   },
   {
     "objectID": "slides/more-ts.html#dynamic-linear-model",
@@ -676,7 +676,7 @@
     "href": "slides/more-ts.html#maximum-likelihood",
     "title": "Time series potpourri",
     "section": "Maximum likelihood",
-    "text": "Maximum likelihood\nWhen it comes to estimating \\(v\\) and \\(w\\), \\(s_{1:T}\\) are nuisance parameters that can be fully integrated out using the Kalman filter:\n\\[\np(y_{1:T}\\mid v\\com w) = \\int p(y_{1:T}\\mid v\\com w\\com s_{1:T})\\,\\dd s_{1:T}.\n\\]\nThis is just a funky multivariate normal! Then we can compute maximum (marginal!) likelihood estimates using numerical optimization:\n\\[\n(\\hat{v}\\com \\hat{w})\n=\n\\underset{v\\com w}{\\arg\\max}\\,p(y_{1:T}\\mid v\\com w).\n\\]"
+    "text": "Maximum likelihood\nWhen it comes to estimating \\(v\\) and \\(w\\), \\(s_{1:T}\\) are nuisance parameters that can be fully integrated out using the Kalman filter:\n\\[\np(y_{1:T}\\mid v\\com w) = \\int p(y_{1:T}\\com s_{1:T}\\mid v\\com w)\\,\\dd s_{1:T}.\n\\]\nThis is just a funky multivariate normal! Then we can compute maximum (marginal!) likelihood estimates using numerical optimization:\n\\[\n(\\hat{v}\\com \\hat{w})\n=\n\\underset{v\\com w}{\\arg\\max}\\,p(y_{1:T}\\mid v\\com w).\n\\]"
   },
   {
     "objectID": "slides/more-ts.html#example",
