@@ -1,0 +1,344 @@
+---
+title: "Case Study 5"
+format: revealjs
+auto-stretch: false
+---
+
+## The journey so far...
+
+::: incremental
+- Case 1: particle adhesion
+    - GLMs, linear mixed models
+- Case 2: macroeconomic revisions
+    - time series, probabilistic prediction
+- Case 3: hormonal etiology of meningioma
+    - Bayesian model averaging
+- Case 4: Beijing air pollution
+    - splines, generalized additive models
+:::
+
+
+
+# And Now for Something Completely Different
+
+## Case 5: statistics in the courtroom
+
+::: incremental
+- You will pretend that you have been hired as an expert witness in a court case;
+- In teams, you will conduct an analysis and write an expert witness report for a non-technical audience (judge, jury, lawyers);
+- Instead of giving a slide presentation, you will then "take the stand" and testify about your report.
+:::
+
+## Expert witnesses in general {.small}
+
+::: incremental
+- The American system is *adversarial*;
+- There is prosecution and defense, and each may hire their own experts;
+- While one side or the other hires the expert, they are not supposed to be an *advocate* for that side;
+- A lawyer hires an expert to conduct a neutral analysis:
+    - If the analysis doesn't help their case, they bury it and hire someone else;
+    - If it does help, the expert might be deposed or testify at trial (very lucrative);
+- The expert is subjected to questions under oath about their background, credentials, report, and the report of other expert witnesses;
+- If the expert testifies, everything they did is *discoverable*. So, if they conduct two analyses, one incriminating and one exculpatory, but then bury one...that's bad.
+:::
+
+ 
+
+## Statistical experts in particular
+
+A statistician (often a PhD academic, but not always) might be hired to...
+
+- explain statistical concepts to the non-expert jury;
+- respond to opposing experts;
+- evaluate statistical evidence or analysis at issue in the litigation;
+- quantify uncertainty, estimate likelihood, evaluate causality;
+- estimate damages.
+
+## An expert being deposed
+
+Statistician Anthony Hayter enduring a wearying line of questioning about the relevance of his expertise:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/FfbTEy4fsDU?si=dIRPRG5O-eCQqD4U" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+## Other *very* amusing depositions
+
+<iframe width="450" height="300" src="https://www.youtube.com/embed/ZIxmrvbMeKc?si=VhTOjXBFLl3eAkFO" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<iframe width="450" height="300" src="https://www.youtube.com/embed/G-6eynsaZ0U?si=L1Z50uzxqlRdGrZ1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+(These have nothing to do with anything. They just tickle me.)
+
+# Case 5
+
+## The case {.small}
+
+In 2012, the Obama Justice Department charged the sheriff of Alamance County NC with discriminating against Latino drivers at traffic stops. 
+
+. . .
+
+Statistical experts were hired to assess the strength of evidence for three kinds of targeting:
+
+::: incremental 
+- The sheriff's office placed checkpoints at sites more likely to encounter Latinos;
+- Checkpoint screenings led to targeted arrests of Latinos;
+- Latinos were more likely to be stopped for minor violations in non-checkpoint situations.
+:::
+
+. . .
+
+Data sources include Alamance County Sheriff’s Office, the U.S. Census Bureau, and the North Carolina state government.
+
+## Your task: phase one
+
+Your client has sent you a horrific pile of files containing the traffic stop records of the sheriff's office from 2009 - 2012:
+
+- Mop up the mess;
+- Write an expert witness report;
+- Reach whatever conclusion seems correct to you.
+
+Judge, jury, and attorneys are the audience. *Not* statisticians.
+
+## Your task: phase two
+
+After you submit the report, we will review it, and then your team will "take the stand" for 25 minutes:
+
+- An "attorney" sympathetic to your conclusion will examine you;
+- An "attorney" hostile to your conclusion will cross-examine you.
+
+. . .
+
+The "attorneys" will come from Duke's Mock Trial team.
+
+## Timeline (Section 2) {.small}
+
+This Case is not about technique, so no content lectures. Furthermore, we're asking you to write an airtight report on an accelerated timeline. So:
+
+- [Friday April 3]{style="color:blue;"}: lab as usual;
+- [Monday April 6]{style="color:blue;"}: in-class work period;
+- [Wednesday April 8]{style="color:blue;"}: Q&A with Dr. David Banks, who has been an expert witness;
+- [Friday April 10]{style="color:blue;"}: lab as usual;
+- [Monday April 13]{style="color:blue;"}: intro Case 6, in-class work period and [final report due]{style="color:red;"};
+- [Wednesday April 15]{style="color:blue;"}: Presentation (3 teams);
+- [Monday April 20]{style="color:blue;"}: Presentation (3 teams);
+- [Wednesday April 22]{style="color:blue;"}: Presentation (3 teams).
+
+
+## Words of caution
+
+::: incremental
+- This is not about technique. Your audience (judge, jury, and lawyers) know virtually nothing about statistics. Stick to simple things you can actually explain!
+- You may not have written every part of your team's report, but your name is on it. Be prepared to explain and defend everything in it;
+- You are a *statistical* expert witness. Don't opine about things beyond your expertise;
+- You wouldn't wear sweatpants to court, would you?
+:::
+
+## Suggested reading {.small .scrollable}
+
+- The ASA's [*Ethical Guidelines for Statistical Practice*](https://www.amstat.org/your-career/ethical-guidelines-for-statistical-practice);
+- Fairley & Huber (2021): "[On being an ethical statistical expert in a legal case](https://doi.org/10.1080/00031305.2020.1763834)," *The American Statistician*;
+- Dotto et al (2021): "[Statistical analyses in the case of an Italian nurse accused of murdering patients](https://doi.org/10.1080/00031305.2020.1763834)," *Law, Probability and Risk*;
+- The Sally Clark case:
+    - Grimes (2023): "[Bad Science and Bad Statistics in the Courtroom Convict Innocent People](https://www.scientificamerican.com/article/bad-science-and-bad-statistics-in-the-courtroom-convict-innocent-people/?utm_source=chatgpt.com)," *Scientific American*;
+    - Carriquiry (2018): "[Misuse of statistics in the courtroom: the Sally Clark case](https://forensicstats.org/blog/misuse-of-statistics-in-the-courtroom-the-sally-clark-case)," CSAFE;
+    - Westreich & Iliinsky (2014): "[Epidemiology visualized: the prosecutor's fallacy](https://sta240-f25.github.io/readings/westreich-iliinsky-2014-aje.pdf)," *American Journal of Epidemiology*;
+    - [AP Dawid](https://en.wikipedia.org/wiki/Philip_Dawid)'s [statement](https://sta240-f25.github.io/readings/dawid-clark-statement.pdf) during the Clark appeal.
+
+
+# The Sally Clark case
+
+## Background
+
+::::: {.columns .v-center-container}
+::: {.column width="30%"}
+![](images/sally-clark.png)
+:::
+
+::: {.column width="70%"}
+
+::: incremental
+- Sally Clark (1964 - 2007): english solicitor;
+- 1996: first son died in bed at 11 weeks;
+- 1998: second son died in bed at 8 weeks;
+- Clark arrested on suspicion of murder;
+- Defense claimed it was SIDS (sudden infant death syndrome).
+:::
+
+:::
+:::::
+
+## Expert testimony
+
+::::: {.columns .v-center-container}
+::: {.column width="60%"}
+
+::: incremental
+- Sir Roy Meadow (1933 - );
+- Pediatrician specializing in "Munchausen syndrome by proxy;"
+- Gave testimony that there is a "1 in 73,000,000" chance of two SIDS deaths in the same family;
+- A second expert was not engaged to push back on this.
+
+:::
+
+:::
+
+::: {.column width="40%"}
+![](images/meadow.png)
+:::
+:::::
+
+## 1 in 73,000,000?
+
+Behold:
+
+::: incremental
+- In the 1990s, the incidence of SIDS in the UK was approximately 1 in 8,500 in middle-class families with no known risk factors;
+- Meadows assumed the two death were independent and just squared that.
+:::
+
+. . .
+
+Any problems?
+
+
+## The prosecutor's fallacy
+
+Even if you accept the number (which you shouldn't):
+
+
+> saying that there is a 1 in 73 million chance that the babies died of SIDS is not the same as saying that there is a 1 in 73 million chance that the mother did not kill them.
+
+. . .
+
+$$
+P(evidence \mid innocence) \neq P(innocence\mid evidence).
+$$
+
+. . .
+
+Why not?
+
+
+## The prosecutor's fallacy
+
+![](images/prosecutor.png){width="45%" fig-align="center"}
+
+## A sad story
+
+::::: {.columns .v-center-container}
+::: {.column width="40%"}
+![](images/rss.png)
+:::
+
+::: {.column width="60%"}
+
+::: incremental
+- 1999: Clark convicted. 
+- Stats community loudly panned Meadow's testimony;
+- 2003: conviction overturned on appeal after revelation that exculpatory evidence was suppressed; 
+- 2007: Clark drinks herself to death.
+:::
+
+
+:::
+:::::
+
+# The Daniela Poggiali case
+
+## Background {.medium}
+
+::: incremental
+- Daniela Poggiali (DP) was a hospital nurse accused of murdering a 78-year-old patient by injecting her with a lethal dose of potassium chloride;
+- DP was known to have complained about the patient, and there was an incident of some KCl going missing, but otherwise no one witnessed anything;
+- Data was available on hospital shift assignments and patient mortality;
+- Prosecution argued that a disproportionate number of patients died while DP was on duty;
+- The jury was convinced this could not be mere chance, and DP was convicted.
+:::
+
+## The prosecution's expert testimony {.small}
+
+![](images/tab-01.png){fig-align="center"}
+
+. . .
+
+Are you convinced by this evidence?
+
+## The defense's expert testimony {.scrollable}
+
+![](images/tab-02-03.png)
+
+## The defense's expert testimony {.scrollable}
+
+![](images/fig-02.png)
+
+## The defense's expert testimony {.scrollable}
+
+![](images/tab-04.png)
+
+## The defense's expert testimony {.scrollable}
+
+![](images/fig-03-a.png)
+
+## The defense's expert testimony {.scrollable}
+
+![](images/fig-03-b.png)
+
+## The defense's expert testimony {.scrollable}
+
+![](images/fig-04.png)
+
+## The defense's expert testimony {.scrollable}
+
+![](images/fig-05.png)
+
+## The defense's expert testimony {.scrollable}
+
+![](images/fig-06.png)
+
+## The defense's expert testimony {.scrollable}
+
+![](images/fig-07.png)
+
+## The defense's expert testimony {.scrollable}
+
+![](images/fig-08.png)
+
+## The defense's expert testimony {.scrollable}
+
+![](images/fig-09.png)
+
+
+
+## The defense's expert testimony {.scrollable}
+
+![](images/tab-05-06-07.png)
+
+## The defense's expert testimony {.scrollable}
+
+![](images/tab-08-09.png)
+
+## The defense's expert testimony {.scrollable}
+
+![](images/fig-10.png){width="70%"}
+
+## The defense's expert testimony {.scrollable}
+
+![](images/tab-10.png)
+
+
+## The defense's expert testimony {.scrollable}
+
+![](images/tab-11-12.png)
+
+## The defense's expert testimony {.scrollable}
+
+![](images/fig-12.png){width="70%"}
+
+## The defense's expert testimony {.scrollable}
+
+![](images/fig-13.png)
+
+## The defense's expert testimony {.scrollable}
+
+![](images/tab-13.png)
+
+
