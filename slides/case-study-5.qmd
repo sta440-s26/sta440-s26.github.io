@@ -42,7 +42,11 @@ auto-stretch: false
 - If the expert testifies, everything they did is *discoverable*. So, if they conduct two analyses, one incriminating and one exculpatory, but then bury one...that's bad.
 :::
 
- 
+## Expert witnesses in general
+
+<iframe width="450" height="300" src="https://www.youtube.com/embed/1QrTzTe90QA?si=-rD65R_07MKBCdbt" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<iframe width="450" height="300" src="https://www.youtube.com/embed/EvYQTvCVYz0?si=--GViwgpc123RFbn" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ## Statistical experts in particular
 
@@ -56,7 +60,7 @@ A statistician (often a PhD academic, but not always) might be hired to...
 
 ## An expert being deposed
 
-Statistician Anthony Hayter enduring a wearying line of questioning about the relevance of his expertise:
+Statistician [Anthony Hayter](https://daniels.du.edu/directory/anthony-hayter/) enduring a wearying line of questioning about the relevance of his expertise:
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/FfbTEy4fsDU?si=dIRPRG5O-eCQqD4U" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
@@ -134,8 +138,8 @@ This case is not about technique, so no content lectures. Furthermore, we're ask
 - [Friday April 10]{style="color:blue;"}: lab as usual;
 - [Monday April 13]{style="color:blue;"}: intro Case 6, in-class work period and [final report due]{style="color:red;"};
 - [Wednesday April 15]{style="color:blue;"}: Presentation (3 teams);
-- [Monday April 20]{style="color:blue;"}: Presentation (3 teams);
-- [Wednesday April 22]{style="color:blue;"}: Presentation (3 teams).
+- [Friday April 17]{style="color:blue;"}: Presentation (3 teams);
+- [Monday April 20]{style="color:blue;"}: Presentation (3 teams).
 
 
 ## Words of caution
@@ -150,7 +154,7 @@ This case is not about technique, so no content lectures. Furthermore, we're ask
 ## Suggested reading {.small .scrollable}
 
 - The ASA's [*Ethical Guidelines for Statistical Practice*](https://www.amstat.org/your-career/ethical-guidelines-for-statistical-practice);
-- Fairley & Huber (2021): "[On being an ethical statistical expert in a legal case](https://doi.org/10.1080/00031305.2020.1763834)," *The American Statistician*;
+- [Fairley](https://www.analysisandinference.com/team/william-b-fairley-phd) & [Huber](https://www.analysisandinference.com/team/william-a-huber-phd) (2021): "[On being an ethical statistical expert in a legal case](https://doi.org/10.1080/00031305.2020.1763834)," *The American Statistician*;
 - Dotto et al (2021): "[Statistical analyses in the case of an Italian nurse accused of murdering patients](https://doi.org/10.1080/00031305.2020.1763834)," *Law, Probability and Risk*;
 - The Sally Clark case:
     - Grimes (2023): "[Bad Science and Bad Statistics in the Courtroom Convict Innocent People](https://www.scientificamerican.com/article/bad-science-and-bad-statistics-in-the-courtroom-convict-innocent-people/?utm_source=chatgpt.com)," *Scientific American*;
