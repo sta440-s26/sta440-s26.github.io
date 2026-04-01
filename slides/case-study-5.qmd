@@ -109,9 +109,24 @@ After you submit the report, we will review it, and then your team will "take th
 
 The "attorneys" will come from Duke's Mock Trial team.
 
+## Timeline (Section 1) {.small}
+
+This case is not about technique, so no content lectures. Furthermore, we're asking you to write an airtight report on an accelerated timeline. So:
+
+- [Friday April 3]{style="color:blue;"}: lab as usual;
+- [Tuesday April 7]{style="color:blue;"}: in-class work period;
+- [Thursday April 9]{style="color:blue;"}: Q&A with Dr. David Banks, who has been an expert witness;
+- [Friday April 10]{style="color:blue;"}: lab as usual;
+- [Monday April 13]{style="color:blue;"}: [final report due]{style="color:red;"};
+- [Tuesday April 14]{style="color:blue;"}: intro Case 6, in-class work period;
+- [Thursday April 16]{style="color:blue;"}: Presentation (3 teams);
+- [Friday April 17]{style="color:blue;"}: Presentation (3 teams);
+- [Tuesday April 21]{style="color:blue;"}: Presentation (3 teams).
+
+
 ## Timeline (Section 2) {.small}
 
-This Case is not about technique, so no content lectures. Furthermore, we're asking you to write an airtight report on an accelerated timeline. So:
+This case is not about technique, so no content lectures. Furthermore, we're asking you to write an airtight report on an accelerated timeline. So:
 
 - [Friday April 3]{style="color:blue;"}: lab as usual;
 - [Monday April 6]{style="color:blue;"}: in-class work period;
