@@ -161,6 +161,132 @@
     "text": "Suggested reading\n\nThe ASA’s Ethical Guidelines for Statistical Practice;\nFairley & Huber (2021): “On being an ethical statistical expert in a legal case,” The American Statistician;\nDotto et al (2021): “Statistical analyses in the case of an Italian nurse accused of murdering patients,” Law, Probability and Risk;\nThe Sally Clark case:\n\nGrimes (2023): “Bad Science and Bad Statistics in the Courtroom Convict Innocent People,” Scientific American;\nCarriquiry (2018): “Misuse of statistics in the courtroom: the Sally Clark case,” CSAFE;\nWestreich & Iliinsky (2014): “Epidemiology visualized: the prosecutor’s fallacy,” American Journal of Epidemiology;\nAP Dawid’s statement during the Clark appeal."
   },
   {
+    "objectID": "slides/case-study-5.html#shared-values-ethical-conduct",
+    "href": "slides/case-study-5.html#shared-values-ethical-conduct",
+    "title": "Case Study 5",
+    "section": "Shared Values — Ethical Conduct",
+    "text": "Shared Values — Ethical Conduct\n\nThe social value of their work and the consequences of how well or poorly it is performed. This includes respect for the life, liberty, dignity, and property of other people.\nThe avoidance of any tendency to slant statistical work toward predetermined outcomes.\nStatistics as a science. The field is evolving. There are established practices as well as unresolved issues."
+  },
+  {
+    "objectID": "slides/case-study-5.html#shared-values-ethical-conduct-ctd",
+    "href": "slides/case-study-5.html#shared-values-ethical-conduct-ctd",
+    "title": "Case Study 5",
+    "section": "Shared Values — Ethical Conduct, Ctd",
+    "text": "Shared Values — Ethical Conduct, Ctd\n\nThe maintenance and upgrading of competence in their work.\nAdherence to all applicable laws and regulations, while also seeking to change any of those that are ethically inappropriate. E.g. Christopher Wylie of SCL https://www.nytimes.com/2018/03/27/world/europe/whistle-blower-data-mining-cambridge-analytica.html\nPreservation of data archives with responsible protection of the safety and confidentiality of any human being or organization involved."
+  },
+  {
+    "objectID": "slides/case-study-5.html#shared-values-good-citizenship",
+    "href": "slides/case-study-5.html#shared-values-good-citizenship",
+    "title": "Case Study 5",
+    "section": "Shared Values — Good Citizenship",
+    "text": "Shared Values — Good Citizenship\n\nCollegiality and civility with fellow professionals.\nSupport for improved public understanding of and respect for statistics.\nSupport for sound statistical practice, especially when it is unfairly criticized.\nExposure of dishonest or incompetent uses of statistics.\nService to one’s profession as a statistical editor, reviewer, or association official and as an active participant in ethical review panels."
+  },
+  {
+    "objectID": "slides/case-study-5.html#ethical-guidelines-professionalism",
+    "href": "slides/case-study-5.html#ethical-guidelines-professionalism",
+    "title": "Case Study 5",
+    "section": "Ethical Guidelines — Professionalism",
+    "text": "Ethical Guidelines — Professionalism\n\nStrive for relevance in statistical analyses. Base work on a competent understanding of the subject-matter issues, statistical protocols and technical criteria.\nGuard against the possibility that a predisposition by investigators or data providers might predetermine the analytic result. Employ data selection or sampling methods and analytic approaches designed to ensure valid analyses.\nRemain current in dynamically evolving statistical methodology."
+  },
+  {
+    "objectID": "slides/case-study-5.html#ethical-guidelines-professionalism-ctd",
+    "href": "slides/case-study-5.html#ethical-guidelines-professionalism-ctd",
+    "title": "Case Study 5",
+    "section": "Ethical Guidelines — Professionalism, Ctd",
+    "text": "Ethical Guidelines — Professionalism, Ctd\n\nEnsure that adequate statistical and subject-matter expertise are both applied to any planned study.\nUse only statistical methodologies suitable to the data and to obtaining valid results. Address potential confounding factors in observational studies and use caution in drawing causal inferences.\nDo not join a research project unless you can expect to achieve valid results and you are confident that your name will not be associated with the project or resulting publications without your explicit consent."
+  },
+  {
+    "objectID": "slides/case-study-5.html#ethical-guidelines-professionalism-ctd-1",
+    "href": "slides/case-study-5.html#ethical-guidelines-professionalism-ctd-1",
+    "title": "Case Study 5",
+    "section": "Ethical Guidelines — Professionalism, Ctd",
+    "text": "Ethical Guidelines — Professionalism, Ctd\n\nA procedure being automated does not ensure correctness or appropriateness; it is necessary to understand the theory, data, and methods used in each statistical study.\nRecognize that any frequentist statistical test has a random chance of indicating significance when it is not really present. Multiple comparisons, p-value fishing.\nDisclose conflicts of interest.\nProvide only such expert testimony as you would be willing to have peer reviewed."
+  },
+  {
+    "objectID": "slides/case-study-5.html#ethical-guidelines-responsibilities-to-others",
+    "href": "slides/case-study-5.html#ethical-guidelines-responsibilities-to-others",
+    "title": "Case Study 5",
+    "section": "Ethical Guidelines — Responsibilities to Others",
+    "text": "Ethical Guidelines — Responsibilities to Others\n\nWhere appropriate, present a client or employer with choices among valid alternative statistical approaches that may vary in scope, cost, or precision.\nClearly state your statistical qualifications and experience relevant to your work.\nClarify the respective roles of different participants in studies to be undertaken.\nExplain any expected adverse consequences of failure to follow through on an agreed-upon sampling or analytic plan."
+  },
+  {
+    "objectID": "slides/case-study-5.html#ethical-guidelines-responsibility-to-others-ctd",
+    "href": "slides/case-study-5.html#ethical-guidelines-responsibility-to-others-ctd",
+    "title": "Case Study 5",
+    "section": "Ethical Guidelines — Responsibility to Others, Ctd",
+    "text": "Ethical Guidelines — Responsibility to Others, Ctd\n\nApply statistical sampling and analysis procedures scientifically, without predetermining the outcome.\nMake new statistical knowledge widely available to benefit society beyond your own applications.\nGuard privileged information of the employer, client, or funder.\nFulfill all commitments.\nAccept full responsibility for your professional performance."
+  },
+  {
+    "objectID": "slides/case-study-5.html#ethical-guidelines-publication-and-testimony",
+    "href": "slides/case-study-5.html#ethical-guidelines-publication-and-testimony",
+    "title": "Case Study 5",
+    "section": "Ethical Guidelines — Publication and Testimony",
+    "text": "Ethical Guidelines — Publication and Testimony\n\nMaintain personal responsibility for all work bearing your name; avoid work you would not want to acknowledge responsibility for.\nReport statistical and substantive assumptions made in the study.\nIn publications or testimony, identify who is responsible for the statistical work if it would not otherwise be apparent."
+  },
+  {
+    "objectID": "slides/case-study-5.html#ethical-guidelines-publication-and-testimony-ctd",
+    "href": "slides/case-study-5.html#ethical-guidelines-publication-and-testimony-ctd",
+    "title": "Case Study 5",
+    "section": "Ethical Guidelines — Publication and Testimony, Ctd",
+    "text": "Ethical Guidelines — Publication and Testimony, Ctd\n\nMake clear the basis for authorship order if determined on grounds other than intellectual contribution.\nAccount for all data considered in a study and explain the sample(s) actually used.\nReport the sources and assessed adequacy of the data.\nReport the data cleaning and screening procedures used, including any imputation."
+  },
+  {
+    "objectID": "slides/case-study-5.html#ethical-guidelines-publications-and-testimony-ctd",
+    "href": "slides/case-study-5.html#ethical-guidelines-publications-and-testimony-ctd",
+    "title": "Case Study 5",
+    "section": "Ethical Guidelines — Publications and Testimony, Ctd",
+    "text": "Ethical Guidelines — Publications and Testimony, Ctd\n\nAddress the suitability of analytic methods and their assumptions relative to the study; identify computer routines used.\nWhere appropriate, address potential confounding variables not included in the study.\nIdentify the ultimate financial sponsor of the study, the stated purpose, and intended use of results.\nWhen reporting analyses of volunteer or non-representative data, include appropriate disclaimers."
+  },
+  {
+    "objectID": "slides/case-study-5.html#ethical-guidelines-publications-and-testimony-ctd-1",
+    "href": "slides/case-study-5.html#ethical-guidelines-publications-and-testimony-ctd-1",
+    "title": "Case Study 5",
+    "section": "Ethical Guidelines — Publications and Testimony, Ctd",
+    "text": "Ethical Guidelines — Publications and Testimony, Ctd\n\nReport the limits of statistical inference and possible sources of error.\nShare data used in published studies to aid peer review and replication while protecting confidential data.\nAs appropriate, promptly and publicly correct any errors discovered after publication.\nWrite with consideration of the intended audience."
+  },
+  {
+    "objectID": "slides/case-study-5.html#ethical-guidelines-research-subjects",
+    "href": "slides/case-study-5.html#ethical-guidelines-research-subjects",
+    "title": "Case Study 5",
+    "section": "Ethical Guidelines — Research Subjects",
+    "text": "Ethical Guidelines — Research Subjects\n\nKnow and adhere to rules for the protection of human subjects.\nAvoid excessive or inadequate numbers of research subjects using informed recommendations for study size.\nAvoid excessive risk to research subjects and imposition on their time and privacy."
+  },
+  {
+    "objectID": "slides/case-study-5.html#ethical-guidelines-research-subjects-ctd",
+    "href": "slides/case-study-5.html#ethical-guidelines-research-subjects-ctd",
+    "title": "Case Study 5",
+    "section": "Ethical Guidelines — Research Subjects, Ctd",
+    "text": "Ethical Guidelines — Research Subjects, Ctd\n\nProtect the privacy and confidentiality of research subjects and their data.\nBe aware of legal limitations on privacy and confidentiality assurances.\nBefore participating in a study or reviewing related manuscripts, consider whether appropriate research subject approvals were obtained."
+  },
+  {
+    "objectID": "slides/case-study-5.html#ethical-guidelines-research-subjects-ctd-1",
+    "href": "slides/case-study-5.html#ethical-guidelines-research-subjects-ctd-1",
+    "title": "Case Study 5",
+    "section": "Ethical Guidelines — Research Subjects, Ctd",
+    "text": "Ethical Guidelines — Research Subjects, Ctd\n\nAvoid or minimize the use of deception; ensure independent ethical review when necessary.\nWhen full disclosure is not advisable, inform participants of the nature of withheld information and the reason.\nAdhere to animal welfare guidelines in research involving animals."
+  },
+  {
+    "objectID": "slides/case-study-5.html#ethical-guidelines-research-team-colleagues",
+    "href": "slides/case-study-5.html#ethical-guidelines-research-team-colleagues",
+    "title": "Case Study 5",
+    "section": "Ethical Guidelines — Research Team & Colleagues",
+    "text": "Ethical Guidelines — Research Team & Colleagues\n\nInform colleagues from other disciplines about relevant aspects of statistical ethics.\nPromote effective and efficient use of statistics by the research team.\nRespect the ethical obligations of members of other disciplines.\nEnsure professional reporting of statistical design and analysis.\nAvoid compromising statistical validity for expediency, while using reasonable approximations when appropriate."
+  },
+  {
+    "objectID": "slides/case-study-5.html#ethical-guidelines-other-statisticians",
+    "href": "slides/case-study-5.html#ethical-guidelines-other-statisticians",
+    "title": "Case Study 5",
+    "section": "Ethical Guidelines — Other Statisticians",
+    "text": "Ethical Guidelines — Other Statisticians\n\nPromote sharing of nonproprietary data and methods.\nStrengthen the work of others through appropriate peer review.\nAssess methods, not individuals.\nRespect differences of opinion."
+  },
+  {
+    "objectID": "slides/case-study-5.html#ethical-guidelines-other-statisticians-ctd",
+    "href": "slides/case-study-5.html#ethical-guidelines-other-statisticians-ctd",
+    "title": "Case Study 5",
+    "section": "Ethical Guidelines — Other Statisticians, Ctd",
+    "text": "Ethical Guidelines — Other Statisticians, Ctd\n\nInstill in students an appreciation for the practical value of statistical concepts and methods.\nUse professional qualifications and contributions as the basis for professional decisions.\nAvoid harassment or discrimination on professionally irrelevant bases."
+  },
+  {
     "objectID": "slides/case-study-5.html#background",
     "href": "slides/case-study-5.html#background",
     "title": "Case Study 5",
