@@ -150,11 +150,12 @@ This case is not about technique, so no content lectures. Furthermore, we're ask
 - [Monday April 20]{style="color:blue;"}: Presentation (3 teams).
 
 
-## Words of caution {.medium}
+## Words of caution {.small}
 
 ::: incremental
 - This is not about technique. Your audience (judge, jury, and lawyers) know virtually nothing about statistics. Stick to simple things you can actually explain!
 - You may not have written every part of your team's report, but your name is on it. Be prepared to explain and defend everything in it. If the question is to you, a teammate can't bail you out;
+- When you're on the stand, the only resource you can consult is a paper copy of your report;
 - You are a *statistical* expert witness. Don't opine about things beyond your expertise;
 - You wouldn't arrive late to court, would you?
 - You wouldn't wear sweatpants to court, would you?
