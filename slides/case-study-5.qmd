@@ -117,6 +117,7 @@ The "attorneys" will come from Duke's Mock Trial team.
 
 This case is not about technique, so no content lectures. Furthermore, we're asking you to write an airtight report on an accelerated timeline. So:
 
+::: incremental
 - [Friday April 3]{style="color:blue;"}: lab as usual;
 - [Tuesday April 7]{style="color:blue;"}: in-class work period;
 - [Thursday April 9]{style="color:blue;"}: Q&A with Dr. David Banks, who has been an expert witness;
@@ -126,6 +127,7 @@ This case is not about technique, so no content lectures. Furthermore, we're ask
 - [Thursday April 16]{style="color:blue;"}: Presentation (3 teams);
 - [Friday April 17]{style="color:blue;"}: Presentation (3 teams);
 - [Tuesday April 21]{style="color:blue;"}: Presentation (3 teams).
+:::
 
 
 ## Timeline (Section 2) {.small}
@@ -142,12 +144,13 @@ This case is not about technique, so no content lectures. Furthermore, we're ask
 - [Monday April 20]{style="color:blue;"}: Presentation (3 teams).
 
 
-## Words of caution
+## Words of caution {.medium}
 
 ::: incremental
 - This is not about technique. Your audience (judge, jury, and lawyers) know virtually nothing about statistics. Stick to simple things you can actually explain!
-- You may not have written every part of your team's report, but your name is on it. Be prepared to explain and defend everything in it;
+- You may not have written every part of your team's report, but your name is on it. Be prepared to explain and defend everything in it. If the question is to you, a teammate can't bail you out;
 - You are a *statistical* expert witness. Don't opine about things beyond your expertise;
+- You wouldn't arrive late to court, would you?
 - You wouldn't wear sweatpants to court, would you?
 :::
 
