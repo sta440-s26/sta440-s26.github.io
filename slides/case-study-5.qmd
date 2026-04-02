@@ -397,15 +397,46 @@ Why not?
 
 # The Daniela Poggiali case
 
-## Background {.medium}
+## Background {.small}
 
 ::: incremental
-- Daniela Poggiali (DP) was a hospital nurse accused of murdering a 78-year-old patient by injecting her with a lethal dose of potassium chloride;
-- DP was known to have complained about the patient, and there was an incident of some KCl going missing, but otherwise no one witnessed anything;
-- Data was available on hospital shift assignments and patient mortality;
-- Prosecution argued that a disproportionate number of patients died while DP was on duty;
-- The jury was convinced this could not be mere chance, and DP was convicted.
+- Daniela Poggiali (DP) was a nurse at 'Umberto I' hospital in Lugo Italy from 9 April 2012 to 8 April 2014;
+- On 12 March 2014, 95-year-old Massimo Montanari (MM) dies;
+- On 8 April 2014, 78-year-old patient Rosa Calderoni (RC) dies;
+- DP is accused of killing RC by lethal does of KCl;
+- DP sentenced to life on 11 March 2016, but then acquitted, re-tried, acquitted, and re-tried again;
+- DP is separately tried on 15 December 2020 for killing MM;
+- Several more rounds of acquittal and re-trial follow;
+- She is acquitted once and for all on 24 October 2021.
 :::
+
+. . .
+
+Suffice it to say...there was some disagreement here.
+
+## The hospital ward where DP worked {.small}
+
+Specialized in seriously ill patients. Most days have at least one death.
+
+![](images/fig-01.png){fig-align="center" width="90%"}
+
+From the prosecution's experts:
+
+- If a nurse is working in sector A while a death occurs in sector B, the death is desginated as being "in the same zone." 
+- A death in C while she works in A is called "in the opposite zone."
+
+## The prosecution's case {.medium}
+
+All circumstantial. No one actually saw DP murder anyone. 
+
+However:
+
+- She was known to complain about the two patients;
+- There was an incident of KCl going missing and turning up in a weird place;
+- Using data on hospital shift assignments and patient mortality, the prosecution's expert witnesses argued that a disproportionate number of patients died while DP was on duty, and this could not be mere coincidence.
+
+Several triers of fact were clearly convinced.
+
 
 ## The prosecution's expert testimony {.small}
 
@@ -415,11 +446,24 @@ Why not?
 
 Are you convinced by this evidence?
 
+## The defense's expert testimony {.medium}
+
+Just poke a million holes:
+
+::: incremental
+- The prosecution's conclusions are sensitive to the choice of grouping of hospital sections;
+- Observational data: association does not imply causation;
+- Prosecutor's fallacy and base rate fallacy;
+- Misinterpretation of the $p$-value as a posterior probability of guilt/innocence given data;
+- Most of the deaths on DP's watch are recorded in broad daylight when multiple other nurses are working.
+:::
+
+
 ## The defense's expert testimony {.scrollable}
 
 ![](images/tab-02-03.png)
 
-## The defense's expert testimony {.scrollable}
+## The patients are already old, frail, seriously ill {.scrollable}
 
 ![](images/fig-02.png)
 
@@ -486,9 +530,45 @@ Are you convinced by this evidence?
 
 ![](images/fig-12.png){width="70%"}
 
+
+## Bayes for dayes
+
+Can the available evidence distinguish:
+
+$$
+\begin{aligned}
+H_d:\, & \text{misconduct did not take place}\\
+H_p:\,& \text{misconduct did take place}.
+\end{aligned}
+$$
+
+The prosecution's experts seem to inappropriately interpret a $p$-value as $P(H_d\mid E)$. Not so. Let's do it right:
+
+$$
+\frac{P(H_p\mid E)}{P(H_d\mid E)}=\frac{P(H_p)}{P(H_d)}\times \frac{P(E\mid H_p)}{P(E\mid H_d)}.
+$$
+
+## Don't commit the base rate fallacy!
+
+What are the prior probabilities? Really f%$#ing low:
+
+- Grant the prosecution's premise that $P(E\mid H_p)$ is 0.99;
+- There were 280,000 nurses in Italy in 2014, and you could count on one hand the number of cases where a nurse murdered patients and there was concrete evidence of guilt. The defense conservatively estimates that $P(H_p)=0.000001$
+
+
 ## The defense's expert testimony {.scrollable}
 
 ![](images/fig-13.png)
+
+## Logistic regression
+
+Each observation is a patient, and the response variable is whether or not they died during their hospital stay. Predictors are:
+
+- Sector (categorical): which sector was the patient in?
+- Times (numerical): how many times during their stay was DP on duty in that sector;
+- Age (numerical): the patient's age;
+- Present (dummy): 1 if a nurse works in the same "zone" when death is recorded, else 0.
+
 
 ## The defense's expert testimony {.scrollable}
 
