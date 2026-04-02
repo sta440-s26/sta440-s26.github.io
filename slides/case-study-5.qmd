@@ -48,6 +48,12 @@ auto-stretch: false
 
 <iframe width="450" height="300" src="https://www.youtube.com/embed/EvYQTvCVYz0?si=--GViwgpc123RFbn" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
+## Expert witnesses in general
+
+<iframe width="450" height="300" src="https://www.youtube.com/embed/YNpEeIus_tY?si=RSZwlI1AtqC-H7rj" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<iframe width="450" height="300" src="https://www.youtube.com/embed/SxMwjJQy-KU?si=kq6VChPn2EchVGgI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
 ## Statistical experts in particular
 
 A statistician (often a PhD academic, but not always) might be hired to...
@@ -157,7 +163,7 @@ This case is not about technique, so no content lectures. Furthermore, we're ask
 ## Suggested reading {.small .scrollable}
 
 - The ASA's [*Ethical Guidelines for Statistical Practice*](https://www.amstat.org/your-career/ethical-guidelines-for-statistical-practice);
-- [Fairley](https://www.analysisandinference.com/team/william-b-fairley-phd) & [Huber](https://www.analysisandinference.com/team/william-a-huber-phd) (2021): "[On being an ethical statistical expert in a legal case](https://doi.org/10.1080/00031305.2020.1763834)," *The American Statistician*;
+- ⭐ [Fairley](https://www.analysisandinference.com/team/william-b-fairley-phd) & [Huber](https://www.analysisandinference.com/team/william-a-huber-phd) (2021): "[On being an ethical statistical expert in a legal case](https://doi.org/10.1080/00031305.2020.1763834)," *The American Statistician*;
 - Dotto et al (2021): "[Statistical analyses in the case of an Italian nurse accused of murdering patients](https://doi.org/10.1080/00031305.2020.1763834)," *Law, Probability and Risk*;
 - The Sally Clark case:
     - Grimes (2023): "[Bad Science and Bad Statistics in the Courtroom Convict Innocent People](https://www.scientificamerican.com/article/bad-science-and-bad-statistics-in-the-courtroom-convict-innocent-people/?utm_source=chatgpt.com)," *Scientific American*;
