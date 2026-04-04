@@ -576,3 +576,10 @@ Each observation is a patient, and the response variable is whether or not they 
 ![](images/tab-13.png)
 
 
+## Takeaways
+
+- Common mistakes repeated over and over: correlation $\neq$ causation, base rate fallacy, misinterpreting $p$-values;
+- An opposing expert need not *prove* their side's case. Just poke a million holes in the other expert's testimony;
+- For a non-technical audience like judge and jury, we're basically back to 199 tools: plots, tables, and simple regressions.
+
+
