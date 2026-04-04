@@ -172,7 +172,7 @@
     "href": "slides/case-study-5.html#words-of-caution",
     "title": "Case Study 5",
     "section": "Words of caution",
-    "text": "Words of caution\n\nThis is not about technique. Your audience (judge, jury, and lawyers) know virtually nothing about statistics. Stick to simple things you can actually explain!\nYou may not have written every part of your team’s report, but your name is on it. Be prepared to explain and defend everything in it. If the question is to you, a teammate can’t bail you out;\nYou are a statistical expert witness. Don’t opine about things beyond your expertise;\nYou wouldn’t arrive late to court, would you?\nYou wouldn’t wear sweatpants to court, would you?"
+    "text": "Words of caution\n\nThis is not about technique. Your audience (judge, jury, and lawyers) know virtually nothing about statistics. Stick to simple things you can actually explain!\nYou may not have written every part of your team’s report, but your name is on it. Be prepared to explain and defend everything in it. If the question is to you, a teammate can’t bail you out;\nWhen you’re on the stand, the only resource you can consult is a paper copy of your report;\nYou are a statistical expert witness. Don’t opine about things beyond your expertise;\nYou wouldn’t arrive late to court, would you?\nYou wouldn’t wear sweatpants to court, would you?"
   },
   {
     "objectID": "slides/case-study-5.html#suggested-reading",
@@ -537,6 +537,13 @@
     "title": "Case Study 5",
     "section": "The defense’s expert testimony",
     "text": "The defense’s expert testimony"
+  },
+  {
+    "objectID": "slides/case-study-5.html#takeaways",
+    "href": "slides/case-study-5.html#takeaways",
+    "title": "Case Study 5",
+    "section": "Takeaways",
+    "text": "Takeaways\n\nCommon mistakes repeated over and over: correlation \\(\\neq\\) causation, base rate fallacy, misinterpreting \\(p\\)-values;\nAn opposing expert need not prove their side’s case. Just poke a million holes in the other expert’s testimony;\nFor a non-technical audience like judge and jury, we’re basically back to 199 tools: plots, tables, and simple regressions."
   },
   {
     "objectID": "slides/ar-intro.html#where-were-going",
